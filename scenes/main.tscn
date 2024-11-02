@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://bksq71ompxjrn"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
+[ext_resource type="Theme" uid="uid://cfk78nhykmoun" path="res://scenes/hud_theme.tres" id="2_gqhd0"]
+[ext_resource type="Script" path="res://scenes/engine_selector.gd" id="3_mp7tm"]
+[ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="4_wbysk"]
+[ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="5_hcqio"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_v5gem")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="hud" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_gqhd0")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/hud"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="topbar" type="MarginContainer" parent="CanvasLayer/hud/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="engine_selector" type="VBoxContainer" parent="CanvasLayer/hud/PanelContainer/topbar"]
+layout_mode = 2
+script = ExtResource("3_mp7tm")
+
+[node name="tank" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/engine_selector"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+text = "TANK"
+
+[node name="ship" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/engine_selector"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+text = "SHIP
+"
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="player" type="Area2D" parent="world"]
+position = Vector2(352, 208)
+script = ExtResource("1_wfkjx")
+
+[node name="ship" type="Polygon2D" parent="world/player"]
+rotation = 1.5708
+polygon = PackedVector2Array(0, -32, -16, 32, 0, 16, 16, 32)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world/player"]
+rotation = 1.5708
+polygon = PackedVector2Array(0, -32, -16, 32, 0, 16, 16, 32)
+
+[node name="Camera2D" type="Camera2D" parent="world/player"]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+
+[node name="Parallax2D" type="ParallaxBackground" parent="world"]
+
+[node name="stars" type="ParallaxLayer" parent="world/Parallax2D"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="Icon" type="Sprite2D" parent="world/Parallax2D/stars"]
+position = Vector2(960, 520)
+scale = Vector2(2, 2)
+texture = ExtResource("4_wbysk")
+
+[node name="stars2" type="ParallaxLayer" parent="world/Parallax2D"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="Icon" type="Sprite2D" parent="world/Parallax2D/stars2"]
+position = Vector2(960, 520)
+scale = Vector2(2, 2)
+texture = ExtResource("5_hcqio")
+
+[node name="blue" type="ParallaxLayer" parent="world/Parallax2D"]
+
+[node name="level0" type="Node2D" parent="world/Parallax2D/blue"]
+
+[node name="Line2D" type="Line2D" parent="world/Parallax2D/blue/level0"]
+points = PackedVector2Array(272, 576, 432, 640, 768, 640, 1056, 496, 1328, 384, 1632, 336, 1760, 240)
+default_color = Color(0.0980392, 0.14902, 0.952941, 1)
