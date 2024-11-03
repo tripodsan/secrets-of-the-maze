@@ -61,3 +61,10 @@ switch={
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.0541417, 0.0541424, 0.0541418, 1)
+
+[shader_globals]
+
+player_pos={
+"type": "vec2",
+"value": Vector2(200, 200)
+}

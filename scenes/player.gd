@@ -42,6 +42,7 @@ func _physics_process(delta: float) -> void:
   var col:KinematicCollision2D = move_and_collide(velocity * delta)
   if col:
     v_velo = 0.0
+  RenderingServer.global_shader_parameter_set("player_pos", global_position)
 
 
 func set_engine(type:Global.EngineType):
