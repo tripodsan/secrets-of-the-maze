@@ -44,7 +44,7 @@ shader_parameter/line_width = 0.02
 shader_parameter/color_0 = Color(0.07464, 0.276894, 0.425392, 1)
 shader_parameter/color_1 = Color(0.111, 0.219, 0.528, 0.279)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_jgete"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_e48yu"]
 _surfaces = [{
 "2d": true,
 "aabb": AABB(0, 0, 0, 1280, 1280, 0),
@@ -201,7 +201,7 @@ grid_size = 64
 
 [node name="mesh" type="MeshInstance2D" parent="world/level0/blue/Grid"]
 material = SubResource("ShaderMaterial_ptcve")
-mesh = SubResource("ArrayMesh_jgete")
+mesh = SubResource("ArrayMesh_e48yu")
 
 [node name="red" type="Node2D" parent="world/level0"]
 visible = false
