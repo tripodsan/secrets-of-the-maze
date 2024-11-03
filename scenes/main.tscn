@@ -8,8 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="4_wbysk"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="5_hcqio"]
 [ext_resource type="Script" path="res://scenes/level.gd" id="5_ummob"]
+[ext_resource type="Script" path="res://scenes/chromatic_distortion.gd" id="6_h7jlh"]
 [ext_resource type="Script" path="res://scenes/grid.gd" id="7_q6pwc"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="7_u1pgc"]
+[ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
 [ext_resource type="Shader" path="res://shaders/grid-tile.gdshader" id="8_ikmy8"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]
@@ -21,6 +23,10 @@ glow_intensity = 1.24
 glow_strength = 0.63
 glow_bloom = 1.0
 glow_blend_mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1g4g"]
+shader = ExtResource("10_rael0")
+shader_parameter/amount = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fxd2r"]
 shader = ExtResource("7_u1pgc")
@@ -135,6 +141,18 @@ focus_mode = 0
 toggle_mode = true
 text = "RED
 "
+
+[node name="ChromaticDistortion" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_r1g4g")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("6_h7jlh")
 
 [node name="world" type="Node2D" parent="."]
 
