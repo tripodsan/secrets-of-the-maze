@@ -1,14 +1,51 @@
-[gd_scene load_steps=7 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=15 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
 [ext_resource type="Theme" uid="uid://cfk78nhykmoun" path="res://scenes/hud_theme.tres" id="2_gqhd0"]
 [ext_resource type="Script" path="res://scenes/engine_selector.gd" id="3_mp7tm"]
+[ext_resource type="Script" path="res://scenes/layer_selector.gd" id="4_2oqa4"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="4_wbysk"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="5_hcqio"]
+[ext_resource type="Script" path="res://scenes/level.gd" id="5_ummob"]
+[ext_resource type="Shader" path="res://shaders/grid.gdshader" id="7_u1pgc"]
+
+[sub_resource type="Environment" id="Environment_75w5p"]
+background_mode = 3
+ambient_light_source = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxd2r"]
+shader = ExtResource("7_u1pgc")
+shader_parameter/scale_0 = 16
+shader_parameter/scale_1 = 4
+shader_parameter/line_scale_0 = 0.011
+shader_parameter/line_scale_1 = 0.005
+shader_parameter/bg_alpha = 0.663
+shader_parameter/color_0 = Color(0.262745, 0.490196, 0.862745, 0.607843)
+shader_parameter/color_1 = Color(0.054902, 0.329412, 0.772549, 0.65098)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsdws"]
+size = Vector2(2896, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghmso"]
+size = Vector2(20, 608)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0cl0"]
+shader = ExtResource("7_u1pgc")
+shader_parameter/scale_0 = 16
+shader_parameter/scale_1 = 4
+shader_parameter/line_scale_0 = 0.011
+shader_parameter/line_scale_1 = 0.005
+shader_parameter/bg_alpha = 0.121
+shader_parameter/color_0 = Color(1, 0.647059, 0.607843, 0.643137)
+shader_parameter/color_1 = Color(0.733333, 0.411765, 0.419608, 0.627451)
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_v5gem")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_75w5p")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -31,28 +68,149 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="engine_selector" type="VBoxContainer" parent="CanvasLayer/hud/PanelContainer/topbar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/hud/PanelContainer/topbar"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="engine_selector2" type="VBoxContainer" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("3_mp7tm")
 
-[node name="tank" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/engine_selector"]
+[node name="tank" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer/engine_selector2"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_pressed = true
 text = "TANK"
 
-[node name="ship" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/engine_selector"]
+[node name="ship" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer/engine_selector2"]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 text = "SHIP
 "
 
+[node name="layer_selector" type="VBoxContainer" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("4_2oqa4")
+
+[node name="blue" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer/layer_selector"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+text = "BLUE"
+
+[node name="red" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer/layer_selector"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+text = "RED
+"
+
 [node name="world" type="Node2D" parent="."]
 
-[node name="player" type="Area2D" parent="world"]
-position = Vector2(352, 208)
+[node name="level0" type="Node2D" parent="world"]
+script = ExtResource("5_ummob")
+
+[node name="blue" type="Node2D" parent="world/level0"]
+
+[node name="Polygon2D" type="Polygon2D" parent="world/level0/blue"]
+material = SubResource("ShaderMaterial_fxd2r")
+color = Color(0.0195432, 0.111921, 0.248135, 1)
+polygon = PackedVector2Array(-1168, 160, -1168, 752, 1664, 752, 1664, 160)
+
+[node name="Label" type="Label" parent="world/level0/blue"]
+offset_left = 1306.0
+offset_top = 340.0
+offset_right = 1570.0
+offset_bottom = 409.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "Press [Tab]"
+
+[node name="Line2D" type="Line2D" parent="world/level0/blue"]
+points = PackedVector2Array(-1168, 160, 1664, 160, 1664, 752, -1168, 752, -1168, 160)
+default_color = Color(0, 0.170656, 1, 1)
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="world/level0/blue/Line2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/level0/blue/Line2D/StaticBody2D"]
+position = Vector2(224, 150)
+shape = SubResource("RectangleShape2D_xsdws")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="world/level0/blue/Line2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/level0/blue/Line2D/StaticBody2D2"]
+position = Vector2(256, 762)
+shape = SubResource("RectangleShape2D_xsdws")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="world/level0/blue/Line2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/level0/blue/Line2D/StaticBody2D3"]
+position = Vector2(-1178, 464)
+shape = SubResource("RectangleShape2D_ghmso")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="world/level0/blue/Line2D"]
+position = Vector2(2848, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/level0/blue/Line2D/StaticBody2D4"]
+position = Vector2(-1178, 464)
+shape = SubResource("RectangleShape2D_ghmso")
+
+[node name="red" type="Node2D" parent="world/level0"]
+visible = false
+
+[node name="Polygon2D" type="Polygon2D" parent="world/level0/red"]
+material = SubResource("ShaderMaterial_x0cl0")
+position = Vector2(1822, 800)
+rotation = 1.5708
+color = Color(0.886275, 0.0666667, 0.113725, 1)
+polygon = PackedVector2Array(-1168, 160, -1168, 752, 1664, 752, 1664, 160)
+
+[node name="Line2D" type="Line2D" parent="world/level0/red"]
+position = Vector2(1824, 800)
+rotation = 1.5708
+points = PackedVector2Array(-1168, 160, 1664, 160, 1664, 752, -1168, 752, -1168, 160)
+default_color = Color(0.886275, 0.0666667, 0.113725, 1)
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="world/level0/red/Line2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/level0/red/Line2D/StaticBody2D"]
+position = Vector2(224, 150)
+shape = SubResource("RectangleShape2D_xsdws")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="world/level0/red/Line2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/level0/red/Line2D/StaticBody2D2"]
+position = Vector2(256, 762)
+shape = SubResource("RectangleShape2D_xsdws")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="world/level0/red/Line2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/level0/red/Line2D/StaticBody2D3"]
+position = Vector2(-1178, 464)
+shape = SubResource("RectangleShape2D_ghmso")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="world/level0/red/Line2D"]
+position = Vector2(2848, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/level0/red/Line2D/StaticBody2D4"]
+position = Vector2(-1178, 464)
+shape = SubResource("RectangleShape2D_ghmso")
+
+[node name="player" type="CharacterBody2D" parent="world"]
+position = Vector2(-962, 436)
+motion_mode = 1
 script = ExtResource("1_wfkjx")
 
 [node name="ship" type="Polygon2D" parent="world/player"]
@@ -91,11 +249,3 @@ motion_mirroring = Vector2(2048, 2048)
 position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("5_hcqio")
-
-[node name="blue" type="ParallaxLayer" parent="world/Parallax2D"]
-
-[node name="level0" type="Node2D" parent="world/Parallax2D/blue"]
-
-[node name="Line2D" type="Line2D" parent="world/Parallax2D/blue/level0"]
-points = PackedVector2Array(272, 576, 432, 640, 768, 640, 1056, 496, 1328, 384, 1632, 336, 1760, 240)
-default_color = Color(0.0980392, 0.14902, 0.952941, 1)
