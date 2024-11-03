@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=21 format=4 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
@@ -11,13 +11,12 @@
 [ext_resource type="Script" path="res://scenes/chromatic_distortion.gd" id="6_h7jlh"]
 [ext_resource type="Script" path="res://scenes/grid.gd" id="7_q6pwc"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="7_u1pgc"]
+[ext_resource type="Material" uid="uid://dsvytu83tsw72" path="res://scenes/grid-blue.material" id="10_ng51w"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
-[ext_resource type="Shader" path="res://shaders/grid-tile.gdshader" id="8_ikmy8"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]
 background_mode = 3
 ambient_light_source = 2
-glow_enabled = true
 glow_normalized = true
 glow_intensity = 1.24
 glow_strength = 0.63
@@ -44,13 +43,7 @@ size = Vector2(2896, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghmso"]
 size = Vector2(20, 608)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ptcve"]
-shader = ExtResource("8_ikmy8")
-shader_parameter/line_width = 0.02
-shader_parameter/color_0 = Color(0.07464, 0.276894, 0.425392, 1)
-shader_parameter/color_1 = Color(0.111, 0.219, 0.528, 0.279)
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_e48yu"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0mxhx"]
 _surfaces = [{
 "2d": true,
 "aabb": AABB(0, 0, 0, 1280, 1280, 0),
@@ -218,8 +211,8 @@ script = ExtResource("7_q6pwc")
 grid_size = 64
 
 [node name="mesh" type="MeshInstance2D" parent="world/level0/blue/Grid"]
-material = SubResource("ShaderMaterial_ptcve")
-mesh = SubResource("ArrayMesh_e48yu")
+material = ExtResource("10_ng51w")
+mesh = SubResource("ArrayMesh_0mxhx")
 
 [node name="red" type="Node2D" parent="world/level0"]
 visible = false

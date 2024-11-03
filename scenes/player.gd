@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
   var col:KinematicCollision2D = move_and_collide(velocity * delta)
   if col:
     v_velo = 0.0
-  RenderingServer.global_shader_parameter_set("player_pos", trail[trail_pos])
+  RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4(trail[trail_pos].x, trail[trail_pos].y, velocity.x, velocity.y))
   trail[trail_pos] = global_position
   trail_pos = (trail_pos + 1) % len(trail)
 

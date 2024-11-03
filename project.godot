@@ -64,7 +64,7 @@ environment/defaults/default_clear_color=Color(0.0541417, 0.0541424, 0.0541418, 
 
 [shader_globals]
 
-player_pos={
-"type": "vec2",
-"value": Vector2(200, 200)
+player_pos_and_vel={
+"type": "vec4",
+"value": Vector4(200, 0, 0, 0)
 }

@@ -8,8 +8,8 @@ extends Polygon2D
 
 var meshInstance: MeshInstance2D
 
-func _ready():
-  generate_mesh()
+#func _ready():
+  #generate_mesh()
 
 func generate_mesh():
   meshInstance = get_node_or_null('mesh')
@@ -23,10 +23,17 @@ func generate_mesh():
   #var normals = PackedVector3Array()
   var indices = PackedInt32Array()
 
-  # Vertex indices.
-  var thisrow = 0
-  var prevrow = 0
-  var point = 0
+  #get BB of polygon
+  #var x0:int = 0
+  #var x1:int = 0
+  #var y0:int = 0
+  #var y1:int = 0
+  #for v:Vector2 in polygon:
+    #bb = bb.expand(v)
+  ## snap bb to grid
+  #prints('before', bb)
+  #bb = bb.grow_individual(bb.position.x % grid_size, bb.position.y % grid_size, grid_size - bb.end.x % grid_size, grid_size - bb.end.y % grid_size)
+  #prints('snapped', bb)
 
   var wx := 20
   var wy := 20
