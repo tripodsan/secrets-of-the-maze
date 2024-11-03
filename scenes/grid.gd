@@ -8,8 +8,12 @@ extends Polygon2D
 
 var meshInstance: MeshInstance2D
 
+func _ready():
+  generate_mesh()
+
 func generate_mesh():
-  meshInstance = get_node('mesh')
+  meshInstance = get_node_or_null('mesh')
+  if !meshInstance: return
   var surface_array = []
   surface_array.resize(Mesh.ARRAY_MAX)
 
