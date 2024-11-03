@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=25 format=4 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
@@ -11,8 +11,9 @@
 [ext_resource type="Script" path="res://scenes/chromatic_distortion.gd" id="6_h7jlh"]
 [ext_resource type="Script" path="res://scenes/grid.gd" id="7_q6pwc"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="7_u1pgc"]
-[ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
 [ext_resource type="Shader" path="res://shaders/grid-tile.gdshader" id="8_ikmy8"]
+[ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
+[ext_resource type="Texture2D" uid="uid://blumhn50n31yd" path="res://assets/particles_flipbook_example.webp" id="12_1kqtu"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]
 background_mode = 3
@@ -50,7 +51,7 @@ shader_parameter/line_width = 0.02
 shader_parameter/color_0 = Color(0.07464, 0.276894, 0.425392, 1)
 shader_parameter/color_1 = Color(0.111, 0.219, 0.528, 0.279)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_e48yu"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_sh5ht"]
 _surfaces = [{
 "2d": true,
 "aabb": AABB(0, 0, 0, 1280, 1280, 0),
@@ -73,6 +74,24 @@ shader_parameter/line_scale_1 = 0.005
 shader_parameter/bg_alpha = 0.121
 shader_parameter/color_0 = Color(1, 0.647059, 0.607843, 0.643137)
 shader_parameter/color_1 = Color(0.733333, 0.411765, 0.419608, 0.627451)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d1d8o"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_liwcl"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 40.0
+gravity = Vector3(0, 98, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 13.44
+scale_min = 0.5
+scale_max = 0.5
+scale_over_velocity_max = 0.5
+anim_speed_max = 2.45
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_v5gem")
@@ -219,7 +238,7 @@ grid_size = 64
 
 [node name="mesh" type="MeshInstance2D" parent="world/level0/blue/Grid"]
 material = SubResource("ShaderMaterial_ptcve")
-mesh = SubResource("ArrayMesh_e48yu")
+mesh = SubResource("ArrayMesh_sh5ht")
 
 [node name="red" type="Node2D" parent="world/level0"]
 visible = false
@@ -274,6 +293,13 @@ script = ExtResource("1_wfkjx")
 [node name="ship" type="Polygon2D" parent="world/player"]
 rotation = 1.5708
 polygon = PackedVector2Array(0, -32, -16, 32, 0, 16, 16, 32)
+
+[node name="EngineParticles" type="GPUParticles2D" parent="world/player/ship"]
+material = SubResource("CanvasItemMaterial_d1d8o")
+amount = 500
+process_material = SubResource("ParticleProcessMaterial_liwcl")
+texture = ExtResource("12_1kqtu")
+lifetime = 2.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world/player"]
 rotation = 1.5708

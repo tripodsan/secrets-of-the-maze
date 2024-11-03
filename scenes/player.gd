@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 var _engine_type := Global.EngineType.Tank
+var _particles
 
 @export var thrust := 80.0
 @export var v_damp := 0.1
@@ -16,10 +17,12 @@ var dir := Vector2.ZERO
 var trail:PackedVector2Array = PackedVector2Array()
 var trail_pos:int = 0
 
+
 func _ready() -> void:
   Global.engine_type_selected.connect(set_engine)
   trail.resize(8)
-
+  _particles = $ship/EngineParticles
+  
 func _physics_process(delta: float) -> void:
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")
 #
@@ -48,7 +51,8 @@ func _physics_process(delta: float) -> void:
   RenderingServer.global_shader_parameter_set("player_pos", trail[trail_pos])
   trail[trail_pos] = global_position
   trail_pos = (trail_pos + 1) % len(trail)
-
+  _particles.emitting = abs(v_velo) > 100.0
+  _particles.process_material.initial_velocity_min = v_velo * 0.5
 
 func set_engine(type:Global.EngineType):
   _engine_type = type
