@@ -17,7 +17,7 @@ levels
 - Levels have multiple dimensions, encoded in colors
 - Find secret to unlock dimension crystal
     - Have to complete level to get radar for secret (?)
-    - Lead the player on: Complete “"game”" once by doing all the levels, but no secrets, so completion percent lowre,bgamemGa(
+    - Lead the player on: Complete “game” once by doing all the levels, but no secrets, so completion percent low
 - Color dimension can be switched once the crystal was obtained
 - Enemies exist in one or several dimensions
 - Movement: Fast and bouncy, for speedrunning
@@ -27,7 +27,7 @@ levels
 - Camera rotates in the same direction of the spaceship? (Editable in settings?)
 - Weapons: Momentum-based?
 
-Crazy IdeasCURSED
+Crazy Ideas
 - Doppler-shifting?
 - Multidimensional levels? (Continous color spectrum?)
 - Time travel?
