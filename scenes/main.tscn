@@ -34,7 +34,6 @@ shader_parameter/amount = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fibkb"]
 shader = ExtResource("7_0qk4n")
-shader_parameter/delta = 2.3
 shader_parameter/amount = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rnlvf"]
@@ -386,6 +385,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("6_h7jlh")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer/ChromaticDistortion"]
+copy_mode = 2
 
 [node name="SuperNova" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_fibkb")
