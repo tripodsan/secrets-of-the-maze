@@ -1,7 +1,7 @@
 extends Node
 
 enum EngineType { Tank, Ship }
-enum Layer { Blue, Red }
+enum Layer { Blue, Red, Green }
 
 signal engine_type_selected(type:EngineType)
 
