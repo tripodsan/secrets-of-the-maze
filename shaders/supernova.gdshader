@@ -7,7 +7,7 @@ void fragment() {
   vec2 to_center = UV.xy - vec2(0.5, 0.5);
   float l = length(to_center);
   vec2 displacement = to_center * sin(amount*4.0*PI+4.0*l)*0.3*(1.0-amount);
-  vec4 c = texture(SCREEN_TEXTURE, min(vec2(1.0, 1.0), max(vec2(0.0, 0.0), UV.xy-displacement)));
+  vec4 c = texture(SCREEN_TEXTURE, UV.xy-displacement);
   COLOR = vec4(mix(1.0, c.r, amount), mix(1.0, c.g, amount), mix(1.0, c.b, amount), 1.0);
   
 }
