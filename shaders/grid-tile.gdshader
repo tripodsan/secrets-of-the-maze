@@ -31,7 +31,7 @@ void fragment() {
   vec2 bl = smoothstep(vec2(0), vec2(line_width), UV);       // bottom-left
   vec2 tr = smoothstep(vec2(0), vec2(line_width),1.0-UV);   // top-right
   vec2 c = abs(UV - vec2(0.5)); // corners
-  vec4 line_color = mix(color_0, vec4(1), warp * c.x * c.y * 1.5);
+  vec4 line_color = mix(color_0, vec4(1), warp * c.x * c.y * 2.0);
   if (debug) {
     if (UV.x < 0.5 && UV.y < 0.5) {
       COLOR.rgb = vec3(round(COLOR.r));
