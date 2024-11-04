@@ -60,7 +60,7 @@ switch={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.0541417, 0.0541424, 0.0541418, 1)
+environment/defaults/default_clear_color=Color(0.144062, 0.144063, 0.144062, 1)
 
 [shader_globals]
 
