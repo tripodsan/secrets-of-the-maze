@@ -1,29 +1,40 @@
 extends Node2D
 
-@onready var blue: Node2D = $blue
-@onready var red: Node2D = $red
-@onready var green: Node2D = $green
+@onready var blue: ChromaLayer = $blue
+@onready var red: ChromaLayer = $red
+@onready var green: ChromaLayer = $green
 
-var _layer := Global.Layer.Blue
+var _layers:Array[ChromaLayer] = [];
+
+var _layer:Global.Layer = Global.Layer.Blue
+
+var _prev_layer:Global.Layer = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+  _layers = [blue, red, green]
+  for l in _layers: l.set_active(false)
   Global.layer_selected.connect(_on_layer_selected)
   _on_layer_selected(_layer)
 
 func _on_layer_selected(layer:Global.Layer):
-  get_viewport().set_canvas_cull_mask_bit(1, layer == Global.Layer.Blue)
-  get_viewport().set_canvas_cull_mask_bit(2, layer == Global.Layer.Red)
-  get_viewport().set_canvas_cull_mask_bit(3, layer == Global.Layer.Green)
-  %phasemap.set_canvas_cull_mask_bit(1, layer != Global.Layer.Blue)
-  %phasemap.set_canvas_cull_mask_bit(2, layer != Global.Layer.Red)
-  %phasemap.set_canvas_cull_mask_bit(3, layer != Global.Layer.Green)
-  blue.process_mode = Node.PROCESS_MODE_INHERIT if layer == Global.Layer.Blue else PROCESS_MODE_DISABLED
-  red.process_mode = Node.PROCESS_MODE_INHERIT if layer == Global.Layer.Red else PROCESS_MODE_DISABLED
-  green.process_mode = Node.PROCESS_MODE_INHERIT if layer == Global.Layer.Green else PROCESS_MODE_DISABLED
-
+  _layers[_layer].set_active(false)
+  _prev_layer = _layer
   _layer = layer
+  _layers[_layer].set_active(true)
+
+func chroma_shift()->void:
+  var p:Player = %player
+  var candidate = -1
+  for i in range(0, len(_layers)):
+    if i != _layer && _layers[i].can_chroma_shift(p.global_position):
+      if candidate < 0:
+        candidate = i
+      elif candidate == _prev_layer:
+        candidate = i
+  if candidate >= 0:
+    Global.layer_selected.emit(candidate)
 
 func _process(delta: float) -> void:
   if Input.is_action_just_pressed('switch'):
-    Global.layer_selected.emit((_layer + 1)%3)
+    chroma_shift()
