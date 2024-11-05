@@ -257,6 +257,7 @@ target_position = Vector2(0, -1000)
 script = ExtResource("12_bpfu0")
 
 [node name="LaserLine" type="Line2D" parent="world/player/ship/LaserCast"]
+visible = false
 material = SubResource("ShaderMaterial_xpo0e")
 points = PackedVector2Array(0, 0, 0, -2000)
 width = 35.0
@@ -267,18 +268,21 @@ antialiased = true
 script = ExtResource("14_lb8h5")
 
 [node name="CastParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_55v84")
 texture = ExtResource("13_wepr7")
 lifetime = 0.3
 
 [node name="LaserParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
+emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_fxcw7")
 texture = ExtResource("13_wepr7")
 lifetime = 0.6
 
 [node name="TargetParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
-amount = 40
+emitting = false
+amount = 30
 process_material = SubResource("ParticleProcessMaterial_y8f06")
 texture = ExtResource("13_wepr7")
 lifetime = 0.5
