@@ -34,6 +34,12 @@ level names:
 - IV:   Green Light (speed traps)
 - V:    The End? (big level, ends with open space)
 
+control:
+- upgradble engine / perks / feature select
+- hard: turning, fwd thrust
+- difficult: turning, fwd, backwd thrust
+- improved: turning, fwd, backwd, side thrust
+- assisted: mario controlls (left goes left...)
 
 Crazy Ideas
 - Doppler-shifting?
