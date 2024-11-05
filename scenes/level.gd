@@ -6,9 +6,9 @@ extends Node2D
 
 var _layers:Array[ChromaLayer] = [];
 
-var _layer:ChromaLayer = null
+var _layer:Global.Layer = Global.Layer.Blue
 
-var _prev_layer:ChromaLayer = null
+var _prev_layer:Global.Layer = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,12 +25,16 @@ func _on_layer_selected(layer:Global.Layer):
 
 func chroma_shift()->void:
   var p:Player = %player
-  var candidates:Array[Global.Layer] = []
-  for l:ChromaLayer in _layers:
-    if l.can_chroma_shift(p.global_position):
-      candidates.append()
-
-  Global.layer_selected.emit((_layer + 1)%3)
+  var candidate = -1
+  for i in range(0, len(_layers)):
+    if i != _layer && _layers[i].can_chroma_shift(p.global_position):
+      if candidate < 0:
+        candidate = i
+      elif candidate == _prev_layer:
+        candidate = i
+  if candidate >= 0:
+    prints('candidate', candidate)
+    Global.layer_selected.emit(candidate)
 
 func _process(delta: float) -> void:
   if Input.is_action_just_pressed('switch'):
