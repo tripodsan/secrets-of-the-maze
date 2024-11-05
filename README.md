@@ -2,18 +2,19 @@
 
 > A [GameOff 2024](https://itch.io/jam/game-off-2024) Contribution
 
-![cover1](https://github.com/user-attachments/assets/688e6173-2e39-4f20-9b4b-2be3fc7b16e8)
+<img alt="game cover" src="https://github.com/user-attachments/assets/688e6173-2e39-4f20-9b4b-2be3fc7b16e8" width="256">
 
 # Notes
 
 ## Secret maze 
 
+### overview
 - Space shooter
 - SFX like geometry wars (vector gfx, dynamic, glow, warping, etc)
 - Fast paced
 - Earn/select upgrades and perks
 
-levels
+### levels
 - Levels have multiple dimensions, encoded in colors
 - Find secret to unlock dimension crystal
     - Have to complete level to get radar for secret (?)
@@ -27,29 +28,28 @@ levels
 - Camera rotates in the same direction of the spaceship? (Editable in settings?)
 - Weapons: Momentum-based?
 
-level names:
+#### level names
 - I:    Baby Steps (movement, obstacles, goal)
 - II:   Careful Now (enemies,..?)
 - III:  Overpenetration (kinetic destruction)
 - IV:   Green Light (speed traps)
 - V:    The End? (big level, ends with open space)
 
-control:
-- upgradble engine / perks / feature select
-- hard: turning, fwd thrust
-- difficult: turning, fwd, backwd thrust
-- improved: turning, fwd, backwd, side thrust
-- assisted: mario controlls (left goes left...)
+### ship control
+- upgradeable engine / perks / feature select
+- **hard**: turning, fwd thrust
+- **difficult**: turning, fwd, backwd thrust
+- **improved**: turning, fwd, backwd, side thrust
+- **assisted**: mario controlls (left goes left...)
 
-Crazy Ideas
+### Crazy Ideas
 - Doppler-shifting?
 - Multidimensional levels? (Continous color spectrum?)
 - Time travel?
 - builtin TAS
 
-Wildcards
+## Wildcards
 - 4 Colors (Mode in settings)
 - Cheat Mode (Invincibility, aim assist, zero friction,…)
 - Speed Run (whole movement idea, design levels with ‘straight shot’, leaderboards, timer in top right hand corner, builtin TAS3D levels saovement 
 
-<img width="903" alt="image" src="https://github.com/user-attachments/assets/b052fb71-a57f-4bc8-b44c-ad1862e1df4a">
