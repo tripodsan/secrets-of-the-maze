@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=35 format=4 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
@@ -101,14 +101,6 @@ direction = Vector3(0, 1, 0)
 spread = 90.0
 initial_velocity_max = 94.09
 gravity = Vector3(0, 0, 0)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c1oeo"]
-particles_animation = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_oks6u"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_v5gem")
@@ -325,13 +317,3 @@ motion_mirroring = Vector2(2048, 2048)
 position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("5_hcqio")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="world"]
-gravity_scale = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world/RigidBody2D"]
-material = SubResource("CanvasItemMaterial_c1oeo")
-position = Vector2(-163, 435)
-scale = Vector2(10, 10)
-shape = SubResource("CircleShape2D_oks6u")
-debug_color = Color(0.825855, 0.394114, 0.135367, 0.42)
