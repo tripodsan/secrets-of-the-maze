@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=37 format=4 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
@@ -13,10 +13,16 @@
 [ext_resource type="Shader" path="res://shaders/screen-filter.gdshader" id="7_e01wk"]
 [ext_resource type="TileSet" uid="uid://b4hv1lcomy6v6" path="res://scenes/level-tiles.tres" id="8_qpt1w"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
+[ext_resource type="Script" path="res://scenes/laser_cast.gd" id="12_bpfu0"]
+[ext_resource type="Shader" path="res://shaders/laser.gdshader" id="13_1t20a"]
+[ext_resource type="Texture2D" uid="uid://0q0x6fsvpax8" path="res://assets/laser.png" id="13_qbd35"]
+[ext_resource type="Texture2D" uid="uid://beawptqgfr72s" path="res://assets/glow_circle.png" id="13_wepr7"]
+[ext_resource type="Script" path="res://scripts/laser_line.gd" id="14_lb8h5"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]
 background_mode = 3
 ambient_light_source = 2
+glow_enabled = true
 glow_normalized = true
 glow_intensity = 1.24
 glow_strength = 0.63
@@ -29,6 +35,80 @@ shader_parameter/amount = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvfhi"]
 shader = ExtResource("7_e01wk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xpo0e"]
+shader = ExtResource("13_1t20a")
+shader_parameter/animation = null
+shader_parameter/laserTexture = ExtResource("13_qbd35")
+
+[sub_resource type="Gradient" id="Gradient_s1bvf"]
+colors = PackedColorArray(1, 1, 1, 0.756863, 0.755286, 0.134995, 0.684776, 1)
+
+[sub_resource type="Curve" id="Curve_1tnhc"]
+_data = [Vector2(0.0154639, 0.445167), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_11iec"]
+curve = SubResource("Curve_1tnhc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_55v84"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 56.613
+initial_velocity_max = 511.85
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 5.0
+alpha_curve = SubResource("CurveTexture_11iec")
+
+[sub_resource type="Curve" id="Curve_mhv70"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.4071, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t6hnb"]
+curve = SubResource("Curve_mhv70")
+
+[sub_resource type="Gradient" id="Gradient_pu8gc"]
+colors = PackedColorArray(0.929884, 0.952839, 0.999416, 1, 0.611114, 0.707589, 0.974303, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jj51v"]
+gradient = SubResource("Gradient_pu8gc")
+
+[sub_resource type="Curve" id="Curve_gi8vp"]
+_data = [Vector2(0.013245, 0.320237), 0.0, 0.0, 0, 0, Vector2(0.639175, 0.0326086), -4.72348, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lpxxh"]
+curve = SubResource("Curve_gi8vp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fxcw7"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(30, 500, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 220.43
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 98.48
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_curve = SubResource("CurveTexture_lpxxh")
+color_ramp = SubResource("GradientTexture1D_jj51v")
+alpha_curve = SubResource("CurveTexture_t6hnb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y8f06"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_max = 94.09
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c1oeo"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oks6u"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_v5gem")
@@ -179,6 +259,38 @@ script = ExtResource("1_wfkjx")
 rotation = 1.5708
 polygon = PackedVector2Array(0, -32, -16, 32, 0, 16, 16, 32)
 
+[node name="LaserCast" type="RayCast2D" parent="world/player/ship"]
+position = Vector2(0, -40)
+target_position = Vector2(0, -1000)
+script = ExtResource("12_bpfu0")
+
+[node name="LaserLine" type="Line2D" parent="world/player/ship/LaserCast"]
+material = SubResource("ShaderMaterial_xpo0e")
+points = PackedVector2Array(0, 0, 0, -2000)
+width = 35.0
+default_color = Color(0.992268, 0.588753, 1, 1)
+gradient = SubResource("Gradient_s1bvf")
+texture_mode = 2
+antialiased = true
+script = ExtResource("14_lb8h5")
+
+[node name="CastParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
+process_material = SubResource("ParticleProcessMaterial_55v84")
+texture = ExtResource("13_wepr7")
+lifetime = 0.3
+
+[node name="LaserParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_fxcw7")
+texture = ExtResource("13_wepr7")
+lifetime = 0.6
+
+[node name="TargetParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_y8f06")
+texture = ExtResource("13_wepr7")
+lifetime = 0.5
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world/player"]
 rotation = 1.5708
 polygon = PackedVector2Array(0, -32, -16, 32, 0, 16, 16, 32)
@@ -213,3 +325,13 @@ motion_mirroring = Vector2(2048, 2048)
 position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("5_hcqio")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="world"]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/RigidBody2D"]
+material = SubResource("CanvasItemMaterial_c1oeo")
+position = Vector2(-163, 435)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_oks6u")
+debug_color = Color(0.825855, 0.394114, 0.135367, 0.42)

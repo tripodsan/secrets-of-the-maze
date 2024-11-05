@@ -20,6 +20,12 @@ func _ready() -> void:
   Global.engine_type_selected.connect(set_engine)
   trail.resize(8)
 
+func _input(event: InputEvent) -> void:
+  if Input.is_key_pressed(KEY_SPACE):
+    $ship/LaserCast.set_is_casting(true)
+  else:
+    $ship/LaserCast.set_is_casting(false)
+      
 func _physics_process(delta: float) -> void:
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")
 #
