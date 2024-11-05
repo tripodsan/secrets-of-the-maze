@@ -27,6 +27,14 @@ levels
 - Camera rotates in the same direction of the spaceship? (Editable in settings?)
 - Weapons: Momentum-based?
 
+level names:
+- I:    Baby Steps (movement, obstacles, goal)
+- II:   Careful Now (enemies,..?)
+- III:  Overpenetration (kinetic destruction)
+- IV:   Green Light (speed traps)
+- V:    The End? (big level, ends with open space)
+
+
 Crazy Ideas
 - Doppler-shifting?
 - Multidimensional levels? (Continous color spectrum?)
