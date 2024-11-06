@@ -38,7 +38,7 @@ var rot_velo := 0.0
 var rot_angle := 0.0
 var rot_dir := Vector2.RIGHT
 
-var trail:PackedVector2Array = PackedVector2Array()
+var trail:PackedVector4Array = PackedVector4Array()
 var trail_pos:int = 0
 
 func _ready() -> void:
@@ -96,7 +96,7 @@ func _physics_process(delta: float) -> void:
   var col:KinematicCollision2D = move_and_collide(velocity * delta)
   if col:
     velocity = Vector2.ZERO
-  RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4(trail[trail_pos].x, trail[trail_pos].y, velocity.x, velocity.y))
-  trail[trail_pos] = global_position
+  RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
+  trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
   trail_pos = (trail_pos + 1) % len(trail)
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)

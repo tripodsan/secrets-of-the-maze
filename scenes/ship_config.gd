@@ -2,6 +2,7 @@ extends GridContainer
 
 
 func _ready() -> void:
+  visible = true
   if Global.player:
     init()
   else:
