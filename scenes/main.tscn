@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=35 format=4 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
@@ -17,6 +17,7 @@
 [ext_resource type="Shader" path="res://shaders/laser.gdshader" id="13_1t20a"]
 [ext_resource type="Texture2D" uid="uid://0q0x6fsvpax8" path="res://assets/laser.png" id="13_qbd35"]
 [ext_resource type="Texture2D" uid="uid://beawptqgfr72s" path="res://assets/glow_circle.png" id="13_wepr7"]
+[ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]
 background_mode = 3
@@ -191,7 +192,7 @@ text = "mass:
 
 [node name="mass" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
 layout_mode = 2
-value = 1.5
+value = 2.0
 allow_greater = true
 alignment = 2
 suffix = "kg"
@@ -204,7 +205,6 @@ text = "F (fwd):"
 layout_mode = 2
 max_value = 10000.0
 step = 10.0
-value = 2.0
 allow_greater = true
 alignment = 2
 suffix = "N"
@@ -419,3 +419,7 @@ motion_mirroring = Vector2(2048, 2048)
 position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("5_hcqio")
+
+[node name="ProjectileManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("18_nwqka")
