@@ -39,8 +39,9 @@
 - **Laser**: 
     - Straight shot, discharges quickly
 - **Missile**: 
-    - Homing: Slow, follows enemies
     - Dumbfire: Fast, straight shot
+    - Homing: Slow, follows enemies
+        - Targeting: Could be manual as an additional skill element
 - **Plasma**: 
     - Fast, high rate of fire 
     - low damage
