@@ -54,6 +54,10 @@
 - **EMP**:
     - Disables enemies
     - Opens doors? 
+- **Mine**:
+    - Explodes on contact
+    - Typically part of the level, or dropped by enemies
+    - Could be player controlled?
 
 ### ship control
 - upgradeable engine / perks / feature select
