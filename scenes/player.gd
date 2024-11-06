@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
   var f:Vector2  # thrust
   if input.x != 0:
     rot_velo = input.x * rot_speed * delta
-  rot_angle += rot_velo
+  rot_angle = fposmod(rot_angle + rot_velo, TAU)
   rot_dir = Vector2.from_angle(rot_angle)
   rot_velo = lerpf(rot_velo, 0, rot_damp)
   if input.y < 0:
@@ -93,10 +93,22 @@ func _physics_process(delta: float) -> void:
   velocity += a_tot * delta
   rotation = rot_dir.angle()
 
-  var col:KinematicCollision2D = move_and_collide(velocity * delta)
-  if col:
-    velocity = Vector2.ZERO
-  RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
+  var coll:KinematicCollision2D = move_and_collide(velocity * delta)
+  if coll:
+    var wall := coll.get_normal()
+    var a:float = wall.dot(rot_dir)
+    if abs(a) > 0.6:
+      var t:Vector2 = coll.get_remainder().bounce(wall)
+      position += t * 1.1
+      velocity = velocity.bounce(wall)
+      rot_angle = t.angle()
+    else:
+      # slide
+      rot_dir = rot_dir.slide(wall).normalized()
+      rot_angle = rot_dir.angle()
+      velocity = velocity.slide(wall)
+      position += coll.get_remainder().slide(wall)
+
   trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
   trail_pos = (trail_pos + 1) % len(trail)
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)

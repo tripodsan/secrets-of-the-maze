@@ -413,6 +413,10 @@ texture_region_size = Vector2i(64, 64)
 0:2/3/terrains_peering_bit/right_side = 0
 0:2/3/terrains_peering_bit/top_side = 0
 0:2/3/terrains_peering_bit/top_right_corner = 0
+1:4/size_in_atlas = Vector2i(4, 4)
+1:4/0 = 0
+1:4/0/texture_origin = Vector2i(-96, -96)
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -16, -32, -15.25, -15.75, -13.75, -0.125, -11.5, 15.875, -6.75, 32, -2.5, 46.875, 3.5, 63.375, 12.125, 79.75, 19.75, 95, 32, 112, 45.125, 128.125, 61.5, 144.75, 80, 160, 94.625, 170.5, 112.75, 181, 127.5, 188.125, 144.5, 194.25, 160.75, 199.625, 175.75, 203.375, 193.25, 205.875, 208.375, 207.625, 224, 208, 224, 224, 208, 224, -32, 224)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_86461"]
 resource_name = "Blue Grid"

@@ -2,7 +2,7 @@ extends GridContainer
 
 
 func _ready() -> void:
-  visible = true
+  #visible = true
   if Global.player:
     init()
   else:
@@ -16,3 +16,7 @@ func init()->void:
 
 func _on_value_changed(value:float, name:String)->void:
   Global.player.set(name, value)
+
+func _input(event: InputEvent) -> void:
+  if Input.is_action_just_pressed('ui_accept'):
+    get_viewport().gui_release_focus()
