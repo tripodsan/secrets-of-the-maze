@@ -35,6 +35,26 @@
 - IV:   Green Light (speed traps)
 - V:    The End? (big level, ends with open space)
 
+### weapon ideas 
+- **Laser**: 
+    - Straight shot, discharges quickly
+- **Missile**: 
+    - Homing: Slow, follows enemies
+    - Dumbfire: Fast, straight shot
+- **Plasma**: 
+    - Fast, high rate of fire 
+    - low damage
+    - bouncy? 
+- **Bomb**:
+    - Kills everything on screen
+    - Rare
+- **Shield**:
+    - Absorbs damage
+    - Recharges
+- **EMP**:
+    - Disables enemies
+    - Opens doors? 
+
 ### ship control
 - upgradeable engine / perks / feature select
 - **hard**: turning, fwd thrust
