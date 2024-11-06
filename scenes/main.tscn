@@ -1,10 +1,9 @@
-[gd_scene load_steps=35 format=4 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=34 format=4 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
 [ext_resource type="Theme" uid="uid://cfk78nhykmoun" path="res://scenes/hud_theme.tres" id="2_gqhd0"]
-[ext_resource type="Script" path="res://scenes/engine_selector.gd" id="3_mp7tm"]
-[ext_resource type="Script" path="res://scenes/layer_selector.gd" id="4_2oqa4"]
+[ext_resource type="Script" path="res://scenes/ship_config.gd" id="3_tlpr0"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="4_wbysk"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="5_hcqio"]
 [ext_resource type="Script" path="res://scenes/level.gd" id="5_ummob"]
@@ -116,58 +115,144 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("2_gqhd0")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/hud"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="topbar" type="MarginContainer" parent="CanvasLayer/hud/PanelContainer"]
+[node name="topbar" type="MarginContainer" parent="CanvasLayer/hud"]
 layout_mode = 2
+offset_right = 134.0
+offset_bottom = 150.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/hud/PanelContainer/topbar"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/hud/topbar"]
 layout_mode = 2
-theme_override_constants/separation = 10
 
-[node name="engine_selector2" type="VBoxContainer" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer"]
+[node name="Control" type="GridContainer" parent="CanvasLayer/hud/topbar/PanelContainer"]
 layout_mode = 2
-script = ExtResource("3_mp7tm")
+theme_override_constants/h_separation = 12
+columns = 2
+script = ExtResource("3_tlpr0")
 
-[node name="tank" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer/engine_selector2"]
+[node name="a_front_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
 layout_mode = 2
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
-text = "TANK"
-
-[node name="ship" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer/engine_selector2"]
-layout_mode = 2
-focus_mode = 0
-toggle_mode = true
-text = "SHIP
+text = "A (front):
 "
 
-[node name="layer_selector" type="VBoxContainer" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer"]
-visible = false
+[node name="a_front" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-script = ExtResource("4_2oqa4")
+step = 0.1
+allow_greater = true
+alignment = 2
+suffix = "m²"
 
-[node name="blue" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer/layer_selector"]
+[node name="a_back_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
 layout_mode = 2
-focus_mode = 0
-toggle_mode = true
-button_pressed = true
-text = "BLUE"
-
-[node name="red" type="Button" parent="CanvasLayer/hud/PanelContainer/topbar/HBoxContainer/layer_selector"]
-layout_mode = 2
-focus_mode = 0
-toggle_mode = true
-text = "RED
+text = "A (back):
 "
+
+[node name="a_back" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+step = 0.1
+value = 1.5
+allow_greater = true
+alignment = 2
+suffix = "m²"
+
+[node name="a_side_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+text = "A (side):
+"
+
+[node name="a_side" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+step = 0.1
+value = 1.5
+allow_greater = true
+alignment = 2
+suffix = "m²"
+
+[node name="density_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+text = "density:
+"
+
+[node name="density" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+max_value = 10.0
+step = 0.0
+allow_greater = true
+alignment = 2
+
+[node name="mass_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+text = "mass:
+"
+
+[node name="mass" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+value = 1.5
+allow_greater = true
+alignment = 2
+suffix = "kg"
+
+[node name="f_fwd_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+text = "F (fwd):"
+
+[node name="f_fwd" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+max_value = 10000.0
+step = 10.0
+value = 2.0
+allow_greater = true
+alignment = 2
+suffix = "N"
+
+[node name="f_back_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+text = "F (back):"
+
+[node name="f_back" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+max_value = 10000.0
+step = 10.0
+allow_greater = true
+alignment = 2
+suffix = "N"
+
+[node name="f_side_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+text = "F (side):"
+
+[node name="f_side" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+max_value = 10000.0
+step = 10.0
+allow_greater = true
+alignment = 2
+suffix = "N"
+
+[node name="rot_speed_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+text = "Rot Speed:"
+
+[node name="rot_speed" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+max_value = 10.0
+allow_greater = true
+alignment = 2
+
+[node name="rot_damp_lab" type="Label" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+text = "Rot Damp:"
+
+[node name="rot_damp" type="SpinBox" parent="CanvasLayer/hud/topbar/PanelContainer/Control"]
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+allow_greater = true
+alignment = 2
 
 [node name="ChromaticDistortion" type="ColorRect" parent="CanvasLayer"]
 visible = false

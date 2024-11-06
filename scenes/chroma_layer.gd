@@ -21,8 +21,8 @@ func set_active(value: bool)->void:
 func can_chroma_shift(pos:Vector2)->bool:
   var p:Vector2i = map.local_to_map(pos)
   var tile:TileData = map.get_cell_tile_data(p)
-  if tile:
-    prints(name, 'tile data', tile.terrain_set)
-  else:
-    prints(name, 'tile data', tile)
+  #if tile:
+    #prints(name, 'tile data', tile.terrain_set)
+  #else:
+    #prints(name, 'tile data', tile)
   return tile && tile.terrain_set == 1

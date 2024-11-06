@@ -1,8 +1,13 @@
 extends Node
 
-enum EngineType { Tank, Ship }
+var player:Player
+
 enum Layer { Blue, Red, Green }
 
-signal engine_type_selected(type:EngineType)
+signal player_changed()
 
 signal layer_selected(type:Layer)
+
+func set_player(p:Player):
+  player = p
+  player_changed.emit()
