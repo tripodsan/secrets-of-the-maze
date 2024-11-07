@@ -97,7 +97,7 @@ func _physics_process(delta: float) -> void:
   if coll:
     var wall := coll.get_normal()
     var a:float = wall.dot(rot_dir)
-    if abs(a) > 0.6:
+    if abs(a) > 0.8:
       var t:Vector2 = coll.get_remainder().bounce(wall)
       position += t * 1.1
       velocity = velocity.bounce(wall)
@@ -109,6 +109,7 @@ func _physics_process(delta: float) -> void:
       velocity = velocity.slide(wall)
       position += coll.get_remainder().slide(wall)
 
+  RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
   trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
   trail_pos = (trail_pos + 1) % len(trail)
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
