@@ -11,13 +11,13 @@ extends CharacterBody2D
 @export_range(0.0, 10.0, 0.1, "or_greater") var a_back := 500.0
 
 ## "fluid density" (kg/m³)
-@export_range(0.0, 10.0, 0.0001, "or_greater") var density := 0.02
+@export_range(0.0, 10.0, 0.0001, "or_greater") var density := 0.01
 
 ## mass (kg)
 @export_range(0.0, 10.0, 0.1, "or_greater") var mass := 50.0
 
 ## forward thrust force (N)
-@export_range(0.0, 10.0, 0.1, "or_greater") var f_fwd := 500000.0
+@export_range(0.0, 10.0, 0.1, "or_greater") var f_fwd := 300000.0
 
 ## backward thrust force (N)
 @export_range(0.0, 10.0, 0.1, "or_greater") var f_back := 100000.0
@@ -26,7 +26,7 @@ extends CharacterBody2D
 @export_range(0.0, 10.0, 0.1, "or_greater") var f_side := 200000.0
 
 ## rotation speed
-@export_range(0.0, 10.0, 0.1, "or_greater") var rot_speed := 4.0
+@export_range(0.0, 10.0, 0.1, "or_greater") var rot_speed := 6.0
 
 ## rotation angular damp
 @export_range(0.0, 10.0, 0.1, "or_greater") var rot_damp := 0.2
@@ -41,6 +41,9 @@ var rot_dir := Vector2.RIGHT
 var trail:PackedVector4Array = PackedVector4Array()
 var trail_pos:int = 0
 
+# todo: use states
+var is_destroyed:bool = false
+
 func _ready() -> void:
   trail.resize(6)
   Global.set_player(self)
@@ -52,6 +55,7 @@ func _input(event: InputEvent) -> void:
     $ship/LaserCast.set_is_casting(false)
 
 func _physics_process(delta: float) -> void:
+  if is_destroyed: return
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")
 #
   var f:Vector2  # thrust
@@ -95,6 +99,13 @@ func _physics_process(delta: float) -> void:
 
   var coll:KinematicCollision2D = move_and_collide(velocity * delta)
   if coll:
+    if coll.get_collider() is TileMapLayer:
+      var map:TileMapLayer = coll.get_collider()
+      var pos:Vector2i = map.get_coords_for_body_rid(coll.get_collider_rid())
+      var data:TileData = map.get_cell_tile_data(pos)
+      if data.get_custom_data("type") == &"spike":
+        hit(Global.HitType.Spike)
+        return
     var wall := coll.get_normal()
     var a:float = wall.dot(rot_dir)
     if abs(a) > 0.8:
@@ -113,3 +124,21 @@ func _physics_process(delta: float) -> void:
   trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
   trail_pos = (trail_pos + 1) % len(trail)
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
+
+func hit(type:Global.HitType)->void:
+  is_destroyed = true
+  $ship.visible = false
+  $player_explosion.fire()
+  RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
+  await get_tree().create_timer(1).timeout
+  Global.player_destroyed.emit(type)
+
+func reset(pos:Vector2)->void:
+  is_destroyed = false
+  $ship.visible = true
+  trail.fill(Vector4.ZERO)
+  position = pos
+  rotation = 0
+  velocity = Vector2.ZERO
+  rot_angle = 0
+  rot_dir = Vector2.RIGHT
