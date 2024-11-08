@@ -6,13 +6,20 @@ var lifespan := 2.0
 var time_alive = 0.0
 var type := 0
 
+func start():
+  $CharacterBody2D/GPUParticles2D.restart()
+  visible = true
+  
 func stop():
   visible = false
   
 func _physics_process(delta: float) -> void:
   if visible:
-    position += direction * speed * delta
+    global_position += direction * speed * delta
     time_alive += delta
-    if time_alive > lifespan:
+    var scale_f = min(0.8, time_alive)
+    $CharacterBody2D/Sprite2D.scale = Vector2(scale_f, scale_f*0.5)
+    $CharacterBody2D/Sprite2D.rotate(time_alive)
+    if time_alive >= lifespan:
       stop()
       

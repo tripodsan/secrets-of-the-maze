@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://chykxgy7cl78m"]
+[gd_scene load_steps=12 format=3 uid="uid://chykxgy7cl78m"]
 
 [ext_resource type="Script" path="res://scenes/projectile.gd" id="1_4gj2m"]
 [ext_resource type="Texture2D" uid="uid://beawptqgfr72s" path="res://assets/glow_circle.png" id="2_twusn"]
+[ext_resource type="Texture2D" uid="uid://bdxx2jv7khtkq" path="res://assets/torpedo.png" id="4_rarg0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8olos"]
 
@@ -51,4 +52,4 @@ process_material = SubResource("ParticleProcessMaterial_7ypmn")
 texture = ExtResource("2_twusn")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("2_twusn")
+texture = ExtResource("4_rarg0")
