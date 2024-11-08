@@ -1076,6 +1076,9 @@ texture_region_size = Vector2i(64, 64)
 5:3/7/custom_data_0 = &"spike"
 4:4/0 = 0
 4:4/0/custom_data_0 = &"start"
+5:4/0 = 0
+5:4/0/physics_layer_2/polygon_0/points = PackedVector2Array(-4.57143, -32, 4.57143, -32, 22.8571, -22.8571, 32, -4.57143, 32, 4.57143, 22.8571, 22.8571, 4.57143, 32, -4.57143, 32, -22.8571, 22.8571, -32, 4.57143, -32, -4.57143, -22.8571, -22.8571)
+5:4/0/custom_data_0 = &"goal"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_86461"]
 resource_name = "Blue Grid"
@@ -1577,6 +1580,7 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 5
 physics_layer_1/collision_layer = 8
 physics_layer_1/collision_mask = 5
+physics_layer_2/collision_layer = 32
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "BlueGrid"
 terrain_set_0/terrain_0/color = Color(0.600019, 0.0978827, 0.647423, 1)
