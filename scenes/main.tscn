@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dptekuh4rhtgs" path="res://scenes/player_explosion.tscn" id="13_hirw8"]
 [ext_resource type="Texture2D" uid="uid://0q0x6fsvpax8" path="res://assets/laser.png" id="13_qbd35"]
 [ext_resource type="Texture2D" uid="uid://beawptqgfr72s" path="res://assets/glow_circle.png" id="13_wepr7"]
+[ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]
 background_mode = 3
@@ -488,3 +489,7 @@ motion_mirroring = Vector2(2048, 2048)
 position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("5_hcqio")
+
+[node name="ProjectileManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("18_nwqka")
