@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://beawptqgfr72s" path="res://assets/glow_circle.png" id="2_twusn"]
 [ext_resource type="Texture2D" uid="uid://bdxx2jv7khtkq" path="res://assets/torpedo.png" id="4_rarg0"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8olos"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_busl5"]
 
 [sub_resource type="Curve" id="Curve_1pmyl"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.986063, 0.0437042), 0.0, 0.0, 0, 0]
@@ -42,9 +42,12 @@ alpha_curve = SubResource("CurveTexture_c50yu")
 script = ExtResource("1_4gj2m")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 16
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_8olos")
+shape = SubResource("CircleShape2D_busl5")
+debug_color = Color(0.917647, 0.231373, 0.439216, 0.745098)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CharacterBody2D"]
 amount = 90
