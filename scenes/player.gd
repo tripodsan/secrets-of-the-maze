@@ -55,7 +55,7 @@ func _input(event: InputEvent) -> void:
     $ship/LaserCast.set_is_casting(false)
   if Input.is_action_just_pressed('missile'):
     %ProjectileManager.shoot_projectile(position+rot_dir*50.0, rot_dir, 750.0, 0.0, 2.0)
-    
+
 func _physics_process(delta: float) -> void:
   if is_destroyed: return
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")

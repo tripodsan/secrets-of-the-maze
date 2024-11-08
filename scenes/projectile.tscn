@@ -38,21 +38,20 @@ scale_curve = SubResource("CurveTexture_j4dwh")
 color_ramp = SubResource("GradientTexture1D_gun2c")
 alpha_curve = SubResource("CurveTexture_c50yu")
 
-[node name="Projectile" type="Node2D"]
+[node name="Projectile" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 14
+motion_mode = 1
 script = ExtResource("1_4gj2m")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-collision_layer = 16
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_busl5")
 debug_color = Color(0.917647, 0.231373, 0.439216, 0.745098)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CharacterBody2D"]
+[node name="trail" type="GPUParticles2D" parent="."]
 amount = 90
 process_material = SubResource("ParticleProcessMaterial_7ypmn")
 texture = ExtResource("2_qh5pk")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_et1o4")
