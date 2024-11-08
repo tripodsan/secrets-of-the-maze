@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://chykxgy7cl78m"]
 
 [ext_resource type="Script" path="res://scenes/projectile.gd" id="1_4gj2m"]
-[ext_resource type="Texture2D" uid="uid://beawptqgfr72s" path="res://assets/glow_circle.png" id="2_twusn"]
-[ext_resource type="Texture2D" uid="uid://bdxx2jv7khtkq" path="res://assets/torpedo.png" id="4_rarg0"]
+[ext_resource type="Texture2D" uid="uid://cyokx1amjp27k" path="res://assets/square.png" id="2_qh5pk"]
+[ext_resource type="Texture2D" uid="uid://bxp3gmbwlpu5b" path="res://assets/ring.png" id="3_et1o4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_busl5"]
 
@@ -15,7 +15,7 @@ curve = SubResource("Curve_1pmyl")
 
 [sub_resource type="Gradient" id="Gradient_mdrmg"]
 offsets = PackedFloat32Array(0, 0.465587, 1)
-colors = PackedColorArray(0.630126, 0.279522, 0.0135687, 1, 0.7392, 0.632926, 0.0643815, 1, 0.166853, 0.166853, 0.166853, 1)
+colors = PackedColorArray(0.705882, 0, 0.454902, 0.760784, 1, 0.65098, 0.866667, 0.686275, 0.166853, 0.166853, 0.166853, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gun2c"]
 gradient = SubResource("Gradient_mdrmg")
@@ -52,7 +52,7 @@ debug_color = Color(0.917647, 0.231373, 0.439216, 0.745098)
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CharacterBody2D"]
 amount = 90
 process_material = SubResource("ParticleProcessMaterial_7ypmn")
-texture = ExtResource("2_twusn")
+texture = ExtResource("2_qh5pk")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("4_rarg0")
+texture = ExtResource("3_et1o4")
