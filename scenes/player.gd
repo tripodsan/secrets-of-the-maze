@@ -130,9 +130,10 @@ func _physics_process(delta: float) -> void:
 func hit(type:Global.HitType)->void:
   is_destroyed = true
   $ship.visible = false
-  $player_explosion.fire()
+  var explosion = load
+  $Explosion.fire()
   RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
-  await get_tree().create_timer(1).timeout
+  await get_tree().create_timer(2).timeout
   Global.player_destroyed.emit(type)
 
 func reset(pos:Vector2)->void:
