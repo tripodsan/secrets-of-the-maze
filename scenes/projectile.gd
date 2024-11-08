@@ -17,9 +17,9 @@ func _physics_process(delta: float) -> void:
   if visible:
     global_position += direction * speed * delta
     time_alive += delta
-    var scale_f = min(0.8, time_alive)
+    var scale_f = min(0.6, time_alive)
     $CharacterBody2D/Sprite2D.scale = Vector2(scale_f, scale_f*0.5)
-    $CharacterBody2D/Sprite2D.rotate(time_alive)
+    $CharacterBody2D/Sprite2D.rotate(time_alive*0.2)
     if time_alive >= lifespan:
       stop()
       
