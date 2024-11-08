@@ -1,11 +1,10 @@
 [gd_scene load_steps=19 format=3 uid="uid://bnbc6fy7ck4xj"]
 
 [ext_resource type="Script" path="res://scenes/explosion.gd" id="1_mb0m1"]
-[ext_resource type="Texture2D" uid="uid://beawptqgfr72s" path="res://assets/glow_circle.png" id="2_wul5r"]
 
 [sub_resource type="Gradient" id="Gradient_wvqoq"]
 offsets = PackedFloat32Array(0.00819672, 0.516393, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.752941, 0, 1, 1, 0.278431, 0, 0.529412)
+colors = PackedColorArray(1, 1, 1, 1, 0.873776, 0.486942, 0.69588, 1, 0.972422, 0.000135536, 0.790996, 0.529412)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gqkja"]
 gradient = SubResource("Gradient_wvqoq")
@@ -21,12 +20,14 @@ gravity = Vector3(0, 98, 0)
 scale_min = 0.1
 scale_max = 0.2
 color_ramp = SubResource("GradientTexture1D_gqkja")
-turbulence_enabled = true
 turbulence_noise_strength = 5.32
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wasai"]
+load_path = "res://.godot/imported/glow_circle.png-525652892a8af17570fffe5e8ae67523.ctex"
 
 [sub_resource type="Gradient" id="Gradient_p17qe"]
 offsets = PackedFloat32Array(0, 0.253061, 0.730612, 1)
-colors = PackedColorArray(0.12549, 0.145098, 0.156863, 0, 0.396078, 0.34902, 0.34902, 0.45098, 0.490196, 0.486275, 0.47451, 0.831373, 0.709804, 0.717647, 0.72549, 0)
+colors = PackedColorArray(0.0616001, 0.157151, 0.181875, 0, 0.178384, 0.411892, 0.339777, 0.45098, 0.240463, 0.543033, 0.533652, 0.831373, 0.709804, 0.717647, 0.72549, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2yi3l"]
 gradient = SubResource("Gradient_p17qe")
@@ -46,14 +47,14 @@ initial_velocity_min = 18.94
 initial_velocity_max = 159.1
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_nb83q")
-color = Color(0.8, 0.815686, 0.815686, 1)
+color = Color(0.568627, 1, 1, 1)
 color_ramp = SubResource("GradientTexture1D_2yi3l")
 hue_variation_min = 0.00999998
 hue_variation_max = 0.05
 
 [sub_resource type="Gradient" id="Gradient_yv6hf"]
 offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(1, 0.729412, 0.0941176, 1, 1, 0.262745, 0, 0.835294, 0.65098, 0, 0, 0.309804)
+colors = PackedColorArray(0.982563, 0.680063, 0.80259, 1, 0.883235, 0.375561, 0.500466, 0.835294, 0.624744, 7.46027e-07, 0.320295, 0.309804)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6vp3q"]
 gradient = SubResource("Gradient_yv6hf")
@@ -77,7 +78,7 @@ curve = SubResource("Curve_ibh1k")
 
 [sub_resource type="Gradient" id="Gradient_84tls"]
 offsets = PackedFloat32Array(0.0163934, 0.504098, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.886275, 0.117647, 1, 1, 0.368627, 0.129412, 0.262745)
+colors = PackedColorArray(1, 1, 1, 1, 0.969387, 0.71071, 0.836192, 1, 1, 0.457034, 0.885994, 0.262745)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_n5pis"]
 gradient = SubResource("Gradient_84tls")
@@ -101,7 +102,7 @@ script = ExtResource("1_mb0m1")
 emitting = false
 amount = 120
 process_material = SubResource("ParticleProcessMaterial_f6osr")
-texture = ExtResource("2_wul5r")
+texture = SubResource("CompressedTexture2D_wasai")
 lifetime = 1.2
 one_shot = true
 explosiveness = 0.87
@@ -110,7 +111,7 @@ explosiveness = 0.87
 emitting = false
 amount = 40
 process_material = SubResource("ParticleProcessMaterial_4m2s7")
-texture = ExtResource("2_wul5r")
+texture = SubResource("CompressedTexture2D_wasai")
 lifetime = 1.5
 one_shot = true
 explosiveness = 0.64
@@ -120,7 +121,7 @@ randomness = 0.4
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_3fhgt")
-texture = ExtResource("2_wul5r")
+texture = SubResource("CompressedTexture2D_wasai")
 lifetime = 0.8
 one_shot = true
 explosiveness = 0.6
@@ -129,7 +130,7 @@ explosiveness = 0.6
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_8g23x")
-texture = ExtResource("2_wul5r")
+texture = SubResource("CompressedTexture2D_wasai")
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
