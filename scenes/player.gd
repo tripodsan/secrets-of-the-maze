@@ -133,7 +133,7 @@ func hit(type:Global.HitType)->void:
   var explosion = load
   $Explosion.fire()
   RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
-  await get_tree().create_timer(2).timeout
+  await get_tree().create_timer(1.5).timeout
   Global.player_destroyed.emit(type)
 
 func reset(pos:Vector2)->void:
