@@ -34,7 +34,7 @@ load_path = "res://.godot/imported/glow_circle.png-525652892a8af17570fffe5e8ae67
 
 [sub_resource type="Gradient" id="Gradient_yv6hf"]
 offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(0.982563, 0.680063, 0.80259, 1, 0.883235, 0.375561, 0.500466, 0.835294, 0.624744, 7.46027e-07, 0.320295, 0.309804)
+colors = PackedColorArray(0.982563, 0.680063, 0.80259, 1, 0.855201, 0.374896, 0.62991, 0.835294, 0.605971, 7.65279e-06, 0.411034, 0.309804)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6vp3q"]
 gradient = SubResource("Gradient_yv6hf")

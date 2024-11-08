@@ -15,7 +15,7 @@ curve = SubResource("Curve_1pmyl")
 
 [sub_resource type="Gradient" id="Gradient_mdrmg"]
 offsets = PackedFloat32Array(0, 0.465587, 1)
-colors = PackedColorArray(0.630126, 0.279522, 0.0135687, 1, 0.7392, 0.632926, 0.0643815, 1, 0.166853, 0.166853, 0.166853, 1)
+colors = PackedColorArray(0.70734, 3.99485e-06, 0.453075, 1, 1, 0.650158, 0.868033, 1, 0.166853, 0.166853, 0.166853, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gun2c"]
 gradient = SubResource("Gradient_mdrmg")
