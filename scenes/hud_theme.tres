@@ -18,5 +18,5 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [resource]
-default_font_size = 40
+default_font_size = 24
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2vqx5")
