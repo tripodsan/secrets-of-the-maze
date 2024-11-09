@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=29 format=4 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
@@ -9,10 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="5_hcqio"]
 [ext_resource type="Script" path="res://scenes/level.gd" id="5_ummob"]
 [ext_resource type="Script" path="res://scenes/chromatic_distortion.gd" id="6_h7jlh"]
-[ext_resource type="Shader" path="res://shaders/supernova.gdshader" id="7_0qk4n"]
 [ext_resource type="Script" path="res://scenes/grid.gd" id="7_q6pwc"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="7_u1pgc"]
-[ext_resource type="Script" path="res://scenes/super_nova.gd" id="8_2ioh4"]
+[ext_resource type="PackedScene" uid="uid://glyv2bogmfg4" path="res://scenes/super_nova.tscn" id="7_vhdax"]
 [ext_resource type="Shader" path="res://shaders/grid-tile.gdshader" id="8_gi3ai"]
 [ext_resource type="Texture2D" uid="uid://b1gb2y1iosi88" path="res://assets/tiles.png" id="9_e7ys4"]
 [ext_resource type="Texture2D" uid="uid://b47gas71coivd" path="res://assets/64x64.png" id="10_bm4oy"]
@@ -30,10 +29,6 @@ glow_blend_mode = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r1g4g"]
 shader = ExtResource("10_rael0")
-shader_parameter/amount = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fibkb"]
-shader = ExtResource("7_0qk4n")
 shader_parameter/amount = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rnlvf"]
@@ -389,14 +384,7 @@ script = ExtResource("6_h7jlh")
 [node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer/ChromaticDistortion"]
 copy_mode = 2
 
-[node name="SuperNova" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_fibkb")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("8_2ioh4")
+[node name="SuperNova" parent="CanvasLayer" instance=ExtResource("7_vhdax")]
 
 [node name="world" type="Node2D" parent="."]
 
