@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://glyv2bogmfg4"]
+
+[ext_resource type="Shader" path="res://shaders/supernova.gdshader" id="1_2glud"]
+[ext_resource type="Script" path="res://scenes/super_nova.gd" id="2_iewh7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fibkb"]
+shader = ExtResource("1_2glud")
+shader_parameter/amount = 0.0
+
+[node name="SuperNova" type="ColorRect"]
+material = SubResource("ShaderMaterial_fibkb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_iewh7")
