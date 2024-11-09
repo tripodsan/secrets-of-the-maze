@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cremgjkvu1nw4"]
+[gd_scene load_steps=13 format=3 uid="uid://cremgjkvu1nw4"]
 
-[ext_resource type="Script" path="res://scenes/portal.gd" id="1_phqwg"]
-[ext_resource type="Texture2D" uid="uid://bxp3gmbwlpu5b" path="res://assets/ring.png" id="1_rs64c"]
-[ext_resource type="Texture2D" uid="uid://7xabij5fiwwy" path="res://assets/triangle.png" id="2_sxo8g"]
-[ext_resource type="Texture2D" uid="uid://bo42hb7j21lk2" path="res://assets/star.png" id="4_mxi5s"]
+[ext_resource type="Script" path="res://scenes/portal.gd" id="1_bp8gh"]
+[ext_resource type="Texture2D" uid="uid://b6i5sw2kwdaq8" path="res://scenes/gradient_texture_green_to_red.tres" id="2_h3vti"]
+[ext_resource type="Texture2D" uid="uid://bxp3gmbwlpu5b" path="res://assets/ring.png" id="3_ust2t"]
+[ext_resource type="Texture2D" uid="uid://7xabij5fiwwy" path="res://assets/triangle.png" id="4_ju5kj"]
+[ext_resource type="Texture2D" uid="uid://bo42hb7j21lk2" path="res://assets/star.png" id="5_3brb1"]
 
 [sub_resource type="Curve" id="Curve_71sem"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.257053, 1), 0.0, 0.0, 0, 0, Vector2(0.960293, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -11,13 +12,6 @@ point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_4y5jl"]
 curve = SubResource("Curve_71sem")
-
-[sub_resource type="Gradient" id="Gradient_cbx32"]
-offsets = PackedFloat32Array(0.353726, 0.462736, 0.600667, 1)
-colors = PackedColorArray(0.0352941, 0.8, 0.92549, 1, 0.430475, 0.690763, 0.588141, 1, 1, 0.533333, 0.101961, 1, 1, 0.533333, 0.101961, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_cmi63"]
-gradient = SubResource("Gradient_cbx32")
 
 [sub_resource type="Curve" id="Curve_4h7ih"]
 max_value = 2.0
@@ -33,7 +27,7 @@ angular_velocity_min = -11.74
 angular_velocity_max = -11.74
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_kiao5")
-color_ramp = SubResource("GradientTexture1D_cmi63")
+color_ramp = ExtResource("2_h3vti")
 alpha_curve = SubResource("CurveTexture_4y5jl")
 
 [sub_resource type="GDScript" id="GDScript_lrei7"]
@@ -58,23 +52,23 @@ func _process(delta: float) -> void:
     rotate(delta * rot_speed)
 "
 
-[node name="portal_ring" type="Node2D"]
-script = ExtResource("1_phqwg")
+[node name="portal" type="Node2D"]
+script = ExtResource("1_bp8gh")
 shape = 1
 
 [node name="ring" type="GPUParticles2D" parent="."]
-visible = false
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_yp3sr")
-texture = ExtResource("1_rs64c")
+texture = ExtResource("3_ust2t")
 lifetime = 3.0
 preprocess = 20.0
 
 [node name="triangle" type="GPUParticles2D" parent="."]
-rotation = 22.4768
+visible = false
+rotation = 411.971
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_yp3sr")
-texture = ExtResource("2_sxo8g")
+texture = ExtResource("4_ju5kj")
 lifetime = 3.0
 preprocess = 20.0
 local_coords = true
@@ -82,10 +76,10 @@ script = SubResource("GDScript_lrei7")
 
 [node name="star" type="GPUParticles2D" parent="."]
 visible = false
-rotation = 58.9012
+rotation = 73.3389
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_yp3sr")
-texture = ExtResource("4_mxi5s")
+texture = ExtResource("5_3brb1")
 lifetime = 3.0
 preprocess = 20.0
 local_coords = true
