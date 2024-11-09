@@ -45,5 +45,7 @@ void fragment() {
     COLOR.a = 1.0;
   } else {
     COLOR.rgba = mix(line_color, color_1, bl.x * bl.y * tr.x * tr.y);
+    //COLOR.rgb = vec3(warp);
+    //COLOR.a = 0.9;
   }
 }

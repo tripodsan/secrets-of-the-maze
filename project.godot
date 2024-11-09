@@ -19,6 +19,7 @@ config/icon="res://assets/icon.png"
 [autoload]
 
 Global="*res://scripts/global.gd"
+GameData="*res://scripts/save/game_data.tscn"
 
 [display]
 

@@ -1,4 +1,4 @@
 class_name GDSettings
-extends Node
+extends GDSerializable
 
 @export var player_name:String = "POD"

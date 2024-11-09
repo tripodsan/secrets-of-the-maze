@@ -48,7 +48,7 @@ func _ready() -> void:
   trail.resize(6)
   Global.set_player(self)
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
   if Input.is_action_just_pressed('laser'):
     $ship/LaserCast.set_is_casting(true)
   if Input.is_action_just_released('laser'):
@@ -130,7 +130,6 @@ func _physics_process(delta: float) -> void:
 func hit(type:Global.HitType)->void:
   is_destroyed = true
   $ship.visible = false
-  var explosion = load
   $Explosion.fire()
   RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
   await get_tree().create_timer(1.5).timeout

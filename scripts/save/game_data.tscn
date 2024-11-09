@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://tol68o1dg6jj"]
+
+[ext_resource type="Script" path="res://scripts/save/game_data.gd" id="1_6068a"]
+[ext_resource type="Script" path="res://scripts/save/gd_layer.gd" id="1_q0hed"]
+[ext_resource type="Script" path="res://scripts/save/gd_serializable.gd" id="2_b8w8f"]
+[ext_resource type="Script" path="res://scripts/save/gd_settings.gd" id="2_esn54"]
+[ext_resource type="Script" path="res://scripts/save/gd_level.gd" id="3_ma83k"]
+
+[node name="GameData" type="Node"]
+script = ExtResource("1_6068a")
+
+[node name="save" type="Node" parent="."]
+script = ExtResource("2_b8w8f")
+
+[node name="progress" type="Node" parent="save"]
+script = ExtResource("2_b8w8f")
+
+[node name="settings" type="Node" parent="save"]
+script = ExtResource("2_esn54")
+
+[node name="bindings" type="Node" parent="save/settings"]
+script = ExtResource("2_b8w8f")
+
+[node name="levels" type="Node" parent="save"]
+script = ExtResource("2_b8w8f")
+
+[node name="level0" type="Node" parent="save/levels"]
+script = ExtResource("3_ma83k")
+
+[node name="layers" type="Node" parent="save/levels/level0"]
+script = ExtResource("2_b8w8f")
+
+[node name="blue" type="Node" parent="save/levels/level0/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+
+[node name="red" type="Node" parent="save/levels/level0/layers"]
+script = ExtResource("1_q0hed")
+
+[node name="green" type="Node" parent="save/levels/level0/layers"]
+script = ExtResource("1_q0hed")
+
+[node name="level1" type="Node" parent="save/levels"]
+script = ExtResource("3_ma83k")
