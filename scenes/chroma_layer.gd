@@ -11,8 +11,7 @@ var active:bool
 
 func set_active(value: bool)->void:
   active = value
-  get_viewport().set_canvas_cull_mask_bit(layer_idx, value)
-  %phasemap.set_canvas_cull_mask_bit(layer_idx, !value)
+  Global.activate_layer_in_viewports(layer_idx, value)
   process_mode = Node.PROCESS_MODE_INHERIT if active else PROCESS_MODE_DISABLED
   for n in get_children():
     if n is TileMapLayer:
