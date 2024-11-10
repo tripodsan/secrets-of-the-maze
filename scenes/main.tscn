@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=45 format=4 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
@@ -54,6 +54,10 @@ shader_parameter/amount = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvfhi"]
 shader = ExtResource("7_e01wk")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nkrg3"]
+friction = 0.0
+bounce = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xpo0e"]
 shader = ExtResource("13_1t20a")
@@ -365,6 +369,7 @@ size_flags_vertical = 3
 script = ExtResource("6_h7jlh")
 
 [node name="SuperNova" parent="hudlayer" instance=ExtResource("7_tsp44")]
+visible = false
 
 [node name="previewlayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -483,12 +488,17 @@ metadata/_edit_lock_ = true
 [node name="corner" parent="world/level0/green/objs" instance=ExtResource("11_jhsqx")]
 color_scheme = 2
 
-[node name="player" type="CharacterBody2D" parent="world"]
+[node name="player" type="RigidBody2D" parent="world"]
 unique_name_in_owner = true
 visibility_layer = 16
 position = Vector2(-1043, 453.99)
 collision_mask = 47
-motion_mode = 1
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_nkrg3")
+can_sleep = false
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_wfkjx")
 
 [node name="Explosion" parent="world/player" instance=ExtResource("13_64s4o")]

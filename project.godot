@@ -92,6 +92,11 @@ missile={
 2d_physics/layer_5="Projectiles"
 2d_physics/layer_6="Items"
 
+[physics]
+
+2d/default_gravity=0.0
+2d/default_gravity_vector=Vector2(0, 0)
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.144062, 0.144063, 0.144062, 1)
