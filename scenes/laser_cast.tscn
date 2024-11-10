@@ -1,0 +1,119 @@
+[gd_scene load_steps=21 format=3 uid="uid://bcyr27ygm52ov"]
+
+[ext_resource type="Script" path="res://scenes/laser_cast.gd" id="1_20t2u"]
+[ext_resource type="Shader" path="res://shaders/laser.gdshader" id="2_76bq2"]
+[ext_resource type="Texture2D" uid="uid://0q0x6fsvpax8" path="res://assets/laser.png" id="3_ua5oy"]
+[ext_resource type="Texture2D" uid="uid://bxp3gmbwlpu5b" path="res://assets/ring.png" id="4_2pg6l"]
+[ext_resource type="Texture2D" uid="uid://cyokx1amjp27k" path="res://assets/square.png" id="5_j15v5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xpo0e"]
+shader = ExtResource("2_76bq2")
+shader_parameter/laserTexture = ExtResource("3_ua5oy")
+
+[sub_resource type="Gradient" id="Gradient_s1bvf"]
+colors = PackedColorArray(1, 1, 1, 0.756863, 0.755286, 0.134995, 0.684776, 1)
+
+[sub_resource type="Gradient" id="Gradient_035di"]
+colors = PackedColorArray(0.93871, 0.377442, 0.665606, 0.513726, 0.75473, 0.000468793, 0.761048, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kx7ko"]
+gradient = SubResource("Gradient_035di")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_55v84"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 56.613
+initial_velocity_max = 511.85
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_kx7ko")
+
+[sub_resource type="Curve" id="Curve_mhv70"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.4071, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t6hnb"]
+curve = SubResource("Curve_mhv70")
+
+[sub_resource type="Gradient" id="Gradient_pu8gc"]
+colors = PackedColorArray(0.929884, 0.952839, 0.999416, 1, 0.611114, 0.707589, 0.974303, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jj51v"]
+gradient = SubResource("Gradient_pu8gc")
+
+[sub_resource type="Curve" id="Curve_gi8vp"]
+_data = [Vector2(0.013245, 0.320237), 0.0, 0.0, 0, 0, Vector2(0.639175, 0.0326086), -4.72348, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lpxxh"]
+curve = SubResource("Curve_gi8vp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fxcw7"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(30, 500, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 220.43
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 98.48
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_curve = SubResource("CurveTexture_lpxxh")
+color_ramp = SubResource("GradientTexture1D_jj51v")
+alpha_curve = SubResource("CurveTexture_t6hnb")
+
+[sub_resource type="Curve" id="Curve_gc8ob"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.091831), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l1y1d"]
+curve = SubResource("Curve_gc8ob")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y8f06"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_max = 94.09
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_l1y1d")
+color = Color(1, 0.878431, 1, 0.533333)
+
+[node name="LaserCast" type="RayCast2D"]
+position = Vector2(0, -40)
+target_position = Vector2(0, -1300)
+collision_mask = 6
+script = ExtResource("1_20t2u")
+
+[node name="LaserLine" type="Line2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_xpo0e")
+points = PackedVector2Array(0, 0, 0, -2000)
+width = 35.0
+default_color = Color(0.992268, 0.588753, 1, 1)
+gradient = SubResource("Gradient_s1bvf")
+texture_mode = 2
+antialiased = true
+
+[node name="CastParticles" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_55v84")
+texture = ExtResource("4_2pg6l")
+lifetime = 0.3
+
+[node name="LaserParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_fxcw7")
+texture = ExtResource("5_j15v5")
+lifetime = 0.6
+
+[node name="TargetParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_y8f06")
+texture = ExtResource("5_j15v5")
+lifetime = 0.5
+visibility_rect = Rect2(-300, -300, 2000, 2000)

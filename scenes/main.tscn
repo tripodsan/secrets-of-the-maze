@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=23 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
@@ -13,12 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://glyv2bogmfg4" path="res://scenes/super_nova.tscn" id="7_tsp44"]
 [ext_resource type="PackedScene" uid="uid://ecg6jylppjbm" path="res://scenes/levels/level_0.tscn" id="10_cgvc0"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
-[ext_resource type="Script" path="res://scenes/laser_cast.gd" id="12_bpfu0"]
-[ext_resource type="Shader" path="res://shaders/laser.gdshader" id="13_1t20a"]
 [ext_resource type="PackedScene" uid="uid://bnbc6fy7ck4xj" path="res://scenes/explosion.tscn" id="13_64s4o"]
-[ext_resource type="Texture2D" uid="uid://0q0x6fsvpax8" path="res://assets/laser.png" id="13_qbd35"]
-[ext_resource type="Texture2D" uid="uid://bxp3gmbwlpu5b" path="res://assets/ring.png" id="17_ydj8f"]
-[ext_resource type="Texture2D" uid="uid://cyokx1amjp27k" path="res://assets/square.png" id="18_i068k"]
+[ext_resource type="PackedScene" uid="uid://bcyr27ygm52ov" path="res://scenes/laser_cast.tscn" id="13_okhme"]
 [ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]
@@ -50,73 +46,6 @@ shader_parameter/amount = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvfhi"]
 shader = ExtResource("7_e01wk")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xpo0e"]
-shader = ExtResource("13_1t20a")
-shader_parameter/laserTexture = ExtResource("13_qbd35")
-
-[sub_resource type="Gradient" id="Gradient_s1bvf"]
-colors = PackedColorArray(1, 1, 1, 0.756863, 0.755286, 0.134995, 0.684776, 1)
-
-[sub_resource type="Gradient" id="Gradient_035di"]
-colors = PackedColorArray(0.93871, 0.377442, 0.665606, 0.513726, 0.75473, 0.000468793, 0.761048, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_kx7ko"]
-gradient = SubResource("Gradient_035di")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_55v84"]
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-spread = 56.613
-initial_velocity_max = 511.85
-gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 2.0
-color_ramp = SubResource("GradientTexture1D_kx7ko")
-
-[sub_resource type="Curve" id="Curve_mhv70"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.4071, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_t6hnb"]
-curve = SubResource("Curve_mhv70")
-
-[sub_resource type="Gradient" id="Gradient_pu8gc"]
-colors = PackedColorArray(0.929884, 0.952839, 0.999416, 1, 0.611114, 0.707589, 0.974303, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_jj51v"]
-gradient = SubResource("Gradient_pu8gc")
-
-[sub_resource type="Curve" id="Curve_gi8vp"]
-_data = [Vector2(0.013245, 0.320237), 0.0, 0.0, 0, 0, Vector2(0.639175, 0.0326086), -4.72348, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_lpxxh"]
-curve = SubResource("Curve_gi8vp")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fxcw7"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(30, 500, 1)
-direction = Vector3(0, -1, 0)
-initial_velocity_max = 220.43
-radial_velocity_min = -2.23517e-05
-radial_velocity_max = 98.48
-gravity = Vector3(0, 0, 0)
-attractor_interaction_enabled = false
-scale_curve = SubResource("CurveTexture_lpxxh")
-color_ramp = SubResource("GradientTexture1D_jj51v")
-alpha_curve = SubResource("CurveTexture_t6hnb")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y8f06"]
-particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
-spread = 90.0
-initial_velocity_max = 94.09
-gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 0.8
-color = Color(1, 0.878431, 1, 0.533333)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1jpm"]
 radius = 17.0
@@ -415,42 +344,7 @@ position = Vector2(16, 0.0100098)
 rotation = 1.5708
 polygon = PackedVector2Array(0, -32, -16, 32, 0, 16, 16, 32)
 
-[node name="LaserCast" type="RayCast2D" parent="world/player/ship"]
-position = Vector2(0, -40)
-target_position = Vector2(0, -1300)
-collision_mask = 6
-script = ExtResource("12_bpfu0")
-
-[node name="LaserLine" type="Line2D" parent="world/player/ship/LaserCast"]
-visible = false
-material = SubResource("ShaderMaterial_xpo0e")
-points = PackedVector2Array(0, 0, 0, -2000)
-width = 35.0
-default_color = Color(0.992268, 0.588753, 1, 1)
-gradient = SubResource("Gradient_s1bvf")
-texture_mode = 2
-antialiased = true
-
-[node name="CastParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_55v84")
-texture = ExtResource("17_ydj8f")
-lifetime = 0.3
-
-[node name="LaserParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
-emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_fxcw7")
-texture = ExtResource("18_i068k")
-lifetime = 0.6
-
-[node name="TargetParticles" type="GPUParticles2D" parent="world/player/ship/LaserCast"]
-emitting = false
-amount = 30
-process_material = SubResource("ParticleProcessMaterial_y8f06")
-texture = ExtResource("17_ydj8f")
-lifetime = 0.5
-visibility_rect = Rect2(-300, -300, 2000, 2000)
+[node name="LaserCast" parent="world/player/ship" instance=ExtResource("13_okhme")]
 
 [node name="Camera2D" type="Camera2D" parent="world/player"]
 position_smoothing_enabled = true
