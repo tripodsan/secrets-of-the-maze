@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://ecg6jylppjbm"]
+[gd_scene load_steps=7 format=4 uid="uid://ecg6jylppjbm"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_2e2jd"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="2_niabm"]
 [ext_resource type="TileSet" uid="uid://b4hv1lcomy6v6" path="res://scenes/level-tiles.tres" id="3_t6sfi"]
 [ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="4_rgtqr"]
 [ext_resource type="PackedScene" uid="uid://cn1wgnhsj8ijg" path="res://scenes/corner.tscn" id="5_ryegj"]
+[ext_resource type="PackedScene" uid="uid://bjgp6yyx5bqf" path="res://scenes/mine.tscn" id="6_m562c"]
 
 [node name="level_sandobx" type="Node2D"]
 script = ExtResource("1_2e2jd")
@@ -37,6 +38,10 @@ color_scheme = 0
 position = Vector2(9128, -2181)
 shape = 2
 layer = 0
+
+[node name="Mine" parent="blue/objects" instance=ExtResource("6_m562c")]
+position = Vector2(748, 139)
+rotation = 1.5708
 
 [node name="red" type="Node2D" parent="."]
 visibility_layer = 4
