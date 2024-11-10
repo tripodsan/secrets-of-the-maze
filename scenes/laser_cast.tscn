@@ -37,7 +37,7 @@ point_count = 2
 curve = SubResource("Curve_mhv70")
 
 [sub_resource type="Gradient" id="Gradient_pu8gc"]
-colors = PackedColorArray(0.929884, 0.952839, 0.999416, 1, 0.611114, 0.707589, 0.974303, 1)
+colors = PackedColorArray(0.929884, 0.952839, 0.999416, 1, 0.611765, 0.705882, 0.972549, 0.360784)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_jj51v"]
 gradient = SubResource("Gradient_pu8gc")
@@ -64,7 +64,7 @@ color_ramp = SubResource("GradientTexture1D_jj51v")
 alpha_curve = SubResource("CurveTexture_t6hnb")
 
 [sub_resource type="Curve" id="Curve_gc8ob"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.091831), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.0309278, 0.695652), 0.0, 0.0, 0, 0, Vector2(1, 0.228261), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_l1y1d"]
@@ -73,11 +73,12 @@ curve = SubResource("Curve_gc8ob")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y8f06"]
 particle_flag_disable_z = true
 direction = Vector3(0, 1, 0)
-spread = 90.0
-initial_velocity_max = 94.09
+spread = 100.0
+initial_velocity_min = 212.12
+initial_velocity_max = 366.81
 gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 0.8
+scale_min = 0.6
+scale_max = 0.9
 scale_curve = SubResource("CurveTexture_l1y1d")
 color = Color(1, 0.878431, 1, 0.533333)
 
@@ -105,15 +106,15 @@ lifetime = 0.3
 
 [node name="LaserParticles" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 20
+amount = 10
 process_material = SubResource("ParticleProcessMaterial_fxcw7")
 texture = ExtResource("5_j15v5")
 lifetime = 0.6
 
 [node name="TargetParticles" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 30
+amount = 40
 process_material = SubResource("ParticleProcessMaterial_y8f06")
 texture = ExtResource("5_j15v5")
-lifetime = 0.5
+lifetime = 0.3
 visibility_rect = Rect2(-300, -300, 2000, 2000)
