@@ -34,10 +34,6 @@ extends CharacterBody2D
 ## rotation velocity
 var rot_velo := 0.0
 
-## rotation direction
-var rot_angle := 0.0
-var rot_dir := Vector2.RIGHT
-
 var trail:PackedVector4Array = PackedVector4Array()
 var trail_pos:int = 0
 
@@ -54,7 +50,7 @@ func _input(_event: InputEvent) -> void:
   if Input.is_action_just_released('laser'):
     $ship/LaserCast.set_is_casting(false)
   if Input.is_action_just_pressed('missile'):
-    %ProjectileManager.shoot_projectile(position+rot_dir*50.0, rot_dir, 750.0, 0.0, 2.0)
+    %ProjectileManager.shoot_projectile(position+transform.x*50.0, transform.x, 750.0, 0, 2.0)
 
 func _physics_process(delta: float) -> void:
   if is_destroyed: return
@@ -63,8 +59,8 @@ func _physics_process(delta: float) -> void:
   var f:Vector2  # thrust
   if input.x != 0:
     rot_velo = input.x * rot_speed * delta
-  rot_angle = fposmod(rot_angle + rot_velo, TAU)
-  rot_dir = Vector2.from_angle(rot_angle)
+  var rot_angle = fposmod(rotation + rot_velo, TAU)
+  var rot_dir = Vector2.from_angle(rot_angle)
   rot_velo = lerpf(rot_velo, 0, rot_damp)
   if input.y < 0:
     f = rot_dir * f_fwd
@@ -97,30 +93,30 @@ func _physics_process(delta: float) -> void:
   var a_tot := (f - f_dir) / mass
 
   velocity += a_tot * delta
-  rotation = rot_dir.angle()
 
   var coll:KinematicCollision2D = move_and_collide(velocity * delta)
   if coll:
     if coll.get_collider() is TileMapLayer:
-      var map:TileMapLayer = coll.get_collider()
-      var pos:Vector2i = map.get_coords_for_body_rid(coll.get_collider_rid())
-      var data:TileData = map.get_cell_tile_data(pos)
-      if data.get_custom_data("type") == &"spike":
+      var type:StringName = Global.get_tile_type(coll.get_collider(), coll.get_collider_rid())
+      if type == &"spike":
         hit(Global.HitType.Spike)
         return
-    var wall := coll.get_normal()
-    var a:float = wall.dot(rot_dir)
-    if abs(a) > 0.8:
-      var t:Vector2 = coll.get_remainder().bounce(wall)
-      position += t * 1.1
-      velocity = velocity.bounce(wall)
-      rot_angle = t.angle()
-    else:
-      # slide
-      rot_dir = rot_dir.slide(wall).normalized()
-      rot_angle = rot_dir.angle()
-      velocity = velocity.slide(wall)
-      position += coll.get_remainder().slide(wall)
+      var wall := coll.get_normal()
+      var a:float = wall.dot(rot_dir)
+      if abs(a) > 0.8:
+        var t:Vector2 = coll.get_remainder().bounce(wall)
+        position += t * 1.1
+        velocity = velocity.bounce(wall)
+        rot_angle = t.angle()
+      else:
+        # slide
+        rot_dir = rot_dir.slide(wall).normalized()
+        rot_angle = rot_dir.angle()
+        rot_velo = 0
+        velocity = velocity.slide(wall)
+        position += coll.get_remainder().slide(wall)
+
+  rotation = rot_angle
 
   RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
   trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
@@ -142,5 +138,3 @@ func reset(pos:Vector2)->void:
   position = pos
   rotation = 0
   velocity = Vector2.ZERO
-  rot_angle = 0
-  rot_dir = Vector2.RIGHT

@@ -16,15 +16,10 @@ func _ready() -> void:
     projectile_pool.append(projectile)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func shoot_projectile(pos, direction, speed, type, lifespan):
-  var projectile = projectile_pool[current_index]
-
-  projectile.global_position = pos
-  projectile.velocity = direction.normalized() * speed
+  var projectile:RigidBody2D = projectile_pool[current_index]
   projectile.type = type
-  projectile.lifespan = lifespan
-  projectile.time_alive = 0.0
-  projectile.start()
+  projectile.lifespan = 4.0
+  projectile.start(pos, direction.normalized() * speed)
 
   current_index = (current_index + 1) % MAX_PROJECTILES
