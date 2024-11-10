@@ -30,6 +30,5 @@ func set_shape(s:Shape)->void:
 func set_layer(l)->void:
   layer = l
   if shape < get_child_count():
-    prints('setting color of %s to %s' % [get_child(shape), _colors[layer]])
     get_child(shape).process_material.color_ramp = _colors[layer]
     get_child(shape).restart()

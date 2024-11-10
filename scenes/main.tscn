@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ecg6jylppjbm" path="res://scenes/levels/level_0.tscn" id="10_cgvc0"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
 [ext_resource type="PackedScene" uid="uid://bnbc6fy7ck4xj" path="res://scenes/explosion.tscn" id="13_64s4o"]
-[ext_resource type="PackedScene" uid="uid://bcyr27ygm52ov" path="res://scenes/laser_cast.tscn" id="13_okhme"]
+[ext_resource type="PackedScene" path="res://scenes/laser_cast.tscn" id="13_okhme"]
 [ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="4_hmivi"]
 [ext_resource type="PackedScene" uid="uid://cn1wgnhsj8ijg" path="res://scenes/corner.tscn" id="5_ak4ki"]
 
-[node name="level_sandobx" type="Node2D"]
+[node name="level_sandbox" type="Node2D"]
 script = ExtResource("1_ca7fj")
 
 [node name="blue" type="Node2D" parent="."]
@@ -58,19 +58,13 @@ metadata/_edit_lock_ = true
 [node name="corner" parent="red/objs" instance=ExtResource("5_ak4ki")]
 position = Vector2(1280, -960)
 orientation = 1
-permeable = null
-flicker = null
 
 [node name="corner2" parent="red/objs" instance=ExtResource("5_ak4ki")]
 position = Vector2(3968, -960)
-permeable = null
-flicker = null
 
 [node name="corner3" parent="red/objs" instance=ExtResource("5_ak4ki")]
 position = Vector2(3712, -640)
 orientation = 3
-permeable = null
-flicker = null
 
 [node name="green" type="Node2D" parent="."]
 visibility_layer = 8
@@ -92,5 +86,3 @@ metadata/_edit_lock_ = true
 
 [node name="corner" parent="green/objs" instance=ExtResource("5_ak4ki")]
 color_scheme = 2
-permeable = null
-flicker = null
