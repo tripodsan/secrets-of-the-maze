@@ -9,6 +9,9 @@ extends Node2D
 
 var active:bool
 
+func _ready():
+  visible = true
+
 func set_active(value: bool)->void:
   active = value
   Global.activate_layer_in_viewports(layer_idx, value)
@@ -31,7 +34,7 @@ func can_chroma_shift(pos:Vector2)->bool:
 func get_start_position()->Vector2:
   for v in map.get_used_cells():
     var cell = map.get_cell_tile_data(v)
-    if cell.get_custom_data("type") == &"start":
+    if cell && cell.get_custom_data("type") == &"start":
       map.set_cell(v, -1)
       return map.map_to_local(v)
   return Vector2.ZERO

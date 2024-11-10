@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://cvglgs23uc2py"]
+[gd_scene load_steps=6 format=4 uid="uid://cvglgs23uc2py"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_na0u2"]
-[ext_resource type="Texture2D" uid="uid://dhquwxtynen64" path="res://assets/Screenshot 2024-11-06 at 07.57.25.png" id="2_dcpo8"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="3_dhd54"]
 [ext_resource type="TileSet" uid="uid://b4hv1lcomy6v6" path="res://scenes/level-tiles.tres" id="4_wjxgo"]
 [ext_resource type="PackedScene" uid="uid://cn1wgnhsj8ijg" path="res://scenes/corner.tscn" id="5_njcdx"]
@@ -15,7 +14,6 @@ visible = false
 modulate = Color(1, 1, 1, 0.254902)
 position = Vector2(5700, -3356.83)
 scale = Vector2(10.6, 10.6)
-texture = ExtResource("2_dcpo8")
 metadata/_edit_lock_ = true
 
 [node name="blue" type="Node2D" parent="."]
@@ -40,7 +38,8 @@ metadata/_edit_lock_ = true
 position = Vector2(3072, 256)
 width = 8
 height = 8
-color_scheme = 0
+permeable = null
+flicker = null
 
 [node name="portal" parent="blue/objects" instance=ExtResource("6_rta5d")]
 position = Vector2(10304, -2560)
@@ -68,14 +67,19 @@ metadata/_edit_lock_ = true
 [node name="corner" parent="red/objs" instance=ExtResource("5_njcdx")]
 position = Vector2(1280, -960)
 orientation = 1
+permeable = null
+flicker = null
 
 [node name="corner2" parent="red/objs" instance=ExtResource("5_njcdx")]
 position = Vector2(3968, -960)
-orientation = 2
+permeable = null
+flicker = null
 
 [node name="corner3" parent="red/objs" instance=ExtResource("5_njcdx")]
 position = Vector2(3712, -640)
 orientation = 3
+permeable = null
+flicker = null
 
 [node name="portal2" parent="red/objs" instance=ExtResource("6_rta5d")]
 position = Vector2(1984, 251)
@@ -105,3 +109,5 @@ metadata/_edit_lock_ = true
 
 [node name="corner" parent="green/objs" instance=ExtResource("5_njcdx")]
 color_scheme = 2
+permeable = null
+flicker = null
