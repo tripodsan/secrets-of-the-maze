@@ -14,6 +14,8 @@ signal player_destroyed(by:HitType)
 
 signal layer_selected(type:Layer)
 
+signal supernova
+
 func select_layer():
   pass
 

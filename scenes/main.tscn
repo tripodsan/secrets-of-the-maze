@@ -290,6 +290,7 @@ size_flags_vertical = 3
 script = ExtResource("6_h7jlh")
 
 [node name="SuperNova" parent="hudlayer" instance=ExtResource("7_tsp44")]
+unique_name_in_owner = true
 visible = false
 
 [node name="previewlayer" type="CanvasLayer" parent="."]

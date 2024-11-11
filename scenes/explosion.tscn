@@ -52,7 +52,7 @@ color_ramp = SubResource("GradientTexture1D_6vp3q")
 
 [sub_resource type="Gradient" id="Gradient_wvqoq"]
 offsets = PackedFloat32Array(0.00819672, 0.516393, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.873776, 0.486942, 0.69588, 1, 0.972422, 0.000135536, 0.790996, 0.529412)
+colors = PackedColorArray(1, 1, 1, 1, 0.873776, 0.486942, 0.69588, 1, 0.972549, 0, 0.792157, 0.14902)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gqkja"]
 gradient = SubResource("Gradient_wvqoq")
@@ -123,9 +123,10 @@ explosiveness = 0.6
 
 [node name="Sparks" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 120
+amount = 240
 process_material = SubResource("ParticleProcessMaterial_f6osr")
 texture = ExtResource("3_p7m45")
+lifetime = 1.5
 one_shot = true
 explosiveness = 0.93
 trail_lifetime = 0.1

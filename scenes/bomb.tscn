@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://bur23dis0vf0t"]
+
+[ext_resource type="Script" path="res://scenes/bomb.gd" id="1_64nbf"]
+[ext_resource type="Shader" path="res://scenes/bomb.gdshader" id="2_0q745"]
+[ext_resource type="Texture2D" uid="uid://c62q077icyvru" path="res://assets/glow_circle.png" id="4_7xddy"]
+[ext_resource type="Texture2D" uid="uid://cyokx1amjp27k" path="res://assets/square.png" id="4_c7lso"]
+
+[sub_resource type="Gradient" id="Gradient_3t57j"]
+offsets = PackedFloat32Array(0.0441176, 0.277551, 0.507353, 0.779412, 1)
+colors = PackedColorArray(0.733333, 0.733333, 0.733333, 0.0862745, 0.368876, 0.145506, 0.434989, 1, 0.556863, 0.364706, 0.615686, 0, 0.831557, 0.751765, 0.858417, 1, 0.0807833, 0.0807833, 0.0807833, 0.203922)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3qj6p"]
+gradient = SubResource("Gradient_3t57j")
+
+[sub_resource type="Curve" id="Curve_17340"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lqnp1"]
+curve = SubResource("Curve_17340")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mmmi2"]
+particle_flag_disable_z = true
+spread = 180.0
+flatness = 0.5
+initial_velocity_max = 305.32
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 25.76
+radial_accel_max = 25.76
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_lqnp1")
+color_ramp = SubResource("GradientTexture1D_3qj6p")
+turbulence_noise_strength = 8.94
+turbulence_noise_scale = 4.294
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5783l"]
+shader = ExtResource("2_0q745")
+
+[node name="Bomb" type="Node2D"]
+script = ExtResource("1_64nbf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_mmmi2")
+texture = ExtResource("4_c7lso")
+lifetime = 2.0
+trail_enabled = true
+trail_sections = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5783l")
+scale = Vector2(0.5, 0.3)
+texture = ExtResource("4_7xddy")
