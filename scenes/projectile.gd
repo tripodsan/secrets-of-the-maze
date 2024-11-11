@@ -39,8 +39,8 @@ func _physics_process(delta: float) -> void:
     hit.call_deferred()
     return
 
-  var scale_f = min(0.6, time_alive)
-  sprite.scale = Vector2(scale_f, scale_f*0.5)
+  #var scale_f = min(0.6, time_alive)
+  #sprite.scale = Vector2(scale_f, scale_f*0.5)
   sprite.rotate(min(1.0, time_alive*0.2))
 
 func hit():

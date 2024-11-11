@@ -38,6 +38,7 @@ spread = 75.545
 initial_velocity_max = 247.82
 gravity = Vector3(0, 0, 0)
 scale_min = 0.2
+scale_max = 0.7
 scale_curve = SubResource("CurveTexture_j4dwh")
 color_ramp = SubResource("GradientTexture1D_gun2c")
 alpha_curve = SubResource("CurveTexture_c50yu")
@@ -59,7 +60,9 @@ debug_color = Color(0.917647, 0.231373, 0.439216, 0.745098)
 amount = 90
 process_material = SubResource("ParticleProcessMaterial_7ypmn")
 texture = ExtResource("2_qh5pk")
+lifetime = 1.5
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 
 [node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_et1o4")
