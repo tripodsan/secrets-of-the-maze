@@ -5,8 +5,8 @@ void vertex() {
 }
 
 uniform sampler2D tex;
-uniform float time;
 void fragment() {
+  float time = TIME;
   vec2 n = vec2(0.5, 0.5)-UV;
   float angle = atan(n.y/n.x);
   vec2 displace = sin(cos(time*2.0)*angle*5.0)*sin(cos(time*7.0)+angle*11.0)*n;
