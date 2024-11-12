@@ -3,12 +3,13 @@
 class_name LevelImporter
 extends Node
 
-@export var clear_level:bool = false:set = clear;
-@export var import_level:bool = false:set = import;
+@export var clear_level:bool = false:set = clear
+@export var import_level:bool = false:set = import
 
-@export var import_red:bool = true;
-@export var import_blue:bool = true;
-@export var import_green:bool = true;
+@export var remove_fake_walls:bool = true
+@export var import_red:bool = true
+@export var import_blue:bool = true
+@export var import_green:bool = true
 
 
 
@@ -92,6 +93,12 @@ func _import_layer(l:ChromaLayer):
   grid.set_cells_terrain_connect(grid_cells, 0, idx)
   map.set_cells_terrain_connect(grid_cells, map_terrains[idx], 0, false)
   map.set_cells_terrain_connect(border_cells, map_terrains[idx], 2, false)
+  if remove_fake_walls:
+    for c in wall_cells:
+      grid_cells.erase(c)
+    for c in grid_cells:
+      map.erase_cell(c)
+
 
 func import(v):
   if !await prompt('Import Level?'): return

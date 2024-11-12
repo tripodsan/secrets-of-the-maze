@@ -12,7 +12,7 @@ var velocity := Vector2(0.0, 0.0)
 func initialize(pos: Vector2, vel: Vector2):
   velocity = vel
   global_position = pos
-  
+
 func _process(delta: float) -> void:
   global_position += velocity
   velocity *= 0.97

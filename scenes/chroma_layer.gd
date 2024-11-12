@@ -22,13 +22,13 @@ func set_active(value: bool)->void:
 
 ## check if ship at global position pos can shift to this layer.
 func can_chroma_shift(pos:Vector2)->bool:
+  prints('check chroma shift at', pos)
   var p:Vector2i = map.local_to_map(pos)
-  var tile:TileData = map.get_cell_tile_data(p)
-  if !tile && grid: tile = grid.get_cell_tile_data(p)
-  #if tile:
-    #prints(name, 'tile data', tile.terrain_set)
-  #else:
-    #prints(name, 'tile data', tile)
+  var tile:TileData = grid.get_cell_tile_data(p)
+  if tile:
+    prints(name, 'tile data', tile.terrain_set)
+  else:
+    prints(name, 'tile data', tile)
   return tile && tile.terrain_set == 0
 
 func get_start_position()->Vector2:
