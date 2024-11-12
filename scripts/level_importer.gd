@@ -90,7 +90,7 @@ func _import_layer(l:ChromaLayer):
           wall_cells.append(g)
 
   grid.set_cells_terrain_connect(grid_cells, 0, idx)
-  map.set_cells_terrain_connect(wall_cells, map_terrains[idx], 0, false)
+  map.set_cells_terrain_connect(grid_cells, map_terrains[idx], 0, false)
   map.set_cells_terrain_connect(border_cells, map_terrains[idx], 2, false)
 
 func import(v):

@@ -44,7 +44,7 @@ func _ready() -> void:
   trail.resize(6)
   Global.set_player(self)
   Global.supernova.connect(%SuperNova.trigger_supernova)
-    
+
 func _input(_event: InputEvent) -> void:
   if Input.is_action_just_pressed('laser'):
     $ship/LaserCast.set_is_casting(true)
@@ -56,7 +56,7 @@ func _input(_event: InputEvent) -> void:
     var bomb = load("res://scenes/bomb.tscn").instantiate()
     bomb.initialize(global_position+transform.x*10.0, -transform.x * 3.0)
     get_parent().add_child(bomb)
-    
+
 func _physics_process(delta: float) -> void:
   if is_destroyed: return
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")
