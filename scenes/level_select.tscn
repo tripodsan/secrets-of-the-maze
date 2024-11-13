@@ -1,0 +1,127 @@
+[gd_scene load_steps=7 format=4 uid="uid://b7ln60f04dhpl"]
+
+[ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/level_theme.tres" id="1_7shaq"]
+[ext_resource type="FontFile" uid="uid://rtbfvblms3ss" path="res://fonts/game-of-squids/Game Of Squids.ttf" id="2_47n1i"]
+[ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="3_hunw0"]
+[ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="4_137gh"]
+[ext_resource type="TileSet" uid="uid://c2wcbcqc6114f" path="res://scenes/level_select.tres" id="5_i3kxi"]
+
+[sub_resource type="GDScript" id="GDScript_fgtaq"]
+script/source = "extends ParallaxBackground
+
+@export var speed:Vector2 = Vector2(100, 50)
+
+
+func _process(delta: float) -> void:
+  scroll_offset += speed * delta
+"
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7shaq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.533333, 0.101961, 1)
+theme_override_colors/font_outline_color = Color(0.585288, 0.293871, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_47n1i")
+theme_override_font_sizes/font_size = 181
+text = "sELECt LEVEl"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+columns = 3
+
+[node name="1" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="2" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="3" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "3"
+
+[node name="4" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+disabled = true
+text = "4"
+
+[node name="5" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+disabled = true
+text = "5"
+
+[node name="6" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+disabled = true
+text = "6"
+
+[node name="7" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+disabled = true
+text = "7"
+
+[node name="8" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+disabled = true
+text = "8"
+
+[node name="9" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+disabled = true
+text = "9
+"
+
+[node name="Parallax2D" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+script = SubResource("GDScript_fgtaq")
+
+[node name="stars" type="ParallaxLayer" parent="Parallax2D"]
+visibility_layer = 16
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="Icon" type="Sprite2D" parent="Parallax2D/stars"]
+position = Vector2(960, 520)
+scale = Vector2(2, 2)
+texture = ExtResource("3_hunw0")
+
+[node name="stars2" type="ParallaxLayer" parent="Parallax2D"]
+visibility_layer = 16
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="Icon" type="Sprite2D" parent="Parallax2D/stars2"]
+position = Vector2(960, 520)
+scale = Vector2(2, 2)
+texture = ExtResource("4_137gh")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(260, -299)
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAAHAA4AAAAAAAEAAAAIAA4AAAABAAEAAAAJAA4AAAACAAEAAAAHAAsAAAAAAAIAAAAIAAsAAAABAAIAAAAJAAsAAAACAAIAAAAHABEAAAAAAAAAAAAKABEAAAAAAAAAAAAIABEAAAABAAAAAAAJABEAAAACAAAAAAALABEAAAABAAAAAAAMABEAAAACAAAAAAAMABAAAAAEAAAAAAAMABIAAAAEAAIAAAANABAAAAAFAAAAAAANABIAAAAFAAIAAAAOABAAAAAGAAAAAAAOABEAAAAGAAEAAAAOABIAAAAGAAIAAAANABEAAAAAAAAAAAAHAAwAAAADAAEAAAAHAA0AAAADAAIAAAAHAA8AAAADAAEAAAAHABAAAAADAAIAAAAIAA8AAAADAAAAAAAJAA8AAAADAAAAAAAKAA8AAAADAAAAAAALAA8AAAADAAAAAAAMAA8AAAADAAAAAAANAA8AAAADAAAAAAAOAA8AAAADAAAAAAAIABAAAAADAAAAAAAJABAAAAADAAAAAAAKABAAAAADAAAAAAALABAAAAADAAAAAAAKAA4AAAAFAAEAAAALAA4AAAADAAAAAAAMAA4AAAADAAAAAAANAA4AAAADAAAAAAAOAA4AAAADAAAAAAAIAA0AAAADAAAAAAAJAA0AAAADAAAAAAAKAA0AAAADAAAAAAALAA0AAAADAAAAAAAMAA0AAAADAAAAAAANAA0AAAADAAAAAAAOAA0AAAADAAAAAAAIAAwAAAADAAAAAAAJAAwAAAADAAAAAAAKAAwAAAADAAAAAAALAAwAAAADAAAAAAAMAAwAAAADAAAAAAANAAwAAAADAAAAAAAOAAwAAAADAAAAAAALAAsAAAADAAAAAAAMAAsAAAADAAAAAAANAAsAAAADAAAAAAAOAAsAAAADAAAAAAAKAAsAAAAFAAEAAAAHAAoAAAADAAAAAAAIAAoAAAADAAAAAAAJAAoAAAADAAAAAAAKAAoAAAADAAAAAAALAAoAAAADAAAAAAAMAAoAAAADAAAAAAANAAoAAAADAAAAAAAOAAoAAAADAAAAAAAGAAoAAAADAAAAAAAGAAsAAAADAAAAAAAGAAwAAAADAAAAAAAGAA0AAAADAAAAAAAGAA4AAAADAAAAAAAGAA8AAAADAAAAAAAGABAAAAADAAAAAAAGABEAAAADAAAAAAAGABIAAAADAAAAAAAHABIAAAADAAAAAAAIABIAAAADAAAAAAAJABIAAAADAAAAAAAKABIAAAADAAAAAAALABIAAAADAAAAAAAGABMAAAADAAAAAAAHABMAAAADAAAAAAAIABMAAAADAAAAAAAJABMAAAADAAAAAAAKABMAAAADAAAAAAALABMAAAADAAAAAAAMABMAAAADAAAAAAANABMAAAADAAAAAAAOABMAAAADAAAAAAAPAAoAAAADAAAAAAAPAAsAAAADAAAAAAAPAAwAAAADAAAAAAAPAA0AAAADAAAAAAAPAA4AAAADAAAAAAAPAA8AAAADAAAAAAAPABAAAAADAAAAAAAPABEAAAADAAAAAAAPABIAAAADAAAAAAAPABMAAAADAAAAAAA=")
+tile_set = ExtResource("5_i3kxi")
