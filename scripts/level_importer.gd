@@ -19,6 +19,10 @@ extends Node
 ## calculated automatically
 @export var template_region:Rect2i
 
+func _ready()->void:
+  if !Engine.is_editor_hint():
+    queue_free()
+
 func _clear_layer(l:ChromaLayer):
   prints('clearing', l.name)
   for m in l.get_children():

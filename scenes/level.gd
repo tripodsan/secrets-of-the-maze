@@ -10,25 +10,18 @@ var _layer:Global.Layer = Global.Layer.Blue
 
 var _prev_layer:Global.Layer = -1
 
-var _start_position
+var _start_portal:Portal
+var _start_layer:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   _layers = [blue, red, green]
   for l in _layers: l.set_active(false)
-  _start_position = get_start_position()
-  assert(_start_position != Vector2.ZERO)
   Global.layer_selected.connect(_on_layer_selected)
-  _on_layer_selected(_layer)
-
-  # todo: move level logic to game controller
-  await get_tree().process_frame
-  start()
   Global.player_destroyed.connect(_on_player_destroyed)
 
 func _on_player_destroyed(by)->void:
-  start()
-  pass
+  restart()
 
 func _on_layer_selected(layer:Global.Layer):
   _layers[_layer].set_active(false)
@@ -52,13 +45,15 @@ func _process(delta: float) -> void:
   if Input.is_action_just_pressed('switch'):
     chroma_shift()
 
-func get_start_position()->Vector2:
-  for l in _layers:
-    var v = l.get_start_position()
-    if v != Vector2.ZERO:
-      return v
-  return Vector2.ZERO
-
 func start()->void:
-  Global.player.reset(_start_position)
-  _on_layer_selected(Global.Layer.Blue)
+  # todo: select different portal
+  _start_portal = blue.get_portal(0)
+  _start_layer = Global.Layer.Blue
+  assert(_start_portal)
+  Global.player.reset(_start_portal.global_transform)
+  get_viewport().get_camera_2d().reset_smoothing()
+  _on_layer_selected(_start_layer)
+
+func restart()->void:
+  Global.player.reset(_start_portal.global_transform)
+  _on_layer_selected(_start_layer)

@@ -72,13 +72,14 @@ func _process(delta: float) -> void:
     rotate(delta * rot_speed)
 "
 
-[node name="portal" type="Node2D"]
+[node name="portal" type="Node2D" groups=["portal"]]
 script = ExtResource("1_bp8gh")
 shape = 1
 layer = 1
 
 [node name="ring" type="GPUParticles2D" parent="."]
 visible = false
+emitting = false
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_sl4la")
 texture = ExtResource("3_ust2t")
@@ -86,7 +87,7 @@ lifetime = 3.0
 preprocess = 20.0
 
 [node name="triangle" type="GPUParticles2D" parent="."]
-rotation = 1357.53
+rotation = 1723.78
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_yfe87")
 texture = ExtResource("4_ju5kj")
@@ -98,6 +99,7 @@ script = SubResource("GDScript_lrei7")
 [node name="star" type="GPUParticles2D" parent="."]
 visible = false
 rotation = 73.3389
+emitting = false
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_7hlhg")
 texture = ExtResource("5_3brb1")
@@ -105,3 +107,7 @@ lifetime = 3.0
 preprocess = 20.0
 local_coords = true
 script = SubResource("GDScript_q8s6v")
+
+[node name="helper_arrow" type="Polygon2D" parent="."]
+color = Color(0.641934, 0.641934, 0.641934, 1)
+polygon = PackedVector2Array(112, -16, 112, 16, 192, 16, 192, 48, 240, 0, 192, -48, 192, -16)

@@ -15,14 +15,17 @@ var _colors:Array[GradientTexture1D] = [
 @export var layer:Global.Layer = Global.Layer.Blue:set = set_layer
 
 func _ready() -> void:
+  if !Engine.is_editor_hint():
+    $helper_arrow.queue_free()
   set_shape(shape)
   set_layer(layer)
 
 func set_shape(s:Shape)->void:
   shape = s
   for n in get_children():
-    n.visible = false
-    n.emitting = false
+    if n is GPUParticles2D:
+      n.emitting = false
+      n.visible = false
   if shape < get_child_count():
     get_child(shape).visible = true
     get_child(shape).restart()

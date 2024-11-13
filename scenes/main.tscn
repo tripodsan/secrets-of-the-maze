@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://scenes/minimap.gd" id="7_6f3p4"]
 [ext_resource type="Shader" path="res://shaders/screen-filter.gdshader" id="7_e01wk"]
 [ext_resource type="PackedScene" uid="uid://glyv2bogmfg4" path="res://scenes/super_nova.tscn" id="7_tsp44"]
-[ext_resource type="PackedScene" uid="uid://ueliw88dyxml" path="res://scenes/levels/level_1.tscn" id="10_60ytg"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
+[ext_resource type="PackedScene" uid="uid://ecg6jylppjbm" path="res://scenes/levels/level_0.tscn" id="10_s2f25"]
 [ext_resource type="PackedScene" uid="uid://bnbc6fy7ck4xj" path="res://scenes/explosion.tscn" id="13_64s4o"]
 [ext_resource type="PackedScene" uid="uid://bcyr27ygm52ov" path="res://scenes/laser_cast.tscn" id="13_okhme"]
 [ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
@@ -330,7 +330,7 @@ size_flags_vertical = 3
 
 [node name="game" type="Node2D" parent="world"]
 
-[node name="level_1" parent="world/game" instance=ExtResource("10_60ytg")]
+[node name="level" parent="world/game" instance=ExtResource("10_s2f25")]
 
 [node name="player" type="CharacterBody2D" parent="world"]
 unique_name_in_owner = true

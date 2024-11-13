@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://dc80ucjmfhp5"]
+
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_dypl2"]
+[ext_resource type="Script" path="res://scripts/level_importer.gd" id="2_q4c7b"]
+[ext_resource type="Texture2D" uid="uid://cfcnchhsfvn12" path="res://assets/level2.png" id="3_l07cn"]
+[ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="4_r3ouo"]
+[ext_resource type="TileSet" uid="uid://b4hv1lcomy6v6" path="res://scenes/level-tiles.tres" id="5_li6g3"]
+
+[node name="level_template" type="Node2D"]
+script = ExtResource("1_dypl2")
+
+[node name="_importer_" type="Node" parent="."]
+script = ExtResource("2_q4c7b")
+remove_fake_walls = false
+template = ExtResource("3_l07cn")
+template_region = Rect2i(48, 176, 1568, 1376)
+
+[node name="blue" type="Node2D" parent="."]
+visibility_layer = 2
+script = ExtResource("4_r3ouo")
+metadata/_edit_lock_ = true
+
+[node name="grid" type="TileMapLayer" parent="blue"]
+tile_set = ExtResource("5_li6g3")
+metadata/_edit_lock_ = true
+
+[node name="map" type="TileMapLayer" parent="blue"]
+tile_set = ExtResource("5_li6g3")
+metadata/_edit_lock_ = true
+
+[node name="objects" type="Node2D" parent="blue"]
+metadata/_edit_lock_ = true
+
+[node name="secrets" type="Node2D" parent="blue"]
+metadata/_edit_lock_ = true
+
+[node name="red" type="Node2D" parent="."]
+visibility_layer = 4
+script = ExtResource("4_r3ouo")
+layer_idx = 2
+metadata/_edit_lock_ = true
+
+[node name="grid" type="TileMapLayer" parent="red"]
+tile_set = ExtResource("5_li6g3")
+metadata/_edit_lock_ = true
+
+[node name="map" type="TileMapLayer" parent="red"]
+tile_set = ExtResource("5_li6g3")
+metadata/_edit_lock_ = true
+
+[node name="objects" type="Node2D" parent="red"]
+
+[node name="secrets" type="Node2D" parent="red"]
+
+[node name="green" type="Node2D" parent="."]
+visibility_layer = 8
+script = ExtResource("4_r3ouo")
+layer_idx = 3
+metadata/_edit_lock_ = true
+
+[node name="grid" type="TileMapLayer" parent="green"]
+tile_set = ExtResource("5_li6g3")
+metadata/_edit_lock_ = true
+
+[node name="map" type="TileMapLayer" parent="green"]
+tile_set = ExtResource("5_li6g3")
+metadata/_edit_lock_ = true
+
+[node name="objects" type="Node2D" parent="green"]
+
+[node name="secrets" type="Node2D" parent="green"]

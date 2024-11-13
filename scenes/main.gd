@@ -6,6 +6,8 @@ func _ready() -> void:
   RenderingServer.set_default_clear_color(bg_color)
   %phasemap.world_2d = get_viewport().world_2d
 
+  await get_tree().process_frame
+  $world/game/level.start()
 
 # ------------ todo: move to somewhere else ?
 func _on_btn_debug_save_pressed() -> void:

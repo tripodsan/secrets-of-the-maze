@@ -135,10 +135,9 @@ func hit(type:Global.HitType)->void:
   await get_tree().create_timer(1.5).timeout
   Global.player_destroyed.emit(type)
 
-func reset(pos:Vector2)->void:
+func reset(xf:Transform2D)->void:
   is_destroyed = false
   $ship.visible = true
   trail.fill(Vector4.ZERO)
-  position = pos
-  rotation = 0
+  global_transform = xf
   velocity = Vector2.ZERO
