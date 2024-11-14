@@ -6,7 +6,7 @@ var _phasemap:SubViewport
 
 enum Layer { Blue, Red, Green }
 
-enum HitType { Spike }
+enum HitType { Spike, Mine}
 
 signal player_changed()
 

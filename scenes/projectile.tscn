@@ -52,6 +52,7 @@ max_contacts_reported = 5
 script = ExtResource("1_4gj2m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_busl5")
 debug_color = Color(0.917647, 0.231373, 0.439216, 0.745098)
 

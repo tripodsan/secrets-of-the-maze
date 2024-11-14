@@ -1,17 +1,104 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjgp6yyx5bqf"]
+[gd_scene load_steps=20 format=3 uid="uid://bjgp6yyx5bqf"]
 
 [ext_resource type="Shader" path="res://scenes/mine.gdshader" id="1_fxkbs"]
-[ext_resource type="Texture2D" uid="uid://bqgbsnxudh5a1" path="res://assets/small_circle2.png" id="3_34mk3"]
+[ext_resource type="Script" path="res://scenes/mine.gd" id="1_wik26"]
+[ext_resource type="Script" path="res://scenes/mine_area.gd" id="3_2fv6n"]
+[ext_resource type="Texture2D" uid="uid://c62q077icyvru" path="res://assets/glow_circle.png" id="3_afxom"]
+[ext_resource type="Script" path="res://scenes/explosion_area.gd" id="4_4dhk0"]
+[ext_resource type="Texture2D" uid="uid://cyokx1amjp27k" path="res://assets/square.png" id="5_r6irh"]
+[ext_resource type="Texture2D" uid="uid://bqgbsnxudh5a1" path="res://assets/small_circle2.png" id="6_2rnfl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3xoe8"]
+
+[sub_resource type="Gradient" id="Gradient_65g82"]
+colors = PackedColorArray(1, 0.8, 0.8, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_64orx"]
+gradient = SubResource("Gradient_65g82")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mst2b"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 463.81
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_64orx")
+
+[sub_resource type="Gradient" id="Gradient_xc531"]
+offsets = PackedFloat32Array(0.0367347, 0.367347, 0.816176, 1)
+colors = PackedColorArray(0.376858, 1, 0.821415, 1, 0, 0.603852, 0.434625, 1, 4.81307e-07, 0.368234, 0.225626, 0.604364, 2.25613e-08, 0.113972, 0.0739414, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uyv25"]
+gradient = SubResource("Gradient_xc531")
+
+[sub_resource type="Curve" id="Curve_cqeyq"]
+_data = [Vector2(0, 0.571549), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0rbep"]
+curve = SubResource("Curve_cqeyq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tna23"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 265.42
+initial_velocity_max = 528.16
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_0rbep")
+color_ramp = SubResource("GradientTexture1D_uyv25")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fvbxx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnb1j"]
 shader = ExtResource("1_fxkbs")
-shader_parameter/tex = ExtResource("3_34mk3")
+shader_parameter/activity = 0.35
+shader_parameter/tex = ExtResource("6_2rnfl")
 
 [sub_resource type="QuadMesh" id="QuadMesh_icsry"]
 
 [node name="Mine" type="Node2D"]
+script = ExtResource("1_wik26")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 64
+script = ExtResource("3_2fv6n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+scale = Vector2(30, 30)
+shape = SubResource("CircleShape2D_3xoe8")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 27
+script = ExtResource("4_4dhk0")
+
+[node name="Flash" type="GPUParticles2D" parent="ExplosionArea"]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_mst2b")
+texture = ExtResource("3_afxom")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+
+[node name="Particles" type="GPUParticles2D" parent="ExplosionArea"]
+position = Vector2(-1, 0)
+emitting = false
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_tna23")
+texture = ExtResource("5_r6irh")
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.86
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+scale = Vector2(2.5, 2.5)
+shape = SubResource("CircleShape2D_fvbxx")
+
+[node name="MineMesh" type="MeshInstance2D" parent="ExplosionArea"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_mnb1j")
 scale = Vector2(100, 100)
 mesh = SubResource("QuadMesh_icsry")
