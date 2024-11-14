@@ -1,11 +1,47 @@
-[gd_scene load_steps=8 format=4 uid="uid://b7ln60f04dhpl"]
+[gd_scene load_steps=25 format=3 uid="uid://b7ln60f04dhpl"]
 
 [ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/level_theme.tres" id="1_7shaq"]
-[ext_resource type="FontFile" uid="uid://rtbfvblms3ss" path="res://fonts/game-of-squids/Game Of Squids.ttf" id="2_47n1i"]
+[ext_resource type="FontFile" uid="uid://b5hil8rayk5id" path="res://fonts/saucer/SaucerBB.ttf" id="2_l1efe"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="3_hunw0"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="4_137gh"]
-[ext_resource type="TileSet" uid="uid://c2wcbcqc6114f" path="res://scenes/level_select.tres" id="5_i3kxi"]
-[ext_resource type="PackedScene" uid="uid://bj1nb06igmvqy" path="res://scenes/level_map/level_map_node.tscn" id="6_2jbhw"]
+[ext_resource type="PackedScene" uid="uid://be1r3b3neri51" path="res://scenes/level_map/level_map_node.tscn" id="6_2jbhw"]
+[ext_resource type="Script" path="res://scenes/level_map/level_map_cursor.gd" id="6_hr126"]
+[ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="7_7w5sb"]
+[ext_resource type="PackedScene" uid="uid://ceykegurm2m3a" path="res://scenes/level_map/level_map_connector.tscn" id="7_ohwbg"]
+[ext_resource type="PackedScene" uid="uid://dyv7olmjrvbo3" path="res://scenes/level_map/level_map_arrow.tscn" id="8_tdmwx"]
+[ext_resource type="PackedScene" uid="uid://r7ky3flag8oo" path="res://scenes/level_map/level_map_question.tscn" id="9_nfp2q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne2b6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nv6qf"]
+content_margin_left = 32.0
+content_margin_right = 0.0
+bg_color = Color(0.655562, 0.303241, 0.444274, 1)
+draw_center = false
+border_width_left = 8
+border_width_right = 8
+border_color = Color(0.625597, 0.625597, 0.625597, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_0xuug"]
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_fic1g"]
+font_size = 100
+font_color = Color(0.0352941, 0.415686, 0.92549, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_gbq8l"]
+color = Color(0.625597, 0.625597, 0.625597, 1)
+grow_end = -69.0
+thickness = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_jbx2i"]
+font = ExtResource("2_l1efe")
+font_size = 56
+font_color = Color(0.923173, 0.923173, 0.923173, 1)
 
 [sub_resource type="GDScript" id="GDScript_fgtaq"]
 script/source = "extends ParallaxBackground
@@ -16,6 +52,56 @@ script/source = "extends ParallaxBackground
 func _process(delta: float) -> void:
   scroll_offset += speed * delta
 "
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbvlq"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uynsh"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oudi6"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuipc"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_452to"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(288, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqhgl"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(384, 96, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uv4m7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbvlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uynsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oudi6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuipc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_452to")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqhgl")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -39,60 +125,71 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_47n1i")
-theme_override_font_sizes/font_size = 181
 text = "sELECt LEVEl"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
-visible = false
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-columns = 3
 
-[node name="1" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="placeholder" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(800, 400)
 layout_mode = 2
-text = "1"
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
 
-[node name="2" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 800)
 layout_mode = 2
-text = "2"
+theme_override_constants/separation = 90
+theme_override_styles/separator = SubResource("StyleBoxFlat_nv6qf")
 
-[node name="3" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
-text = "3"
 
-[node name="4" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-disabled = true
-text = "4"
 
-[node name="5" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-disabled = true
-text = "5"
+text = "LIII-"
+label_settings = SubResource("LabelSettings_0xuug")
 
-[node name="6" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-disabled = true
-text = "6"
+text = "[B]"
+label_settings = SubResource("LabelSettings_fic1g")
 
-[node name="7" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="line" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-disabled = true
-text = "7"
+size_flags_vertical = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_gbq8l")
 
-[node name="8" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="placeholder2" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-disabled = true
-text = "8"
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
 
-[node name="9" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-disabled = true
-text = "9
-"
+text = "- secrets 0/5
+- best time 12:45
+- exits 1/1"
+label_settings = SubResource("LabelSettings_jbx2i")
+
+[node name="placeholder3" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 80
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "LAUncH"
+alignment = 0
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
@@ -118,26 +215,57 @@ position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("4_137gh")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-position = Vector2(264, -297)
-scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAAHAA4AAAAAAAEAAAAIAA4AAAABAAEAAAAJAA4AAAACAAEAAAAHAAsAAAAAAAIAAAAIAAsAAAABAAIAAAAJAAsAAAACAAIAAAAHABEAAAAAAAAAAAAKABEAAAAAAAAAAAAIABEAAAABAAAAAAAJABEAAAACAAAAAAALABEAAAABAAAAAAAMABEAAAACAAAAAAAMABAAAAAEAAAAAAAMABIAAAAEAAIAAAANABAAAAAFAAAAAAANABIAAAAFAAIAAAAOABAAAAAGAAAAAAAOABEAAAAGAAEAAAAOABIAAAAGAAIAAAANABEAAAAAAAAAAAAHAAwAAAADAAEAAAAHAA0AAAADAAIAAAAHAA8AAAADAAEAAAAHABAAAAADAAIAAAAIAA8AAAADAAAAAAAJAA8AAAADAAAAAAAKAA8AAAADAAAAAAALAA8AAAADAAAAAAAMAA8AAAADAAAAAAANAA8AAAADAAAAAAAOAA8AAAADAAAAAAAIABAAAAADAAAAAAAJABAAAAADAAAAAAAKABAAAAADAAAAAAALABAAAAADAAAAAAAKAA4AAAAFAAEAAAALAA4AAAADAAAAAAAMAA4AAAADAAAAAAANAA4AAAADAAAAAAAOAA4AAAADAAAAAAAIAA0AAAADAAAAAAAJAA0AAAADAAAAAAAKAA0AAAADAAAAAAALAA0AAAADAAAAAAAMAA0AAAADAAAAAAANAA0AAAADAAAAAAAOAA0AAAADAAAAAAAIAAwAAAADAAAAAAAJAAwAAAADAAAAAAAKAAwAAAADAAAAAAALAAwAAAADAAAAAAAMAAwAAAADAAAAAAANAAwAAAADAAAAAAAOAAwAAAADAAAAAAALAAsAAAADAAAAAAAMAAsAAAADAAAAAAANAAsAAAADAAAAAAAOAAsAAAADAAAAAAAKAAsAAAAFAAEAAAAHAAoAAAADAAAAAAAIAAoAAAADAAAAAAAJAAoAAAADAAAAAAAKAAoAAAADAAAAAAALAAoAAAADAAAAAAAMAAoAAAADAAAAAAANAAoAAAADAAAAAAAOAAoAAAADAAAAAAAGAAoAAAADAAAAAAAGAAsAAAADAAAAAAAGAAwAAAADAAAAAAAGAA0AAAADAAAAAAAGAA4AAAADAAAAAAAGAA8AAAADAAAAAAAGABAAAAADAAAAAAAGABEAAAADAAAAAAAGABIAAAADAAAAAAAHABIAAAADAAAAAAAIABIAAAADAAAAAAAJABIAAAADAAAAAAAKABIAAAADAAAAAAALABIAAAADAAAAAAAGABMAAAADAAAAAAAHABMAAAADAAAAAAAIABMAAAADAAAAAAAJABMAAAADAAAAAAAKABMAAAADAAAAAAALABMAAAADAAAAAAAMABMAAAADAAAAAAANABMAAAADAAAAAAAOABMAAAADAAAAAAAPAAoAAAADAAAAAAAPAAsAAAADAAAAAAAPAAwAAAADAAAAAAAPAA0AAAADAAAAAAAPAA4AAAADAAAAAAAPAA8AAAADAAAAAAAPABAAAAADAAAAAAAPABEAAAADAAAAAAAPABIAAAADAAAAAAAPABMAAAADAAAAAAA=")
-tile_set = ExtResource("5_i3kxi")
-
 [node name="level_map" type="Node2D" parent="."]
+position = Vector2(256, 896)
 scale = Vector2(2, 2)
+
+[node name="cursor" type="AnimatedSprite2D" parent="level_map"]
+position = Vector2(208, -16)
+rotation = 4.71239
+sprite_frames = SubResource("SpriteFrames_uv4m7")
+frame = 1
+script = ExtResource("6_hr126")
+opening = 8
 
 [node name="level_0_b" parent="level_map" instance=ExtResource("6_2jbhw")]
-position = Vector2(176, 400)
-layer = 0
-
-[node name="level_0_r" parent="level_map" instance=ExtResource("6_2jbhw")]
-position = Vector2(176, 320)
-layer = 1
-
-[node name="level_0_g" parent="level_map" instance=ExtResource("6_2jbhw")]
-position = Vector2(176, 240)
+position = Vector2(0, -32)
 
 [node name="level_1_b" parent="level_map" instance=ExtResource("6_2jbhw")]
-position = Vector2(272, 400)
-layer = 0
+position = Vector2(96, -32)
+
+[node name="level_2_b" parent="level_map" instance=ExtResource("6_2jbhw")]
+position = Vector2(192, -32)
+
+[node name="level_0_g" parent="level_map" instance=ExtResource("6_2jbhw")]
+position = Vector2(0, -224)
+animation = &"green"
+
+[node name="level_0_r" parent="level_map" instance=ExtResource("6_2jbhw")]
+position = Vector2(0, -128)
+animation = &"red"
+
+[node name="connector" parent="level_map" instance=ExtResource("7_ohwbg")]
+position = Vector2(0, -192)
+
+[node name="connector2" parent="level_map" instance=ExtResource("7_ohwbg")]
+position = Vector2(0, -96)
+
+[node name="arrow" parent="level_map" instance=ExtResource("8_tdmwx")]
+position = Vector2(32, -32)
+
+[node name="arrow3" parent="level_map" instance=ExtResource("8_tdmwx")]
+position = Vector2(128, -32)
+
+[node name="arrow2" parent="level_map" instance=ExtResource("8_tdmwx")]
+position = Vector2(32, -128)
+animation = &"red"
+
+[node name="arrow4" parent="level_map" instance=ExtResource("8_tdmwx")]
+position = Vector2(32, -224)
+animation = &"green"
+
+[node name="question" parent="level_map" instance=ExtResource("9_nfp2q")]
+position = Vector2(96, -128)
+
+[node name="question2" parent="level_map" instance=ExtResource("9_nfp2q")]
+position = Vector2(96, -224)

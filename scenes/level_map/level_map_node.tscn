@@ -1,25 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj1nb06igmvqy"]
+[gd_scene load_steps=6 format=3 uid="uid://be1r3b3neri51"]
 
 [ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="1_rrbk6"]
-[ext_resource type="Script" path="res://scenes/level_map/level_map_node.gd" id="1_wxbuk"]
 
-[node name="level_map_node" type="Node2D"]
-script = ExtResource("1_wxbuk")
-layer = 2
+[sub_resource type="AtlasTexture" id="AtlasTexture_70t40"]
+atlas = ExtResource("1_rrbk6")
+region = Rect2(0, 0, 32, 32)
 
-[node name="blue" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("1_rrbk6")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdcq5"]
+atlas = ExtResource("1_rrbk6")
+region = Rect2(0, 64, 32, 32)
 
-[node name="red" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("1_rrbk6")
-region_enabled = true
-region_rect = Rect2(0, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4bmj"]
+atlas = ExtResource("1_rrbk6")
+region = Rect2(0, 32, 32, 32)
 
-[node name="green" type="Sprite2D" parent="."]
-texture = ExtResource("1_rrbk6")
-region_enabled = true
-region_rect = Rect2(0, 64, 32, 32)
+[sub_resource type="SpriteFrames" id="SpriteFrames_8l563"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70t40")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdcq5")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4bmj")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[node name="level_0_b" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_8l563")
+animation = &"blue"
+centered = false

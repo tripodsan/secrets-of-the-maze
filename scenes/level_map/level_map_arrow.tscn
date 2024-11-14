@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyv7olmjrvbo3"]
+
+[ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="1_3v36p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3foig"]
+atlas = ExtResource("1_3v36p")
+region = Rect2(32, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxkw3"]
+atlas = ExtResource("1_3v36p")
+region = Rect2(32, 64, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbpf6"]
+atlas = ExtResource("1_3v36p")
+region = Rect2(32, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o16rh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3foig")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxkw3")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbpf6")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[node name="arrow" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_o16rh")
+animation = &"blue"
+centered = false

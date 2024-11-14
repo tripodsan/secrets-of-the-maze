@@ -1,12 +1,8 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dqql2g0hhe5xd"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://dqql2g0hhe5xd"]
 
-[ext_resource type="FontFile" uid="uid://b5hil8rayk5id" path="res://fonts/saucer/SaucerBB.ttf" id="1_sih37"]
+[ext_resource type="FontFile" uid="uid://rtbfvblms3ss" path="res://fonts/game-of-squids/Game Of Squids.ttf" id="2_akody"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2mvd8"]
-content_margin_left = 100.0
-content_margin_top = 50.0
-content_margin_right = 100.0
-content_margin_bottom = 50.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iu70a"]
 
@@ -15,6 +11,8 @@ content_margin_bottom = 50.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_57d60"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_po5ny"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dr7cl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vqx5"]
 content_margin_left = 12.0
@@ -35,7 +33,7 @@ corner_detail = 5
 
 [resource]
 default_font_size = 24
-Button/colors/font_color = Color(0.0352941, 0.415686, 0.92549, 1)
+Button/colors/font_color = Color(0.531621, 0.713231, 0.998427, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 Button/colors/font_focus_color = Color(0.0352941, 0.415686, 0.92549, 1)
 Button/colors/font_hover_color = Color(0.0352941, 0.8, 0.92549, 1)
@@ -52,11 +50,22 @@ Button/constants/align_to_largest_stylebox = 1
 Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
-Button/font_sizes/font_size = 180
-Button/fonts/font = ExtResource("1_sih37")
+Button/font_sizes/font_size = 120
+Button/fonts/font = ExtResource("2_akody")
 Button/styles/disabled = SubResource("StyleBoxEmpty_2mvd8")
 Button/styles/focus = SubResource("StyleBoxEmpty_iu70a")
 Button/styles/hover = SubResource("StyleBoxEmpty_s8yqg")
 Button/styles/normal = SubResource("StyleBoxEmpty_57d60")
 Button/styles/pressed = SubResource("StyleBoxEmpty_po5ny")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 170
+Label/fonts/font = ExtResource("2_akody")
+Label/styles/normal = SubResource("StyleBoxEmpty_dr7cl")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2vqx5")
