@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b5hil8rayk5id"
-path="res://.godot/imported/SaucerBB.ttf-4baec455af16de365fc81cf3f6dd48cd.fontdata"
+uid="uid://kvrcig0ggl1f"
+path="res://.godot/imported/A-Space Bold Demo.otf-6352f748d8c93ae40c00b1c298c8eef5.fontdata"
 
 [deps]
 
-source_file="res://fonts/saucer/SaucerBB.ttf"
-dest_files=["res://.godot/imported/SaucerBB.ttf-4baec455af16de365fc81cf3f6dd48cd.fontdata"]
+source_file="res://fonts/a-space/A-Space Bold Demo.otf"
+dest_files=["res://.godot/imported/A-Space Bold Demo.otf-6352f748d8c93ae40c00b1c298c8eef5.fontdata"]
 
 [params]
 

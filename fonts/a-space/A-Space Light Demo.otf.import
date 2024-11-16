@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bmbua53mtav1f"
-path="res://.godot/imported/SaucerBB.ttf-dc7a108b9d6306f326ec30f5405ce219.fontdata"
+uid="uid://bgtot0cyo04yy"
+path="res://.godot/imported/A-Space Light Demo.otf-1c2f96bc3c1356a4edf58ca634998bf2.fontdata"
 
 [deps]
 
-source_file="res://scenes/saucer/SaucerBB.ttf"
-dest_files=["res://.godot/imported/SaucerBB.ttf-dc7a108b9d6306f326ec30f5405ce219.fontdata"]
+source_file="res://fonts/a-space/A-Space Light Demo.otf"
+dest_files=["res://.godot/imported/A-Space Light Demo.otf-1c2f96bc3c1356a4edf58ca634998bf2.fontdata"]
 
 [params]
 

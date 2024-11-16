@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://dqql2g0hhe5xd"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dqql2g0hhe5xd"]
 
-[ext_resource type="FontFile" uid="uid://rtbfvblms3ss" path="res://fonts/game-of-squids/Game Of Squids.ttf" id="2_akody"]
+[ext_resource type="FontFile" uid="uid://kvrcig0ggl1f" path="res://fonts/a-space/A-Space Bold Demo.otf" id="1_4pbll"]
+[ext_resource type="FontFile" uid="uid://bqy8hokdfi3s7" path="res://fonts/a-space/A-Space Black Demo.otf" id="2_wp5mq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2mvd8"]
 
@@ -51,7 +52,7 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 120
-Button/fonts/font = ExtResource("2_akody")
+Button/fonts/font = ExtResource("1_4pbll")
 Button/styles/disabled = SubResource("StyleBoxEmpty_2mvd8")
 Button/styles/focus = SubResource("StyleBoxEmpty_iu70a")
 Button/styles/hover = SubResource("StyleBoxEmpty_s8yqg")
@@ -66,6 +67,6 @@ Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 170
-Label/fonts/font = ExtResource("2_akody")
+Label/fonts/font = ExtResource("2_wp5mq")
 Label/styles/normal = SubResource("StyleBoxEmpty_dr7cl")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2vqx5")

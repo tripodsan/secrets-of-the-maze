@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://b7ln60f04dhpl"]
+[gd_scene load_steps=27 format=3 uid="uid://b7ln60f04dhpl"]
 
 [ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/level_theme.tres" id="1_7shaq"]
-[ext_resource type="FontFile" uid="uid://b5hil8rayk5id" path="res://fonts/saucer/SaucerBB.ttf" id="2_l1efe"]
+[ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="2_luebk"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="3_hunw0"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="4_137gh"]
+[ext_resource type="Script" path="res://scenes/level_map/level_map.gd" id="5_d4dit"]
 [ext_resource type="PackedScene" uid="uid://be1r3b3neri51" path="res://scenes/level_map/level_map_node.tscn" id="6_2jbhw"]
 [ext_resource type="Script" path="res://scenes/level_map/level_map_cursor.gd" id="6_hr126"]
 [ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="7_7w5sb"]
@@ -39,9 +40,11 @@ grow_end = -69.0
 thickness = 7
 
 [sub_resource type="LabelSettings" id="LabelSettings_jbx2i"]
-font = ExtResource("2_l1efe")
-font_size = 56
+font = ExtResource("2_luebk")
+font_size = 55
 font_color = Color(0.923173, 0.923173, 0.923173, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n7ttj"]
 
 [sub_resource type="GDScript" id="GDScript_fgtaq"]
 script/source = "extends ParallaxBackground
@@ -123,16 +126,23 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="placeholder2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "sELECt LEVEl"
+size_flags_horizontal = 3
+theme_override_constants/separation = 130
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Level Map"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="placeholder" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(800, 400)
+custom_minimum_size = Vector2(750, 400)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
@@ -144,7 +154,7 @@ theme_override_constants/separation = 90
 theme_override_styles/separator = SubResource("StyleBoxFlat_nv6qf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(700, 0)
+custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -152,12 +162,12 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "LIII-"
+text = "DIII"
 label_settings = SubResource("LabelSettings_0xuug")
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "[B]"
+text = "-B"
 label_settings = SubResource("LabelSettings_fic1g")
 
 [node name="line" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -165,18 +175,34 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/separator = SubResource("StyleBoxLine_gbq8l")
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "secrets:
+best time:
+exits found:"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="HSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_n7ttj")
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0 / 5
+00:12.45
+1 / 1"
+label_settings = SubResource("LabelSettings_jbx2i")
+
 [node name="placeholder2" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 40
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
-
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "- secrets 0/5
-- best time 12:45
-- exits 1/1"
-label_settings = SubResource("LabelSettings_jbx2i")
 
 [node name="placeholder3" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -188,7 +214,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "LAUncH"
+text = ">> launch"
 alignment = 0
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
@@ -215,9 +241,11 @@ position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("4_137gh")
 
-[node name="level_map" type="Node2D" parent="."]
+[node name="level_map" type="Node2D" parent="." node_paths=PackedStringArray("selected_level")]
 position = Vector2(256, 896)
 scale = Vector2(2, 2)
+script = ExtResource("5_d4dit")
+selected_level = NodePath("level_2_b")
 
 [node name="cursor" type="AnimatedSprite2D" parent="level_map"]
 position = Vector2(208, -16)
