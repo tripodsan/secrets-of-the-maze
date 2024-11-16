@@ -1,10 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://r7ky3flag8oo"]
+[gd_scene load_steps=2 format=3 uid="uid://p7238askb68a"]
 
 [ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="1_ecujd"]
 
 [node name="question" type="Sprite2D"]
-position = Vector2(0, -192)
 texture = ExtResource("1_ecujd")
-centered = false
 region_enabled = true
 region_rect = Rect2(160, 32, 32, 32)

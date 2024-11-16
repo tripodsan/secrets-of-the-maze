@@ -1,7 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://be1r3b3neri51"]
+[gd_scene load_steps=8 format=3 uid="uid://be1r3b3neri51"]
 
 [ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="1_rrbk6"]
 [ext_resource type="Script" path="res://scenes/level_map/level_map_node.gd" id="2_utjt7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb2ei"]
+atlas = ExtResource("1_rrbk6")
+region = Rect2(160, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70t40"]
 atlas = ExtResource("1_rrbk6")
@@ -17,6 +21,14 @@ region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8l563"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb2ei")
+}],
+"loop": false,
+"name": &"_",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_70t40")
@@ -44,6 +56,5 @@ animations = [{
 
 [node name="level_map_node" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_8l563")
-animation = &"blue"
-centered = false
+animation = &"_"
 script = ExtResource("2_utjt7")

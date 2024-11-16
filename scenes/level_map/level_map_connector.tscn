@@ -4,6 +4,5 @@
 
 [node name="connector" type="Sprite2D"]
 texture = ExtResource("1_fi20b")
-centered = false
 region_enabled = true
 region_rect = Rect2(96, 32, 32, 64)

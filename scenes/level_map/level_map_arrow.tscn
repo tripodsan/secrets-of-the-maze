@@ -44,4 +44,3 @@ animations = [{
 [node name="arrow" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_o16rh")
 animation = &"blue"
-centered = false

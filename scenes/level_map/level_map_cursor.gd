@@ -1,4 +1,5 @@
 @tool
+class_name LevelMapCursor
 extends AnimatedSprite2D
 
 @export_flags('top', 'right', 'bottom', 'left') var opening:int = 0: set = set_opening
@@ -27,3 +28,6 @@ func set_opening(v:int):
   opening = v
   frame = CONFIGS[v].x
   rotation_degrees = CONFIGS[v].y
+
+func set_opening_by_direction(top:bool, right:bool, bottom:bool, left:bool)->void:
+  set_opening(int(top) | 2 * int(right) | 4 * int(bottom) | 8 * int(left))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b7ln60f04dhpl"]
+[gd_scene load_steps=26 format=3 uid="uid://b7ln60f04dhpl"]
 
 [ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/level_theme.tres" id="1_7shaq"]
 [ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="2_luebk"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="7_7w5sb"]
 [ext_resource type="PackedScene" uid="uid://ceykegurm2m3a" path="res://scenes/level_map/level_map_connector.tscn" id="7_ohwbg"]
 [ext_resource type="PackedScene" uid="uid://dyv7olmjrvbo3" path="res://scenes/level_map/level_map_arrow.tscn" id="8_tdmwx"]
-[ext_resource type="PackedScene" uid="uid://r7ky3flag8oo" path="res://scenes/level_map/level_map_question.tscn" id="9_nfp2q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne2b6"]
 
@@ -248,52 +247,67 @@ script = ExtResource("5_d4dit")
 selected_level = NodePath("level_2_b")
 
 [node name="cursor" type="AnimatedSprite2D" parent="level_map"]
-position = Vector2(208, -16)
+position = Vector2(192, -32)
 rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_uv4m7")
 frame = 1
 script = ExtResource("6_hr126")
 opening = 8
 
-[node name="level_0_b" parent="level_map" instance=ExtResource("6_2jbhw")]
+[node name="level_0_b" parent="level_map" node_paths=PackedStringArray("nb_top", "nb_right") instance=ExtResource("6_2jbhw")]
 position = Vector2(0, -32)
+animation = &"blue"
+nb_top = NodePath("../level_0_r")
+nb_right = NodePath("../level_1_b")
 
-[node name="level_1_b" parent="level_map" instance=ExtResource("6_2jbhw")]
+[node name="level_1_b" parent="level_map" node_paths=PackedStringArray("nb_right", "nb_left") instance=ExtResource("6_2jbhw")]
 position = Vector2(96, -32)
+animation = &"blue"
+nb_right = NodePath("../level_2_b")
+nb_left = NodePath("../level_0_b")
 
-[node name="level_2_b" parent="level_map" instance=ExtResource("6_2jbhw")]
+[node name="level_2_b" parent="level_map" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
 position = Vector2(192, -32)
+animation = &"blue"
+nb_left = NodePath("../level_1_b")
 
-[node name="level_0_g" parent="level_map" instance=ExtResource("6_2jbhw")]
+[node name="level_0_g" parent="level_map" node_paths=PackedStringArray("nb_right", "nb_bottom") instance=ExtResource("6_2jbhw")]
 position = Vector2(0, -224)
 animation = &"green"
+nb_right = NodePath("../level_1_g")
+nb_bottom = NodePath("../level_0_r")
 
-[node name="level_0_r" parent="level_map" instance=ExtResource("6_2jbhw")]
+[node name="level_1_g" parent="level_map" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
+position = Vector2(96, -224)
+nb_left = NodePath("../level_0_g")
+
+[node name="level_0_r" parent="level_map" node_paths=PackedStringArray("nb_top", "nb_right", "nb_bottom") instance=ExtResource("6_2jbhw")]
 position = Vector2(0, -128)
 animation = &"red"
+nb_top = NodePath("../level_0_g")
+nb_right = NodePath("../level_1_r")
+nb_bottom = NodePath("../level_0_b")
+
+[node name="level_1_r" parent="level_map" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
+position = Vector2(96, -128)
+nb_left = NodePath("../level_0_r")
 
 [node name="connector" parent="level_map" instance=ExtResource("7_ohwbg")]
-position = Vector2(0, -192)
+position = Vector2(0, -176)
 
 [node name="connector2" parent="level_map" instance=ExtResource("7_ohwbg")]
-position = Vector2(0, -96)
+position = Vector2(0, -80)
 
 [node name="arrow" parent="level_map" instance=ExtResource("8_tdmwx")]
-position = Vector2(32, -32)
+position = Vector2(48, -32)
 
 [node name="arrow3" parent="level_map" instance=ExtResource("8_tdmwx")]
-position = Vector2(128, -32)
+position = Vector2(144, -32)
 
 [node name="arrow2" parent="level_map" instance=ExtResource("8_tdmwx")]
-position = Vector2(32, -128)
+position = Vector2(48, -128)
 animation = &"red"
 
 [node name="arrow4" parent="level_map" instance=ExtResource("8_tdmwx")]
-position = Vector2(32, -224)
+position = Vector2(48, -224)
 animation = &"green"
-
-[node name="question" parent="level_map" instance=ExtResource("9_nfp2q")]
-position = Vector2(96, -128)
-
-[node name="question2" parent="level_map" instance=ExtResource("9_nfp2q")]
-position = Vector2(96, -224)
