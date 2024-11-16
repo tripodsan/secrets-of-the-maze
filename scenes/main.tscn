@@ -1,7 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=20 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
 [ext_resource type="Theme" uid="uid://cfk78nhykmoun" path="res://scenes/hud_theme.tres" id="2_gqhd0"]
 [ext_resource type="Script" path="res://scripts/custom_dropdown.gd" id="3_a52ap"]
 [ext_resource type="Script" path="res://scenes/ship_config.gd" id="3_tlpr0"]
@@ -11,10 +10,9 @@
 [ext_resource type="Script" path="res://scenes/minimap.gd" id="7_6f3p4"]
 [ext_resource type="Shader" path="res://shaders/screen-filter.gdshader" id="7_e01wk"]
 [ext_resource type="PackedScene" uid="uid://glyv2bogmfg4" path="res://scenes/super_nova.tscn" id="7_tsp44"]
+[ext_resource type="PackedScene" uid="uid://b4kepaijdk64i" path="res://scenes/levels/level_2.tscn" id="10_pjm13"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
-[ext_resource type="PackedScene" uid="uid://ecg6jylppjbm" path="res://scenes/levels/level_0.tscn" id="10_s2f25"]
-[ext_resource type="PackedScene" uid="uid://bnbc6fy7ck4xj" path="res://scenes/explosion.tscn" id="13_64s4o"]
-[ext_resource type="PackedScene" uid="uid://bcyr27ygm52ov" path="res://scenes/laser_cast.tscn" id="13_okhme"]
+[ext_resource type="PackedScene" uid="uid://b804mmyeds45o" path="res://entities/player.tscn" id="11_01h05"]
 [ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
 
 [sub_resource type="Environment" id="Environment_75w5p"]
@@ -46,10 +44,6 @@ shader_parameter/amount = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvfhi"]
 shader = ExtResource("7_e01wk")
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1jpm"]
-radius = 17.0
-height = 76.0
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_v5gem")
@@ -330,38 +324,10 @@ size_flags_vertical = 3
 
 [node name="game" type="Node2D" parent="world"]
 
-[node name="level" parent="world/game" instance=ExtResource("10_s2f25")]
+[node name="level" parent="world/game" instance=ExtResource("10_pjm13")]
 
-[node name="player" type="CharacterBody2D" parent="world"]
+[node name="player" parent="world" instance=ExtResource("11_01h05")]
 unique_name_in_owner = true
-visibility_layer = 16
-position = Vector2(-1043, 453.99)
-collision_mask = 47
-motion_mode = 1
-script = ExtResource("1_wfkjx")
-
-[node name="Explosion" parent="world/player" instance=ExtResource("13_64s4o")]
-
-[node name="ship" type="Polygon2D" parent="world/player"]
-position = Vector2(16, 0.0100098)
-rotation = 1.5708
-polygon = PackedVector2Array(0, -32, -16, 32, 0, 16, 16, 32)
-
-[node name="LaserCast" parent="world/player/ship" instance=ExtResource("13_okhme")]
-
-[node name="Camera2D" type="Camera2D" parent="world/player"]
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.1
-drag_top_margin = 0.1
-drag_right_margin = 0.1
-drag_bottom_margin = 0.1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world/player"]
-position = Vector2(11, 0.0100098)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_g1jpm")
 
 [node name="Parallax2D" type="ParallaxBackground" parent="world"]
 

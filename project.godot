@@ -30,6 +30,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 portal="Group for all portals"
+spike="static deadly enemy"
 
 [input]
 

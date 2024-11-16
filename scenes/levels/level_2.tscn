@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=4 uid="uid://b4kepaijdk64i"]
+[gd_scene load_steps=9 format=4 uid="uid://b4kepaijdk64i"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_anykt"]
 [ext_resource type="Script" path="res://scripts/level_importer.gd" id="2_bagyl"]
 [ext_resource type="Texture2D" uid="uid://bjhxaxn4m3v6r" path="res://assets/level3.png" id="3_236on"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="4_y0ttv"]
 [ext_resource type="TileSet" uid="uid://b4hv1lcomy6v6" path="res://scenes/level-tiles.tres" id="5_vh7f2"]
+[ext_resource type="PackedScene" uid="uid://d2oh02mscfwjk" path="res://entities/static_mine.tscn" id="6_x7w7n"]
+[ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="7_8k2le"]
+[ext_resource type="Script" path="res://scripts/oscilator.gd" id="8_ddnlu"]
 
 [node name="level_2" type="Node2D"]
 script = ExtResource("1_anykt")
@@ -32,10 +35,50 @@ metadata/_edit_lock_ = true
 [node name="objects" type="Node2D" parent="blue"]
 metadata/_edit_lock_ = true
 
+[node name="static_mine" parent="blue/objects" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 704)
+
+[node name="static_mine2" parent="blue/objects" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 896)
+
+[node name="static_mine3" parent="blue/objects" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1088)
+
+[node name="static_mine4" parent="blue/objects" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1280)
+
+[node name="static_mine5" parent="blue/objects" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1472)
+
+[node name="static_mine6" parent="blue/objects" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1664)
+
+[node name="static_mine7" parent="blue/objects" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1856)
+
+[node name="Oscilator" type="Node" parent="blue/objects" node_paths=PackedStringArray("targets")]
+script = ExtResource("8_ddnlu")
+amplitude = Vector2(250, 0)
+freq = Vector2(0.35, 0)
+phase = Vector2(-0.08, 0)
+targets = [NodePath("../static_mine"), NodePath("../static_mine2"), NodePath("../static_mine3"), NodePath("../static_mine4"), NodePath("../static_mine5"), NodePath("../static_mine6"), NodePath("../static_mine7")]
+
+[node name="portal_1" parent="blue/objects" instance=ExtResource("7_8k2le")]
+position = Vector2(5952, 1728)
+rotation = -3.14159
+shape = 2
+layer = 0
+
+[node name="portal_0" parent="blue/objects" instance=ExtResource("7_8k2le")]
+position = Vector2(256, 1728)
+shape = 2
+layer = 0
+
 [node name="secrets" type="Node2D" parent="blue"]
 metadata/_edit_lock_ = true
 
 [node name="red" type="Node2D" parent="."]
+visible = false
 visibility_layer = 4
 script = ExtResource("4_y0ttv")
 layer_idx = 2
@@ -56,6 +99,7 @@ metadata/_edit_lock_ = true
 [node name="secrets" type="Node2D" parent="red"]
 
 [node name="green" type="Node2D" parent="."]
+visible = false
 visibility_layer = 8
 script = ExtResource("4_y0ttv")
 layer_idx = 3

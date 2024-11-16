@@ -101,10 +101,15 @@ func _physics_process(delta: float) -> void:
 
   var coll:KinematicCollision2D = move_and_collide(velocity * delta)
   if coll:
-    var type:StringName = Global.get_tile_type(coll.get_collider(), coll.get_collider_rid())
+    var body:Object = coll.get_collider()
+    var type:StringName = Global.get_tile_type(body, coll.get_collider_rid())
     if type == &"spike":
       hit(Global.HitType.Spike)
       return
+    elif body is Node2D and body.is_in_group(&"spike"):
+      hit(Global.HitType.Spike)
+      return
+
     var wall := coll.get_normal()
     var a:float = wall.dot(rot_dir)
     if abs(a) > 0.8:
