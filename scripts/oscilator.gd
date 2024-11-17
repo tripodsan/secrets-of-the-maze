@@ -35,7 +35,7 @@ func set_preview(v:bool)->void:
       _store_initial_pos()
   preview = v
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   if preview or not Engine.is_editor_hint():
     var p := Vector2.ZERO
     for i in range(len(targets)):

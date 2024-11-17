@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=3 uid="uid://bngfeoy11veqw"]
+
+[ext_resource type="Theme" uid="uid://gydw4cyvjjug" path="res://scenes/title_theme.tres" id="1_4sy3r"]
+[ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="2_2rjkx"]
+[ext_resource type="Script" path="res://scenes/title_screen.gd" id="2_aa0ag"]
+[ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="3_d1qfl"]
+[ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="3_s2uhj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abufw"]
+
+[sub_resource type="GDScript" id="GDScript_62yhf"]
+script/source = "extends ParallaxBackground
+
+@export var speed:Vector2 = Vector2(100, 50)
+
+
+func _process(delta: float) -> void:
+  scroll_offset += speed * delta
+"
+
+[node name="title_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4sy3r")
+script = ExtResource("2_aa0ag")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_s2uhj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 131
+text = "Secrets Of The Maze"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 160
+theme_override_styles/separator = SubResource("StyleBoxEmpty_abufw")
+
+[node name="btn_start" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="btn_settings" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="btn_credits" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="btn_quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Parallax2D" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+script = SubResource("GDScript_62yhf")
+
+[node name="stars" type="ParallaxLayer" parent="Parallax2D"]
+visibility_layer = 16
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="Icon" type="Sprite2D" parent="Parallax2D/stars"]
+position = Vector2(960, 520)
+scale = Vector2(2, 2)
+texture = ExtResource("2_2rjkx")
+
+[node name="stars2" type="ParallaxLayer" parent="Parallax2D"]
+visibility_layer = 16
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="Icon" type="Sprite2D" parent="Parallax2D/stars2"]
+position = Vector2(960, 520)
+scale = Vector2(2, 2)
+texture = ExtResource("3_d1qfl")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_start" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_settings" to="." method="_on_btn_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_credits" to="." method="_on_btn_credits_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_quit" to="." method="_on_btn_quit_pressed"]

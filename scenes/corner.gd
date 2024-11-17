@@ -12,7 +12,7 @@ const WALL_3 = preload('res://assets/wall3.png')
 @export var width:int = 4: set = set_width
 @export var height:int = 4: set = set_height
 @export var orientation:int = 0: set = set_orientation
-@export var color_scheme:Global.Layer = Global.Layer.Blue: set = set_color_scheme
+@export var color_scheme:Global.Layer = Global.Layer.BLUE: set = set_color_scheme
 @export var permeable:bool = false
 @export var flicker:bool = false
 
@@ -29,7 +29,7 @@ signal body_exited(body: Node2D)
 var flicker_time := 0.0
 var flicker_on := 0.0
 var flicker_off := 0.0
-var flicker_count := 0
+var flicker_count:int = 0
 
 var COLORS = [
   {
@@ -50,11 +50,11 @@ const border_width = 16
 const grid_size = 64
 const detail = 20
 
-func set_width(v:float):
+func set_width(v:int):
   width = v
   _create_geometry()
 
-func set_height(v:float):
+func set_height(v:int):
   height = v
   _create_geometry()
 
@@ -62,7 +62,7 @@ func set_orientation(v:int):
   orientation = v % 4
   _create_geometry()
 
-func set_color_scheme(v:int):
+func set_color_scheme(v:Global.Layer):
   color_scheme = v
   _create_geometry()
 
@@ -87,7 +87,7 @@ func _process(delta)->void:
   if !flicker: return
   flicker_time += delta
   if flicker_time > flicker_on:
-    modulate.a = 0.1 if (flicker_count / 4) % 2 else 1.0
+    modulate.a = 0.1 if (flicker_count >> 2) % 2 else 1.0
     flicker_count += 1
     if flicker_time > flicker_off:
       modulate.a = 1.0

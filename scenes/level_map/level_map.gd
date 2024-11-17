@@ -30,8 +30,8 @@ func rebuild()->void:
     var level:GDLevel = levels.get_child(x)
     var layers = level.get_layers()
     var prev:LevelMapNode = null
-    for y in range(layers.get_child_count()):
-      var layer:GDLayer = layers.get_child(y)
+    for y in range(len(layers)):
+      var layer:GDLayer = layers[y]
       var n:LevelMapNode = scn_map_node.instantiate()
       n.name = 'level_%d_%s' % [x, layer.name]
       nodes.add_child(n)

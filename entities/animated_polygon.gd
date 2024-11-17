@@ -46,7 +46,7 @@ func _draw()->void:
     points[i] = Vector2(x, y)
   draw_colored_polygon(points, color)
 
-func _process(delta:float)->void:
+func _process(_delta:float)->void:
   if animate:
     # use Engine time to synchronize animation
     phase = fmod(speed * float(Time.get_ticks_msec()) / 1000.0, 1)

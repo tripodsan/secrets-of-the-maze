@@ -10,8 +10,19 @@ extends Node2D
 
 var active:bool
 
+var game_data:GDLayer
+
+var idx:Global.Layer
+
 func _ready():
-  visible = true
+  idx = Global.get_layer_from_string(name)
+  assert(idx >= 0)
+  visible = false
+
+# set via parent
+func set_game_data(layer:GDLayer)->void:
+  game_data = layer
+  visible = game_data.unlocked
 
 func set_active(value: bool)->void:
   active = value
@@ -23,6 +34,7 @@ func set_active(value: bool)->void:
 
 ## check if ship at global position pos can shift to this layer.
 func can_chroma_shift(pos:Vector2)->bool:
+  if !visible: return false
   prints('check chroma shift at', pos)
   var p:Vector2i = map.local_to_map(pos)
   var tile:TileData = grid.get_cell_tile_data(p)

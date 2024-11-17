@@ -11,15 +11,19 @@ config_version=5
 [application]
 
 config/name="SecretsOfTheMaze"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=60
 boot_splash/image="res://assets/cover-1920x1080.png"
 config/icon="res://assets/icon.png"
+config/max_fps=60
 
 [autoload]
 
 Global="*res://scripts/global.gd"
 GameData="*res://scripts/save/game_data.tscn"
+GameController="*res://scripts/game_controller.gd"
+SceneTransition="*res://scenes/scene_transition.tscn"
 
 [display]
 

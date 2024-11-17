@@ -27,8 +27,8 @@ func stop():
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
   for i in range(get_contact_count()):
-    var type:StringName = Global.get_tile_type(state.get_contact_collider_object(i), state.get_contact_collider(i))
-    if type == &"spike":
+    var tile_type:StringName = Global.get_tile_type(state.get_contact_collider_object(i), state.get_contact_collider(i))
+    if tile_type == &"spike":
       hit.call_deferred()
       return
 
@@ -48,5 +48,6 @@ func hit():
   trail.emitting = false
   freeze = true
 
+@warning_ignore('unused_parameter')
 func _on_body_shape_entered(body_rid: RID, body: Node, body_shape_index: int, local_shape_index: int):
   pass

@@ -146,3 +146,4 @@ func reset(xf:Transform2D)->void:
   trail.fill(Vector4.ZERO)
   global_transform = xf
   velocity = Vector2.ZERO
+  rot_velo = 0

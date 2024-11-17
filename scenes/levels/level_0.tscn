@@ -72,11 +72,12 @@ _data = {
 
 [node name="level_0" type="Node2D"]
 script = ExtResource("1_2e2jd")
+nr = 0
 
 [node name="blue" type="Node2D" parent="."]
+visible = false
 visibility_layer = 2
 script = ExtResource("2_niabm")
-layer_idx = null
 metadata/_edit_lock_ = true
 
 [node name="grid" type="TileMapLayer" parent="blue"]
@@ -166,7 +167,7 @@ color_scheme = 1
 
 [node name="portal_0" parent="red/objects" instance=ExtResource("4_rgtqr")]
 position = Vector2(9024, -2176)
-rotation = 3.14159
+rotation = 4.71239
 shape = 0
 
 [node name="portal_1" parent="red/objects" instance=ExtResource("4_rgtqr")]
@@ -175,6 +176,7 @@ rotation = -1.5708
 shape = 0
 
 [node name="green" type="Node2D" parent="."]
+visible = false
 visibility_layer = 8
 script = ExtResource("2_niabm")
 layer_idx = 3

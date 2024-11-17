@@ -3,10 +3,7 @@ extends RayCast2D
 
 var is_casting := false
 
-func _process(delta: float) -> void:
-  pass
-
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
   if !is_casting: return
   var cast_point := target_position
   #force_raycast_update()

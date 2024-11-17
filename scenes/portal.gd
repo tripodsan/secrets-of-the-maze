@@ -12,7 +12,7 @@ var _colors:Array[GradientTexture1D] = [
 
 @export var shape:Shape = Shape.Ring:set = set_shape
 
-@export var layer:Global.Layer = Global.Layer.Blue:set = set_layer
+@export var layer:Global.Layer = Global.Layer.BLUE:set = set_layer
 
 func _ready() -> void:
   if !Engine.is_editor_hint():

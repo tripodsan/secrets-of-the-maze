@@ -1,24 +1,37 @@
+## The GameData acts as meta contains for level information as well as for
+## loading and saving progress and settings.
+## the variables that exported and do not start with `_` are saved.
+## note that only unlocked levels are saved, in order to keep
+## the undiscovered levels a "secret" :-)
 extends Node
 
-func load_file(name:String)->void:
+func load_file(_file_name:String)->void:
   pass
 
-func save_file(name:String)->void:
+func save_file(file_name:String)->void:
   var root:GDSerializable = get_node('save')
   assert(root)
-  var save_file = FileAccess.open("user://saves_%s.json" % name, FileAccess.WRITE)
+  var file = FileAccess.open("user://saves_%s.json" % file_name, FileAccess.WRITE)
   var error = FileAccess.get_open_error()
   if error != OK:
     printerr('failed to open save_file: ', error_string(error))
     return
   var data = root.to_dict()
   var json_string = JSON.stringify(data, '  ')
-  save_file.store_line(json_string)
-  prints('save game data to:', save_file.get_path_absolute())
-  pass
+  file.store_line(json_string)
+  prints('save game data to:', file.get_path_absolute())
 
 func reset()->void:
   pass
 
 func get_levels()->GDSerializable:
   return $save/levels
+
+func get_level(nr:int)->GDLevel:
+  return get_node_or_null('save/levels/%d' % nr)
+
+
+func get_layer(nr:int, layer:Global.Layer)->GDLayer:
+  var lvl:GDLevel = get_level(nr)
+  assert(lvl)
+  return lvl.get_layers()[layer]

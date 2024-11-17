@@ -29,7 +29,7 @@ func _clear_layer(l:ChromaLayer):
     if m is TileMapLayer:
       m.clear()
 
-func clear(v):
+func clear(_v):
   if !await prompt('Clear Level?'): return
   for l in get_parent().get_children():
     if l is ChromaLayer:
@@ -37,9 +37,9 @@ func clear(v):
 
 func get_bb()->Rect2i:
   var size:Vector2 = template.get_size()
-  var x0:int = INF
+  var x0:int = Global.INT64_MAX
   var x1:int = 0
-  var y0:int = INF
+  var y0:int = Global.INT64_MAX
   var y1:int = 0
   var img:Image = template.get_image()
   for y:int in range(size.y):
@@ -61,7 +61,9 @@ func _import_layer(l:ChromaLayer):
   if !flags[idx]: return
   prints('importing', l.name)
   var img:Image = template.get_image()
+  @warning_ignore('integer_division')
   var wx = template_region.size.x / template_scale
+  @warning_ignore('integer_division')
   var wy = template_region.size.y / template_scale
   var grid:TileMapLayer = l.get_node('grid')
   var map:TileMapLayer = l.get_node('map')
@@ -104,7 +106,7 @@ func _import_layer(l:ChromaLayer):
       map.erase_cell(c)
 
 
-func import(v):
+func import(_v):
   if !await prompt('Import Level?'): return
   template_region = get_bb()
   prints('level size:', template_region.size / template_scale)
