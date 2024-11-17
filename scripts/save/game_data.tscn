@@ -26,6 +26,7 @@ script = ExtResource("2_b8w8f")
 
 [node name="0" type="Node" parent="save/levels"]
 script = ExtResource("3_ma83k")
+unlocked = true
 
 [node name="layers" type="Node" parent="save/levels/0"]
 script = ExtResource("2_b8w8f")
@@ -36,12 +37,15 @@ unlocked = true
 
 [node name="red" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
+unlocked = true
 
 [node name="green" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
+unlocked = true
 
 [node name="1" type="Node" parent="save/levels"]
 script = ExtResource("3_ma83k")
+unlocked = true
 
 [node name="layers" type="Node" parent="save/levels/1"]
 script = ExtResource("2_b8w8f")
@@ -58,6 +62,7 @@ script = ExtResource("1_q0hed")
 
 [node name="2" type="Node" parent="save/levels"]
 script = ExtResource("3_ma83k")
+unlocked = true
 
 [node name="layers" type="Node" parent="save/levels/2"]
 script = ExtResource("2_b8w8f")

@@ -1,6 +1,9 @@
 class_name LevelMapNode
 extends AnimatedSprite2D
 
+var title:String = ''
+var suffix:String = ''
+
 @export var nb_top:LevelMapNode
 
 @export var nb_right:LevelMapNode

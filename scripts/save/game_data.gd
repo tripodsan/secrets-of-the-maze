@@ -19,3 +19,6 @@ func save_file(name:String)->void:
 
 func reset()->void:
   pass
+
+func get_levels()->GDSerializable:
+  return $save/levels

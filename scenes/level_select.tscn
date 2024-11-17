@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://b7ln60f04dhpl"]
+[gd_scene load_steps=42 format=3 uid="uid://b7ln60f04dhpl"]
 
 [ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/level_theme.tres" id="1_7shaq"]
 [ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="2_luebk"]
+[ext_resource type="Script" path="res://scenes/level_map/level_select.gd" id="2_s0hvj"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="3_hunw0"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="4_137gh"]
 [ext_resource type="Script" path="res://scenes/level_map/level_map.gd" id="5_d4dit"]
@@ -105,6 +106,290 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb2ei"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70t40"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdcq5"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4bmj"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oikr2"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb2ei")
+}],
+"loop": false,
+"name": &"_",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70t40")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdcq5")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4bmj")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onixx"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnnix"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td6cn"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obsna"]
+atlas = ExtResource("7_7w5sb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_du4fx"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onixx")
+}],
+"loop": false,
+"name": &"_",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnnix")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td6cn")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obsna")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n6idt"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onixx")
+}],
+"loop": false,
+"name": &"_",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnnix")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td6cn")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obsna")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fop6c"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onixx")
+}],
+"loop": false,
+"name": &"_",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnnix")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td6cn")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obsna")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_emhho"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onixx")
+}],
+"loop": false,
+"name": &"_",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnnix")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td6cn")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obsna")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l65vo"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onixx")
+}],
+"loop": false,
+"name": &"_",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnnix")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td6cn")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obsna")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6c1hp"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onixx")
+}],
+"loop": false,
+"name": &"_",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnnix")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td6cn")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obsna")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -113,6 +398,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_7shaq")
+script = ExtResource("2_s0hvj")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -159,12 +445,12 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="level_title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "DIII"
 label_settings = SubResource("LabelSettings_0xuug")
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="level_suffix" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "-B"
 label_settings = SubResource("LabelSettings_fic1g")
@@ -240,11 +526,10 @@ position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("4_137gh")
 
-[node name="level_map" type="Node2D" parent="." node_paths=PackedStringArray("selected_level")]
+[node name="level_map" type="Node2D" parent="."]
 position = Vector2(256, 896)
 scale = Vector2(2, 2)
 script = ExtResource("5_d4dit")
-selected_level = NodePath("level_2_b")
 
 [node name="cursor" type="AnimatedSprite2D" parent="level_map"]
 position = Vector2(192, -32)
@@ -254,60 +539,69 @@ frame = 1
 script = ExtResource("6_hr126")
 opening = 8
 
-[node name="level_0_b" parent="level_map" node_paths=PackedStringArray("nb_top", "nb_right") instance=ExtResource("6_2jbhw")]
+[node name="nodes" type="Node2D" parent="level_map"]
+
+[node name="level_0_b" parent="level_map/nodes" node_paths=PackedStringArray("nb_top", "nb_right") instance=ExtResource("6_2jbhw")]
 position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_oikr2")
 animation = &"blue"
 nb_top = NodePath("../level_0_r")
 nb_right = NodePath("../level_1_b")
 
-[node name="level_1_b" parent="level_map" node_paths=PackedStringArray("nb_right", "nb_left") instance=ExtResource("6_2jbhw")]
+[node name="level_1_b" parent="level_map/nodes" node_paths=PackedStringArray("nb_right", "nb_left") instance=ExtResource("6_2jbhw")]
 position = Vector2(96, -32)
+sprite_frames = SubResource("SpriteFrames_du4fx")
 animation = &"blue"
 nb_right = NodePath("../level_2_b")
 nb_left = NodePath("../level_0_b")
 
-[node name="level_2_b" parent="level_map" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
+[node name="level_2_b" parent="level_map/nodes" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
 position = Vector2(192, -32)
+sprite_frames = SubResource("SpriteFrames_n6idt")
 animation = &"blue"
 nb_left = NodePath("../level_1_b")
 
-[node name="level_0_g" parent="level_map" node_paths=PackedStringArray("nb_right", "nb_bottom") instance=ExtResource("6_2jbhw")]
+[node name="level_0_g" parent="level_map/nodes" node_paths=PackedStringArray("nb_right", "nb_bottom") instance=ExtResource("6_2jbhw")]
 position = Vector2(0, -224)
+sprite_frames = SubResource("SpriteFrames_fop6c")
 animation = &"green"
 nb_right = NodePath("../level_1_g")
 nb_bottom = NodePath("../level_0_r")
 
-[node name="level_1_g" parent="level_map" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
+[node name="level_1_g" parent="level_map/nodes" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
 position = Vector2(96, -224)
+sprite_frames = SubResource("SpriteFrames_emhho")
 nb_left = NodePath("../level_0_g")
 
-[node name="level_0_r" parent="level_map" node_paths=PackedStringArray("nb_top", "nb_right", "nb_bottom") instance=ExtResource("6_2jbhw")]
+[node name="level_0_r" parent="level_map/nodes" node_paths=PackedStringArray("nb_top", "nb_right", "nb_bottom") instance=ExtResource("6_2jbhw")]
 position = Vector2(0, -128)
+sprite_frames = SubResource("SpriteFrames_l65vo")
 animation = &"red"
 nb_top = NodePath("../level_0_g")
 nb_right = NodePath("../level_1_r")
 nb_bottom = NodePath("../level_0_b")
 
-[node name="level_1_r" parent="level_map" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
+[node name="level_1_r" parent="level_map/nodes" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
 position = Vector2(96, -128)
+sprite_frames = SubResource("SpriteFrames_6c1hp")
 nb_left = NodePath("../level_0_r")
 
-[node name="connector" parent="level_map" instance=ExtResource("7_ohwbg")]
+[node name="connector" parent="level_map/nodes" instance=ExtResource("7_ohwbg")]
 position = Vector2(0, -176)
 
-[node name="connector2" parent="level_map" instance=ExtResource("7_ohwbg")]
+[node name="connector2" parent="level_map/nodes" instance=ExtResource("7_ohwbg")]
 position = Vector2(0, -80)
 
-[node name="arrow" parent="level_map" instance=ExtResource("8_tdmwx")]
+[node name="arrow" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
 position = Vector2(48, -32)
 
-[node name="arrow3" parent="level_map" instance=ExtResource("8_tdmwx")]
+[node name="arrow3" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
 position = Vector2(144, -32)
 
-[node name="arrow2" parent="level_map" instance=ExtResource("8_tdmwx")]
+[node name="arrow2" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
 position = Vector2(48, -128)
 animation = &"red"
 
-[node name="arrow4" parent="level_map" instance=ExtResource("8_tdmwx")]
+[node name="arrow4" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
 position = Vector2(48, -224)
 animation = &"green"
