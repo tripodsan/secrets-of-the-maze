@@ -31,6 +31,7 @@ func set_active(value: bool)->void:
   for n in get_children():
     if n is TileMapLayer:
       n.collision_enabled = value
+  Global.layer_activated.emit(idx)
 
 ## check if ship at global position pos can shift to this layer.
 func can_chroma_shift(pos:Vector2)->bool:

@@ -7,7 +7,7 @@ extends Node2D
 var LEVEL_SCENES:Array[PackedScene] = [
   preload('res://scenes/levels/level_0.tscn'),
   preload('res://scenes/levels/level_1.tscn'),
-  preload('res://scenes/levels/level_1.tscn')
+  preload('res://scenes/levels/level_2.tscn')
 ]
 
 @onready var game: Node2D = $world/game

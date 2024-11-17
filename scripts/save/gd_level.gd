@@ -2,6 +2,8 @@
 class_name GDLevel
 extends GDSerializable
 
+var ROMAN:Array[String] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+
 @export var unlocked:bool = false
 
 var _layers:Array[GDLayer] = []
@@ -15,3 +17,6 @@ func get_layers()->Array[GDLayer]:
 
 func get_nr()->int:
   return int(str(name))
+
+func get_title()->String:
+  return 'D%s' % ROMAN[get_nr() + 1]

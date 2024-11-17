@@ -1,6 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cfk78nhykmoun"]
-
-[ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="1_qv3wd"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://xjqqvev5aben"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qs6m7"]
 content_margin_left = 4.0
@@ -112,6 +110,4 @@ Button/styles/focus = SubResource("StyleBoxFlat_iv8d1")
 Button/styles/hover = SubResource("StyleBoxFlat_f8mm6")
 Button/styles/normal = SubResource("StyleBoxFlat_hklv6")
 Button/styles/pressed = SubResource("StyleBoxFlat_hu745")
-Label/font_sizes/font_size = 64
-Label/fonts/font = ExtResource("1_qv3wd")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2vqx5")

@@ -12,12 +12,13 @@ var selected_level:LevelMapNode
 
 const GRID_SIZE:int = 96
 
-var ROMAN:Array[String] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
-
 signal level_selected(layer:LevelMapNode)
+
+signal level_accepted(layer:LevelMapNode)
 
 func _ready() -> void:
   rebuild()
+  select(nodes.get_child(0))
 
 func rebuild()->void:
   for n in nodes.get_children():
@@ -39,8 +40,9 @@ func rebuild()->void:
       n.animation = layer.name
       n.gd_layer = layer
       n.gd_level = level
-      n.title = 'D%s' % ROMAN[x]
+      n.title = level.get_title()
       n.suffix = '-%s' % layer.name.to_upper()[0]
+      n.clicked.connect(_on_map_node_clicked.bind(n))
       if prev:
         prev.nb_top = n
         n.nb_bottom = prev
@@ -61,8 +63,6 @@ func rebuild()->void:
         n.animation = '_'
         break
 
-  select(nodes.get_child(0))
-
 func _input(event: InputEvent) -> void:
   if Input.is_action_just_pressed('ui_left'):
     select(selected_level.nb_left)
@@ -72,6 +72,8 @@ func _input(event: InputEvent) -> void:
     select(selected_level.nb_top)
   elif Input.is_action_just_pressed('ui_down'):
     select(selected_level.nb_bottom)
+  elif Input.is_action_just_pressed('ui_accept'):
+    level_accepted.emit(selected_level)
 
 func select(next:LevelMapNode):
   if !next: return
@@ -79,3 +81,6 @@ func select(next:LevelMapNode):
   cursor.position = next.position
   cursor.set_opening_by_direction(!!next.nb_top, !!next.nb_right, !!next.nb_bottom, !!next.nb_left)
   level_selected.emit(next)
+
+func _on_map_node_clicked(n:LevelMapNode)->void:
+  select(n)

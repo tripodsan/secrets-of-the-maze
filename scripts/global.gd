@@ -22,13 +22,14 @@ enum HitType { Spike }
 
 signal player_changed()
 
-@warning_ignore('unused_signal')
 signal player_destroyed(by:HitType)
 
-@warning_ignore('unused_signal')
 signal layer_selected(type:Layer)
 
-@warning_ignore('unused_signal')
+signal layer_activated(type:Layer)
+
+signal level_loaded(level:Level)
+
 signal supernova
 
 func select_layer():

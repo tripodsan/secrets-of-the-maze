@@ -75,7 +75,6 @@ script = ExtResource("1_2e2jd")
 nr = 0
 
 [node name="blue" type="Node2D" parent="."]
-visible = false
 visibility_layer = 2
 script = ExtResource("2_niabm")
 metadata/_edit_lock_ = true
@@ -176,7 +175,6 @@ rotation = -1.5708
 shape = 0
 
 [node name="green" type="Node2D" parent="."]
-visible = false
 visibility_layer = 8
 script = ExtResource("2_niabm")
 layer_idx = 3

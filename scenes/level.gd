@@ -32,6 +32,7 @@ func _ready() -> void:
     l.set_game_data(_game_data.get_layers()[l.idx])
   Global.layer_selected.connect(_on_layer_selected)
   Global.player_destroyed.connect(_on_player_destroyed)
+  Global.level_loaded.emit(self)
 
 func _on_player_destroyed(_by)->void:
   restart()
