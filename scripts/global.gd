@@ -24,11 +24,17 @@ signal player_changed()
 
 signal player_destroyed(by:HitType)
 
+signal portal_reached(p:Portal)
+
 signal layer_selected(type:Layer)
 
 signal layer_activated(type:Layer)
 
 signal level_loaded(level:Level)
+
+signal level_started(level:Level)
+
+signal level_stopped(level:Level)
 
 signal supernova
 

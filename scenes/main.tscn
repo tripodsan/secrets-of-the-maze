@@ -308,10 +308,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_r78rs")
 
-[node name="level_time" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+[node name="level_time_secs" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "01:42"
-horizontal_alignment = 2
+
+[node name="level_time_ts" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = ".8"
 
 [node name="ChromaticDistortion" type="ColorRect" parent="hudlayer"]
 visible = false

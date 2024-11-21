@@ -2,7 +2,7 @@
 class_name GDLevel
 extends GDSerializable
 
-var ROMAN:Array[String] = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+var ROMAN:Array[String] = ['O', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 
 @export var unlocked:bool = false
 

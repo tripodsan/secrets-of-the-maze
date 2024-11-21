@@ -18,6 +18,9 @@ var _game_data:GDLevel
 var _start_portal:Portal
 var _start_layer:int
 
+var _level_start_time:int
+var _level_stop_time:int
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   if nr < 0:
@@ -32,16 +35,26 @@ func _ready() -> void:
     l.set_game_data(_game_data.get_layers()[l.idx])
   Global.layer_selected.connect(_on_layer_selected)
   Global.player_destroyed.connect(_on_player_destroyed)
+  Global.portal_reached.connect(_on_portal_reached)
   Global.level_loaded.emit(self)
 
 func _on_player_destroyed(_by)->void:
   restart()
 
 func _on_layer_selected(layer:Global.Layer):
-  _layers[_layer].set_active(false)
-  _prev_layer = _layer
-  _layer = layer
-  _layers[_layer].set_active(true)
+  if layer != _prev_layer:
+    _layers[_layer].set_active(false)
+    _prev_layer = _layer
+    _layer = layer
+    _layers[_layer].set_active(true)
+
+func _on_portal_reached(p:Portal)->void:
+  print('portal reached')
+  _level_stop_time = Time.get_ticks_msec()
+  Global.level_stopped.emit(self)
+  await get_tree().create_timer(2.0).timeout
+  print('portal reset')
+  restart()
 
 func chroma_shift()->void:
   var pos = Global.player.global_position
@@ -67,10 +80,19 @@ func start(layer:Global.Layer, portal:int = 0)->void:
   _layer = layer
   _start_portal = _layers[layer].get_portal(portal)
   assert(_start_portal)
-  Global.player.reset(_start_portal.global_transform)
+  _start_portal.enabled = false
+  restart()
   get_viewport().get_camera_2d().reset_smoothing()
-  _on_layer_selected(_start_layer)
 
 func restart()->void:
   Global.player.reset(_start_portal.global_transform)
   _on_layer_selected(_start_layer)
+  Global.level_started.emit(self)
+  _level_start_time = Time.get_ticks_msec()
+  _level_stop_time = 0
+
+## returns the level time in milliseconds
+func get_run_time()->int:
+  var t = _level_stop_time
+  if t == 0: t = Time.get_ticks_msec()
+  return t - _level_start_time

@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+@onready var ship: Polygon2D = $ship
+
 ## front surface area (m²)
 @export_range(0.0, 10.0, 0.1, "or_greater") var a_front := 30.0
 
@@ -40,6 +42,12 @@ var trail_pos:int = 0
 # todo: use states
 var is_destroyed:bool = false
 
+var is_active:bool = true
+
+var portal:Portal = null
+var portal_time:float = 0
+var portal_speed:float = 0.1
+
 func _ready() -> void:
   trail.resize(6)
   Global.set_player(self)
@@ -57,8 +65,29 @@ func _input(_event: InputEvent) -> void:
     bomb.initialize(global_position+transform.x*10.0, -transform.x * 3.0)
     get_parent().add_child(bomb)
 
+func update_trail()->void:
+  RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
+  trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
+  trail_pos = (trail_pos + 1) % len(trail)
+
 func _physics_process(delta: float) -> void:
-  if is_destroyed: return
+  if is_destroyed or not is_active: return
+
+  if portal:
+    var d := portal.get_spiral_pos(portal_time)
+    global_position = portal.global_position + d
+    rotation = d.angle() + PI/2 * portal.ph_scale
+    portal_time += delta * portal_speed
+    portal_speed += delta * 0.2
+    update_trail()
+    ship.scale = lerp(Vector2.ONE, Vector2(0.2, 0.2), min(portal_time, 1.0))
+    if portal_time > 0.7:
+      portal = null
+      is_active = false
+      ship.visible = false
+      ship.scale = Vector2.ONE
+    return
+
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")
 #
   var f:Vector2  # thrust
@@ -126,10 +155,7 @@ func _physics_process(delta: float) -> void:
       position += coll.get_remainder().slide(wall)
 
   rotation = rot_angle
-
-  RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
-  trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
-  trail_pos = (trail_pos + 1) % len(trail)
+  update_trail()
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
 
 func hit(type:Global.HitType)->void:
@@ -141,9 +167,24 @@ func hit(type:Global.HitType)->void:
   Global.player_destroyed.emit(type)
 
 func reset(xf:Transform2D)->void:
+  prints('reset', xf)
+  global_transform = xf
   is_destroyed = false
+  is_active = true
+  visible = true
   $ship.visible = true
   trail.fill(Vector4.ZERO)
-  global_transform = xf
   velocity = Vector2.ZERO
   rot_velo = 0
+
+
+func portal_enter(p:Portal)->void:
+  if !portal and is_active and not is_destroyed:
+    prints('->', p)
+    portal = p
+    portal.ph_scale = 1.0 if get_angle_to(portal.global_position) > 0 else -1.0
+    portal.init_spiral(global_position)
+    portal_time = 0
+    portal_speed = velocity.length() * 0.0002
+    velocity = Vector2.ZERO
+    Global.portal_reached.emit(portal)
