@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2oh02mscfwjk"]
+
+[ext_resource type="Script" path="res://entities/animated_polygon.gd" id="1_px0jw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_12d36"]
+radius = 58.0
+
+[node name="static_mine" type="StaticBody2D" groups=["spike"]]
+collision_layer = 4
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_12d36")
+
+[node name="animated_polygon" type="Node2D" parent="."]
+script = ExtResource("1_px0jw")
+animate = true
+speed = 0.5
+size = 58.06
+pattern = Array[Vector2]([Vector2(1, 0.5), Vector2(0.75, 1), Vector2(0.75, 1), Vector2(1, 0.5)])
+color = Color(0.901961, 0.988235, 0.866667, 1)

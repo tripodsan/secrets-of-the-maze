@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+@onready var ship: Polygon2D = $ship
+
 ## front surface area (m²)
 @export_range(0.0, 10.0, 0.1, "or_greater") var a_front := 30.0
 
@@ -37,23 +39,90 @@ var rot_velo := 0.0
 var trail:PackedVector4Array = PackedVector4Array()
 var trail_pos:int = 0
 
-# todo: use states
-var is_destroyed:bool = false
+signal state_changed()
+
+enum State {
+  ## inital state right after initialized
+  LOADED,
+
+  ## player _ready is called
+  READY,
+
+  ## player is getting ready in the level
+  ACTIVATING,
+
+  ## player is active in the level
+  ACTIVE,
+
+  ## player is deactivating, eg when reaching the portal
+  DEACTIVATING,
+
+  ## player is deactivated
+  DEACTIVATED,
+
+  ## player is getting destroyed
+  DESTROYING,
+
+  ## player is destroyed
+  DESTROYED,
+}
+
+var state:State = State.LOADED
+
+var portal:Portal = null
+var portal_time:float = 0
+var portal_speed:float = 0.1
 
 func _ready() -> void:
   trail.resize(6)
-  Global.set_player(self)
+  GameController.set_player(self)
+  Global.supernova.connect(%SuperNova.trigger_supernova)
+  set_state(State.READY)
+
+func set_state(s:State)->void:
+  state = s
+  prints('player state:', State.keys()[state])
+  state_changed.emit()
 
 func _input(_event: InputEvent) -> void:
+  if state == State.ACTIVATING and Input.is_anything_pressed():
+    set_state(State.ACTIVE)
+
+  if state != State.ACTIVE: return
+
   if Input.is_action_just_pressed('laser'):
     $ship/LaserCast.set_is_casting(true)
   if Input.is_action_just_released('laser'):
     $ship/LaserCast.set_is_casting(false)
   if Input.is_action_just_pressed('missile'):
     %ProjectileManager.shoot_projectile(position+transform.x*50.0, transform.x, 750.0, 0, 2.0)
+  if Input.is_action_just_pressed('bomb'):
+    var bomb = load("res://scenes/bomb.tscn").instantiate()
+    bomb.initialize(global_position+transform.x*10.0, -transform.x * 3.0)
+    get_parent().add_child(bomb)
+
+func update_trail()->void:
+  RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
+  trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
+  trail_pos = (trail_pos + 1) % len(trail)
 
 func _physics_process(delta: float) -> void:
-  if is_destroyed: return
+  if state == State.DEACTIVATING and portal:
+    var d := portal.get_spiral_pos(portal_time)
+    global_position = portal.global_position + d
+    rotation = d.angle() + PI/2 * portal.ph_scale
+    portal_time += delta * portal_speed
+    portal_speed += delta * 0.2
+    update_trail()
+    ship.scale = lerp(Vector2.ONE, Vector2(0.2, 0.2), min(portal_time, 1.0))
+    if portal_time > 0.7:
+      ship.visible = false
+      ship.scale = Vector2.ONE
+      set_state(State.DEACTIVATED)
+    return
+
+  if state != State.ACTIVE: return
+
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")
 #
   var f:Vector2  # thrust
@@ -96,10 +165,15 @@ func _physics_process(delta: float) -> void:
 
   var coll:KinematicCollision2D = move_and_collide(velocity * delta)
   if coll:
-    var type:StringName = Global.get_tile_type(coll.get_collider(), coll.get_collider_rid())
+    var body:Object = coll.get_collider()
+    var type:StringName = Global.get_tile_type(body, coll.get_collider_rid())
     if type == &"spike":
       hit(Global.HitType.Spike)
       return
+    elif body is Node2D and body.is_in_group(&"spike"):
+      hit(Global.HitType.Spike)
+      return
+
     var wall := coll.get_normal()
     var a:float = wall.dot(rot_dir)
     if abs(a) > 0.8:
@@ -116,24 +190,37 @@ func _physics_process(delta: float) -> void:
       position += coll.get_remainder().slide(wall)
 
   rotation = rot_angle
-
-  RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
-  trail[trail_pos] = Vector4(global_position.x, global_position.y, velocity.x, velocity.y)
-  trail_pos = (trail_pos + 1) % len(trail)
+  update_trail()
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
 
 func hit(type:Global.HitType)->void:
-  is_destroyed = true
   $ship.visible = false
   $Explosion.fire()
   RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
+  set_state(State.DESTROYING)
   await get_tree().create_timer(1.5).timeout
-  Global.player_destroyed.emit(type)
+  set_state(State.DESTROYED)
 
-func reset(pos:Vector2)->void:
-  is_destroyed = false
+func activate(xf:Transform2D)->void:
+  prints('activate', xf)
+  global_transform = xf
+  portal = null
+  visible = true
   $ship.visible = true
   trail.fill(Vector4.ZERO)
-  position = pos
-  rotation = 0
   velocity = Vector2.ZERO
+  rot_velo = 0
+  set_state(State.ACTIVATING)
+
+
+func portal_enter(p:Portal)->void:
+  if !portal and state == State.ACTIVE:
+    prints('->', p)
+    portal = p
+    portal.ph_scale = 1.0 if get_angle_to(portal.global_position) > 0 else -1.0
+    portal.init_spiral(global_position)
+    portal_time = 0
+    portal_speed = velocity.length() * 0.0002
+    velocity = Vector2.ZERO
+    set_state(State.DEACTIVATING)
+    GameController.portal_reached.emit(portal)

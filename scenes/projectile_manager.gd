@@ -3,7 +3,7 @@ extends Node2D
 
 var scn_projectile = preload("res://scenes/projectile.tscn")
 
-const MAX_PROJECTILES = 20
+const MAX_PROJECTILES = 100
 var projectile_pool = []
 var current_index := 0
 

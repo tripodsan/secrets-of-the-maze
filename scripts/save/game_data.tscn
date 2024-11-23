@@ -24,21 +24,59 @@ script = ExtResource("2_b8w8f")
 [node name="levels" type="Node" parent="save"]
 script = ExtResource("2_b8w8f")
 
-[node name="level0" type="Node" parent="save/levels"]
+[node name="0" type="Node" parent="save/levels"]
 script = ExtResource("3_ma83k")
+unlocked = true
 
-[node name="layers" type="Node" parent="save/levels/level0"]
+[node name="layers" type="Node" parent="save/levels/0"]
 script = ExtResource("2_b8w8f")
 
-[node name="blue" type="Node" parent="save/levels/level0/layers"]
+[node name="blue" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
 
-[node name="red" type="Node" parent="save/levels/level0/layers"]
+[node name="red" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
+unlocked = true
 
-[node name="green" type="Node" parent="save/levels/level0/layers"]
+[node name="green" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
+unlocked = true
 
-[node name="level1" type="Node" parent="save/levels"]
+[node name="1" type="Node" parent="save/levels"]
 script = ExtResource("3_ma83k")
+unlocked = true
+
+[node name="layers" type="Node" parent="save/levels/1"]
+script = ExtResource("2_b8w8f")
+
+[node name="blue" type="Node" parent="save/levels/1/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+
+[node name="red" type="Node" parent="save/levels/1/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+
+[node name="green" type="Node" parent="save/levels/1/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+
+[node name="2" type="Node" parent="save/levels"]
+script = ExtResource("3_ma83k")
+unlocked = true
+
+[node name="layers" type="Node" parent="save/levels/2"]
+script = ExtResource("2_b8w8f")
+
+[node name="blue" type="Node" parent="save/levels/2/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+
+[node name="red" type="Node" parent="save/levels/2/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+
+[node name="green" type="Node" parent="save/levels/2/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true

@@ -1,31 +1,24 @@
-[gd_scene load_steps=23 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=25 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_wfkjx"]
+[ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_arx0t"]
 [ext_resource type="Theme" uid="uid://cfk78nhykmoun" path="res://scenes/hud_theme.tres" id="2_gqhd0"]
 [ext_resource type="Script" path="res://scripts/custom_dropdown.gd" id="3_a52ap"]
+[ext_resource type="Theme" uid="uid://xjqqvev5aben" path="res://scenes/debug_hud_theme.tres" id="3_mf8j1"]
 [ext_resource type="Script" path="res://scenes/ship_config.gd" id="3_tlpr0"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="4_wbysk"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="5_hcqio"]
 [ext_resource type="Script" path="res://scenes/chromatic_distortion.gd" id="6_h7jlh"]
 [ext_resource type="Script" path="res://scenes/minimap.gd" id="7_6f3p4"]
 [ext_resource type="Shader" path="res://shaders/screen-filter.gdshader" id="7_e01wk"]
+[ext_resource type="Script" path="res://scenes/level_suffix.gd" id="7_jihxl"]
+[ext_resource type="Script" path="res://scenes/hud.gd" id="7_qwu0n"]
 [ext_resource type="PackedScene" uid="uid://glyv2bogmfg4" path="res://scenes/super_nova.tscn" id="7_tsp44"]
-[ext_resource type="PackedScene" uid="uid://ecg6jylppjbm" path="res://scenes/levels/level_0.tscn" id="10_cgvc0"]
+[ext_resource type="Script" path="res://scenes/level_timer.gd" id="9_7gmml"]
+[ext_resource type="PackedScene" uid="uid://b4kepaijdk64i" path="res://scenes/levels/level_1.tscn" id="10_pjm13"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
-[ext_resource type="PackedScene" uid="uid://bnbc6fy7ck4xj" path="res://scenes/explosion.tscn" id="13_64s4o"]
-[ext_resource type="PackedScene" uid="uid://bcyr27ygm52ov" path="res://scenes/laser_cast.tscn" id="13_okhme"]
+[ext_resource type="PackedScene" uid="uid://b804mmyeds45o" path="res://entities/player.tscn" id="11_01h05"]
 [ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
-
-[sub_resource type="Environment" id="Environment_75w5p"]
-background_mode = 3
-ambient_light_source = 2
-glow_enabled = true
-glow_normalized = true
-glow_intensity = 1.24
-glow_strength = 0.63
-glow_bloom = 1.0
-glow_blend_mode = 0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6pc7t"]
 
@@ -40,6 +33,8 @@ func _process(delta: float) -> void:
     timer -= 0.5
 "
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r78rs"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r1g4g"]
 shader = ExtResource("10_rael0")
 shader_parameter/amount = 0.0
@@ -47,17 +42,231 @@ shader_parameter/amount = 0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvfhi"]
 shader = ExtResource("7_e01wk")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1jpm"]
-radius = 17.0
-height = 76.0
-
 [node name="main" type="Node2D"]
 script = ExtResource("1_v5gem")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_75w5p")
+environment = ExtResource("2_arx0t")
 
 [node name="hudlayer" type="CanvasLayer" parent="."]
+
+[node name="debug_hud" type="Control" parent="hudlayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("3_mf8j1")
+
+[node name="topbar" type="MarginContainer" parent="hudlayer/debug_hud"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 780.0
+offset_bottom = 500.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="hudlayer/debug_hud/topbar"]
+layout_mode = 2
+
+[node name="EngineSettings" type="PanelContainer" parent="hudlayer/debug_hud/topbar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("3_a52ap")
+
+[node name="container" type="VBoxContainer" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="button" type="Button" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+text = "Engine"
+
+[node name="content" type="GridContainer" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container"]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 12
+columns = 2
+script = ExtResource("3_tlpr0")
+
+[node name="a_front_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "A (front):
+"
+
+[node name="a_front" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+step = 0.1
+allow_greater = true
+alignment = 2
+suffix = "m²"
+
+[node name="a_back_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "A (back):
+"
+
+[node name="a_back" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+step = 0.1
+value = 1.5
+allow_greater = true
+alignment = 2
+suffix = "m²"
+
+[node name="a_side_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "A (side):
+"
+
+[node name="a_side" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+step = 0.1
+value = 1.5
+allow_greater = true
+alignment = 2
+suffix = "m²"
+
+[node name="density_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "density:
+"
+
+[node name="density" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+max_value = 10.0
+step = 0.0
+allow_greater = true
+alignment = 2
+
+[node name="mass_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "mass:
+"
+
+[node name="mass" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+value = 2.0
+allow_greater = true
+alignment = 2
+suffix = "kg"
+
+[node name="f_fwd_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "F (fwd):"
+
+[node name="f_fwd" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+max_value = 10000.0
+step = 10.0
+allow_greater = true
+alignment = 2
+suffix = "N"
+
+[node name="f_back_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "F (back):"
+
+[node name="f_back" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+max_value = 10000.0
+step = 10.0
+allow_greater = true
+alignment = 2
+suffix = "N"
+
+[node name="f_side_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "F (side):"
+
+[node name="f_side" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+max_value = 10000.0
+step = 10.0
+allow_greater = true
+alignment = 2
+suffix = "N"
+
+[node name="rot_speed_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "Rot Speed:"
+
+[node name="rot_speed" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+max_value = 10.0
+allow_greater = true
+alignment = 2
+
+[node name="rot_damp_lab" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+text = "Rot Damp:"
+
+[node name="rot_damp" type="SpinBox" parent="hudlayer/debug_hud/topbar/HBoxContainer/EngineSettings/container/content"]
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+allow_greater = true
+alignment = 2
+
+[node name="DebugMenu" type="PanelContainer" parent="hudlayer/debug_hud/topbar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("3_a52ap")
+
+[node name="container" type="VBoxContainer" parent="hudlayer/debug_hud/topbar/HBoxContainer/DebugMenu"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="button" type="Button" parent="hudlayer/debug_hud/topbar/HBoxContainer/DebugMenu/container"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+text = "Debug"
+
+[node name="content" type="VBoxContainer" parent="hudlayer/debug_hud/topbar/HBoxContainer/DebugMenu/container"]
+visible = false
+layout_mode = 2
+
+[node name="btn_debug_load" type="Button" parent="hudlayer/debug_hud/topbar/HBoxContainer/DebugMenu/container/content"]
+layout_mode = 2
+text = "load game save"
+alignment = 0
+
+[node name="btn_debug_save" type="Button" parent="hudlayer/debug_hud/topbar/HBoxContainer/DebugMenu/container/content"]
+layout_mode = 2
+text = "save game save"
+alignment = 0
+
+[node name="btn_debug_reset" type="Button" parent="hudlayer/debug_hud/topbar/HBoxContainer/DebugMenu/container/content"]
+layout_mode = 2
+text = "reset game sace
+"
+alignment = 0
+
+[node name="VSeparator" type="VSeparator" parent="hudlayer/debug_hud/topbar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6pc7t")
+
+[node name="Stas" type="PanelContainer" parent="hudlayer/debug_hud/topbar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="fps_counter" type="Label" parent="hudlayer/debug_hud/topbar/HBoxContainer/Stas"]
+layout_mode = 2
+text = "FPS: 100	"
+script = SubResource("GDScript_morce")
 
 [node name="hud" type="Control" parent="hudlayer"]
 layout_mode = 3
@@ -67,215 +276,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_gqhd0")
+script = ExtResource("7_qwu0n")
 
-[node name="topbar" type="MarginContainer" parent="hudlayer/hud"]
+[node name="MarginContainer" type="MarginContainer" parent="hudlayer/hud"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 500.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="hudlayer/hud/topbar"]
-layout_mode = 2
-
-[node name="EngineSettings" type="PanelContainer" parent="hudlayer/hud/topbar/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-script = ExtResource("3_a52ap")
-
-[node name="container" type="VBoxContainer" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings"]
+[node name="VBoxContainer" type="HBoxContainer" parent="hudlayer/hud/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="button" type="Button" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container"]
-custom_minimum_size = Vector2(360, 0)
+[node name="level_name" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
 layout_mode = 2
-focus_mode = 0
-toggle_mode = true
-text = "Engine"
+text = "DII"
 
-[node name="content" type="GridContainer" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container"]
-visible = false
+[node name="level_suffix" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 12
-columns = 2
-script = ExtResource("3_tlpr0")
+theme_override_colors/font_color = Color(0.603922, 0.921569, 0, 1)
+text = "-B"
+script = ExtResource("7_jihxl")
 
-[node name="a_front_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "A (front):
-"
-
-[node name="a_front" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-step = 0.1
-allow_greater = true
-alignment = 2
-suffix = "m²"
-
-[node name="a_back_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "A (back):
-"
-
-[node name="a_back" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-step = 0.1
-value = 1.5
-allow_greater = true
-alignment = 2
-suffix = "m²"
-
-[node name="a_side_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "A (side):
-"
-
-[node name="a_side" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-step = 0.1
-value = 1.5
-allow_greater = true
-alignment = 2
-suffix = "m²"
-
-[node name="density_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "density:
-"
-
-[node name="density" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-max_value = 10.0
-step = 0.0
-allow_greater = true
-alignment = 2
-
-[node name="mass_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "mass:
-"
-
-[node name="mass" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-value = 2.0
-allow_greater = true
-alignment = 2
-suffix = "kg"
-
-[node name="f_fwd_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "F (fwd):"
-
-[node name="f_fwd" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-max_value = 10000.0
-step = 10.0
-allow_greater = true
-alignment = 2
-suffix = "N"
-
-[node name="f_back_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "F (back):"
-
-[node name="f_back" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-max_value = 10000.0
-step = 10.0
-allow_greater = true
-alignment = 2
-suffix = "N"
-
-[node name="f_side_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "F (side):"
-
-[node name="f_side" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-max_value = 10000.0
-step = 10.0
-allow_greater = true
-alignment = 2
-suffix = "N"
-
-[node name="rot_speed_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "Rot Speed:"
-
-[node name="rot_speed" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-max_value = 10.0
-allow_greater = true
-alignment = 2
-
-[node name="rot_damp_lab" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-text = "Rot Damp:"
-
-[node name="rot_damp" type="SpinBox" parent="hudlayer/hud/topbar/HBoxContainer/EngineSettings/container/content"]
-layout_mode = 2
-max_value = 10.0
-step = 0.1
-allow_greater = true
-alignment = 2
-
-[node name="DebugMenu" type="PanelContainer" parent="hudlayer/hud/topbar/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-script = ExtResource("3_a52ap")
-
-[node name="container" type="VBoxContainer" parent="hudlayer/hud/topbar/HBoxContainer/DebugMenu"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="button" type="Button" parent="hudlayer/hud/topbar/HBoxContainer/DebugMenu/container"]
-custom_minimum_size = Vector2(360, 0)
-layout_mode = 2
-focus_mode = 0
-toggle_mode = true
-text = "Debug"
-
-[node name="content" type="VBoxContainer" parent="hudlayer/hud/topbar/HBoxContainer/DebugMenu/container"]
-visible = false
-layout_mode = 2
-
-[node name="btn_debug_load" type="Button" parent="hudlayer/hud/topbar/HBoxContainer/DebugMenu/container/content"]
-layout_mode = 2
-text = "load game save"
-alignment = 0
-
-[node name="btn_debug_save" type="Button" parent="hudlayer/hud/topbar/HBoxContainer/DebugMenu/container/content"]
-layout_mode = 2
-text = "save game save"
-alignment = 0
-
-[node name="btn_debug_reset" type="Button" parent="hudlayer/hud/topbar/HBoxContainer/DebugMenu/container/content"]
-layout_mode = 2
-text = "reset game sace
-"
-alignment = 0
-
-[node name="VSeparator" type="VSeparator" parent="hudlayer/hud/topbar/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_styles/separator = SubResource("StyleBoxEmpty_6pc7t")
+theme_override_styles/separator = SubResource("StyleBoxEmpty_r78rs")
 
-[node name="Stas" type="PanelContainer" parent="hudlayer/hud/topbar/HBoxContainer"]
+[node name="level_timer" type="HBoxContainer" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
+script = ExtResource("9_7gmml")
 
-[node name="fps_counter" type="Label" parent="hudlayer/hud/topbar/HBoxContainer/Stas"]
+[node name="level_time_secs" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer/level_timer"]
 layout_mode = 2
-text = "FPS: 100	"
-script = SubResource("GDScript_morce")
+text = "01:42"
+
+[node name="level_time_ts" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer/level_timer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = ".8"
 
 [node name="ChromaticDistortion" type="ColorRect" parent="hudlayer"]
 visible = false
@@ -290,6 +335,7 @@ size_flags_vertical = 3
 script = ExtResource("6_h7jlh")
 
 [node name="SuperNova" parent="hudlayer" instance=ExtResource("7_tsp44")]
+unique_name_in_owner = true
 visible = false
 
 [node name="previewlayer" type="CanvasLayer" parent="."]
@@ -327,38 +373,13 @@ size_flags_vertical = 3
 
 [node name="world" type="Node2D" parent="."]
 
-[node name="level" parent="world" instance=ExtResource("10_cgvc0")]
+[node name="game" type="Node2D" parent="world"]
 
-[node name="player" type="CharacterBody2D" parent="world"]
+[node name="level" parent="world/game" instance=ExtResource("10_pjm13")]
+nr = -1
+
+[node name="player" parent="world" instance=ExtResource("11_01h05")]
 unique_name_in_owner = true
-visibility_layer = 16
-position = Vector2(-1043, 453.99)
-collision_mask = 111
-motion_mode = 1
-script = ExtResource("1_wfkjx")
-
-[node name="Explosion" parent="world/player" instance=ExtResource("13_64s4o")]
-
-[node name="ship" type="Polygon2D" parent="world/player"]
-position = Vector2(16, 0.0100098)
-rotation = 1.5708
-polygon = PackedVector2Array(0, -32, -16, 32, 0, 16, 16, 32)
-
-[node name="LaserCast" parent="world/player/ship" instance=ExtResource("13_okhme")]
-
-[node name="Camera2D" type="Camera2D" parent="world/player"]
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.1
-drag_top_margin = 0.1
-drag_right_margin = 0.1
-drag_bottom_margin = 0.1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world/player"]
-position = Vector2(11, 0.0100098)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_g1jpm")
 
 [node name="Parallax2D" type="ParallaxBackground" parent="world"]
 

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="4_hmivi"]
 [ext_resource type="PackedScene" uid="uid://cn1wgnhsj8ijg" path="res://scenes/corner.tscn" id="5_ak4ki"]
 
-[node name="level_sandobx" type="Node2D"]
+[node name="level_sandbox" type="Node2D"]
 script = ExtResource("1_ca7fj")
 
 [node name="blue" type="Node2D" parent="."]
@@ -61,7 +61,6 @@ orientation = 1
 
 [node name="corner2" parent="red/objs" instance=ExtResource("5_ak4ki")]
 position = Vector2(3968, -960)
-orientation = 2
 
 [node name="corner3" parent="red/objs" instance=ExtResource("5_ak4ki")]
 position = Vector2(3712, -640)

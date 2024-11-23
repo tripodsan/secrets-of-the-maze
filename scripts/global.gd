@@ -1,25 +1,27 @@
 extends Node
 
-var player:Player
+# see https://github.com/godotengine/godot-proposals/issues/2411
+## Maximum negative 64-bit signed integer number. Its positive cannot be represented in 64 bits.
+## [br]0x8000000000000000
+const INT64_NEGATIVE_LIMIT: int = -9223372036854775808
+## Maximum positive 64-bit signed integer number. Use a minus to obtain its negative.
+## [br]0x7FFFFFFFFFFFFFFF
+const INT64_MAX: int = 9223372036854775807
 
 var _phasemap:SubViewport
 
-enum Layer { Blue, Red, Green }
+enum Layer { NONE = -1, BLUE, RED, GREEN }
+
+func get_layer_from_string(s):
+  return Layer.get(str(s).to_upper())
 
 enum HitType { Spike, Mine}
 
-signal player_changed()
-
-signal player_destroyed(by:HitType)
-
 signal layer_selected(type:Layer)
 
-func select_layer():
-  pass
+signal layer_activated(type:Layer)
 
-func set_player(p:Player):
-  player = p
-  player_changed.emit()
+signal supernova
 
 func get_tile_type(map, rid)->StringName:
   if map is TileMapLayer:

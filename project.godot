@@ -11,15 +11,19 @@ config_version=5
 [application]
 
 config/name="SecretsOfTheMaze"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=60
 boot_splash/image="res://assets/cover-1920x1080.png"
 config/icon="res://assets/icon.png"
+config/max_fps=60
 
 [autoload]
 
 Global="*res://scripts/global.gd"
 GameData="*res://scripts/save/game_data.tscn"
+GameController="*res://scripts/game_controller.gd"
+SceneTransition="*res://scenes/scene_transition.tscn"
 
 [display]
 
@@ -27,9 +31,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
-[editor]
+[global_group]
 
-movie_writer/movie_file="/home/chaotic/c/gameoff2024/mine.avi"
+portal="Group for all portals"
+spike="static deadly enemy"
 
 [input]
 
@@ -80,6 +85,11 @@ strafe_right={
 missile={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+bomb={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":66,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

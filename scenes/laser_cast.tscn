@@ -14,7 +14,7 @@ shader_parameter/laserTexture = ExtResource("3_ua5oy")
 colors = PackedColorArray(1, 1, 1, 0.756863, 0.755286, 0.134995, 0.684776, 1)
 
 [sub_resource type="Gradient" id="Gradient_035di"]
-colors = PackedColorArray(0.93871, 0.377442, 0.665606, 0.513726, 0.75473, 0.000468793, 0.761048, 0)
+colors = PackedColorArray(0.937255, 0.376471, 0.666667, 0.301961, 0.75473, 0.000468793, 0.761048, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_kx7ko"]
 gradient = SubResource("Gradient_035di")
