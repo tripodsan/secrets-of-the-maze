@@ -39,10 +39,35 @@ var rot_velo := 0.0
 var trail:PackedVector4Array = PackedVector4Array()
 var trail_pos:int = 0
 
-# todo: use states
-var is_destroyed:bool = false
+signal state_changed()
 
-var is_active:bool = true
+enum State {
+  ## inital state right after initialized
+  LOADED,
+
+  ## player _ready is called
+  READY,
+
+  ## player is getting ready in the level
+  ACTIVATING,
+
+  ## player is active in the level
+  ACTIVE,
+
+  ## player is deactivating, eg when reaching the portal
+  DEACTIVATING,
+
+  ## player is deactivated
+  DEACTIVATED,
+
+  ## player is getting destroyed
+  DESTROYING,
+
+  ## player is destroyed
+  DESTROYED,
+}
+
+var state:State = State.LOADED
 
 var portal:Portal = null
 var portal_time:float = 0
@@ -50,10 +75,18 @@ var portal_speed:float = 0.1
 
 func _ready() -> void:
   trail.resize(6)
-  Global.set_player(self)
+  GameController.set_player(self)
   Global.supernova.connect(%SuperNova.trigger_supernova)
+  set_state(State.READY)
+
+func set_state(s:State)->void:
+  state = s
+  prints('player state:', State.keys()[state])
+  state_changed.emit()
 
 func _input(_event: InputEvent) -> void:
+  if state != State.ACTIVE: return
+
   if Input.is_action_just_pressed('laser'):
     $ship/LaserCast.set_is_casting(true)
   if Input.is_action_just_released('laser'):
@@ -71,9 +104,7 @@ func update_trail()->void:
   trail_pos = (trail_pos + 1) % len(trail)
 
 func _physics_process(delta: float) -> void:
-  if is_destroyed or not is_active: return
-
-  if portal:
+  if state == State.DEACTIVATING and portal:
     var d := portal.get_spiral_pos(portal_time)
     global_position = portal.global_position + d
     rotation = d.angle() + PI/2 * portal.ph_scale
@@ -83,10 +114,12 @@ func _physics_process(delta: float) -> void:
     ship.scale = lerp(Vector2.ONE, Vector2(0.2, 0.2), min(portal_time, 1.0))
     if portal_time > 0.7:
       portal = null
-      is_active = false
       ship.visible = false
       ship.scale = Vector2.ONE
+      set_state(State.DEACTIVATED)
     return
+
+  if state != State.ACTIVE: return
 
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")
 #
@@ -159,27 +192,26 @@ func _physics_process(delta: float) -> void:
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
 
 func hit(type:Global.HitType)->void:
-  is_destroyed = true
   $ship.visible = false
   $Explosion.fire()
   RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
+  set_state(State.DESTROYING)
   await get_tree().create_timer(1.5).timeout
-  Global.player_destroyed.emit(type)
+  set_state(State.DESTROYED)
 
-func reset(xf:Transform2D)->void:
-  prints('reset', xf)
+func activate(xf:Transform2D)->void:
+  prints('activate', xf)
   global_transform = xf
-  is_destroyed = false
-  is_active = true
   visible = true
   $ship.visible = true
   trail.fill(Vector4.ZERO)
   velocity = Vector2.ZERO
   rot_velo = 0
+  set_state(State.ACTIVE)
 
 
 func portal_enter(p:Portal)->void:
-  if !portal and is_active and not is_destroyed:
+  if !portal and state == State.ACTIVE:
     prints('->', p)
     portal = p
     portal.ph_scale = 1.0 if get_angle_to(portal.global_position) > 0 else -1.0
@@ -187,4 +219,5 @@ func portal_enter(p:Portal)->void:
     portal_time = 0
     portal_speed = velocity.length() * 0.0002
     velocity = Vector2.ZERO
-    Global.portal_reached.emit(portal)
+    set_state(State.DEACTIVATING)
+    GameController.portal_reached.emit(portal)

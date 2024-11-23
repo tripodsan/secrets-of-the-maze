@@ -67,6 +67,7 @@ targets = [NodePath("../static_mine"), NodePath("../static_mine2"), NodePath("..
 [node name="portal_1" parent="blue/objects" instance=ExtResource("7_8k2le")]
 position = Vector2(5952, 1728)
 rotation = -3.14159
+ph_off = -3.24209
 shape = 2
 layer = 0
 
@@ -102,6 +103,7 @@ position = Vector2(256, 1728)
 [node name="portal_1" parent="red/objects" instance=ExtResource("7_8k2le")]
 position = Vector2(5952, 1792)
 rotation = -1.5708
+ph_off = -1.6713
 
 [node name="secrets" type="Node2D" parent="red"]
 
@@ -131,6 +133,7 @@ layer = 2
 [node name="portal_1" parent="green/objects" instance=ExtResource("7_8k2le")]
 position = Vector2(5952, 1600)
 rotation = 1.5708
+ph_off = 1.4703
 shape = 2
 layer = 2
 

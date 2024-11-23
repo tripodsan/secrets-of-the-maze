@@ -8,9 +8,6 @@ const INT64_NEGATIVE_LIMIT: int = -9223372036854775808
 ## [br]0x7FFFFFFFFFFFFFFF
 const INT64_MAX: int = 9223372036854775807
 
-
-var player:Player
-
 var _phasemap:SubViewport
 
 enum Layer { NONE = -1, BLUE, RED, GREEN }
@@ -20,30 +17,11 @@ func get_layer_from_string(s):
 
 enum HitType { Spike }
 
-signal player_changed()
-
-signal player_destroyed(by:HitType)
-
-signal portal_reached(p:Portal)
-
 signal layer_selected(type:Layer)
 
 signal layer_activated(type:Layer)
 
-signal level_loaded(level:Level)
-
-signal level_started(level:Level)
-
-signal level_stopped(level:Level)
-
 signal supernova
-
-func select_layer():
-  pass
-
-func set_player(p:Player):
-  player = p
-  player_changed.emit()
 
 func get_tile_type(map, rid)->StringName:
   if map is TileMapLayer:

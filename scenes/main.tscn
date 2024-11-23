@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=25 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_arx0t"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scenes/level_suffix.gd" id="7_jihxl"]
 [ext_resource type="Script" path="res://scenes/hud.gd" id="7_qwu0n"]
 [ext_resource type="PackedScene" uid="uid://glyv2bogmfg4" path="res://scenes/super_nova.tscn" id="7_tsp44"]
+[ext_resource type="Script" path="res://scenes/level_timer.gd" id="9_7gmml"]
 [ext_resource type="PackedScene" uid="uid://b4kepaijdk64i" path="res://scenes/levels/level_1.tscn" id="10_pjm13"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
 [ext_resource type="PackedScene" uid="uid://b804mmyeds45o" path="res://entities/player.tscn" id="11_01h05"]
@@ -308,11 +309,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_r78rs")
 
-[node name="level_time_secs" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+[node name="level_timer" type="HBoxContainer" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("9_7gmml")
+
+[node name="level_time_secs" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer/level_timer"]
 layout_mode = 2
 text = "01:42"
 
-[node name="level_time_ts" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+[node name="level_time_ts" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer/level_timer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = ".8"
@@ -371,6 +376,7 @@ size_flags_vertical = 3
 [node name="game" type="Node2D" parent="world"]
 
 [node name="level" parent="world/game" instance=ExtResource("10_pjm13")]
+nr = -1
 
 [node name="player" parent="world" instance=ExtResource("11_01h05")]
 unique_name_in_owner = true

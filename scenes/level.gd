@@ -7,6 +7,20 @@ extends Node2D
 
 @export var nr:int = -1
 
+enum State {
+  LOADED,
+  READY,
+  STARTING,
+  STARTED,
+  STOPPING,
+  STOPPED,
+  DESTROYED
+}
+
+var state:State = State.LOADED
+
+signal state_changed()
+
 var _layers:Array[ChromaLayer] = [];
 
 var _layer:Global.Layer = Global.Layer.BLUE
@@ -25,7 +39,6 @@ var _level_stop_time:int
 func _ready() -> void:
   if nr < 0:
     prints('leftover scene level. discarding...')
-    get_parent().remove_child(self)
     self.queue_free()
     return
   _layers = [blue, red, green]
@@ -34,12 +47,22 @@ func _ready() -> void:
     l.set_active(false)
     l.set_game_data(_game_data.get_layers()[l.idx])
   Global.layer_selected.connect(_on_layer_selected)
-  Global.player_destroyed.connect(_on_player_destroyed)
-  Global.portal_reached.connect(_on_portal_reached)
-  Global.level_loaded.emit(self)
+  GameController.get_player_deferred(_on_player_loaded)
+  GameController.portal_reached.connect(_on_portal_reached)
+  GameController.set_level(self)
+  set_state(State.READY)
 
-func _on_player_destroyed(_by)->void:
-  restart()
+func set_state(s:State)->void:
+  state = s
+  prints('layer state:', State.keys()[state])
+  state_changed.emit()
+
+func _on_player_loaded(p:Player)->void:
+  p.state_changed.connect(_on_player_state_changed.bind(p))
+
+func _on_player_state_changed(p:Player)->void:
+  if p.state == Player.State.DESTROYED:
+    restart()
 
 func _on_layer_selected(layer:Global.Layer):
   if layer != _prev_layer:
@@ -51,13 +74,13 @@ func _on_layer_selected(layer:Global.Layer):
 func _on_portal_reached(p:Portal)->void:
   print('portal reached')
   _level_stop_time = Time.get_ticks_msec()
-  Global.level_stopped.emit(self)
+  #Global.level_stopped.emit(self)
   await get_tree().create_timer(2.0).timeout
   print('portal reset')
   restart()
 
 func chroma_shift()->void:
-  var pos = Global.player.global_position
+  var pos = GameController.player.global_position
   var candidate = -1
   for i in range(0, len(_layers)):
     if i != _layer && _layers[i].can_chroma_shift(pos):
@@ -85,9 +108,10 @@ func start(layer:Global.Layer, portal:int = 0)->void:
   get_viewport().get_camera_2d().reset_smoothing()
 
 func restart()->void:
-  Global.player.reset(_start_portal.global_transform)
+  GameController.player.activate(_start_portal.global_transform)
   _on_layer_selected(_start_layer)
-  Global.level_started.emit(self)
+  #Global.level_started.emit(self)
+  set_state(State.STARTED)
   _level_start_time = Time.get_ticks_msec()
   _level_stop_time = 0
 
