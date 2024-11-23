@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://ecg6jylppjbm"]
+[gd_scene load_steps=13 format=4 uid="uid://ecg6jylppjbm"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_2e2jd"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="2_niabm"]
