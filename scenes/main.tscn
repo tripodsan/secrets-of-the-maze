@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=26 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
-[ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_arx0t"]
+[ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_b8e42"]
 [ext_resource type="Theme" uid="uid://cfk78nhykmoun" path="res://scenes/hud_theme.tres" id="2_gqhd0"]
 [ext_resource type="Script" path="res://scripts/custom_dropdown.gd" id="3_a52ap"]
 [ext_resource type="Theme" uid="uid://xjqqvev5aben" path="res://scenes/debug_hud_theme.tres" id="3_mf8j1"]
+[ext_resource type="Script" path="res://scenes/world_environment.gd" id="3_nr21i"]
 [ext_resource type="Script" path="res://scenes/ship_config.gd" id="3_tlpr0"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="4_wbysk"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="5_hcqio"]
@@ -46,25 +47,27 @@ shader = ExtResource("7_e01wk")
 script = ExtResource("1_v5gem")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("2_arx0t")
+environment = ExtResource("2_b8e42")
+script = ExtResource("3_nr21i")
 
 [node name="hudlayer" type="CanvasLayer" parent="."]
 
 [node name="debug_hud" type="Control" parent="hudlayer"]
-visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3_mf8j1")
 
 [node name="topbar" type="MarginContainer" parent="hudlayer/debug_hud"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_right = 780.0
-offset_bottom = 500.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -74,6 +77,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="EngineSettings" type="PanelContainer" parent="hudlayer/debug_hud/topbar/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("3_a52ap")

@@ -1,8 +1,6 @@
 class_name GameScene
 extends Node2D
 
-@export var bg_color:Color = Color.BLACK
-
 var LEVEL_SCENES:Array[PackedScene] = [
   preload('res://scenes/levels/level_0.tscn'),
   preload('res://scenes/levels/level_1.tscn'),
@@ -17,7 +15,6 @@ var _current_level:Level = null
 
 func _ready() -> void:
   _current_level = get_node_or_null("world/game/level")
-  RenderingServer.set_default_clear_color(bg_color)
   %phasemap.world_2d = get_viewport().world_2d
   GameController.on_game_scene_loaded(self)
 

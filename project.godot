@@ -114,7 +114,7 @@ bomb={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.144062, 0.144063, 0.144062, 1)
+environment/defaults/default_clear_color=Color(0.0943044, 0.0943044, 0.0943044, 1)
 
 [shader_globals]
 
