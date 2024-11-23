@@ -85,6 +85,9 @@ func set_state(s:State)->void:
   state_changed.emit()
 
 func _input(_event: InputEvent) -> void:
+  if state == State.ACTIVATING and Input.is_anything_pressed():
+    set_state(State.ACTIVE)
+
   if state != State.ACTIVE: return
 
   if Input.is_action_just_pressed('laser'):
@@ -113,7 +116,6 @@ func _physics_process(delta: float) -> void:
     update_trail()
     ship.scale = lerp(Vector2.ONE, Vector2(0.2, 0.2), min(portal_time, 1.0))
     if portal_time > 0.7:
-      portal = null
       ship.visible = false
       ship.scale = Vector2.ONE
       set_state(State.DEACTIVATED)
@@ -202,12 +204,13 @@ func hit(type:Global.HitType)->void:
 func activate(xf:Transform2D)->void:
   prints('activate', xf)
   global_transform = xf
+  portal = null
   visible = true
   $ship.visible = true
   trail.fill(Vector4.ZERO)
   velocity = Vector2.ZERO
   rot_velo = 0
-  set_state(State.ACTIVE)
+  set_state(State.ACTIVATING)
 
 
 func portal_enter(p:Portal)->void:

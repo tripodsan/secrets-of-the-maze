@@ -22,9 +22,8 @@ var prev_time:int = -1
 func _on_level_state_changed(l:Level)->void:
   if l.state == Level.State.STARTED:
     current_level = l
-
-func _on_level_stopped(l:Level)->void:
-  current_level = null
+  else:
+    current_level = null
 
 func _process(delta: float) -> void:
   if current_level:

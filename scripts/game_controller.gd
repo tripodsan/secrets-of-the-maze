@@ -17,6 +17,9 @@ signal player_loaded(player:Player)
 signal portal_reached(p:Portal)
 
 func start_game()->void:
+  show_level_select()
+
+func show_level_select():
   SceneTransition.change_scene(scn_lvl_select)
 
 ## Starts the level with the given layer as starting point
@@ -35,6 +38,10 @@ func on_level_state_change()->void:
   if level.state == Level.State.READY:
     # level was just loaded, so start it
     level.start(_current_layer.idx)
+  elif level.state == Level.State.FINISHED:
+    level = null
+    player = null
+    show_level_select()
 
 
 func set_player(p:Player)->void:

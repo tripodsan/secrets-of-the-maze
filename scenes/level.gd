@@ -12,8 +12,8 @@ enum State {
   READY,
   STARTING,
   STARTED,
-  STOPPING,
   STOPPED,
+  FINISHED,
   DESTROYED
 }
 
@@ -61,8 +61,19 @@ func _on_player_loaded(p:Player)->void:
   p.state_changed.connect(_on_player_state_changed.bind(p))
 
 func _on_player_state_changed(p:Player)->void:
-  if p.state == Player.State.DESTROYED:
+  if p.state == Player.State.ACTIVE:
+    _level_start_time = Time.get_ticks_msec()
+    _level_stop_time = 0
+  elif p.state == Player.State.DESTROYING:
+    set_state(State.STOPPED)
+  elif p.state == Player.State.DESTROYED:
     restart()
+  elif p.state == Player.State.DEACTIVATING:
+    # portal animation
+    pass
+  elif p.state == Player.State.DEACTIVATED:
+    # portal animation finished
+    set_state(State.FINISHED)
 
 func _on_layer_selected(layer:Global.Layer):
   if layer != _prev_layer:
@@ -74,10 +85,7 @@ func _on_layer_selected(layer:Global.Layer):
 func _on_portal_reached(p:Portal)->void:
   print('portal reached')
   _level_stop_time = Time.get_ticks_msec()
-  #Global.level_stopped.emit(self)
-  await get_tree().create_timer(2.0).timeout
-  print('portal reset')
-  restart()
+  set_state(State.STOPPED)
 
 func chroma_shift()->void:
   var pos = GameController.player.global_position
@@ -112,8 +120,8 @@ func restart()->void:
   _on_layer_selected(_start_layer)
   #Global.level_started.emit(self)
   set_state(State.STARTED)
-  _level_start_time = Time.get_ticks_msec()
-  _level_stop_time = 0
+  _level_start_time = 1
+  _level_stop_time = 1
 
 ## returns the level time in milliseconds
 func get_run_time()->int:
