@@ -18,6 +18,11 @@ signal level_accepted(layer:LevelMapNode)
 
 func _ready() -> void:
   rebuild()
+  if GameController._current_layer:
+    for n in nodes.get_children():
+      if n is LevelMapNode && n.gd_layer == GameController._current_layer:
+        select(n)
+        return
   select(nodes.get_child(0))
 
 func rebuild()->void:
@@ -33,6 +38,8 @@ func rebuild()->void:
     var prev:LevelMapNode = null
     for y in range(len(layers)):
       var layer:GDLayer = layers[y]
+      var left:LevelMapNode = nodes.get_node_or_null('level_%d_%s' % [x - 1, layer.name]) if x > 0 else null
+      #if left && !left.gd_layer.unlocked: return
       var n:LevelMapNode = scn_map_node.instantiate()
       n.name = 'level_%d_%s' % [x, layer.name]
       nodes.add_child(n)
@@ -49,15 +56,13 @@ func rebuild()->void:
         var c = scn_map_conn.instantiate()
         nodes.add_child(c)
         c.position = Vector2(x * GRID_SIZE, -y * GRID_SIZE + GRID_SIZE / 2)
-      if x > 0:
-        var left:LevelMapNode = nodes.get_node_or_null('level_%d_%s' % [x - 1, layer.name])
-        if left:
-          left.nb_right = n
-          n.nb_left = left
-          var a = scn_map_arrow.instantiate()
-          nodes.add_child(a)
-          a.position = Vector2(x * GRID_SIZE - GRID_SIZE / 2, -y * GRID_SIZE)
-          a.animation = layer.name
+      if left:
+        left.nb_right = n
+        n.nb_left = left
+        var a = scn_map_arrow.instantiate()
+        nodes.add_child(a)
+        a.position = Vector2(x * GRID_SIZE - GRID_SIZE / 2, -y * GRID_SIZE)
+        a.animation = layer.name
       prev = n
       if !layer.unlocked:
         n.animation = '_'
@@ -76,7 +81,7 @@ func _input(event: InputEvent) -> void:
     level_accepted.emit(selected_level)
 
 func select(next:LevelMapNode):
-  if !next: return
+  if !next || !next.gd_layer.unlocked: return
   selected_level = next
   cursor.position = next.position
   cursor.set_opening_by_direction(!!next.nb_top, !!next.nb_right, !!next.nb_bottom, !!next.nb_left)

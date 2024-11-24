@@ -486,7 +486,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxEmpty_n7ttj")
 
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="level_info" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "0 / 5
 00:12.45
@@ -537,6 +537,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_137gh")
 
 [node name="level_map" type="Node2D" parent="."]
+texture_filter = 3
 position = Vector2(256, 896)
 scale = Vector2(2, 2)
 script = ExtResource("5_d4dit")

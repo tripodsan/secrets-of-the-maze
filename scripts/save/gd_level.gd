@@ -20,3 +20,11 @@ func get_nr()->int:
 
 func get_title()->String:
   return 'D%s' % ROMAN[get_nr() + 1]
+
+func reset()->void:
+  unlocked = false
+  super.reset()
+
+func unlock()->void:
+  unlocked = true
+  _layers[0].unlocked = true

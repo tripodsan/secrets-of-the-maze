@@ -194,6 +194,7 @@ func _physics_process(delta: float) -> void:
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
 
 func hit(type:Global.HitType)->void:
+  if state != State.ACTIVE: return
   $ship.visible = false
   $Explosion.fire()
   RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)

@@ -39,6 +39,8 @@ func on_level_state_change()->void:
     # level was just loaded, so start it
     level.start(_current_layer.idx)
   elif level.state == Level.State.FINISHED:
+    _current_layer.record_time(level.get_run_time())
+    GameData.unlock_next_level(_current_layer.get_level())
     level = null
     player = null
     show_level_select()

@@ -1,8 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://b4kepaijdk64i"]
+[gd_scene load_steps=7 format=4 uid="uid://b4kepaijdk64i"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_anykt"]
-[ext_resource type="Script" path="res://scripts/level_importer.gd" id="2_bagyl"]
-[ext_resource type="Texture2D" uid="uid://bjhxaxn4m3v6r" path="res://assets/level3.png" id="3_236on"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="4_y0ttv"]
 [ext_resource type="TileSet" uid="uid://b4hv1lcomy6v6" path="res://scenes/level-tiles.tres" id="5_vh7f2"]
 [ext_resource type="PackedScene" uid="uid://d2oh02mscfwjk" path="res://entities/static_mine.tscn" id="6_x7w7n"]
@@ -12,11 +10,6 @@
 [node name="level_1" type="Node2D"]
 script = ExtResource("1_anykt")
 nr = 1
-
-[node name="_importer_" type="Node" parent="."]
-script = ExtResource("2_bagyl")
-template = ExtResource("3_236on")
-template_region = Rect2i(80, 432, 1568, 864)
 
 [node name="blue" type="Node2D" parent="."]
 visibility_layer = 2

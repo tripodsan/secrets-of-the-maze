@@ -22,7 +22,8 @@ func save_file(file_name:String)->void:
   prints('save game data to:', file.get_path_absolute())
 
 func reset()->void:
-  pass
+  get_levels().reset()
+  get_level(0).unlock()
 
 func get_levels()->GDSerializable:
   return $save/levels
@@ -30,6 +31,10 @@ func get_levels()->GDSerializable:
 func get_level(nr:int)->GDLevel:
   return get_node_or_null('save/levels/%d' % nr)
 
+func unlock_next_level(lvl:GDLevel)->void:
+  var next = get_level(lvl.get_nr() + 1)
+  if next:
+    next.unlock()
 
 func get_layer(nr:int, layer:Global.Layer)->GDLayer:
   var lvl:GDLevel = get_level(nr)

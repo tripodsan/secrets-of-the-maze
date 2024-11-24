@@ -21,3 +21,8 @@ func to_dict()->Dictionary:
         printerr('warning: serialization of child node %s shadows exported property' % n.get_path())
       ret[n.name] = n.to_dict()
   return ret
+
+func reset()->void:
+  for n in get_children():
+    if n is GDSerializable:
+      n.reset()

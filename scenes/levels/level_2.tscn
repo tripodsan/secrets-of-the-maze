@@ -1,22 +1,14 @@
-[gd_scene load_steps=8 format=4 uid="uid://ueliw88dyxml"]
+[gd_scene load_steps=6 format=4 uid="uid://ueliw88dyxml"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_8huey"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="2_6eiqs"]
-[ext_resource type="Script" path="res://scripts/level_importer.gd" id="2_dpm1w"]
 [ext_resource type="TileSet" uid="uid://b4hv1lcomy6v6" path="res://scenes/level-tiles.tres" id="3_doovm"]
-[ext_resource type="Texture2D" uid="uid://cfcnchhsfvn12" path="res://assets/level2.png" id="3_uglio"]
 [ext_resource type="PackedScene" uid="uid://cn1wgnhsj8ijg" path="res://scenes/corner.tscn" id="6_uepqb"]
 [ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="7_l5ml6"]
 
 [node name="level_2" type="Node2D"]
 script = ExtResource("1_8huey")
 nr = 2
-
-[node name="_importer_" type="Node" parent="."]
-script = ExtResource("2_dpm1w")
-remove_fake_walls = false
-template = ExtResource("3_uglio")
-template_region = Rect2i(48, 176, 1568, 1376)
 
 [node name="blue" type="Node2D" parent="."]
 visibility_layer = 2
@@ -56,6 +48,7 @@ layer = 0
 [node name="portal_1" parent="blue/objects" instance=ExtResource("7_l5ml6")]
 position = Vector2(1728, 5248)
 rotation = -1.5708
+ph_off = -1.6713
 shape = 0
 layer = 0
 
@@ -151,12 +144,14 @@ color_scheme = 2
 [node name="portal_0" parent="green/objects" instance=ExtResource("7_l5ml6")]
 position = Vector2(320, 3584)
 rotation = -1.5708
+ph_off = -1.6713
 shape = 2
 layer = 2
 
 [node name="portal_1" parent="green/objects" instance=ExtResource("7_l5ml6")]
 position = Vector2(1728, 5248)
 rotation = -1.5708
+ph_off = -1.6713
 shape = 2
 layer = 2
 
