@@ -37,6 +37,7 @@ func unlock_next_level(lvl:GDLevel)->void:
     next.unlock()
 
 func get_layer(nr:int, layer:Global.Layer)->GDLayer:
+  if layer < 0 || layer > Global.Layer.GREEN: return
   var lvl:GDLevel = get_level(nr)
-  assert(lvl)
+  if !lvl: return
   return lvl.get_layers()[layer]

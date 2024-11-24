@@ -6,18 +6,24 @@ var suffix:String = ''
 
 signal clicked()
 
-@export var nb_top:LevelMapNode
+static var DIRS = [
+  Vector2i(0, -1),
+  Vector2i(1, 0),
+  Vector2i(0, 1),
+  Vector2i(-1, 0),
+]
 
-@export var nb_right:LevelMapNode
+var neighbors:Array[LevelMapNode] = [null, null, null, null]
 
-@export var nb_bottom:LevelMapNode
+var gd_level:GDLevel
 
-@export var nb_left:LevelMapNode
+var gd_layer:GDLayer
 
-@export var gd_level:GDLevel
-
-@export var gd_layer:GDLayer
-
+func get_nb_bitmask()->int:
+  var msk:int = 0
+  for i in range(4):
+    if neighbors[i]: msk += 2**i
+  return msk
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
   if event is InputEventMouseButton and event.is_released():

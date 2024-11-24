@@ -538,7 +538,7 @@ texture = ExtResource("4_137gh")
 
 [node name="level_map" type="Node2D" parent="."]
 texture_filter = 3
-position = Vector2(256, 896)
+position = Vector2(256, 768)
 scale = Vector2(2, 2)
 script = ExtResource("5_d4dit")
 
@@ -552,69 +552,57 @@ opening = 8
 
 [node name="nodes" type="Node2D" parent="level_map"]
 
-[node name="level_0_b" parent="level_map/nodes" node_paths=PackedStringArray("nb_top", "nb_right") instance=ExtResource("6_2jbhw")]
-position = Vector2(0, -32)
+[node name="level_0_b" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
+position = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_oikr2")
 animation = &"blue"
-nb_top = NodePath("../level_0_r")
-nb_right = NodePath("../level_1_b")
 
-[node name="level_1_b" parent="level_map/nodes" node_paths=PackedStringArray("nb_right", "nb_left") instance=ExtResource("6_2jbhw")]
-position = Vector2(96, -32)
+[node name="level_1_b" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
+position = Vector2(112, 16)
 sprite_frames = SubResource("SpriteFrames_du4fx")
 animation = &"blue"
-nb_right = NodePath("../level_2_b")
-nb_left = NodePath("../level_0_b")
 
-[node name="level_2_b" parent="level_map/nodes" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
-position = Vector2(192, -32)
+[node name="level_2_b" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
+position = Vector2(208, 16)
 sprite_frames = SubResource("SpriteFrames_n6idt")
 animation = &"blue"
-nb_left = NodePath("../level_1_b")
 
-[node name="level_0_g" parent="level_map/nodes" node_paths=PackedStringArray("nb_right", "nb_bottom") instance=ExtResource("6_2jbhw")]
-position = Vector2(0, -224)
+[node name="level_0_g" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
+position = Vector2(16, -176)
 sprite_frames = SubResource("SpriteFrames_fop6c")
 animation = &"green"
-nb_right = NodePath("../level_1_g")
-nb_bottom = NodePath("../level_0_r")
 
-[node name="level_1_g" parent="level_map/nodes" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
-position = Vector2(96, -224)
+[node name="level_1_g" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
+position = Vector2(112, -176)
 sprite_frames = SubResource("SpriteFrames_emhho")
-nb_left = NodePath("../level_0_g")
 
-[node name="level_0_r" parent="level_map/nodes" node_paths=PackedStringArray("nb_top", "nb_right", "nb_bottom") instance=ExtResource("6_2jbhw")]
-position = Vector2(0, -128)
+[node name="level_0_r" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
+position = Vector2(16, -80)
 sprite_frames = SubResource("SpriteFrames_l65vo")
 animation = &"red"
-nb_top = NodePath("../level_0_g")
-nb_right = NodePath("../level_1_r")
-nb_bottom = NodePath("../level_0_b")
 
-[node name="level_1_r" parent="level_map/nodes" node_paths=PackedStringArray("nb_left") instance=ExtResource("6_2jbhw")]
-position = Vector2(96, -128)
+[node name="level_1_r" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
+position = Vector2(112, -80)
 sprite_frames = SubResource("SpriteFrames_6c1hp")
-nb_left = NodePath("../level_0_r")
 
 [node name="connector" parent="level_map/nodes" instance=ExtResource("7_ohwbg")]
-position = Vector2(0, -176)
+position = Vector2(16, -128)
 
 [node name="connector2" parent="level_map/nodes" instance=ExtResource("7_ohwbg")]
-position = Vector2(0, -80)
+position = Vector2(16, -32)
 
 [node name="arrow" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
-position = Vector2(48, -32)
+position = Vector2(64, 16)
 
 [node name="arrow3" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
-position = Vector2(144, -32)
+position = Vector2(160, 16)
 
 [node name="arrow2" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
-position = Vector2(48, -128)
+position = Vector2(64, -80)
 animation = &"red"
 
 [node name="arrow4" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
-position = Vector2(48, -224)
+position = Vector2(64, -176)
 animation = &"green"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/launch" to="." method="_on_launch_pressed"]
