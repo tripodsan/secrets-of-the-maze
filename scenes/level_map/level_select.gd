@@ -31,3 +31,6 @@ func _on_level_accepted(l:LevelMapNode)->void:
 
 func _on_launch_pressed() -> void:
   GameController.start_level(level_map.selected_level.gd_layer)
+
+func _on_btn_back_title_pressed() -> void:
+  GameController.show_title_screen()

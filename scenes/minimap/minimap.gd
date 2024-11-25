@@ -7,8 +7,6 @@ extends Node2D
 
 var cells:Array[Vector2i] = [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)]
 
-var _level:Level
-
 func _ready() -> void:
   GameController.level_loaded.connect(_on_level_loaded)
   Global.layer_activated.connect(_on_layer_activated)

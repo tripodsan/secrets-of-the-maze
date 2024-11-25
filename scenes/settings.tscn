@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://be17dxfp5e0vq"]
+
+[ext_resource type="Script" path="res://scenes/settings.gd" id="1_uud42"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abufw"]
+
+[node name="settings" type="VBoxContainer"]
+visible = false
+script = ExtResource("1_uud42")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 131
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 241
+theme_override_styles/separator = SubResource("StyleBoxEmpty_abufw")
+
+[node name="btn_controls" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Controls"
+
+[node name="btn_back" type="Button" parent="."]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="btn_back" to="." method="_on_btn_back_pressed"]

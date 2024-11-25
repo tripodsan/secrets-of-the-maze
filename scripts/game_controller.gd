@@ -24,7 +24,12 @@ func start_game()->void:
   show_level_select()
 
 func show_level_select():
+  level = null
+  player = null
   SceneTransition.change_scene(scn_lvl_select)
+
+func show_title_screen():
+  SceneTransition.change_scene(scn_title)
 
 ## Starts the level with the given layer as starting point
 ## calls by the level select screeen
@@ -45,8 +50,6 @@ func on_level_state_change()->void:
   elif level.state == Level.State.FINISHED:
     _current_layer.record_time(level.get_run_time())
     GameData.unlock_next_level(_current_layer.get_level())
-    level = null
-    player = null
     show_level_select()
 
 func set_player(p:Player)->void:
@@ -89,3 +92,12 @@ func pause_game()->void:
 func resume_game()->void:
   get_tree().paused = false
   game_resumed.emit()
+
+func restart_level()->void:
+  resume_game()
+  level.restart()
+
+func exit_level()->void:
+  resume_game()
+  level.quit()
+  show_level_select()

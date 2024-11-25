@@ -25,6 +25,6 @@ func _on_level_state_changed(l:Level)->void:
   else:
     current_level = null
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   if current_level:
     level_timer.set_time(current_level.get_run_time())

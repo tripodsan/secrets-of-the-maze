@@ -108,7 +108,6 @@ func _process(_delta: float) -> void:
   if Input.is_action_just_pressed('switch'):
     chroma_shift()
 
-
 func set_game_data(level:GDLevel)->void:
   _game_data = level
 
@@ -120,6 +119,9 @@ func start(layer:Global.Layer, portal:int = 0)->void:
   _start_portal.enabled = false
   restart()
   get_viewport().get_camera_2d().reset_smoothing()
+
+func quit()->void:
+  set_state(State.DESTROYED)
 
 func restart()->void:
   GameController.player.activate(_start_portal.global_transform)
