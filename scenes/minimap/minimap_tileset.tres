@@ -1,0 +1,12 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ci32io6iatetr"]
+
+[ext_resource type="Texture2D" uid="uid://deablve5a1prd" path="res://assets/minimap.png" id="1_k3lis"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lhbli"]
+texture = ExtResource("1_k3lis")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[resource]
+sources/1 = SubResource("TileSetAtlasSource_lhbli")

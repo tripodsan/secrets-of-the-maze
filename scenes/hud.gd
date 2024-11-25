@@ -1,8 +1,8 @@
 extends Control
 
-@onready var level_suffix: LevelSuffixLabel = $MarginContainer/VBoxContainer/level_suffix
-@onready var level_name: Label = $MarginContainer/VBoxContainer/level_name
-@onready var level_timer:LevelTimer = $MarginContainer/VBoxContainer/level_timer
+@onready var level_suffix: LevelSuffixLabel = %level_suffix
+@onready var level_name: Label = %level_name
+@onready var level_timer:LevelTimer = %level_timer
 
 func _ready() -> void:
   Global.layer_activated.connect(_on_layer_activated)

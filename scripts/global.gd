@@ -12,8 +12,13 @@ var _phasemap:SubViewport
 
 enum Layer { NONE = -1, BLUE, RED, GREEN }
 
+const LAYER_MASK = [1, 2, 4]
+
 func get_layer_from_string(s):
   return Layer.get(str(s).to_upper())
+
+func get_layer_cull_mask_bit(layer:Layer)->int:
+  return layer + 1
 
 enum HitType { Spike, Mine}
 
@@ -31,6 +36,7 @@ func get_tile_type(map, rid)->StringName:
       return data.get_custom_data("type")
   return &""
 
-func activate_layer_in_viewports(layer_idx:int, enabled:bool)->void:
-  get_viewport().set_canvas_cull_mask_bit(layer_idx, enabled)
-  _phasemap.set_canvas_cull_mask_bit(layer_idx, !enabled)
+func activate_layer_in_viewports(layer:Layer, enabled:bool)->void:
+  var bit = get_layer_cull_mask_bit(layer)
+  get_viewport().set_canvas_cull_mask_bit(bit, enabled)
+  _phasemap.set_canvas_cull_mask_bit(bit, !enabled)

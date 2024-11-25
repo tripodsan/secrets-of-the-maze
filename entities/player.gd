@@ -225,3 +225,8 @@ func portal_enter(p:Portal)->void:
     velocity = Vector2.ZERO
     set_state(State.DEACTIVATING)
     GameController.portal_reached.emit(portal)
+
+func pickup(body:Node2D)->void:
+  if body is ChromaCrystal:
+    body.queue_free()
+    GameController.on_chroma_crystal_pickup.call_deferred(body.type)

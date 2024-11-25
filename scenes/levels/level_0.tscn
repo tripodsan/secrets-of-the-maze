@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="4_rgtqr"]
 [ext_resource type="Script" path="res://scenes/secret_room.gd" id="5_g585d"]
 [ext_resource type="PackedScene" uid="uid://cn1wgnhsj8ijg" path="res://scenes/corner.tscn" id="5_ryegj"]
+[ext_resource type="PackedScene" uid="uid://c03mtiutjnf4o" path="res://entities/chroma_crystal.tscn" id="6_jfqw0"]
 [ext_resource type="Script" path="res://scripts/trigger.gd" id="6_jqhty"]
-[ext_resource type="PackedScene" uid="uid://bjgp6yyx5bqf" path="res://scenes/mine.tscn" id="6_m562c"]
 
 [sub_resource type="Animation" id="Animation_g7ktt"]
 length = 0.001
@@ -111,6 +111,9 @@ tile_set = ExtResource("3_t6sfi")
 [node name="objects" type="Node2D" parent="blue"]
 metadata/_edit_lock_ = true
 
+[node name="ChromaCrystal" parent="blue/objects" instance=ExtResource("6_jfqw0")]
+position = Vector2(696, -203)
+
 [node name="corner" parent="blue/objects" instance=ExtResource("5_ryegj")]
 position = Vector2(2752, 256)
 width = 8
@@ -129,7 +132,7 @@ script = ExtResource("6_jqhty")
 target = NodePath("../../../secret0")
 
 [node name="portal_1" parent="blue/objects" instance=ExtResource("4_rgtqr")]
-position = Vector2(768, -512)
+position = Vector2(704, -1024)
 rotation = -3.14159
 ph_off = -3.24209
 shape = 2
@@ -142,15 +145,10 @@ ph_off = -1.6713
 shape = 2
 layer = 0
 
-[node name="Mine" parent="blue/objects" instance=ExtResource("6_m562c")]
-position = Vector2(748, 139)
-rotation = 1.5708
-
 [node name="red" type="Node2D" parent="."]
 visible = false
 visibility_layer = 4
 script = ExtResource("2_niabm")
-layer_idx = 2
 metadata/_edit_lock_ = true
 
 [node name="grid" type="TileMapLayer" parent="red"]
@@ -188,7 +186,6 @@ shape = 0
 visible = false
 visibility_layer = 8
 script = ExtResource("2_niabm")
-layer_idx = 3
 metadata/_edit_lock_ = true
 
 [node name="grid" type="TileMapLayer" parent="green"]

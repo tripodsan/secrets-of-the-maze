@@ -1,8 +1,6 @@
 class_name ChromaLayer
 extends Node2D
 
-@export var layer_idx:int = 1
-
 ## primary tilemap, use to detect if player can chroma shift
 @onready var map:TileMapLayer = $map
 @onready var grid:TileMapLayer = $grid
@@ -26,7 +24,7 @@ func set_game_data(layer:GDLayer)->void:
 
 func set_active(value: bool)->void:
   active = value
-  Global.activate_layer_in_viewports(layer_idx, value)
+  Global.activate_layer_in_viewports(idx, value)
   process_mode = Node.PROCESS_MODE_INHERIT if active else PROCESS_MODE_DISABLED
   for n in get_children():
     if n is TileMapLayer:

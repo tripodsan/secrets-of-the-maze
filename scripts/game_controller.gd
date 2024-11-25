@@ -16,6 +16,7 @@ signal player_loaded(player:Player)
 
 signal portal_reached(p:Portal)
 
+
 func start_game()->void:
   show_level_select()
 
@@ -45,7 +46,6 @@ func on_level_state_change()->void:
     player = null
     show_level_select()
 
-
 func set_player(p:Player)->void:
   player = p
   player_loaded.emit(p)
@@ -60,3 +60,21 @@ func set_level(l:Level)->void:
   level = l
   level_loaded.emit(l)
   level.state_changed.connect(on_level_state_change)
+
+func on_chroma_crystal_pickup(type:Global.Layer)->void:
+  level.force_chroma_shift(type)
+  _current_layer.set_crystal(type)
+  _current_layer.get_level().get_layers()[type].unlocked = true
+
+var _mouse_motion_timer:float = 0
+
+func _unhandled_input(event: InputEvent) -> void:
+  if event is InputEventMouse:
+    _mouse_motion_timer = 0.0
+    Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _process(delta:float)->void:
+  if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+    _mouse_motion_timer += delta
+    if _mouse_motion_timer > 3.0:
+      Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

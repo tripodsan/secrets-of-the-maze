@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://be1r3b3neri51" path="res://scenes/level_map/level_map_node.tscn" id="6_2jbhw"]
 [ext_resource type="Script" path="res://scenes/level_map/level_map_cursor.gd" id="6_hr126"]
 [ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="7_7w5sb"]
+[ext_resource type="Script" path="res://scenes/level_map/crystal_info.gd" id="7_gxw7w"]
 [ext_resource type="PackedScene" uid="uid://ceykegurm2m3a" path="res://scenes/level_map/level_map_connector.tscn" id="7_ohwbg"]
 [ext_resource type="PackedScene" uid="uid://dyv7olmjrvbo3" path="res://scenes/level_map/level_map_arrow.tscn" id="8_tdmwx"]
 
@@ -46,8 +47,6 @@ thickness = 7
 font = ExtResource("2_luebk")
 font_size = 55
 font_color = Color(0.923173, 0.923173, 0.923173, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n7ttj"]
 
 [sub_resource type="GDScript" id="GDScript_fgtaq"]
 script/source = "extends ParallaxBackground
@@ -470,28 +469,85 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/separator = SubResource("StyleBoxLine_gbq8l")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 19
+theme_override_constants/v_separation = 13
+columns = 2
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="txt_secrets" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "secrets:
-best time:
-exits found:"
+text = "secrets:"
 label_settings = SubResource("LabelSettings_jbx2i")
 horizontal_alignment = 2
 
-[node name="HSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="lab_secrets" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxEmpty_n7ttj")
-
-[node name="level_info" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "0 / 5
-00:12.45
-1 / 1"
+text = "0 / 5"
 label_settings = SubResource("LabelSettings_jbx2i")
+
+[node name="txt_time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "best time:"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="lab_time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "00:00.0"
+label_settings = SubResource("LabelSettings_jbx2i")
+
+[node name="txt_exits" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "exits found:"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="lab_exits" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "1 / 1"
+label_settings = SubResource("LabelSettings_jbx2i")
+
+[node name="txt_chroma" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "cystals:"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="lab_chroma" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("7_gxw7w")
+
+[node name="none" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_chroma"]
+layout_mode = 2
+text = "none"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="blue" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_chroma"]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.0352941, 0.415686, 0.92549, 1)
+
+[node name="red" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_chroma"]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.635294, 0.188235, 0, 1)
+
+[node name="green" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_chroma"]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.219608, 0.411765, 0, 1)
 
 [node name="placeholder2" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

@@ -87,6 +87,11 @@ func _on_portal_reached(p:Portal)->void:
   _level_stop_time = Time.get_ticks_msec()
   set_state(State.STOPPED)
 
+func force_chroma_shift(layer:Global.Layer)->void:
+  _layers[layer].visible = true
+  Global.layer_selected.emit(layer)
+
+
 func chroma_shift()->void:
   var pos = GameController.player.global_position
   var candidate = -1
@@ -128,3 +133,6 @@ func get_run_time()->int:
   var t = _level_stop_time
   if t == 0: t = Time.get_ticks_msec()
   return t - _level_start_time
+
+func get_grid(layer:Global.Layer)->TileMapLayer:
+  return _layers[layer].grid

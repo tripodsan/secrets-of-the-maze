@@ -34,14 +34,17 @@ script = ExtResource("2_b8w8f")
 [node name="blue" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 7
 
 [node name="red" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 7
 
 [node name="green" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 7
 
 [node name="1" type="Node" parent="save/levels"]
 script = ExtResource("3_ma83k")
@@ -53,14 +56,17 @@ script = ExtResource("2_b8w8f")
 [node name="blue" type="Node" parent="save/levels/1/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 2
 
 [node name="red" type="Node" parent="save/levels/1/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 5
 
 [node name="green" type="Node" parent="save/levels/1/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 2
 
 [node name="2" type="Node" parent="save/levels"]
 script = ExtResource("3_ma83k")
@@ -72,11 +78,14 @@ script = ExtResource("2_b8w8f")
 [node name="blue" type="Node" parent="save/levels/2/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 7
 
 [node name="red" type="Node" parent="save/levels/2/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 7
 
 [node name="green" type="Node" parent="save/levels/2/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
+crystals = 7

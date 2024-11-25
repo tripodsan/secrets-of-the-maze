@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=28 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Environment" uid="uid://ckialqc3p7cb0" path="res://scenes/compat_env.tres" id="2_aik6b"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b4kepaijdk64i" path="res://scenes/levels/level_1.tscn" id="10_pjm13"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
 [ext_resource type="PackedScene" uid="uid://b804mmyeds45o" path="res://entities/player.tscn" id="11_01h05"]
+[ext_resource type="PackedScene" uid="uid://cbldhsup615x5" path="res://scenes/minimap/minimap.tscn" id="11_ms5bv"]
 [ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6pc7t"]
@@ -35,6 +36,8 @@ func _process(delta: float) -> void:
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r78rs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3welx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r1g4g"]
 shader = ExtResource("10_rael0")
@@ -53,6 +56,7 @@ script = ExtResource("3_nr21i")
 [node name="hudlayer" type="CanvasLayer" parent="."]
 
 [node name="debug_hud" type="Control" parent="hudlayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -294,37 +298,66 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="HBoxContainer" parent="hudlayer/hud/MarginContainer"]
+[node name="vbox" type="VBoxContainer" parent="hudlayer/hud/MarginContainer"]
+layout_mode = 2
+
+[node name="hbox" type="HBoxContainer" parent="hudlayer/hud/MarginContainer/vbox"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="level_name" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+[node name="level_name" type="Label" parent="hudlayer/hud/MarginContainer/vbox/hbox"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "DII"
 
-[node name="level_suffix" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+[node name="level_suffix" type="Label" parent="hudlayer/hud/MarginContainer/vbox/hbox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.603922, 0.921569, 0, 1)
 text = "-B"
 script = ExtResource("7_jihxl")
 
-[node name="VSeparator" type="VSeparator" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="hudlayer/hud/MarginContainer/vbox/hbox"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_r78rs")
 
-[node name="level_timer" type="HBoxContainer" parent="hudlayer/hud/MarginContainer/VBoxContainer"]
+[node name="level_timer" type="HBoxContainer" parent="hudlayer/hud/MarginContainer/vbox/hbox"]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("9_7gmml")
 
-[node name="level_time_secs" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer/level_timer"]
+[node name="level_time_secs" type="Label" parent="hudlayer/hud/MarginContainer/vbox/hbox/level_timer"]
 layout_mode = 2
 text = "01:42"
 
-[node name="level_time_ts" type="Label" parent="hudlayer/hud/MarginContainer/VBoxContainer/level_timer"]
+[node name="level_time_ts" type="Label" parent="hudlayer/hud/MarginContainer/vbox/hbox/level_timer"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = ".55"
+
+[node name="HSeparator" type="HSeparator" parent="hudlayer/hud/MarginContainer/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_3welx")
+
+[node name="PanelContainer" type="PanelContainer" parent="hudlayer/hud/MarginContainer/vbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="minimap_container" type="SubViewportContainer" parent="hudlayer/hud/MarginContainer/vbox/PanelContainer"]
+layout_mode = 2
+
+[node name="minimap_port" type="SubViewport" parent="hudlayer/hud/MarginContainer/vbox/PanelContainer/minimap_container"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+gui_disable_input = true
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="minimap" parent="hudlayer/hud/MarginContainer/vbox/PanelContainer/minimap_container/minimap_port" instance=ExtResource("11_ms5bv")]
 
 [node name="ChromaticDistortion" type="ColorRect" parent="hudlayer"]
 visible = false
