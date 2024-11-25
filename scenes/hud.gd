@@ -8,8 +8,8 @@ func _ready() -> void:
   Global.layer_activated.connect(_on_layer_activated)
   GameController.level_loaded.connect(_on_level_loaded)
 
-func _on_layer_activated(l:Global.Layer)->void:
-  level_suffix.set_color_scheme(l)
+func _on_layer_activated(layer:ChromaLayer)->void:
+  level_suffix.set_color_scheme(layer.type)
 
 func _on_level_loaded(l:Level)->void:
   level_name.text = l._game_data.get_title()

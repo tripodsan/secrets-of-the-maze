@@ -22,9 +22,9 @@ func get_layer_cull_mask_bit(layer:Layer)->int:
 
 enum HitType { Spike, Mine}
 
-signal layer_selected(type:Layer)
+signal layer_selected(layer:ChromaLayer)
 
-signal layer_activated(type:Layer)
+signal layer_activated(layer:ChromaLayer)
 
 signal supernova
 

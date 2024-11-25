@@ -146,7 +146,6 @@ shape = 2
 layer = 0
 
 [node name="red" type="Node2D" parent="."]
-visible = false
 visibility_layer = 4
 script = ExtResource("2_niabm")
 metadata/_edit_lock_ = true

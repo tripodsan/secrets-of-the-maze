@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func _on_level_selected(l:LevelMapNode)->void:
   level_title.text = l.title
-  level_suffix.color_scheme = l.gd_layer.idx
+  level_suffix.color_scheme = l.gd_layer.type
 
   var hsec = l.gd_layer.best_time / 10
   var sec = hsec / 100

@@ -10,11 +10,11 @@ var active:bool
 
 var game_data:GDLayer
 
-var idx:Global.Layer
+var type:Global.Layer
 
 func _ready():
-  idx = Global.get_layer_from_string(name)
-  assert(idx >= 0)
+  type = Global.get_layer_from_string(name)
+  assert(type >= 0)
   visible = false
 
 # set via parent
@@ -24,12 +24,12 @@ func set_game_data(layer:GDLayer)->void:
 
 func set_active(value: bool)->void:
   active = value
-  Global.activate_layer_in_viewports(idx, value)
+  Global.activate_layer_in_viewports(type, value)
   process_mode = Node.PROCESS_MODE_INHERIT if active else PROCESS_MODE_DISABLED
   for n in get_children():
     if n is TileMapLayer:
       n.collision_enabled = value
-  Global.layer_activated.emit(idx)
+  Global.layer_activated.emit(self)
 
 ## check if ship at global position pos can shift to this layer.
 func can_chroma_shift(pos:Vector2)->bool:

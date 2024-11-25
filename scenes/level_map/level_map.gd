@@ -29,7 +29,7 @@ func _build_node(layer:GDLayer)->LevelMapNode:
   if !layer: return null
   var level:GDLevel = layer.get_level()
   var lvl:int = level.get_nr()
-  var lay:int = layer.idx
+  var lay:int = layer.type
   # check if already exist
   var nName = 'level_%d_%s' % [lvl, layer.name]
   var n:LevelMapNode = nodes.get_node_or_null(nName)

@@ -8,11 +8,11 @@ extends GDSerializable
 
 @export var crystals:int = 0
 
-var idx:Global.Layer
+var type:Global.Layer
 
 func _ready() -> void:
-  idx = Global.get_layer_from_string(name)
-  assert(idx >= 0)
+  type = Global.get_layer_from_string(name)
+  assert(type >= 0)
 
 func get_level()->GDLevel:
   return get_parent().get_parent()

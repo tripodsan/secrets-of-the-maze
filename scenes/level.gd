@@ -23,14 +23,14 @@ signal state_changed()
 
 var _layers:Array[ChromaLayer] = [];
 
-var _layer:Global.Layer = Global.Layer.BLUE
+var _layer:ChromaLayer = null
 
-var _prev_layer:Global.Layer = Global.Layer.NONE
+var _prev_layer:ChromaLayer = null
 
 var _game_data:GDLevel
 
 var _start_portal:Portal
-var _start_layer:int
+var _start_layer:ChromaLayer
 
 var _level_start_time:int
 var _level_stop_time:int
@@ -44,8 +44,8 @@ func _ready() -> void:
   _layers = [blue, red, green]
   _game_data = GameData.get_level(nr)
   for l in _layers:
+    l.set_game_data(_game_data.get_layers()[l.type])
     l.set_active(false)
-    l.set_game_data(_game_data.get_layers()[l.idx])
   Global.layer_selected.connect(_on_layer_selected)
   GameController.get_player_deferred(_on_player_loaded)
   GameController.portal_reached.connect(_on_portal_reached)
@@ -75,33 +75,33 @@ func _on_player_state_changed(p:Player)->void:
     # portal animation finished
     set_state(State.FINISHED)
 
-func _on_layer_selected(layer:Global.Layer):
+func _on_layer_selected(layer:ChromaLayer):
   if layer != _prev_layer:
-    _layers[_layer].set_active(false)
+    _layer.set_active(false)
     _prev_layer = _layer
     _layer = layer
-    _layers[_layer].set_active(true)
+    _layer.set_active(true)
 
 func _on_portal_reached(p:Portal)->void:
   print('portal reached')
   _level_stop_time = Time.get_ticks_msec()
   set_state(State.STOPPED)
 
-func force_chroma_shift(layer:Global.Layer)->void:
-  _layers[layer].visible = true
+func force_chroma_shift(type:Global.Layer)->void:
+  var layer:ChromaLayer = _layers[type]
+  layer.visible = true
   Global.layer_selected.emit(layer)
-
 
 func chroma_shift()->void:
   var pos = GameController.player.global_position
-  var candidate = -1
-  for i in range(0, len(_layers)):
-    if i != _layer && _layers[i].can_chroma_shift(pos):
-      if candidate < 0:
-        candidate = i
+  var candidate:ChromaLayer = null
+  for l in _layers:
+    if l != _layer && l.can_chroma_shift(pos):
+      if candidate == null:
+        candidate = l
       elif candidate == _prev_layer:
-        candidate = i
-  if candidate >= 0:
+        candidate = l
+  if candidate:
     Global.layer_selected.emit(candidate)
 
 func _process(_delta: float) -> void:
@@ -112,9 +112,9 @@ func set_game_data(level:GDLevel)->void:
   _game_data = level
 
 func start(layer:Global.Layer, portal:int = 0)->void:
-  _start_layer = layer
-  _layer = layer
-  _start_portal = _layers[layer].get_portal(portal)
+  _start_layer = _layers[layer]
+  _layer = _start_layer
+  _start_portal = _start_layer.get_portal(portal)
   assert(_start_portal)
   _start_portal.enabled = false
   restart()
