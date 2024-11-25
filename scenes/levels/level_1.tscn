@@ -29,33 +29,32 @@ metadata/_edit_lock_ = true
 [node name="objects" type="Node2D" parent="blue"]
 metadata/_edit_lock_ = true
 
-[node name="static_mine" parent="blue/objects" instance=ExtResource("6_x7w7n")]
-position = Vector2(3136, 704)
-
-[node name="static_mine2" parent="blue/objects" instance=ExtResource("6_x7w7n")]
-position = Vector2(3136, 896)
-
-[node name="static_mine3" parent="blue/objects" instance=ExtResource("6_x7w7n")]
-position = Vector2(3136, 1088)
-
-[node name="static_mine4" parent="blue/objects" instance=ExtResource("6_x7w7n")]
-position = Vector2(3136, 1280)
-
-[node name="static_mine5" parent="blue/objects" instance=ExtResource("6_x7w7n")]
-position = Vector2(3136, 1472)
-
-[node name="static_mine6" parent="blue/objects" instance=ExtResource("6_x7w7n")]
-position = Vector2(3136, 1664)
-
-[node name="static_mine7" parent="blue/objects" instance=ExtResource("6_x7w7n")]
-position = Vector2(3136, 1856)
-
-[node name="Oscilator" type="Node" parent="blue/objects" node_paths=PackedStringArray("targets")]
+[node name="Oscilator" type="Node" parent="blue/objects"]
 script = ExtResource("8_ddnlu")
 amplitude = Vector2(250, 0)
 freq = Vector2(0.35, 0)
 phase = Vector2(-0.08, 0)
-targets = [NodePath("../static_mine"), NodePath("../static_mine2"), NodePath("../static_mine3"), NodePath("../static_mine4"), NodePath("../static_mine5"), NodePath("../static_mine6"), NodePath("../static_mine7")]
+
+[node name="static_mine" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 704)
+
+[node name="static_mine2" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 896)
+
+[node name="static_mine3" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1088)
+
+[node name="static_mine4" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1280)
+
+[node name="static_mine5" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1472)
+
+[node name="static_mine6" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1664)
+
+[node name="static_mine7" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 1856)
 
 [node name="portal_1" parent="blue/objects" instance=ExtResource("7_8k2le")]
 position = Vector2(5952, 1728)
@@ -100,6 +99,7 @@ ph_off = -1.6713
 [node name="secrets" type="Node2D" parent="red"]
 
 [node name="green" type="Node2D" parent="."]
+visible = false
 visibility_layer = 8
 script = ExtResource("4_y0ttv")
 metadata/_edit_lock_ = true

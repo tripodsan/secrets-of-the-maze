@@ -30,9 +30,24 @@ var phase:float = 0:
     color = v
     queue_redraw()
 
+@export var border_color:Color = Color.WHITE:
+  set(v):
+    border_color = v
+    queue_redraw()
+
+@export var border_width:float = 0.0:
+  set(v):
+    border_width = v
+    queue_redraw()
+
 @export var sides:int = 12:
   set(v):
     sides = v
+    queue_redraw()
+
+@export var rotation_speed:float = 0:
+  set(v):
+    rotation_speed = v
     queue_redraw()
 
 func _draw()->void:
@@ -45,9 +60,14 @@ func _draw()->void:
     var y := sin(a) * radius
     points[i] = Vector2(x, y)
   draw_colored_polygon(points, color)
+  if border_width > 0.0:
+    points.append(points[0])
+    draw_polyline(points, border_color, border_width, true)
 
-func _process(_delta:float)->void:
+func _process(delta:float)->void:
   if animate:
     # use Engine time to synchronize animation
     phase = fmod(speed * float(Time.get_ticks_msec()) / 1000.0, 1)
     queue_redraw()
+    if rotation_speed:
+      rotation += delta * rotation_speed

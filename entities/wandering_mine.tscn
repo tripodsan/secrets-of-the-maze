@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://kj6vuij04rgw"]
+
+[ext_resource type="Script" path="res://entities/animated_polygon.gd" id="1_0n6sd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_12d36"]
+radius = 84.49
+
+[node name="wandering_mine" type="StaticBody2D" groups=["spike"]]
+collision_layer = 4
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_12d36")
+
+[node name="animated_polygon" type="Node2D" parent="."]
+rotation = 98.8643
+script = ExtResource("1_0n6sd")
+animate = true
+speed = 0.69
+size = 80.0
+pattern = Array[Vector2]([Vector2(0.6, 1), Vector2(1, 0.6)])
+color = Color(0.219608, 0.411765, 0, 1)
+border_color = Color(0.603922, 0.921569, 0, 1)
+border_width = 5.99
+sides = 24
+rotation_speed = 0.2
