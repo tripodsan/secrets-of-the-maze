@@ -40,6 +40,7 @@ func has_crystal(layer:Global.Layer)->bool:
 ## marks the secret as found
 func set_secret(nr:int):
   secrets |= 2**nr
+  prints('set_secret(%d) -> %d' % [nr, secrets])
 
 func has_secret(nr:int)->bool:
   return secrets & 2**nr != 0

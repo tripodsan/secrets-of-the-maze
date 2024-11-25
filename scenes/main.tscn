@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
-[ext_resource type="Environment" uid="uid://ckialqc3p7cb0" path="res://scenes/compat_env.tres" id="2_aik6b"]
+[ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_7p6ml"]
 [ext_resource type="Theme" uid="uid://cfk78nhykmoun" path="res://scenes/hud_theme.tres" id="2_gqhd0"]
 [ext_resource type="Script" path="res://scripts/custom_dropdown.gd" id="3_a52ap"]
 [ext_resource type="Theme" uid="uid://xjqqvev5aben" path="res://scenes/debug_hud_theme.tres" id="3_mf8j1"]
@@ -61,7 +61,7 @@ shader = ExtResource("7_e01wk")
 script = ExtResource("1_v5gem")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("2_aik6b")
+environment = ExtResource("2_7p6ml")
 script = ExtResource("3_nr21i")
 
 [node name="hudlayer" type="CanvasLayer" parent="."]

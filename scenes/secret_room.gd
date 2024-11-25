@@ -12,6 +12,7 @@ var revealed:bool = false
 func _ready():
   visible = false
   id = int(name.split('_')[1])
+  prints('secret %d is ready' % id)
 
 func reveal(immediate:bool = false)->void:
   revealed = true

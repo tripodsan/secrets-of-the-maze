@@ -43,8 +43,10 @@ func _ready() -> void:
   _layers = [blue, red, green]
   _game_data = GameData.get_level(nr)
   for l in _layers:
-    l.set_game_data(_game_data.get_layers()[l.type])
+    var gd_layer:GDLayer = _game_data.get_layers()[l.type]
+    l.set_game_data(gd_layer)
     l.set_active(false)
+    l.visible = false
   Global.layer_selected.connect(_on_layer_selected)
   GameController.get_player_deferred(_on_player_loaded)
   GameController.portal_reached.connect(_on_portal_reached)
@@ -80,6 +82,11 @@ func _on_layer_selected(layer:ChromaLayer):
     _prev_layer = _layer
     _layer = layer
     _layer.set_active(true)
+    # show the layers where we have a crystal for
+    for l in _layers:
+      l.visible = _layer.game_data.has_crystal(l.type)
+    _layer.visible = true
+
 
 func _on_portal_reached(_p:Portal)->void:
   print('portal reached')

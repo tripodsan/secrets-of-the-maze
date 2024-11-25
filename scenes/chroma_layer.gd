@@ -20,7 +20,6 @@ func _ready():
 # set via parent
 func set_game_data(layer:GDLayer)->void:
   game_data = layer
-  visible = game_data.unlocked
   for n:ChromaCrystal in get_tree().get_nodes_in_group('crystal'):
     if is_ancestor_of(n) and layer.has_crystal(n.type):
       # remove cystals already found
@@ -30,10 +29,10 @@ func set_game_data(layer:GDLayer)->void:
       if layer.has_secret(n.id):
         n.reveal(true)
       else:
-        n.secret_revealed.connect(_on_secret_revealed.bind(n.id))
+        n.secret_revealed.connect(_on_secret_revealed.bind(n))
 
-func _on_secret_revealed(id:int, immediate:bool)->void:
-  game_data.set_secret(id)
+func _on_secret_revealed(immediate:bool, secret:SecretRoom)->void:
+  game_data.set_secret(secret.id)
 
 func set_active(value: bool)->void:
   active = value

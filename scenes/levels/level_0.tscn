@@ -177,7 +177,7 @@ shape = 2
 layer = 0
 
 [node name="portal_0" parent="blue/objects" instance=ExtResource("4_rgtqr")]
-position = Vector2(832, 576)
+position = Vector2(5952, -2176)
 rotation = -1.5708
 ph_off = -1.6713
 shape = 2
