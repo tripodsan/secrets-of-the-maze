@@ -21,14 +21,25 @@ func _ready():
 func set_game_data(layer:GDLayer)->void:
   game_data = layer
   visible = game_data.unlocked
+  for n:ChromaCrystal in get_tree().get_nodes_in_group('crystal'):
+    if is_ancestor_of(n) and layer.has_crystal(n.type):
+      # remove cystals already found
+      n.queue_free()
+  for n:SecretRoom in get_tree().get_nodes_in_group('secret_room'):
+    if is_ancestor_of(n):
+      if layer.has_secret(n.id):
+        n.reveal(true)
+      else:
+        n.secret_revealed.connect(_on_secret_revealed.bind(n.id))
+
+func _on_secret_revealed(id:int, immediate:bool)->void:
+  game_data.set_secret(id)
 
 func set_active(value: bool)->void:
   active = value
   Global.activate_layer_in_viewports(type, value)
   process_mode = Node.PROCESS_MODE_INHERIT if active else PROCESS_MODE_DISABLED
-  for n in get_children():
-    if n is TileMapLayer:
-      n.collision_enabled = value
+  Global.enable_collision_in_tree(self, value)
   Global.layer_activated.emit(self)
 
 ## check if ship at global position pos can shift to this layer.
@@ -45,3 +56,6 @@ func can_chroma_shift(pos:Vector2)->bool:
 
 func get_portal(id:int)->Portal:
   return objects.get_node_or_null('portal_%d' % id)
+
+func get_secret(id:int)->SecretRoom:
+  return get_node_or_null('secret_%d' % id)

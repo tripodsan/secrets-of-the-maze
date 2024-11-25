@@ -32,8 +32,7 @@ var _game_data:GDLevel
 var _start_portal:Portal
 var _start_layer:ChromaLayer
 
-var _level_start_time:int
-var _level_stop_time:int
+var _level_run_time:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -62,8 +61,7 @@ func _on_player_loaded(p:Player)->void:
 
 func _on_player_state_changed(p:Player)->void:
   if p.state == Player.State.ACTIVE:
-    _level_start_time = Time.get_ticks_msec()
-    _level_stop_time = 0
+    _level_run_time = 0
   elif p.state == Player.State.DESTROYING:
     set_state(State.STOPPED)
   elif p.state == Player.State.DESTROYED:
@@ -76,15 +74,15 @@ func _on_player_state_changed(p:Player)->void:
     set_state(State.FINISHED)
 
 func _on_layer_selected(layer:ChromaLayer):
-  if layer != _prev_layer:
-    _layer.set_active(false)
+  if layer != _layer:
+    if _layer:
+      _layer.set_active(false)
     _prev_layer = _layer
     _layer = layer
     _layer.set_active(true)
 
-func _on_portal_reached(p:Portal)->void:
+func _on_portal_reached(_p:Portal)->void:
   print('portal reached')
-  _level_stop_time = Time.get_ticks_msec()
   set_state(State.STOPPED)
 
 func force_chroma_shift(type:Global.Layer)->void:
@@ -105,15 +103,18 @@ func chroma_shift()->void:
     Global.layer_selected.emit(candidate)
 
 func _process(_delta: float) -> void:
+  if state == State.STARTED && _level_run_time >= 0:
+    _level_run_time += _delta * 1000
   if Input.is_action_just_pressed('switch'):
     chroma_shift()
+
 
 func set_game_data(level:GDLevel)->void:
   _game_data = level
 
 func start(layer:Global.Layer, portal:int = 0)->void:
+  _layer = null
   _start_layer = _layers[layer]
-  _layer = _start_layer
   _start_portal = _start_layer.get_portal(portal)
   assert(_start_portal)
   _start_portal.enabled = false
@@ -125,14 +126,11 @@ func restart()->void:
   _on_layer_selected(_start_layer)
   #Global.level_started.emit(self)
   set_state(State.STARTED)
-  _level_start_time = 1
-  _level_stop_time = 1
+  _level_run_time = -1 # timer still stopped
 
 ## returns the level time in milliseconds
 func get_run_time()->int:
-  var t = _level_stop_time
-  if t == 0: t = Time.get_ticks_msec()
-  return t - _level_start_time
+  return _level_run_time if _level_run_time >= 0 else 0;
 
 func get_grid(layer:Global.Layer)->TileMapLayer:
   return _layers[layer].grid

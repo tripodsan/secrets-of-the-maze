@@ -16,6 +16,9 @@ signal player_loaded(player:Player)
 
 signal portal_reached(p:Portal)
 
+signal game_paused()
+
+signal game_resumed()
 
 func start_game()->void:
   show_level_select()
@@ -78,3 +81,11 @@ func _process(delta:float)->void:
     _mouse_motion_timer += delta
     if _mouse_motion_timer > 3.0:
       Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+func pause_game()->void:
+  get_tree().paused = true
+  game_paused.emit()
+
+func resume_game()->void:
+  get_tree().paused = false
+  game_resumed.emit()

@@ -99,6 +99,7 @@ color_ramp = SubResource("GradientTexture1D_n5pis")
 alpha_curve = SubResource("CurveTexture_2qirf")
 
 [node name="Explosion" type="Node2D"]
+z_index = 10
 script = ExtResource("1_mb0m1")
 
 [node name="Smoke" type="GPUParticles2D" parent="."]

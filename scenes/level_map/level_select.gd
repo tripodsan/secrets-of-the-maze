@@ -23,7 +23,7 @@ func _on_level_selected(l:LevelMapNode)->void:
 
   lab_time.text = '%02d:%02d.%02d' % [sec / 60, sec % 60, hsec % 100]
   lab_exits.text = '1 / 1'
-  lab_secrets.text = '0 / 5'
+  lab_secrets.text = '%d / %d' % [l.gd_layer.num_secrets, l.gd_layer.max_secrets]
   lab_chroma.set_crystals(l.gd_layer.crystals)
 
 func _on_level_accepted(l:LevelMapNode)->void:

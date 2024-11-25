@@ -40,3 +40,10 @@ func activate_layer_in_viewports(layer:Layer, enabled:bool)->void:
   var bit = get_layer_cull_mask_bit(layer)
   get_viewport().set_canvas_cull_mask_bit(bit, enabled)
   _phasemap.set_canvas_cull_mask_bit(bit, !enabled)
+
+func enable_collision_in_tree(parent:Node2D, enabled:bool)->void:
+  for n in parent.get_children():
+    if n is TileMapLayer:
+      n.collision_enabled = enabled
+    elif n is Node2D:
+      enable_collision_in_tree(n, enabled)
