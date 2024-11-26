@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bur23dis0vf0t"]
+[gd_scene load_steps=12 format=3 uid="uid://bur23dis0vf0t"]
 
-[ext_resource type="Script" path="res://scenes/bomb.gd" id="1_64nbf"]
-[ext_resource type="Shader" path="res://scenes/bomb.gdshader" id="2_0q745"]
+[ext_resource type="Script" path="res://entities/bomb.gd" id="1_64nbf"]
+[ext_resource type="Shader" path="res://entities/bomb.gdshader" id="2_0q745"]
 [ext_resource type="Texture2D" uid="uid://c62q077icyvru" path="res://assets/glow_circle.png" id="4_7xddy"]
 [ext_resource type="Texture2D" uid="uid://cyokx1amjp27k" path="res://assets/square.png" id="4_c7lso"]
 
@@ -37,11 +37,17 @@ turbulence_noise_scale = 4.294
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5783l"]
 shader = ExtResource("2_0q745")
 
-[node name="Bomb" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ynxv"]
+radius = 13.0
+
+[node name="Bomb" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_64nbf")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D (not used)" type="GPUParticles2D" parent="."]
 visible = false
+emitting = false
 amount = 300
 process_material = SubResource("ParticleProcessMaterial_mmmi2")
 texture = ExtResource("4_c7lso")
@@ -49,7 +55,10 @@ lifetime = 2.0
 trail_enabled = true
 trail_sections = 6
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_5783l")
 scale = Vector2(0.5, 0.3)
 texture = ExtResource("4_7xddy")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2ynxv")

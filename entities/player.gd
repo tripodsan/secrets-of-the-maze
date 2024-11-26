@@ -97,9 +97,7 @@ func _input(_event: InputEvent) -> void:
   if Input.is_action_just_pressed('missile'):
     %ProjectileManager.shoot_projectile(position+transform.x*50.0, transform.x, 750.0, 0, 2.0)
   if Input.is_action_just_pressed('bomb'):
-    var bomb = load("res://scenes/bomb.tscn").instantiate()
-    bomb.initialize(global_position+transform.x*10.0, -transform.x * 3.0)
-    get_parent().add_child(bomb)
+    %ProjectileManager.launch_bomb(global_transform)
 
 func update_trail()->void:
   RenderingServer.global_shader_parameter_set("player_pos_and_vel", trail[trail_pos])
