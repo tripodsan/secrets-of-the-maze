@@ -37,7 +37,6 @@ func _on_secret_revealed(immediate:bool, secret:SecretRoom)->void:
 func set_active(value: bool)->void:
   active = value
   Global.activate_layer_in_viewports(type, value)
-  process_mode = Node.PROCESS_MODE_INHERIT if active else PROCESS_MODE_DISABLED
   Global.enable_collision_in_tree(self, value)
   Global.layer_activated.emit(self)
 

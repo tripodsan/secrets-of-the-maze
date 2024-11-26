@@ -29,7 +29,7 @@ metadata/_edit_lock_ = true
 [node name="objects" type="Node2D" parent="blue"]
 metadata/_edit_lock_ = true
 
-[node name="Oscilator" type="Node" parent="blue/objects"]
+[node name="Oscilator" type="Node2D" parent="blue/objects"]
 script = ExtResource("8_ddnlu")
 amplitude = Vector2(250, 0)
 freq = Vector2(0.35, 0)
@@ -55,6 +55,12 @@ position = Vector2(3136, 1664)
 
 [node name="static_mine7" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
 position = Vector2(3136, 1856)
+
+[node name="static_mine8" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 2048)
+
+[node name="static_mine9" parent="blue/objects/Oscilator" instance=ExtResource("6_x7w7n")]
+position = Vector2(3136, 2240)
 
 [node name="portal_1" parent="blue/objects" instance=ExtResource("7_8k2le")]
 position = Vector2(5952, 1728)

@@ -45,5 +45,7 @@ func enable_collision_in_tree(parent:Node2D, enabled:bool)->void:
   for n in parent.get_children():
     if n is TileMapLayer:
       n.collision_enabled = enabled
+    elif n is CollisionShape2D:
+      n.disabled = !enabled
     elif n is Node2D:
       enable_collision_in_tree(n, enabled)

@@ -1,6 +1,6 @@
 @tool
 class_name Oscilator
-extends Node
+extends Node2D
 
 @export var preview:bool = false:set = set_preview
 

@@ -122,8 +122,10 @@ func start(layer:Global.Layer, portal:int = 0)->void:
   _layer = null
   _start_layer = _layers[layer]
   _start_portal = _start_layer.get_portal(portal)
-  assert(_start_portal)
-  _start_portal.enabled = false
+  # disable start portals
+  # todo: move to layer.reset()
+  for l in _layers:
+    l.get_portal(portal).enabled = false
   restart()
   get_viewport().get_camera_2d().reset_smoothing()
 

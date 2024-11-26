@@ -1,18 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://kj6vuij04rgw"]
+[gd_scene load_steps=4 format=3 uid="uid://kj6vuij04rgw"]
 
 [ext_resource type="Script" path="res://entities/animated_polygon.gd" id="1_0n6sd"]
+[ext_resource type="Script" path="res://entities/wandering_mine.gd" id="1_pgwt8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_12d36"]
 radius = 84.49
 
 [node name="wandering_mine" type="StaticBody2D" groups=["spike"]]
 collision_layer = 4
+script = ExtResource("1_pgwt8")
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_12d36")
 
 [node name="animated_polygon" type="Node2D" parent="."]
-rotation = 98.8643
+rotation = 1726.43
 script = ExtResource("1_0n6sd")
 animate = true
 speed = 0.69
