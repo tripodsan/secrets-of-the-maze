@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @onready var ship: Polygon2D = $ship
+@onready var laser: Laser = $ship/laser
 
 ## front surface area (m²)
 @export_range(0.0, 10.0, 0.1, "or_greater") var a_front := 30.0
@@ -82,6 +83,8 @@ func _ready() -> void:
 func set_state(s:State)->void:
   state = s
   prints('player state:', State.keys()[state])
+  if state != State.ACTIVE:
+    laser.set_active(false)
   state_changed.emit()
 
 func _input(_event: InputEvent) -> void:
@@ -91,9 +94,9 @@ func _input(_event: InputEvent) -> void:
   if state != State.ACTIVE: return
 
   if Input.is_action_just_pressed('laser'):
-    $ship/LaserCast.set_is_casting(true)
+    laser.set_active(true)
   if Input.is_action_just_released('laser'):
-    $ship/LaserCast.set_is_casting(false)
+    laser.set_active(false)
   if Input.is_action_just_pressed('missile'):
     %ProjectileManager.shoot_projectile(position+transform.x*50.0, transform.x, 750.0, 0, 2.0)
   if Input.is_action_just_pressed('bomb'):
@@ -199,6 +202,9 @@ func hit(type:Global.HitType)->void:
   set_state(State.DESTROYING)
   await get_tree().create_timer(1.5).timeout
   set_state(State.DESTROYED)
+
+func apply_damage()->void:
+  hit(Global.HitType.Ship)
 
 func activate(xf:Transform2D)->void:
   prints('activate', xf)

@@ -1,16 +1,21 @@
+class_name Laser
 extends RayCast2D
 
+var is_active := false
 
-var is_casting := false
+var damange:int = 10
 
 func _physics_process(_delta: float) -> void:
-  if !is_casting: return
+  if !is_active: return
   var cast_point := target_position
   #force_raycast_update()
 
   if is_colliding():
+    var col = get_collider()
+    if col.has_method('apply_damage'):
+      col.apply_damage(damange)
     cast_point = to_local(get_collision_point())
-    $TargetParticles.emitting = is_casting
+    $TargetParticles.emitting = is_active
     $TargetParticles.position = cast_point
   else:
     $TargetParticles.emitting = false
@@ -19,10 +24,15 @@ func _physics_process(_delta: float) -> void:
   $LaserParticles.position = cast_point*0.5
   $LaserParticles.process_material.emission_box_extents.y = cast_point.length()*0.5
 
-func set_is_casting(cast):
-  is_casting = cast
-  set_physics_process(is_casting)
-  $CastParticles.emitting = is_casting
-  $LaserParticles.emitting = is_casting
-  $TargetParticles.emitting = is_casting
-  $LaserLine.visible = is_casting
+func set_active(v:bool)->void:
+  if is_active == v: return
+  is_active = v
+  set_physics_process(is_active)
+  $CastParticles.restart()
+  $CastParticles.emitting = is_active
+  $LaserParticles.restart()
+  $LaserParticles.emitting = is_active
+  $TargetParticles.restart()
+  $TargetParticles.emitting = is_active
+
+  $LaserLine.visible = is_active

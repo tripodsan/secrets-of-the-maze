@@ -37,6 +37,7 @@ portal="Group for all portals"
 spike="static deadly enemy"
 secret_room="Group for all secret rooms"
 crystal="Group for all crystals"
+resetable="Entity that should be reset on level restart"
 
 [input]
 

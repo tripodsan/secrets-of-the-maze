@@ -135,6 +135,8 @@ func quit()->void:
 func restart()->void:
   GameController.player.activate(_start_portal.global_transform)
   _on_layer_selected(_start_layer)
+  for n:Node2D in get_tree().get_nodes_in_group('resetable'):
+    n.reset()
   #Global.level_started.emit(self)
   set_state(State.STARTED)
   _level_run_time = -1 # timer still stopped

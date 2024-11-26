@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://ecg6jylppjbm"]
+[gd_scene load_steps=15 format=4 uid="uid://ecg6jylppjbm"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_2e2jd"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="2_niabm"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cn1wgnhsj8ijg" path="res://scenes/corner.tscn" id="5_ryegj"]
 [ext_resource type="PackedScene" uid="uid://c03mtiutjnf4o" path="res://entities/chroma_crystal.tscn" id="6_jfqw0"]
 [ext_resource type="Script" path="res://scripts/trigger.gd" id="6_jqhty"]
+[ext_resource type="Script" path="res://entities/spawner.gd" id="10_6nw55"]
 
 [sub_resource type="Animation" id="Animation_g7ktt"]
 length = 0.001
@@ -70,6 +71,9 @@ _data = {
 "RESET": SubResource("Animation_g7ktt"),
 "reveal": SubResource("Animation_nogph")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_geqoi"]
+size = Vector2(128, 640)
 
 [node name="level_0" type="Node2D"]
 script = ExtResource("1_2e2jd")
@@ -177,11 +181,24 @@ shape = 2
 layer = 0
 
 [node name="portal_0" parent="blue/objects" instance=ExtResource("4_rgtqr")]
-position = Vector2(5952, -2176)
+position = Vector2(832, 512)
 rotation = -1.5708
 ph_off = -1.6713
 shape = 2
 layer = 0
+
+[node name="spawner" type="Node2D" parent="blue/objects" groups=["resetable"]]
+position = Vector2(1088, -2176)
+script = ExtResource("10_6nw55")
+
+[node name="detector" type="Area2D" parent="blue/objects/spawner"]
+position = Vector2(384, 0)
+monitorable = false
+
+[node name="collision" type="CollisionShape2D" parent="blue/objects/spawner/detector"]
+shape = SubResource("RectangleShape2D_geqoi")
+
+[node name="swarm" type="Node2D" parent="blue/objects/spawner"]
 
 [node name="red" type="Node2D" parent="."]
 visible = false
@@ -269,3 +286,5 @@ position = Vector2(832, 512)
 rotation = -1.5708
 ph_off = -1.6713
 layer = 2
+
+[connection signal="body_entered" from="blue/objects/spawner/detector" to="blue/objects/spawner" method="_on_detector_body_entered"]

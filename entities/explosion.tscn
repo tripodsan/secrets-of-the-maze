@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxo81whpicwy"]
+
+[ext_resource type="Script" path="res://entities/explosion.gd" id="1_0mv3r"]
+[ext_resource type="Texture2D" uid="uid://c62q077icyvru" path="res://assets/glow_circle.png" id="2_i2fve"]
+[ext_resource type="Texture2D" uid="uid://cyokx1amjp27k" path="res://assets/square.png" id="3_6y1au"]
+
+[sub_resource type="Gradient" id="Gradient_65g82"]
+colors = PackedColorArray(1, 0.8, 0.8, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_64orx"]
+gradient = SubResource("Gradient_65g82")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mst2b"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 463.81
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_64orx")
+
+[sub_resource type="Gradient" id="Gradient_xc531"]
+offsets = PackedFloat32Array(0.0367347, 0.367347, 0.816176, 1)
+colors = PackedColorArray(0.376858, 1, 0.821415, 1, 0, 0.603852, 0.434625, 1, 4.81307e-07, 0.368234, 0.225626, 0.604364, 2.25613e-08, 0.113972, 0.0739414, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uyv25"]
+gradient = SubResource("Gradient_xc531")
+
+[sub_resource type="Curve" id="Curve_cqeyq"]
+_data = [Vector2(0, 0.571549), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0rbep"]
+curve = SubResource("Curve_cqeyq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tna23"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 265.42
+initial_velocity_max = 528.16
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_0rbep")
+color_ramp = SubResource("GradientTexture1D_uyv25")
+
+[node name="explosion" type="Node2D"]
+script = ExtResource("1_0mv3r")
+
+[node name="Flash" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_mst2b")
+texture = ExtResource("2_i2fve")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+position = Vector2(-1, 0)
+emitting = false
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_tna23")
+texture = ExtResource("3_6y1au")
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.86

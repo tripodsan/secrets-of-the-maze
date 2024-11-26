@@ -497,6 +497,7 @@ nr = -1
 
 [node name="player" parent="world" instance=ExtResource("11_01h05")]
 unique_name_in_owner = true
+position = Vector2(804, 1715)
 
 [node name="Parallax2D" type="ParallaxBackground" parent="world"]
 

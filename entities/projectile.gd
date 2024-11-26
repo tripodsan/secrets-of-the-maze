@@ -27,8 +27,13 @@ func stop():
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
   for i in range(get_contact_count()):
-    var tile_type:StringName = Global.get_tile_type(state.get_contact_collider_object(i), state.get_contact_collider(i))
+    var obj = state.get_contact_collider_object(i)
+    var tile_type:StringName = Global.get_tile_type(obj, state.get_contact_collider(i))
     if tile_type == &"spike":
+      hit.call_deferred()
+      return
+    if obj.has_method('apply_damage'):
+      obj.apply_damage(10)
       hit.call_deferred()
       return
 

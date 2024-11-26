@@ -20,7 +20,7 @@ func get_layer_from_string(s):
 func get_layer_cull_mask_bit(layer:Layer)->int:
   return layer + 1
 
-enum HitType { Spike, Mine}
+enum HitType { Spike, Mine, Ship }
 
 signal layer_selected(layer:ChromaLayer)
 
@@ -45,7 +45,7 @@ func enable_collision_in_tree(parent:Node2D, enabled:bool)->void:
   for n in parent.get_children():
     if n is TileMapLayer:
       n.collision_enabled = enabled
-    elif n is CollisionShape2D:
+    elif n is CollisionShape2D or n is CollisionPolygon2D:
       n.disabled = !enabled
     elif n is Node2D:
       enable_collision_in_tree(n, enabled)

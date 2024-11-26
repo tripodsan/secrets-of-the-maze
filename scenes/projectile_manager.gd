@@ -1,7 +1,7 @@
 class_name ProjectileManager
 extends Node2D
 
-var scn_projectile = preload("res://scenes/projectile.tscn")
+var scn_projectile = preload("res://entities/projectile.tscn")
 
 var scn_bomb = preload('res://entities/bomb.tscn')
 

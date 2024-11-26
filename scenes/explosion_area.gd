@@ -8,8 +8,7 @@ func _ready() -> void:
 func _on_body_entered(body):
   disconnect("body_entered", _on_body_entered)
   $MineMesh.visible = false
-  $Flash.emitting = true
-  $Particles.emitting = true
+  $explosion.explode()
   if body is Player:
     body.hit(Global.HitType.Mine)
   await get_tree().create_timer(1.0).timeout
