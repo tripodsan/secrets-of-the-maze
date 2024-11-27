@@ -3,7 +3,7 @@ extends GDSerializable
 
 @export var player_name:String = "POD"
 
-@export var maze_scale:float = 0.5
+@export var maze_scale:float = 1.0
 
 var SCALE_NAMES = {
   0.5: 'Small',
