@@ -103,6 +103,7 @@ emitting = false
 process_material = SubResource("ParticleProcessMaterial_55v84")
 texture = ExtResource("4_2pg6l")
 lifetime = 0.3
+local_coords = true
 
 [node name="LaserParticles" type="GPUParticles2D" parent="."]
 emitting = false

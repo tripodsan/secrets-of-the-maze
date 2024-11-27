@@ -34,6 +34,9 @@ var _start_layer:ChromaLayer
 
 var _level_run_time:int
 
+# dictionary. key = layer where picked up, value: crystal type
+var _picked_up_crystals:Dictionary = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   if nr < 0:
@@ -87,10 +90,15 @@ func _on_layer_selected(layer:ChromaLayer):
       l.visible = _layer.game_data.has_crystal(l.type)
     _layer.visible = true
 
-
 func _on_portal_reached(_p:Portal)->void:
   print('portal reached')
+  # apply crystals
+  for from:Global.Layer in _picked_up_crystals:
+    var to:Global.Layer = _picked_up_crystals[from]
+    _layers[from].game_data.set_crystal(to)
+    _layers[to].game_data.unlocked = true
   set_state(State.STOPPED)
+
 
 func force_chroma_shift(type:Global.Layer)->void:
   var layer:ChromaLayer = _layers[type]
@@ -111,7 +119,7 @@ func chroma_shift()->void:
 
 func _process(_delta: float) -> void:
   if state == State.STARTED && _level_run_time >= 0:
-    _level_run_time += _delta * 1000
+    _level_run_time += int(_delta * 1000.0)
   if Input.is_action_just_pressed('switch'):
     chroma_shift()
 
@@ -134,6 +142,7 @@ func quit()->void:
 
 func restart()->void:
   GameController.player.activate(_start_portal.global_transform)
+  _picked_up_crystals.clear()
   _on_layer_selected(_start_layer)
   for n:Node2D in get_tree().get_nodes_in_group('resetable'):
     n.reset()
@@ -147,3 +156,6 @@ func get_run_time()->int:
 
 func get_grid(layer:Global.Layer)->TileMapLayer:
   return _layers[layer].grid
+
+func picked_up_crystal(layer_type:Global.Layer, crystal:Global.Layer)->void:
+  _picked_up_crystals[layer_type] = crystal

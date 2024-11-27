@@ -13,6 +13,8 @@ func _ready()->void:
 
 func open()->void:
   visible = true
+  pause_menu.visible = true
+  settings_menu.visible = false
   btn_resume_game.grab_focus()
 
 func close()->void:

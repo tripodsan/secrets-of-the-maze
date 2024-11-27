@@ -80,6 +80,7 @@ script = ExtResource("1_2e2jd")
 nr = 0
 
 [node name="blue" type="Node2D" parent="."]
+visible = false
 visibility_layer = 2
 script = ExtResource("2_niabm")
 metadata/_edit_lock_ = true
@@ -201,7 +202,6 @@ shape = SubResource("RectangleShape2D_geqoi")
 [node name="swarm" type="Node2D" parent="blue/objects/spawner"]
 
 [node name="red" type="Node2D" parent="."]
-visible = false
 visibility_layer = 4
 script = ExtResource("2_niabm")
 metadata/_edit_lock_ = true
@@ -226,13 +226,13 @@ orientation = 1
 color_scheme = 1
 
 [node name="portal_0" parent="red/objects" instance=ExtResource("4_rgtqr")]
-position = Vector2(9024, -2176)
+position = Vector2(832, 512)
 rotation = 4.71239
 ph_off = -1.6713
 shape = 0
 
 [node name="portal_1" parent="red/objects" instance=ExtResource("4_rgtqr")]
-position = Vector2(832, 512)
+position = Vector2(9024, -2112)
 rotation = -1.5708
 ph_off = -1.6713
 shape = 0

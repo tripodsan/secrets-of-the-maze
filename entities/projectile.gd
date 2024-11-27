@@ -2,13 +2,21 @@ extends RigidBody2D
 
 var lifespan := 2.0
 var time_alive = 0.0
-var type := 0
 
 @onready var trail: GPUParticles2D = $trail
 @onready var sprite: Sprite2D = $sprite
 
 func _ready() -> void:
   body_shape_entered.connect(_on_body_shape_entered)
+  GameController.maze_scale_changed.connect(_on_maze_scale_changed)
+  _on_maze_scale_changed()
+
+func _on_maze_scale_changed()->void:
+  # adjust the scaling based on level scale, because a ridgid body can't be scaled
+  var s = Vector2.ONE * GameData.get_settings().maze_scale
+  trail.scale = s
+  sprite.scale = s * 0.3
+  $collision.scale = s
 
 func start(pos:Vector2, vel:Vector2):
   global_position = pos
@@ -40,10 +48,12 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 func _physics_process(delta: float) -> void:
   if !visible: return
   time_alive += delta
+  if time_alive >= lifespan + trail.lifetime:
+    visible = false
+    return
   if time_alive >= lifespan:
     hit.call_deferred()
     return
-
   #var scale_f = min(0.6, time_alive)
   #sprite.scale = Vector2(scale_f, scale_f*0.5)
   sprite.rotate(min(1.0, time_alive*0.2))
@@ -52,6 +62,10 @@ func hit():
   sprite.visible = false
   trail.emitting = false
   freeze = true
+
+func reset():
+  hit()
+  stop()
 
 @warning_ignore('unused_parameter')
 func _on_body_shape_entered(body_rid: RID, body: Node, body_shape_index: int, local_shape_index: int):

@@ -4,6 +4,8 @@ var scn_title:PackedScene = preload('res://scenes/title.tscn')
 var scn_main:PackedScene = preload('res://scenes/main.tscn')
 var scn_lvl_select:PackedScene = preload('res://scenes/level_map/level_select.tscn')
 
+var _start_layer:GDLayer
+
 var _current_layer:GDLayer
 
 var player:Player
@@ -12,13 +14,19 @@ var level:Level
 
 signal level_loaded(level:Level)
 
+signal layer_activated(layer:ChromaLayer)
+
 signal player_loaded(player:Player)
 
+@warning_ignore('unused_signal')
 signal portal_reached(p:Portal)
 
 signal game_paused()
 
 signal game_resumed()
+
+@warning_ignore('unused_signal')
+signal maze_scale_changed()
 
 func start_game()->void:
   show_level_select()
@@ -35,21 +43,25 @@ func show_title_screen():
 ## calls by the level select screeen
 func start_level(layer:GDLayer)->void:
   print('gamecontroller: start_level')
-  _current_layer = layer
+  _start_layer = layer
   await SceneTransition.change_scene(scn_main)
+
+func activate_layer(layer:ChromaLayer)->void:
+  _current_layer = layer.game_data
+  layer_activated.emit(layer)
 
 func on_game_scene_loaded(scn:GameScene)->void:
   print('gamecontroller: load_level')
-  scn.load_level(_current_layer)
+  scn.load_level(_start_layer)
 
 func on_level_state_change()->void:
   assert(level)
   if level.state == Level.State.READY:
     # level was just loaded, so start it
-    level.start(_current_layer.type)
+    level.start(_start_layer.type)
   elif level.state == Level.State.FINISHED:
-    _current_layer.record_time(level.get_run_time())
-    GameData.unlock_next_level(_current_layer.get_level())
+    _start_layer.record_time(level.get_run_time())
+    GameData.unlock_next_level(_start_layer.get_level())
     show_level_select()
 
 func set_player(p:Player)->void:
@@ -68,9 +80,8 @@ func set_level(l:Level)->void:
   level.state_changed.connect(on_level_state_change)
 
 func on_chroma_crystal_pickup(type:Global.Layer)->void:
+  level.picked_up_crystal(_current_layer.type, type)
   level.force_chroma_shift(type)
-  _current_layer.set_crystal(type)
-  _current_layer.get_level().get_layers()[type].unlocked = true
 
 var _mouse_motion_timer:float = 0
 

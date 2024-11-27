@@ -38,7 +38,7 @@ func _build_node(layer:GDLayer)->LevelMapNode:
   n.name = nName
   nodes.add_child(n)
   n.position = Vector2(lvl * GRID_SIZE, -lay * GRID_SIZE)
-  n.animation = layer.name if layer.unlocked else '_'
+  n.animation = layer.name if layer.unlocked else &'_'
   n.gd_layer = layer
   n.gd_level = level
   n.title = level.get_title()
@@ -72,7 +72,7 @@ func rebuild()->void:
   selected_level = null
   _build_node(GameData.get_layer(0, 0))
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
   if Input.is_action_just_pressed('ui_left'):
     select(selected_level.neighbors[3])
   elif Input.is_action_just_pressed('ui_right'):

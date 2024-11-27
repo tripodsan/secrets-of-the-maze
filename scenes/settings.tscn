@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://be17dxfp5e0vq"]
+[gd_scene load_steps=4 format=3 uid="uid://be17dxfp5e0vq"]
 
+[ext_resource type="Theme" uid="uid://gydw4cyvjjug" path="res://scenes/title_theme.tres" id="1_nlbdr"]
 [ext_resource type="Script" path="res://scenes/settings.gd" id="1_uud42"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abufw"]
 
 [node name="settings" type="VBoxContainer"]
-visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_nlbdr")
 script = ExtResource("1_uud42")
 
 [node name="Label" type="Label" parent="."]
@@ -24,8 +30,14 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Controls"
 
+[node name="btn_scale" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Level Scale: Small"
+
 [node name="btn_back" type="Button" parent="."]
 layout_mode = 2
 text = "Back"
 
+[connection signal="pressed" from="btn_scale" to="." method="_on_btn_scale_pressed"]
 [connection signal="pressed" from="btn_back" to="." method="_on_btn_back_pressed"]

@@ -17,6 +17,11 @@ func _ready() -> void:
   _current_level = get_node_or_null("world/game/level")
   %phasemap.world_2d = get_viewport().world_2d
   GameController.on_game_scene_loaded(self)
+  GameController.maze_scale_changed.connect(_on_maze_scale_changed)
+  _on_maze_scale_changed()
+
+func _on_maze_scale_changed()->void:
+  scale = Vector2.ONE * GameData.get_settings().maze_scale
 
 func load_level(layer:GDLayer)->void:
   var nr := layer.get_level().get_nr()

@@ -31,18 +31,19 @@ func set_game_data(layer:GDLayer)->void:
       else:
         n.secret_revealed.connect(_on_secret_revealed.bind(n))
 
-func _on_secret_revealed(immediate:bool, secret:SecretRoom)->void:
+func _on_secret_revealed(_immediate:bool, secret:SecretRoom)->void:
   game_data.set_secret(secret.id)
 
 func set_active(value: bool)->void:
   active = value
   Global.activate_layer_in_viewports(type, value)
   Global.enable_collision_in_tree(self, value)
-  Global.layer_activated.emit(self)
+  GameController.activate_layer(self)
 
 ## check if ship at global position pos can shift to this layer.
 func can_chroma_shift(pos:Vector2)->bool:
   if !visible: return false
+  pos = to_local(pos)
   prints('check chroma shift at', pos)
   var p:Vector2i = map.local_to_map(pos)
   var tile:TileData = grid.get_cell_tile_data(p)

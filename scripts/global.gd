@@ -22,10 +22,10 @@ func get_layer_cull_mask_bit(layer:Layer)->int:
 
 enum HitType { Spike, Mine, Ship }
 
+@warning_ignore('unused_signal')
 signal layer_selected(layer:ChromaLayer)
 
-signal layer_activated(layer:ChromaLayer)
-
+@warning_ignore('unused_signal')
 signal supernova
 
 func get_tile_type(map, rid)->StringName:

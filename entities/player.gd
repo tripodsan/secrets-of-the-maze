@@ -98,7 +98,7 @@ func _input(_event: InputEvent) -> void:
   if Input.is_action_just_released('laser'):
     laser.set_active(false)
   if Input.is_action_just_pressed('missile'):
-    %ProjectileManager.shoot_projectile(position+transform.x*50.0, transform.x, 750.0, 0, 2.0)
+    %ProjectileManager.shoot_projectile(global_transform)
   if Input.is_action_just_pressed('bomb'):
     %ProjectileManager.launch_bomb(global_transform)
 
@@ -164,7 +164,7 @@ func _physics_process(delta: float) -> void:
 
   velocity += a_tot * delta
 
-  var coll:KinematicCollision2D = move_and_collide(velocity * delta)
+  var coll:KinematicCollision2D = move_and_collide(velocity * delta * GameData.get_settings().maze_scale)
   if coll:
     var body:Object = coll.get_collider()
     var type:StringName = Global.get_tile_type(body, coll.get_collider_rid())
@@ -194,7 +194,7 @@ func _physics_process(delta: float) -> void:
   update_trail()
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
 
-func hit(type:Global.HitType)->void:
+func hit(_type:Global.HitType)->void:
   if state != State.ACTIVE: return
   $ship.visible = false
   $Explosion.fire()
@@ -232,5 +232,4 @@ func portal_enter(p:Portal)->void:
 
 func pickup(body:Node2D)->void:
   if body is ChromaCrystal:
-    body.queue_free()
     GameController.on_chroma_crystal_pickup.call_deferred(body.type)

@@ -5,7 +5,7 @@ extends Control
 @onready var level_timer:LevelTimer = %level_timer
 
 func _ready() -> void:
-  Global.layer_activated.connect(_on_layer_activated)
+  GameController.layer_activated.connect(_on_layer_activated)
   GameController.level_loaded.connect(_on_level_loaded)
 
 func _on_layer_activated(layer:ChromaLayer)->void:

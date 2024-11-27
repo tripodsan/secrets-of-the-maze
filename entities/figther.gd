@@ -23,12 +23,16 @@ func hit():
   await get_tree().create_timer(1.0).timeout
   queue_free()
 
-func apply_damage(amount:int)->void:
+func apply_damage(_amount:int)->void:
   hit()
 
 func _physics_process(delta: float) -> void:
   if modulate.a < 1.0:
     modulate.a += 0.1
+
+  if GameController.player == null:
+    queue_free()
+    return
 
   nav_agent.target_position = GameController.player.global_position
   var ppos:Vector2 = nav_agent.get_next_path_position()
@@ -39,7 +43,7 @@ func _physics_process(delta: float) -> void:
     speed *= 1.1
 
   speed_delta = speed * delta
-  var new_velocity:Vector2 = transform.x * speed# * delta
+  var new_velocity:Vector2 = transform.x * speed * GameData.get_settings().maze_scale
   if nav_agent.avoidance_enabled:
     nav_agent.set_velocity(new_velocity)
   else:
@@ -49,9 +53,9 @@ func _on_velocity_computed(v:Vector2)->void:
   velocity = v# * speed_delta
   #global_position = global_position.move_toward(global_position + v, speed_delta)
   move_and_slide()
-  #var col:KinematicCollision2D = move_and_collide(velocity)
-  #if col:
-    #var body:Object = col.get_collider()
-    #var type:StringName = Global.get_tile_type(body, col.get_collider_rid())
-    #if type == &"spike":
-      #hit()
+  for i in get_slide_collision_count():
+    var col:KinematicCollision2D = get_slide_collision(i)
+    var body:Object = col.get_collider()
+    var type:StringName = Global.get_tile_type(body, col.get_collider_rid())
+    if type == &"spike":
+      hit()

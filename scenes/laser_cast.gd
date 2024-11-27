@@ -5,6 +5,18 @@ var is_active := false
 
 var damange:int = 10
 
+const DISTANCE = 1300
+
+@onready var laser_line: Line2D = $LaserLine
+
+func _ready() -> void:
+  _on_maze_scale_changed()
+  GameController.maze_scale_changed.connect(_on_maze_scale_changed)
+
+func _on_maze_scale_changed()->void:
+  var s:float = GameData.get_settings().maze_scale
+  target_position = Vector2(0, -DISTANCE) / s
+
 func _physics_process(_delta: float) -> void:
   if !is_active: return
   var cast_point := target_position

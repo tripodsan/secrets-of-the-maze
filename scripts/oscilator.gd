@@ -22,11 +22,11 @@ func _store_initial_pos():
   _initial_pos = []
   for t:Node2D in get_children():
     _targets.append(t)
-    _initial_pos.append(t.global_position)
+    _initial_pos.append(t.position)
 
 func _reset_initial_pos():
   for i in range(len(_targets)):
-    _targets[i].global_position = _initial_pos[i]
+    _targets[i].position = _initial_pos[i]
 
 func set_preview(v:bool)->void:
   if Engine.is_editor_hint():
@@ -41,7 +41,7 @@ func _process(_delta: float) -> void:
     var p := Vector2.ZERO
     for i in range(len(_targets)):
       var a:Vector2 = TAU * (p + freq * float(Time.get_ticks_msec()) / 1000.0)
-      _targets[i].global_position = _initial_pos[i] + amplitude * Vector2(cos(a.x), sin(a.y))
+      _targets[i].position = _initial_pos[i] + amplitude * Vector2(cos(a.x), sin(a.y))
       p += phase
 
 func _notification(what: int) -> void:

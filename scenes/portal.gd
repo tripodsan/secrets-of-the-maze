@@ -100,7 +100,7 @@ func get_spiral_pos(t:float)->Vector2:
   var r := a * exp(k * ph)
   return Vector2.RIGHT.rotated((ph + ph_off) * ph_scale) * r
 
-func _process(delta)->void:
+func _process(_delta)->void:
   if Engine.is_editor_hint():
     if marker.global_position != marker_pos:
       marker_pos = marker.global_position

@@ -9,7 +9,7 @@ var cells:Array[Vector2i] = [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)]
 
 func _ready() -> void:
   GameController.level_loaded.connect(_on_level_loaded)
-  Global.layer_activated.connect(_on_layer_activated)
+  GameController.layer_activated.connect(_on_layer_activated)
 
 func _on_level_loaded(level:Level)->void:
   level.state_changed.connect(_on_level_state_changed.bind(level))
@@ -32,4 +32,4 @@ func _on_level_state_changed(level:Level)->void:
 
 func _process(_delta: float) -> void:
   if GameController.player:
-    camera_2d.global_position = GameController.player.global_position / 32.0
+    camera_2d.global_position = GameController.player.global_position / 32.0 / GameData.get_settings().maze_scale

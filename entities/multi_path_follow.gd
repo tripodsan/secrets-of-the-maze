@@ -23,7 +23,6 @@ func _ready() -> void:
       _targets.append(n)
   _portals.sort_custom(func (a,b): return a.curve_offset < b.curve_offset)
   _start_type = _portals[-1].type
-
   distribute_targets()
 
 func distribute_targets()->void:
@@ -38,7 +37,7 @@ func distribute_targets()->void:
       type = m.type
     var mine = _targets[i]
     mine.reparent(_layer_parents[type])
-    mine.global_position = pos
+    mine.global_position = to_global(pos)
 
 func _process(delta:float)->void:
   offset = fmod(offset + delta * speed, curve.get_baked_length())

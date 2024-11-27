@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://ueliw88dyxml"]
+[gd_scene load_steps=11 format=4 uid="uid://ueliw88dyxml"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_8huey"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="2_6eiqs"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://kj6vuij04rgw" path="res://entities/wandering_mine.tscn" id="6_5rwq0"]
 [ext_resource type="Script" path="res://entities/multi_path_follow.gd" id="6_qtfq5"]
 [ext_resource type="PackedScene" uid="uid://cn1wgnhsj8ijg" path="res://scenes/corner.tscn" id="6_uepqb"]
+[ext_resource type="PackedScene" uid="uid://c03mtiutjnf4o" path="res://entities/chroma_crystal.tscn" id="6_yev1u"]
 [ext_resource type="Script" path="res://entities/mine_portal.gd" id="7_jqfu5"]
 [ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="7_l5ml6"]
 
@@ -61,10 +62,14 @@ ph_off = -1.6713
 shape = 0
 layer = 0
 
+[node name="crystal_red" parent="blue/objects" instance=ExtResource("6_yev1u")]
+position = Vector2(3648, 1920)
+
 [node name="secrets" type="Node2D" parent="blue"]
 metadata/_edit_lock_ = true
 
 [node name="red" type="Node2D" parent="."]
+visible = false
 visibility_layer = 4
 script = ExtResource("2_6eiqs")
 metadata/_edit_lock_ = true

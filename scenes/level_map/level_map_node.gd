@@ -25,6 +25,7 @@ func get_nb_bitmask()->int:
     if neighbors[i]: msk += 2**i
   return msk
 
+@warning_ignore('unused_parameter')
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
   if event is InputEventMouseButton and event.is_released():
     clicked.emit()

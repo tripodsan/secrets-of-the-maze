@@ -17,12 +17,12 @@ func _ready() -> void:
     add_child(projectile)
     projectile_pool.append(projectile)
 
-
-func shoot_projectile(pos, direction, speed, type, lifespan):
+func shoot_projectile(xform:Transform2D):
+#func shoot_projectile(pos, direction, speed, type, lifespan):
+  # position+transform.x*50.0, transform.x, 750.0, 0, 2.0
   var projectile:RigidBody2D = projectile_pool[current_index]
-  projectile.type = type
   projectile.lifespan = 4.0
-  projectile.start(pos, direction.normalized() * speed)
+  projectile.start(xform.origin + xform.x*50.0, xform.x * 750)
 
   current_index = (current_index + 1) % MAX_PROJECTILES
 

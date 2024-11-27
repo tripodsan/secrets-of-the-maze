@@ -11,9 +11,9 @@ func _ready() -> void:
     get_parent().body_entered.connect(_on_body_entered)
     target.secret_revealed.connect(_on_target_revealed)
 
-func _on_body_entered(body:Node2D)->void:
+func _on_body_entered(_body:Node2D)->void:
   target.reveal()
 
-func _on_target_revealed(immediate:bool)->void:
+func _on_target_revealed(_immediate:bool)->void:
   # todo: generalize
   get_parent().visible = false

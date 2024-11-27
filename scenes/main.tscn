@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=36 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_7p6ml"]
@@ -25,6 +25,8 @@
 [ext_resource type="Script" path="res://scenes/pause_menu.gd" id="16_lo5hn"]
 [ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
 [ext_resource type="PackedScene" uid="uid://be17dxfp5e0vq" path="res://scenes/settings.tscn" id="18_ow3de"]
+[ext_resource type="AudioStream" uid="uid://kw8cidi6kggc" path="res://sounds/chromakoma.mp3" id="26_e8gw4"]
+[ext_resource type="Script" path="res://scripts/bg_player.gd" id="27_noa8a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6pc7t"]
 
@@ -365,7 +367,7 @@ disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 gui_disable_input = true
-size = Vector2i(256, 256)
+size = Vector2i(192, 192)
 render_target_update_mode = 4
 
 [node name="minimap" parent="hudlayer/hud/MarginContainer/vbox/PanelContainer/minimap_container/minimap_port" instance=ExtResource("11_ms5bv")]
@@ -387,6 +389,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="pause" type="Control" parent="hudlayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -453,6 +456,7 @@ text = "Quit Level"
 
 [node name="settings_menu" parent="hudlayer/pause/MarginContainer" instance=ExtResource("18_ow3de")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="previewlayer" type="CanvasLayer" parent="."]
@@ -524,6 +528,12 @@ texture = ExtResource("5_hcqio")
 [node name="ProjectileManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("18_nwqka")
+
+[node name="bg_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_e8gw4")
+bus = &"background"
+parameters/looping = true
+script = ExtResource("27_noa8a")
 
 [connection signal="pressed" from="hudlayer/pause/MarginContainer/pause_menu/btn_resume_game" to="hudlayer/pause" method="_on_btn_resume_game_pressed"]
 [connection signal="pressed" from="hudlayer/pause/MarginContainer/pause_menu/btn_restart_level" to="hudlayer/pause" method="_on_btn_restart_level_pressed"]

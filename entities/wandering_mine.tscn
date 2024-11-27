@@ -14,7 +14,7 @@ script = ExtResource("1_pgwt8")
 shape = SubResource("CircleShape2D_12d36")
 
 [node name="animated_polygon" type="Node2D" parent="."]
-rotation = 1728.08
+rotation = 1780.69
 script = ExtResource("1_0n6sd")
 animate = true
 speed = 0.69

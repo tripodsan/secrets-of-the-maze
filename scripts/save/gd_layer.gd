@@ -47,7 +47,7 @@ func has_secret(nr:int)->bool:
 
 func reset()->void:
   unlocked = false
-  best_time = 0.0
+  best_time = 0
   crystals = 0
 
 func record_time(time:int)->void:
