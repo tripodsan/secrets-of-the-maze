@@ -20,6 +20,12 @@ func get_layer_from_string(s):
 func get_layer_cull_mask_bit(layer:Layer)->int:
   return layer + 1
 
+## recursively walks up the tree until it finds the chromlayer
+func get_chroma_layer(node:Node2D)->ChromaLayer:
+  if node is ChromaLayer:
+    return node
+  return get_chroma_layer(node.get_parent())
+
 enum HitType { Spike, Mine, Ship }
 
 @warning_ignore('unused_signal')

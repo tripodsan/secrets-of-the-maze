@@ -12,10 +12,18 @@ var game_data:GDLayer
 
 var type:Global.Layer
 
+var navigation_map:RID
+
 func _ready():
   type = Global.get_layer_from_string(name)
   assert(type >= 0)
   visible = false
+  # create a navigation map for each layer, so that the enemies have
+  # the correct map to operate on
+  navigation_map = NavigationServer2D.map_create()
+  NavigationServer2D.map_set_cell_size(navigation_map, 1)
+  NavigationServer2D.map_set_active(navigation_map, true)
+  grid.set_navigation_map(navigation_map)
 
 # set via parent
 func set_game_data(layer:GDLayer)->void:
@@ -39,6 +47,7 @@ func set_active(value: bool)->void:
   Global.activate_layer_in_viewports(type, value)
   Global.enable_collision_in_tree(self, value)
   GameController.activate_layer(self)
+
 
 ## check if ship at global position pos can shift to this layer.
 func can_chroma_shift(pos:Vector2)->bool:

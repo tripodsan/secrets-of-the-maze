@@ -61,7 +61,8 @@ func on_level_state_change()->void:
     level.start(_start_layer.type)
   elif level.state == Level.State.FINISHED:
     _start_layer.record_time(level.get_run_time())
-    GameData.unlock_next_level(_start_layer.get_level())
+    if _current_layer == _start_layer:
+      GameData.unlock_next_level(_start_layer)
     show_level_select()
 
 func set_player(p:Player)->void:

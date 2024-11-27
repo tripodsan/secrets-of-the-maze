@@ -25,6 +25,6 @@ func reset()->void:
   unlocked = false
   super.reset()
 
-func unlock()->void:
+func unlock(type:int)->void:
   unlocked = true
-  _layers[0].unlocked = true
+  _layers[type].unlocked = true

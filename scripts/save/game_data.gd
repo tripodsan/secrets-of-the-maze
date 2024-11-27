@@ -23,7 +23,7 @@ func save_file(file_name:String)->void:
 
 func reset()->void:
   get_levels().reset()
-  get_level(0).unlock()
+  get_level(0).unlock(0)
 
 func get_levels()->GDSerializable:
   return $save/levels
@@ -31,10 +31,12 @@ func get_levels()->GDSerializable:
 func get_level(nr:int)->GDLevel:
   return get_node_or_null('save/levels/%d' % nr)
 
-func unlock_next_level(lvl:GDLevel)->void:
-  var next = get_level(lvl.get_nr() + 1)
+## unlocks the next level and respective layer
+func unlock_next_level(lay:GDLayer):
+  var next = get_level(lay.get_level().get_nr() + 1)
   if next:
-    next.unlock()
+    prints('unlocking level', next)
+    next.unlock(lay.type)
 
 func get_settings()->GDSettings:
   return $save/settings

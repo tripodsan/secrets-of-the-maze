@@ -12,9 +12,14 @@ var speed = 20
 
 var speed_delta:float = 0
 
+var layer:Global.Layer
+
 func _ready()->void:
   modulate.a = 0
-  nav_agent.velocity_computed.connect(_on_velocity_computed)
+  if nav_agent.avoidance_enabled:
+    nav_agent.velocity_computed.connect(_on_velocity_computed)
+  nav_agent.navigation_layers = Global.LAYER_MASK[layer]
+  nav_agent.set_navigation_map(Global.get_chroma_layer(self).navigation_map)
 
 func hit():
   explosion.explode()
