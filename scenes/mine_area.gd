@@ -15,7 +15,7 @@ func _ready() -> void:
   connect("body_entered", _on_entered)
 
 func _on_entered(body):
-  if body is Player:
+  if body is Player && body.state == Player.State.ACTIVE:
     target = body
     %MineMesh.material.set_shader_parameter("activity", 1.1)
 

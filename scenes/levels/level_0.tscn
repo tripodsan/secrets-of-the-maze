@@ -329,7 +329,11 @@ layer = 2
 [node name="red_crystal" parent="green/objects" instance=ExtResource("6_jfqw0")]
 position = Vector2(4544, -3648)
 
+[node name="blue_crystal" parent="green/objects" instance=ExtResource("6_jfqw0")]
+position = Vector2(6784, -2176)
+type = 0
+
 [node name="Mine" parent="green/objects" instance=ExtResource("10_mpxi1")]
-position = Vector2(3008, -2176)
+position = Vector2(5760, -3648)
 
 [connection signal="body_entered" from="red/objects/spawner/detector" to="red/objects/spawner" method="_on_detector_body_entered"]

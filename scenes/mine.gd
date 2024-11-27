@@ -13,11 +13,11 @@ func reset()->void:
   visible = true
   $DetectionArea.reset()
   $ExplosionArea.reset()
-  $ExplosionArea/collision.disabled = false
-  $DetectionArea/collision.disabled = false
+  $ExplosionArea/collision.set_disabled.call_deferred(false)
+  $DetectionArea/collision.set_disabled.call_deferred(false)
 
 func disable()->void:
   visible = false
   $DetectionArea.target = null
-  $ExplosionArea/collision.disabled = true
-  $DetectionArea/collision.disabled = true
+  $ExplosionArea/collision.set_disabled.call_deferred(true)
+  $DetectionArea/collision.set_disabled.call_deferred(true)
