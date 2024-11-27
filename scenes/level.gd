@@ -104,6 +104,10 @@ func force_chroma_shift(type:Global.Layer)->void:
   var layer:ChromaLayer = _layers[type]
   layer.visible = true
   Global.layer_selected.emit(layer)
+  if !layer.can_chroma_shift(GameController.player.global_position):
+    # move player to start portal
+    GameController.player.global_transform = layer.get_portal(0).global_transform
+
 
 func chroma_shift()->void:
   var pos = GameController.player.global_position
