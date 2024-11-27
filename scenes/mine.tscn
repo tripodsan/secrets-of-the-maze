@@ -18,14 +18,14 @@ shader_parameter/tex = ExtResource("6_2rnfl")
 
 [sub_resource type="QuadMesh" id="QuadMesh_icsry"]
 
-[node name="Mine" type="Node2D"]
+[node name="Mine" type="Node2D" groups=["resetable"]]
 script = ExtResource("1_wik26")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 64
 script = ExtResource("3_2fv6n")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+[node name="collision" type="CollisionShape2D" parent="DetectionArea"]
 scale = Vector2(30, 30)
 shape = SubResource("CircleShape2D_3xoe8")
 
@@ -34,7 +34,7 @@ collision_layer = 64
 collision_mask = 27
 script = ExtResource("4_4dhk0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+[node name="collision" type="CollisionShape2D" parent="ExplosionArea"]
 scale = Vector2(2.5, 2.5)
 shape = SubResource("CircleShape2D_fvbxx")
 
