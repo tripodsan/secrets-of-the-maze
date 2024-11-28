@@ -151,6 +151,9 @@ func restart()->void:
   _picked_up_crystals.clear()
   chrystals_changed.emit()
   _on_layer_selected(_start_layer)
+  # wait a frame to avoid immediate collisions
+  #await get_tree().physics_frame
+  #await get_tree().physics_frame
   for n:Node2D in get_tree().get_nodes_in_group('resetable'):
     n.reset()
   #Global.level_started.emit(self)
@@ -167,3 +170,6 @@ func get_grid(layer:Global.Layer)->TileMapLayer:
 func picked_up_crystal(layer_type:Global.Layer, crystal:Global.Layer)->void:
   _picked_up_crystals[layer_type] = crystal
   chrystals_changed.emit()
+
+func add_blast(blast:Blast)->void:
+  _layer.objects.add_child(blast)

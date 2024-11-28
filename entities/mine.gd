@@ -24,9 +24,11 @@ func _process(delta: float) -> void:
     velocity = velocity.lerp(v_to_target * speed, 0.5)
 
 func _on_explosion_area_body_entered(body: Node2D) -> void:
+  prints('mine explodes..', self)
   visual.visible = false
   explosion.explode()
-  if body is Player:
-    body.hit(Global.HitType.Mine)
+  GameController.create_blast(global_position, 200, 500)
   await get_tree().create_timer(1.0).timeout
+  prints('mine frees..', self)
+  get_parent().remove_child(self)
   queue_free()

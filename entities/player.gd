@@ -42,6 +42,8 @@ var trail_pos:int = 0
 
 signal state_changed()
 
+signal health_changed()
+
 enum State {
   ## inital state right after initialized
   LOADED,
@@ -74,6 +76,10 @@ var portal:Portal = null
 var portal_time:float = 0
 var portal_speed:float = 0.1
 
+var health:float = 100
+
+var start_health:float = 100
+
 func _ready() -> void:
   trail.resize(6)
   GameController.set_player(self)
@@ -85,6 +91,9 @@ func set_state(s:State)->void:
   prints('player state:', State.keys()[state])
   if state != State.ACTIVE:
     laser.set_active(false)
+    collision_layer = 0
+  else:
+    collision_layer = 1
   state_changed.emit()
 
 func _input(_event: InputEvent) -> void:
@@ -169,10 +178,10 @@ func _physics_process(delta: float) -> void:
     var body:Object = coll.get_collider()
     var type:StringName = Global.get_tile_type(body, coll.get_collider_rid())
     if type == &"spike":
-      hit(Global.HitType.Spike)
+      apply_damage(100)
       return
     elif body is Node2D and body.is_in_group(&"spike"):
-      hit(Global.HitType.Spike)
+      apply_damage(100)
       return
 
     var wall := coll.get_normal()
@@ -194,17 +203,18 @@ func _physics_process(delta: float) -> void:
   update_trail()
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
 
-func hit(_type:Global.HitType)->void:
+func apply_damage(amount:float)->void:
   if state != State.ACTIVE: return
-  $ship.visible = false
-  $Explosion.fire()
-  RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
-  set_state(State.DESTROYING)
-  await get_tree().create_timer(1.5).timeout
-  set_state(State.DESTROYED)
-
-func apply_damage()->void:
-  hit(Global.HitType.Ship)
+  prints('applied %f damage' % amount)
+  health = max(0, health - amount)
+  health_changed.emit()
+  if health == 0:
+    $ship.visible = false
+    $Explosion.fire()
+    RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
+    set_state(State.DESTROYING)
+    await get_tree().create_timer(1.5).timeout
+    set_state(State.DESTROYED)
 
 func activate(xf:Transform2D)->void:
   prints('activate', xf)
@@ -215,6 +225,7 @@ func activate(xf:Transform2D)->void:
   trail.fill(Vector4.ZERO)
   velocity = Vector2.ZERO
   rot_velo = 0
+  health = start_health
   set_state(State.ACTIVATING)
 
 

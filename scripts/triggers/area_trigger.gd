@@ -32,11 +32,11 @@ func _get_configuration_warnings():
     return ['Missing Area2D child node']
 
 func _on_body_entered(n: Node2D):
-  if n is Player:
+  if n is Player && n.state == Player.State.ACTIVE:
     trigger_body = n
     activate.emit()
 
 func _on_body_exited(n: Node2D):
-  if n is Player:
+  if n is Player && n.state == Player.State.ACTIVE:
     trigger_body = n
     deactivate.emit()

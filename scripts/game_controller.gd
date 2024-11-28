@@ -25,6 +25,8 @@ signal game_paused()
 
 signal game_resumed()
 
+signal blasted(blast:Blast)
+
 @warning_ignore('unused_signal')
 signal maze_scale_changed()
 
@@ -113,3 +115,14 @@ func exit_level()->void:
   resume_game()
   level.quit()
   show_level_select()
+
+var scn_blast:PackedScene = preload('res://entities/blast.tscn')
+func create_blast(pos:Vector2, amount:float, radius:float, affect_player:bool = true, affect_enemy:bool = false):
+  var blast:Blast = scn_blast.instantiate()
+  blast.amount = amount
+  blast.radius = radius
+  blast.affect_player = affect_player
+  blast.affect_enemy = affect_enemy
+  blast.global_position = pos
+  level.add_blast.call_deferred(blast)
+  blasted.emit(blast)

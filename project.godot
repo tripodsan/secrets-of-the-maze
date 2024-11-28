@@ -124,6 +124,8 @@ pause={
 2d_physics/layer_5="Projectiles"
 2d_physics/layer_6="Items"
 2d_physics/layer_7="Mines"
+2d_physics/layer_8="blast_player"
+2d_physics/layer_9="blast_enemy"
 
 [physics]
 

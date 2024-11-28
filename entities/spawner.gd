@@ -27,6 +27,7 @@ var type:Global.Layer
 var entity:Node2D
 
 func reset()->void:
+  prints('spawner reset', name)
   for n in swarm_parent.get_children():
     swarm_parent.remove_child(n)
     n.queue_free()
@@ -34,8 +35,9 @@ func reset()->void:
   spawning = false
   num_spawned = 0
   spawn_timer = 0
+  entity = null
   if pre_spawn:
-    spawn()
+    spawn.call_deferred()
 
 func _ready() -> void:
   trigger.activate.connect(_on_trigger_activate)
@@ -58,7 +60,11 @@ func spawn()->void:
   num_spawned += 1
 
 func launch()->void:
-  entity.set_target(GameController.player)
+  if is_instance_valid(entity):
+    entity.set_target(GameController.player)
+  else:
+    prints('unable to launch. entity is not valid')
+
 
 func _process(delta:float)->void:
   if !spawning || num_spawned >= swarm_size: return
