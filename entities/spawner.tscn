@@ -1,21 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://dyt1wujh0vr5w"]
 
 [ext_resource type="Script" path="res://entities/spawner.gd" id="1_g4gva"]
+[ext_resource type="PackedScene" uid="uid://cd20btifjpa3n" path="res://entities/fighter.tscn" id="2_28ha3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_geqoi"]
-size = Vector2(128, 640)
-
-[node name="spawner" type="Node2D" groups=["resetable"]]
-position = Vector2(1088, -2176)
+[node name="spawner" type="Node2D" node_paths=PackedStringArray("trigger") groups=["resetable"]]
+position = Vector2(1600, -2176)
 script = ExtResource("1_g4gva")
-
-[node name="detector" type="Area2D" parent="."]
-position = Vector2(384, 0)
-monitorable = false
-
-[node name="collision" type="CollisionShape2D" parent="detector"]
-shape = SubResource("RectangleShape2D_geqoi")
+scn_entity = ExtResource("2_28ha3")
+trigger = NodePath("")
 
 [node name="swarm" type="Node2D" parent="."]
-
-[connection signal="body_entered" from="detector" to="." method="_on_detector_body_entered"]

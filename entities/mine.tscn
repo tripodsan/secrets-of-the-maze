@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjgp6yyx5bqf"]
+
+[ext_resource type="Shader" path="res://entities/mine.gdshader" id="1_fxkbs"]
+[ext_resource type="Script" path="res://entities/mine.gd" id="1_wik26"]
+[ext_resource type="PackedScene" uid="uid://cxo81whpicwy" path="res://entities/explosion.tscn" id="6_0sf2r"]
+[ext_resource type="Texture2D" uid="uid://bqgbsnxudh5a1" path="res://assets/small_circle2.png" id="6_2rnfl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mnb1j"]
+shader = ExtResource("1_fxkbs")
+shader_parameter/activity = 0.35
+shader_parameter/modulate = Color(1, 0.27451, 0.811765, 1)
+shader_parameter/tex = ExtResource("6_2rnfl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_icsry"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fvbxx"]
+
+[node name="mine" type="Node2D"]
+script = ExtResource("1_wik26")
+
+[node name="explosion" parent="." instance=ExtResource("6_0sf2r")]
+
+[node name="visual" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_mnb1j")
+scale = Vector2(100, 100)
+mesh = SubResource("QuadMesh_icsry")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 27
+
+[node name="collision" type="CollisionShape2D" parent="ExplosionArea"]
+scale = Vector2(2.5, 2.5)
+shape = SubResource("CircleShape2D_fvbxx")
+
+[connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered" flags=6]

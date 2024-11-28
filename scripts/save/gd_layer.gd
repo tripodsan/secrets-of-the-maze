@@ -49,6 +49,7 @@ func reset()->void:
   unlocked = false
   best_time = 0
   crystals = 0
+  secrets = 0
 
 func record_time(time:int)->void:
   if best_time == 0 || time < best_time:
