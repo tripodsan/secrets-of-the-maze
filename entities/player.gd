@@ -127,7 +127,7 @@ func _physics_process(delta: float) -> void:
   var input:Vector2 = Input.get_vector("left", "right", "fwd", "backwd")
 #
   var f:Vector2  # thrust
-  if input.x != 0:
+  if input.x != 0 && !Input.is_action_pressed('strafe_left') && !Input.is_action_pressed('strafe_right'):
     rot_velo = input.x * rot_speed * delta
   var rot_angle = fposmod(rotation + rot_velo, TAU)
   var rot_dir = Vector2.from_angle(rot_angle)

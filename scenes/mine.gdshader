@@ -6,7 +6,7 @@ void vertex() {
 
 uniform sampler2D tex;
 uniform float activity = .35;
-
+uniform vec4 modulate:source_color = vec4(1.0);
 void fragment() {
   float time = TIME;
   vec2 n = vec2(0.5, 0.5)-UV;
@@ -18,10 +18,5 @@ void fragment() {
   vec4 c2 = texture(tex, (UV+displace2*0.3 * activity));
   //COLOR = (c1+c2)*vec4(0.4, 1.0, 0.4, 1.0);
   COLOR = (c1*vec4(1.0, 0.4, 1.0, 1.0))+(c2*vec4(0.4, 1.0, 0.4, 1.0));
- // Called for every pixel the material is visible on.
+  COLOR *= modulate;
 }
-
-//void light() {
-	// Called for every pixel for every light affecting the CanvasItem.
-	// Uncomment to replace the default light processing function with this one.
-//}

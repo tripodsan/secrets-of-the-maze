@@ -14,11 +14,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnb1j"]
 shader = ExtResource("1_fxkbs")
 shader_parameter/activity = 0.35
+shader_parameter/modulate = Color(1, 0.27451, 0.811765, 1)
 shader_parameter/tex = ExtResource("6_2rnfl")
 
 [sub_resource type="QuadMesh" id="QuadMesh_icsry"]
 
-[node name="Mine" type="Node2D" groups=["resetable"]]
+[node name="mine" type="Node2D"]
 script = ExtResource("1_wik26")
 
 [node name="DetectionArea" type="Area2D" parent="."]

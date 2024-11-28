@@ -21,6 +21,8 @@ var state:State = State.LOADED
 
 signal state_changed()
 
+signal chrystals_changed()
+
 var _layers:Array[ChromaLayer] = [];
 
 var _layer:ChromaLayer = null
@@ -147,6 +149,7 @@ func quit()->void:
 func restart()->void:
   GameController.player.activate(_start_portal.global_transform)
   _picked_up_crystals.clear()
+  chrystals_changed.emit()
   _on_layer_selected(_start_layer)
   for n:Node2D in get_tree().get_nodes_in_group('resetable'):
     n.reset()
@@ -163,3 +166,4 @@ func get_grid(layer:Global.Layer)->TileMapLayer:
 
 func picked_up_crystal(layer_type:Global.Layer, crystal:Global.Layer)->void:
   _picked_up_crystals[layer_type] = crystal
+  chrystals_changed.emit()

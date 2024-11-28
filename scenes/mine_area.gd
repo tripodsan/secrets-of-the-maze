@@ -5,12 +5,6 @@ var target = null
 const max_speed := 900.0
 var speed := 10.0
 
-func reset()->void:
-  target = null
-  speed = 10
-  velocity = Vector2.ZERO
-  %MineMesh.material.set_shader_parameter("activity", 0.35)
-
 func _ready() -> void:
   connect("body_entered", _on_entered)
 

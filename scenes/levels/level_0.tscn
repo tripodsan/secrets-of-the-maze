@@ -186,6 +186,9 @@ ph_off = -1.6713
 shape = 2
 layer = 0
 
+[node name="Mine" parent="blue/objects" instance=ExtResource("10_mpxi1")]
+position = Vector2(832, -192)
+
 [node name="red" type="Node2D" parent="."]
 visibility_layer = 4
 script = ExtResource("2_niabm")

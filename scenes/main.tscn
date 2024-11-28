@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=50 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_7p6ml"]
@@ -16,9 +16,12 @@
 [ext_resource type="Script" path="res://scenes/hud.gd" id="7_qwu0n"]
 [ext_resource type="PackedScene" uid="uid://glyv2bogmfg4" path="res://scenes/super_nova.tscn" id="7_tsp44"]
 [ext_resource type="Script" path="res://scenes/level_timer.gd" id="9_7gmml"]
+[ext_resource type="Texture2D" uid="uid://c2qh7g6ki543n" path="res://assets/layer_indicator.png" id="10_k8mih"]
 [ext_resource type="PackedScene" uid="uid://b4kepaijdk64i" path="res://scenes/levels/level_1.tscn" id="10_pjm13"]
 [ext_resource type="Shader" path="res://shaders/chromatic_distortion.gdshader" id="10_rael0"]
+[ext_resource type="Script" path="res://scripts/layer_indicator.gd" id="10_rndym"]
 [ext_resource type="PackedScene" uid="uid://b804mmyeds45o" path="res://entities/player.tscn" id="11_01h05"]
+[ext_resource type="Script" path="res://scripts/multi_texture_rect.gd" id="11_2qm7g"]
 [ext_resource type="PackedScene" uid="uid://cbldhsup615x5" path="res://scenes/minimap/minimap.tscn" id="11_ms5bv"]
 [ext_resource type="Theme" uid="uid://gydw4cyvjjug" path="res://scenes/title_theme.tres" id="15_bp42w"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="16_2f8ly"]
@@ -43,6 +46,34 @@ func _process(delta: float) -> void:
     text = 'FPS: %d' % Engine.get_frames_per_second()
     timer -= 0.5
 "
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1hpq"]
+atlas = ExtResource("10_k8mih")
+region = Rect2(0, 0, 192, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3eex"]
+atlas = ExtResource("10_k8mih")
+region = Rect2(768, 0, 192, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlpuy"]
+atlas = ExtResource("10_k8mih")
+region = Rect2(1152, 0, 192, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prwqf"]
+atlas = ExtResource("10_k8mih")
+region = Rect2(1344, 0, 192, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s75uq"]
+atlas = ExtResource("10_k8mih")
+region = Rect2(1728, 0, 192, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxbkm"]
+atlas = ExtResource("10_k8mih")
+region = Rect2(2112, 0, 192, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd42h"]
+atlas = ExtResource("10_k8mih")
+region = Rect2(2496, 0, 192, 96)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r78rs"]
 
@@ -347,6 +378,59 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.603922, 0.921569, 0, 1)
 text = "-B"
 script = ExtResource("7_jihxl")
+
+[node name="layer_indicator" type="MarginContainer" parent="hudlayer/hud/MarginContainer/vbox/hbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 20
+script = ExtResource("10_rndym")
+
+[node name="layer" type="TextureRect" parent="hudlayer/hud/MarginContainer/vbox/hbox/layer_indicator"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_i1hpq")
+script = ExtResource("11_2qm7g")
+
+[node name="blue_cystals_red" type="TextureRect" parent="hudlayer/hud/MarginContainer/vbox/hbox/layer_indicator"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_c3eex")
+script = ExtResource("11_2qm7g")
+region = 4
+
+[node name="blue_cystals_green" type="TextureRect" parent="hudlayer/hud/MarginContainer/vbox/hbox/layer_indicator"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_nlpuy")
+script = ExtResource("11_2qm7g")
+region = 6
+
+[node name="red_cystals_green" type="TextureRect" parent="hudlayer/hud/MarginContainer/vbox/hbox/layer_indicator"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_prwqf")
+script = ExtResource("11_2qm7g")
+region = 7
+
+[node name="red_cystals_blue" type="TextureRect" parent="hudlayer/hud/MarginContainer/vbox/hbox/layer_indicator"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_s75uq")
+script = ExtResource("11_2qm7g")
+region = 9
+
+[node name="green_cystals_blue" type="TextureRect" parent="hudlayer/hud/MarginContainer/vbox/hbox/layer_indicator"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_rxbkm")
+script = ExtResource("11_2qm7g")
+region = 11
+
+[node name="green_cystals_red" type="TextureRect" parent="hudlayer/hud/MarginContainer/vbox/hbox/layer_indicator"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_wd42h")
+script = ExtResource("11_2qm7g")
+region = 13
 
 [node name="VSeparator" type="VSeparator" parent="hudlayer/hud/MarginContainer/vbox/hbox"]
 layout_mode = 2
