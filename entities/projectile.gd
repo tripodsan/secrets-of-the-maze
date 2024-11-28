@@ -5,9 +5,10 @@ var time_alive = 0.0
 
 @onready var trail: GPUParticles2D = $trail
 @onready var sprite: Sprite2D = $sprite
+@onready var hitbox: HitBox = $hitbox
+@onready var collision: CollisionShape2D = $collision
 
 func _ready() -> void:
-  body_shape_entered.connect(_on_body_shape_entered)
   GameController.maze_scale_changed.connect(_on_maze_scale_changed)
   _on_maze_scale_changed()
 
@@ -16,11 +17,13 @@ func _on_maze_scale_changed()->void:
   var s = Vector2.ONE * GameData.get_settings().maze_scale
   trail.scale = s
   sprite.scale = s * 0.3
-  $collision.scale = s
+  collision.scale = s
 
 func start(pos:Vector2, vel:Vector2):
   global_position = pos
   linear_velocity = vel
+  hitbox.set_disabled(false)
+  collision.set_deferred('disabled', false)
   process_mode = PROCESS_MODE_INHERIT
   trail.restart()
   time_alive = 0
@@ -33,6 +36,13 @@ func stop():
   process_mode = PROCESS_MODE_DISABLED
   visible = false
 
+func get_damage()->float:
+  return 100
+
+func apply_damage(amount:float, source:Node2D)->void:
+  prints('projectile %s hit by %s' % [self, source])
+  hit()
+
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
   for i in range(get_contact_count()):
     var obj = state.get_contact_collider_object(i)
@@ -40,10 +50,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
     if tile_type == &"spike":
       hit.call_deferred()
       return
-    if obj.has_method('apply_damage'):
-      obj.apply_damage(10)
-      hit.call_deferred()
-      return
+    #if obj.has_method('apply_damage'):
+      #obj.apply_damage(50)
+      #hit.call_deferred()
+      #return
 
 func _physics_process(delta: float) -> void:
   if !visible: return
@@ -61,12 +71,11 @@ func _physics_process(delta: float) -> void:
 func hit():
   sprite.visible = false
   trail.emitting = false
-  freeze = true
+  hitbox.set_disabled(true)
+  set_deferred('freeze', true)
+  #await get_tree().process_frame
+  collision.set_deferred('disabled', true)
 
 func reset():
   hit()
   stop()
-
-@warning_ignore('unused_parameter')
-func _on_body_shape_entered(body_rid: RID, body: Node, body_shape_index: int, local_shape_index: int):
-  pass

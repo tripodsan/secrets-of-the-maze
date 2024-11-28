@@ -42,7 +42,7 @@ var trail_pos:int = 0
 
 signal state_changed()
 
-signal health_changed()
+signal health_changed(health:float)
 
 enum State {
   ## inital state right after initialized
@@ -178,10 +178,10 @@ func _physics_process(delta: float) -> void:
     var body:Object = coll.get_collider()
     var type:StringName = Global.get_tile_type(body, coll.get_collider_rid())
     if type == &"spike":
-      apply_damage(100)
+      apply_damage(100, body)
       return
     elif body is Node2D and body.is_in_group(&"spike"):
-      apply_damage(100)
+      apply_damage(100, body)
       return
 
     var wall := coll.get_normal()
@@ -191,6 +191,7 @@ func _physics_process(delta: float) -> void:
       position += t * 1.1
       velocity = velocity.bounce(wall)
       rot_angle = t.angle()
+      apply_damage(2, body)
     else:
       # slide
       rot_dir = rot_dir.slide(wall).normalized()
@@ -203,14 +204,15 @@ func _physics_process(delta: float) -> void:
   update_trail()
   #prints('a:', A, 'd:', density, 'dpv:', f_dpv, 'f:', f, 'f_dir:', f_dir, 'a_tot:', a_tot, 'v:', velocity, 'p:', position)
 
-func apply_damage(amount:float)->void:
+func apply_damage(amount:float, source:Node2D)->void:
   if state != State.ACTIVE: return
-  prints('applied %f damage' % amount)
   health = max(0, health - amount)
-  health_changed.emit()
+  prints('%s applied damamage %f -> %f to %s' % [source, amount, health, self])
+  health_changed.emit(health)
   if health == 0:
     $ship.visible = false
     $Explosion.fire()
+    trail.fill(Vector4.ZERO)
     RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
     set_state(State.DESTROYING)
     await get_tree().create_timer(1.5).timeout
@@ -226,6 +228,7 @@ func activate(xf:Transform2D)->void:
   velocity = Vector2.ZERO
   rot_velo = 0
   health = start_health
+  health_changed.emit(health)
   set_state(State.ACTIVATING)
 
 

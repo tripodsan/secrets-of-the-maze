@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://djhdu76ycm4tj"]
+
+[sub_resource type="GDScript" id="GDScript_ydax4"]
+script/source = "extends Node2D
+
+@onready var character_body: Node2D = $character_body
+
+var time := 0.0
+
+func _process(delta: float) -> void:
+  time += delta
+  character_body.position.x = sin(time) * 700 + 800
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+  prints('body entered')
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+  prints('body exited')
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjyip"]
+size = Vector2(128, 128)
+
+[sub_resource type="GDScript" id="GDScript_0t4cl"]
+script/source = "extends Area2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+  pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+  pass
+
+
+func _on_body_entered(body: Node2D) -> void:
+  $Polygon2D.visible = true
+
+func _on_body_exited(body: Node2D) -> void:
+  $Polygon2D.visible = false
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j22l2"]
+size = Vector2(266, 266)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_30ptx"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dl81f"]
+size = Vector2(20, 245)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jb47l"]
+size = Vector2(64, 64)
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_ydax4")
+
+[node name="character_body" type="CharacterBody2D" parent="."]
+position = Vector2(128, 384)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="character_body"]
+shape = SubResource("RectangleShape2D_vjyip")
+
+[node name="Polygon2D" type="Polygon2D" parent="character_body"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = SubResource("GDScript_0t4cl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(960, 384)
+shape = SubResource("RectangleShape2D_j22l2")
+
+[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
+position = Vector2(960, 384)
+polygon = PackedVector2Array(-96, -96, 96, -96, 96, 96, -96, 96)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(1856, 384)
+physics_material_override = SubResource("PhysicsMaterial_30ptx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_dl81f")
+
+[node name="StaticBody2D" type="RigidBody2D" parent="."]
+position = Vector2(1376, 384)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_jb47l")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

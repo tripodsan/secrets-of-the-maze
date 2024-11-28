@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://chxel4y257nfh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqj1r"]
+bg_color = Color(0.6, 0.6, 0.6, 0.188235)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.415981, 0.41598, 0.41598, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 4
+anti_aliasing = false
+
+[resource]
+Label/font_sizes/font_size = 32
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_nqj1r")

@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://entities/spawner.gd" id="1_g4gva"]
 [ext_resource type="PackedScene" uid="uid://cd20btifjpa3n" path="res://entities/fighter.tscn" id="2_28ha3"]
 
-[node name="spawner" type="Node2D" node_paths=PackedStringArray("trigger") groups=["resetable"]]
+[node name="spawner" type="Node2D" groups=["resetable"]]
 position = Vector2(1600, -2176)
 script = ExtResource("1_g4gva")
 scn_entity = ExtResource("2_28ha3")
-trigger = NodePath("")
 
 [node name="swarm" type="Node2D" parent="."]

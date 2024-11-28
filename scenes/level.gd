@@ -172,4 +172,6 @@ func picked_up_crystal(layer_type:Global.Layer, crystal:Global.Layer)->void:
   chrystals_changed.emit()
 
 func add_blast(blast:Blast)->void:
+  var pos = blast.global_position
   _layer.objects.add_child(blast)
+  blast.global_position = pos

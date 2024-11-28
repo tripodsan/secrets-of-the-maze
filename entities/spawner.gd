@@ -55,7 +55,7 @@ func spawn()->void:
   entity = scn_entity.instantiate()
   entity.layer = type
   prints('spawing', entity)
-  swarm_parent.add_child(entity)
+  swarm_parent.add_child(entity, true)
   entity.global_position = global_position
   num_spawned += 1
 

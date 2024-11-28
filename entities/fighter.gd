@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var shape: Polygon2D = $shape
 @onready var collision: CollisionShape2D = $collision
 @onready var nav_agent: NavigationAgent2D = $nav_agent
+@onready var hitbox: HitBox = $hitbox
 
 const MAX_SPEED = 500.0
 
@@ -13,6 +14,8 @@ var speed = 20
 var speed_delta:float = 0
 
 var layer:Global.Layer
+
+var health:float = 100
 
 func _ready()->void:
   modulate.a = 0
@@ -24,12 +27,19 @@ func _ready()->void:
 func hit():
   explosion.explode()
   shape.visible = false
-  collision.set_disabled.call_deferred(true)
+  collision.set_deferred('disabled', true)
+  hitbox.set_disabled(true)
   await get_tree().create_timer(1.0).timeout
   queue_free()
 
-func apply_damage(_amount:int)->void:
-  hit()
+func get_damage()->float:
+  return 100.0
+
+func apply_damage(amount:int, source:Node2D)->void:
+  health = max(0, health - amount)
+  prints('%s applied damamage %f -> %f to %s' % [source, amount, health, self])
+  if health == 0:
+    hit()
 
 func _physics_process(delta: float) -> void:
   if modulate.a < 1.0:

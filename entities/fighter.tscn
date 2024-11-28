@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd20btifjpa3n"]
+[gd_scene load_steps=6 format=3 uid="uid://cd20btifjpa3n"]
 
 [ext_resource type="Script" path="res://entities/fighter.gd" id="1_tbc20"]
 [ext_resource type="PackedScene" uid="uid://cxo81whpicwy" path="res://entities/explosion.tscn" id="2_2k75c"]
+[ext_resource type="Script" path="res://entities/hitbox.gd" id="3_ym4ii"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l721p"]
 radius = 30.0167
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_24wot"]
+radius = 31.66
 
 [node name="figther" type="CharacterBody2D"]
 collision_layer = 4
@@ -28,3 +32,15 @@ avoidance_enabled = true
 radius = 40.0
 time_horizon_agents = 0.5
 max_speed = 1000.0
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 153
+input_pickable = false
+script = ExtResource("3_ym4ii")
+is_enemy = true
+
+[node name="collision" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(6, 0)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_24wot")

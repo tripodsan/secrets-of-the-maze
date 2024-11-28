@@ -27,7 +27,7 @@ func _on_explosion_area_body_entered(body: Node2D) -> void:
   prints('mine explodes..', self)
   visual.visible = false
   explosion.explode()
-  GameController.create_blast(global_position, 200, 500)
+  GameController.create_blast(global_position, 200, 500, true, true)
   await get_tree().create_timer(1.0).timeout
   prints('mine frees..', self)
   get_parent().remove_child(self)

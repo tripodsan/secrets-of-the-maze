@@ -18,6 +18,7 @@ func _ready() -> void:
   %phasemap.world_2d = get_viewport().world_2d
   GameController.on_game_scene_loaded(self)
   GameController.maze_scale_changed.connect(_on_maze_scale_changed)
+
   _on_maze_scale_changed()
 
 func _on_maze_scale_changed()->void:

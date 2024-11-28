@@ -20,16 +20,12 @@ func _notification(what):
     _validate()
 
 func _validate()->void:
-  _area = null
-  for a in get_children():
-    if a is Area2D:
-      _area = a
-      break
+  _area = get_parent() as Area2D
   update_configuration_warnings()
 
 func _get_configuration_warnings():
   if !_area:
-    return ['Missing Area2D child node']
+    return ['Needs to be child of Area2D node']
 
 func _on_body_entered(n: Node2D):
   if n is Player && n.state == Player.State.ACTIVE:

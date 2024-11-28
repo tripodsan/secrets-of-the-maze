@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=52 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_7p6ml"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://b804mmyeds45o" path="res://entities/player.tscn" id="11_01h05"]
 [ext_resource type="Script" path="res://scripts/multi_texture_rect.gd" id="11_2qm7g"]
 [ext_resource type="PackedScene" uid="uid://cbldhsup615x5" path="res://scenes/minimap/minimap.tscn" id="11_ms5bv"]
+[ext_resource type="Theme" uid="uid://chxel4y257nfh" path="res://scenes/health_bar_theme.tres" id="13_3lgom"]
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="14_lmxtn"]
 [ext_resource type="Theme" uid="uid://gydw4cyvjjug" path="res://scenes/title_theme.tres" id="15_bp42w"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="16_2f8ly"]
 [ext_resource type="Script" path="res://scenes/pause_menu.gd" id="16_lo5hn"]
@@ -383,6 +385,7 @@ script = ExtResource("7_jihxl")
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
 script = ExtResource("10_rndym")
 
 [node name="layer" type="TextureRect" parent="hudlayer/hud/MarginContainer/vbox/hbox/layer_indicator"]
@@ -451,20 +454,60 @@ custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = ".55"
 
+[node name="bars" type="GridContainer" parent="hudlayer/hud/MarginContainer/vbox"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("13_3lgom")
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="lab_health" type="Label" parent="hudlayer/hud/MarginContainer/vbox/bars"]
+layout_mode = 2
+text = "H"
+
+[node name="bar_health" type="PanelContainer" parent="hudlayer/hud/MarginContainer/vbox/bars"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("14_lmxtn")
+color = Color(0.603922, 0.921569, 0, 1)
+
+[node name="bar" type="ColorRect" parent="hudlayer/hud/MarginContainer/vbox/bars/bar_health"]
+layout_mode = 2
+color = Color(0.603922, 0.921569, 0, 1)
+
+[node name="lab_shield" type="Label" parent="hudlayer/hud/MarginContainer/vbox/bars"]
+layout_mode = 2
+text = "S"
+
+[node name="bar_shield" type="PanelContainer" parent="hudlayer/hud/MarginContainer/vbox/bars"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("14_lmxtn")
+color = Color(0.0352941, 0.8, 0.92549, 1)
+
+[node name="bar" type="ColorRect" parent="hudlayer/hud/MarginContainer/vbox/bars/bar_shield"]
+layout_mode = 2
+color = Color(0.0352941, 0.8, 0.92549, 1)
+
 [node name="HSeparator" type="HSeparator" parent="hudlayer/hud/MarginContainer/vbox"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_3welx")
 
-[node name="PanelContainer" type="PanelContainer" parent="hudlayer/hud/MarginContainer/vbox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="hudlayer/hud/MarginContainer/vbox"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="hudlayer/hud/MarginContainer/vbox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="minimap_container" type="SubViewportContainer" parent="hudlayer/hud/MarginContainer/vbox/PanelContainer"]
+[node name="minimap_container" type="SubViewportContainer" parent="hudlayer/hud/MarginContainer/vbox/HBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="minimap_port" type="SubViewport" parent="hudlayer/hud/MarginContainer/vbox/PanelContainer/minimap_container"]
+[node name="minimap_port" type="SubViewport" parent="hudlayer/hud/MarginContainer/vbox/HBoxContainer/PanelContainer/minimap_container"]
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
@@ -472,7 +515,7 @@ gui_disable_input = true
 size = Vector2i(192, 192)
 render_target_update_mode = 4
 
-[node name="minimap" parent="hudlayer/hud/MarginContainer/vbox/PanelContainer/minimap_container/minimap_port" instance=ExtResource("11_ms5bv")]
+[node name="minimap" parent="hudlayer/hud/MarginContainer/vbox/HBoxContainer/PanelContainer/minimap_container/minimap_port" instance=ExtResource("11_ms5bv")]
 
 [node name="ChromaticDistortion" type="ColorRect" parent="hudlayer"]
 visible = false
@@ -599,6 +642,7 @@ size_flags_vertical = 3
 [node name="game" type="Node2D" parent="world"]
 
 [node name="level" parent="world/game" instance=ExtResource("10_pjm13")]
+visible = false
 nr = -1
 
 [node name="player" parent="world" instance=ExtResource("11_01h05")]

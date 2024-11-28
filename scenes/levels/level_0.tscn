@@ -153,16 +153,16 @@ metadata/_edit_lock_ = true
 
 [node name="spawner" parent="blue/objects" node_paths=PackedStringArray("trigger") instance=ExtResource("6_fiafx")]
 position = Vector2(2112, -2176)
-trigger = NodePath("trigger")
+trigger = NodePath("detector/trigger")
 
-[node name="trigger" type="Node" parent="blue/objects/spawner"]
-script = ExtResource("7_dohr4")
-
-[node name="detector" type="Area2D" parent="blue/objects/spawner/trigger"]
-position = Vector2(832, -1728)
+[node name="detector" type="Area2D" parent="blue/objects/spawner"]
+position = Vector2(-1280, 448)
 monitorable = false
 
-[node name="collision" type="CollisionShape2D" parent="blue/objects/spawner/trigger/detector"]
+[node name="trigger" type="Node" parent="blue/objects/spawner/detector"]
+script = ExtResource("7_dohr4")
+
+[node name="collision" type="CollisionShape2D" parent="blue/objects/spawner/detector"]
 shape = SubResource("RectangleShape2D_4g6mk")
 
 [node name="corner" parent="blue/objects" instance=ExtResource("5_ryegj")]
@@ -220,18 +220,17 @@ position = Vector2(832, -320)
 scn_entity = ExtResource("10_mpxi1")
 swarm_size = 1
 spawn_delay = 0.0
-trigger = NodePath("AreaTrigger")
+trigger = NodePath("Area2D/AreaTrigger")
 pre_spawn = true
 metadata/_edit_group_ = true
 
-[node name="AreaTrigger" type="Node" parent="blue/objects/mine_spawner"]
-script = ExtResource("7_dohr4")
+[node name="Area2D" type="Area2D" parent="blue/objects/mine_spawner"]
 
-[node name="Area2D" type="Area2D" parent="blue/objects/mine_spawner/AreaTrigger"]
-position = Vector2(832, -320)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blue/objects/mine_spawner/AreaTrigger/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blue/objects/mine_spawner/Area2D"]
 shape = SubResource("CircleShape2D_kfk02")
+
+[node name="AreaTrigger" type="Node" parent="blue/objects/mine_spawner/Area2D"]
+script = ExtResource("7_dohr4")
 
 [node name="red" type="Node2D" parent="."]
 visibility_layer = 4

@@ -25,7 +25,7 @@ func _physics_process(_delta: float) -> void:
   if is_colliding():
     var col = get_collider()
     if col.has_method('apply_damage'):
-      col.apply_damage(damange)
+      col.apply_damage(damange, self)
     cast_point = to_local(get_collision_point())
     $TargetParticles.emitting = is_active
     $TargetParticles.position = cast_point
