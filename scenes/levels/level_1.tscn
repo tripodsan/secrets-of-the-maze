@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://b4kepaijdk64i"]
+[gd_scene load_steps=8 format=4 uid="uid://b4kepaijdk64i"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_anykt"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="4_y0ttv"]
 [ext_resource type="TileSet" uid="uid://b4hv1lcomy6v6" path="res://scenes/level-tiles.tres" id="5_vh7f2"]
 [ext_resource type="PackedScene" uid="uid://d2oh02mscfwjk" path="res://entities/static_mine.tscn" id="6_x7w7n"]
 [ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="7_8k2le"]
+[ext_resource type="PackedScene" uid="uid://c03mtiutjnf4o" path="res://entities/chroma_crystal.tscn" id="7_mn744"]
 [ext_resource type="Script" path="res://scripts/oscilator.gd" id="8_ddnlu"]
 
 [node name="level_1" type="Node2D"]
@@ -106,6 +107,12 @@ position = Vector2(2816, 640)
 [node name="static_mine6" parent="blue/objects/Oscilator3" instance=ExtResource("6_x7w7n")]
 position = Vector2(2816, 640)
 
+[node name="static_mine7" parent="blue/objects/Oscilator3" instance=ExtResource("6_x7w7n")]
+position = Vector2(2816, 640)
+
+[node name="static_mine8" parent="blue/objects/Oscilator3" instance=ExtResource("6_x7w7n")]
+position = Vector2(2816, 640)
+
 [node name="portal_1" parent="blue/objects" instance=ExtResource("7_8k2le")]
 position = Vector2(5952, 1728)
 rotation = -3.14159
@@ -117,6 +124,9 @@ layer = 0
 position = Vector2(256, 1728)
 shape = 2
 layer = 0
+
+[node name="ChromaCrystal" parent="blue/objects" instance=ExtResource("7_mn744")]
+position = Vector2(4608, 1792)
 
 [node name="secrets" type="Node2D" parent="blue"]
 metadata/_edit_lock_ = true

@@ -95,6 +95,7 @@ func _ready()->void:
   selected_level = GameController._current_layer
   if !selected_level:
     selected_level = GameData.get_layer(0, 0)
+  selected = Vector2i(selected_level.get_level().get_nr(), selected_level.type)
   level_selected.emit(selected_level)
 
 func _get_minimum_size():

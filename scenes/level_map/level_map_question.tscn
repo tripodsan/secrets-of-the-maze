@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3rhup7365t8e"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a6mqr"]
-load_path = "res://.godot/imported/level_select.png-87001113b9f86e743595f9d949efb8f9.ctex"
-
-[node name="question" type="Sprite2D"]
-texture = SubResource("CompressedTexture2D_a6mqr")
-region_enabled = true
-region_rect = Rect2(160, 32, 32, 32)

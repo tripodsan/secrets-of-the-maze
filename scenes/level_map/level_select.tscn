@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b7ln60f04dhpl"]
+[gd_scene load_steps=21 format=3 uid="uid://b7ln60f04dhpl"]
 
 [ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/ui/level_theme.tres" id="1_7shaq"]
 [ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="2_luebk"]
@@ -43,6 +43,13 @@ font_size = 55
 font_color = Color(0.923173, 0.923173, 0.923173, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne2b6"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_opdbl"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_3ufkb"]
+events = [SubResource("InputEventKey_opdbl")]
 
 [sub_resource type="GDScript" id="GDScript_fgtaq"]
 script/source = "extends ParallaxBackground
@@ -380,6 +387,8 @@ alignment = 0
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 51
+shortcut = SubResource("Shortcut_3ufkb")
+shortcut_in_tooltip = false
 text = "quit to title"
 alignment = 2
 

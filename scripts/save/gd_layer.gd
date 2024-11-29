@@ -6,7 +6,7 @@ extends GDSerializable
 
 @export var unlocked:bool = false
 
-@export var crystals:int = 0
+@export_flags('Blue', 'Red', 'Green') var crystals:int = 0
 
 @export var secrets:int = 0:
   set(v):

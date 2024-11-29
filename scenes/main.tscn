@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=51 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_7p6ml"]
@@ -89,6 +89,13 @@ shader_parameter/lod = 2.345
 shader_parameter/darken = 0.507
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6nan1"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_m6xhy"]
+action = &"pause"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_krn7d"]
+events = [SubResource("InputEventAction_m6xhy")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvfhi"]
 shader = ExtResource("7_e01wk")
@@ -568,6 +575,8 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_6nan1")
 [node name="btn_resume_game" type="Button" parent="hudlayer/pause/MarginContainer/pause_menu/hbox"]
 unique_name_in_owner = true
 layout_mode = 2
+shortcut = SubResource("Shortcut_krn7d")
+shortcut_in_tooltip = false
 text = "Resume"
 
 [node name="btn_restart_level" type="Button" parent="hudlayer/pause/MarginContainer/pause_menu/hbox"]
