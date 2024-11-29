@@ -27,7 +27,7 @@ func _ready()->void:
 
 func reset()->void:
   visible = true
-  collision.set_disabled.call_deferred(false)
+  collision.set_disabled.call_deferred(!ChromaLayer.is_in_active_layer(self))
 
 func _on_detector_body_entered(body: Node2D) -> void:
   if body is Player:

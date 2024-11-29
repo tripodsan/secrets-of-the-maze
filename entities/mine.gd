@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var explosion: Explosion = $explosion
 @onready var visual: MeshInstance2D = $visual
+@onready var collision: CollisionShape2D = $ExplosionArea/collision
 
 var target = null
 var layer:Global.Layer = Global.Layer.NONE
@@ -12,6 +13,9 @@ var speed := 10.0
 func set_target(t:Node2D)->void:
   target = t
   visual.material.set_shader_parameter("activity", 1.1)
+
+func _ready()->void:
+  collision.disabled = !ChromaLayer.is_in_active_layer(self)
 
 func _process(delta: float) -> void:
   rotation += delta*3.0

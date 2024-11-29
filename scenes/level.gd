@@ -36,8 +36,14 @@ var _start_layer:ChromaLayer
 
 var _level_run_time:int
 
-# dictionary. key = layer where picked up, value: crystal type
-var _picked_up_crystals:Dictionary = {}
+class PickedUpCrystal extends RefCounted:
+  var source:Global.Layer
+  var type:Global.Layer
+  func _init(s:Global.Layer, t:Global.Layer):
+    source = s
+    type = t
+
+var _picked_up_crystals:Array[PickedUpCrystal] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -90,15 +96,18 @@ func _on_layer_selected(layer:ChromaLayer):
     # show the layers where we have a crystal for
     for l in _layers:
       l.visible = _layer.game_data.has_crystal(l.type)
+    for crystal:PickedUpCrystal in _picked_up_crystals:
+      if crystal.source == _layer.type:
+        _layers[crystal.type].visible = true
+
     _layer.visible = true
 
 func _on_portal_reached(_p:Portal)->void:
   print('portal reached')
   # apply crystals
-  for from:Global.Layer in _picked_up_crystals:
-    var to:Global.Layer = _picked_up_crystals[from]
-    _layers[from].game_data.set_crystal(to)
-    _layers[to].game_data.unlocked = true
+  for crystal:PickedUpCrystal in _picked_up_crystals:
+    _layers[crystal.source].game_data.set_crystal(crystal.type)
+    _layers[crystal.type].game_data.unlocked = true
   set_state(State.STOPPED)
 
 func enable_layer(type:Global.Layer)->void:
@@ -171,7 +180,9 @@ func get_grid(layer:Global.Layer)->TileMapLayer:
   return _layers[layer].grid
 
 func picked_up_crystal(layer_type:Global.Layer, crystal:Global.Layer)->void:
-  _picked_up_crystals[layer_type] = crystal
+  prints('pikced up crystal %d in %d' % [crystal, layer_type])
+  enable_layer(crystal)
+  _picked_up_crystals.append(PickedUpCrystal.new(layer_type, crystal))
   chrystals_changed.emit()
 
 func add_blast(blast:Blast)->void:

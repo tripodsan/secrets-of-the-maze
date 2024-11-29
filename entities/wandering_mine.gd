@@ -4,6 +4,4 @@ extends StaticBody2D
 
 func _notification(what: int) -> void:
   if what == NOTIFICATION_PARENTED:
-    var layer:ChromaLayer = get_parent().get_parent() as ChromaLayer
-    if layer:
-      collision.disabled = !layer.active
+    collision.disabled = !ChromaLayer.is_in_active_layer(self)

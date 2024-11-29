@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=55 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_7p6ml"]
@@ -31,6 +31,8 @@
 [ext_resource type="Script" path="res://scenes/projectile_manager.gd" id="18_nwqka"]
 [ext_resource type="PackedScene" uid="uid://be17dxfp5e0vq" path="res://scenes/ui/settings.tscn" id="18_ow3de"]
 [ext_resource type="PackedScene" uid="uid://b0qnb15obtmeo" path="res://scenes/ui/controls.tscn" id="24_c3sgx"]
+[ext_resource type="Script" path="res://scenes/ui/hint.gd" id="25_u7lt8"]
+[ext_resource type="Theme" uid="uid://5sakmuedgrxb" path="res://scenes/ui/hint_theme.tres" id="25_y155j"]
 [ext_resource type="AudioStream" uid="uid://kw8cidi6kggc" path="res://sounds/chromakoma.mp3" id="26_e8gw4"]
 [ext_resource type="AudioStream" uid="uid://cafa2rom3gv1x" path="res://sounds/chroma2.mp3" id="26_m5b81"]
 [ext_resource type="AudioStream" uid="uid://52u6bwu2tuvs" path="res://sounds/chroma3.mp3" id="27_621jn"]
@@ -88,8 +90,8 @@ shader_parameter/amount = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_50mii"]
 shader = ExtResource("16_2f8ly")
-shader_parameter/lod = 1.712
-shader_parameter/darken = 0.337
+shader_parameter/lod = 2.345
+shader_parameter/darken = 0.507
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6nan1"]
 
@@ -535,6 +537,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="pause" type="Control" parent="hudlayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -615,6 +618,64 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+
+[node name="hint" type="Control" parent="hudlayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("15_bp42w")
+script = ExtResource("25_u7lt8")
+
+[node name="blur_bg" type="ColorRect" parent="hudlayer/hint"]
+material = SubResource("ShaderMaterial_50mii")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="hudlayer/hint"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("25_y155j")
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 300
+
+[node name="PanelContainer" type="PanelContainer" parent="hudlayer/hint/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="hudlayer/hint/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="lab_hint" type="RichTextLabel" parent="hudlayer/hint/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "You picked up the __crystal__ chroma crystal. 
+
+You can now jump from this __layer__ layer to the __crystal__ layer using the [tab] key.
+
+Complete any level to keep the collected crystals."
+fit_content = true
+
+[node name="btn_resume" type="Button" parent="hudlayer/hint/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 71
+text = "Resume"
 
 [node name="previewlayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -698,3 +759,4 @@ script = ExtResource("27_noa8a")
 [connection signal="pressed" from="hudlayer/pause/MarginContainer/pause_menu/hbox/btn_controls" to="hudlayer/pause" method="_on_btn_controls_pressed"]
 [connection signal="pressed" from="hudlayer/pause/MarginContainer/pause_menu/hbox/btn_setting" to="hudlayer/pause" method="_on_btn_setting_pressed"]
 [connection signal="pressed" from="hudlayer/pause/MarginContainer/pause_menu/hbox/btn_exit_level" to="hudlayer/pause" method="_on_btn_exit_level_pressed"]
+[connection signal="pressed" from="hudlayer/hint/MarginContainer/PanelContainer/VBoxContainer/btn_resume" to="hudlayer/hint" method="_on_btn_resume_pressed"]

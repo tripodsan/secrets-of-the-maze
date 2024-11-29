@@ -14,6 +14,18 @@ var type:Global.Layer
 
 var navigation_map:RID
 
+static func from_child(node:Node2D)->ChromaLayer:
+  var l = node
+  while l is Node2D:
+    if l is ChromaLayer:
+      return l
+    l = l.get_parent()
+  return null
+
+static func is_in_active_layer(node:Node2D)->bool:
+  var l:ChromaLayer = from_child(node)
+  return l.active if l else false
+
 func _ready():
   type = Global.get_layer_from_string(name)
   assert(type >= 0)
@@ -47,7 +59,6 @@ func set_active(value: bool)->void:
   Global.activate_layer_in_viewports(type, value)
   Global.enable_collision_in_tree(self, value)
   GameController.activate_layer(self)
-
 
 ## check if ship at global position pos can shift to this layer.
 func can_chroma_shift(pos:Vector2)->bool:

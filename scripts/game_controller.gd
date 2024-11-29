@@ -12,6 +12,9 @@ var player:Player
 
 var level:Level
 
+# todo: improve hinting system
+var crystal_hint_shown:bool = false
+
 signal level_loaded(level:Level)
 
 signal layer_activated(layer:ChromaLayer)
@@ -26,6 +29,8 @@ signal game_paused()
 signal game_resumed()
 
 signal blasted(blast:Blast)
+
+signal show_crystal_hint(layer:Global.Layer, crystal:Global.Layer)
 
 @warning_ignore('unused_signal')
 signal maze_scale_changed()
@@ -84,7 +89,11 @@ func set_level(l:Level)->void:
 
 func on_chroma_crystal_pickup(type:Global.Layer)->void:
   level.picked_up_crystal(_current_layer.type, type)
-  level.enable_layer(type)
+  if !crystal_hint_shown:
+    crystal_hint_shown = true
+    Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+    get_tree().paused = true
+    show_crystal_hint.emit(_current_layer.type, type)
 
 var _mouse_motion_timer:float = 0
 

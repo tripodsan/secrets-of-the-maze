@@ -36,11 +36,12 @@ func _on_level_loaded(level:Level)->void:
   _on_crystals_changed(level)
 
 func _on_crystals_changed(level:Level)->void:
+  var cs:Array[int] = [0, 0, 0]
   for layer:ChromaLayer in level._layers:
-    crystals[layer.type] = layer.game_data.crystals
-  for from in level._picked_up_crystals:
-    var to = level._picked_up_crystals[from]
-    crystals[from] |= Global.LAYER_MASK[to]
+    cs[layer.type] = layer.game_data.crystals
+  for crystal in level._picked_up_crystals:
+    cs[crystal.source] |= Global.LAYER_MASK[crystal.type]
+  crystals = cs
 
 func update_layer():
   layer.region = type
