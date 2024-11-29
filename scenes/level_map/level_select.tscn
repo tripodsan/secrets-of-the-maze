@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://b7ln60f04dhpl"]
+[gd_scene load_steps=18 format=3 uid="uid://b7ln60f04dhpl"]
 
 [ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/ui/level_theme.tres" id="1_7shaq"]
 [ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="2_luebk"]
@@ -8,13 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="4_137gh"]
 [ext_resource type="Script" path="res://scenes/world_environment.gd" id="4_737iy"]
 [ext_resource type="Script" path="res://scenes/ui/level_suffix.gd" id="4_v353u"]
-[ext_resource type="Script" path="res://scenes/level_map/level_map.gd" id="5_d4dit"]
-[ext_resource type="PackedScene" uid="uid://be1r3b3neri51" path="res://scenes/level_map/level_map_node.tscn" id="6_2jbhw"]
-[ext_resource type="Script" path="res://scenes/level_map/level_map_cursor.gd" id="6_hr126"]
-[ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="7_7w5sb"]
+[ext_resource type="Script" path="res://scenes/level_map/level_map_v_2.gd" id="5_rx8ef"]
 [ext_resource type="Script" path="res://scenes/level_map/crystal_info.gd" id="7_gxw7w"]
-[ext_resource type="PackedScene" uid="uid://ceykegurm2m3a" path="res://scenes/level_map/level_map_connector.tscn" id="7_ohwbg"]
-[ext_resource type="PackedScene" uid="uid://dyv7olmjrvbo3" path="res://scenes/level_map/level_map_arrow.tscn" id="8_tdmwx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne2b6"]
 
@@ -57,340 +52,6 @@ func _process(delta: float) -> void:
   scroll_offset += speed * delta
 "
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cbvlq"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(384, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uynsh"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(0, 96, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oudi6"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(96, 96, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cuipc"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(192, 96, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_452to"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(288, 96, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hqhgl"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(384, 96, 96, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_uv4m7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cbvlq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uynsh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oudi6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cuipc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_452to")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hqhgl")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nb2ei"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(160, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_70t40"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cdcq5"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v4bmj"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_oikr2"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nb2ei")
-}],
-"loop": false,
-"name": &"_",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_70t40")
-}],
-"loop": false,
-"name": &"blue",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cdcq5")
-}],
-"loop": false,
-"name": &"green",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v4bmj")
-}],
-"loop": false,
-"name": &"red",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_onixx"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(160, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rnnix"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_td6cn"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_obsna"]
-atlas = ExtResource("7_7w5sb")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_du4fx"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_onixx")
-}],
-"loop": false,
-"name": &"_",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnnix")
-}],
-"loop": false,
-"name": &"blue",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_td6cn")
-}],
-"loop": false,
-"name": &"green",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_obsna")
-}],
-"loop": false,
-"name": &"red",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n6idt"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_onixx")
-}],
-"loop": false,
-"name": &"_",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnnix")
-}],
-"loop": false,
-"name": &"blue",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_td6cn")
-}],
-"loop": false,
-"name": &"green",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_obsna")
-}],
-"loop": false,
-"name": &"red",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fop6c"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_onixx")
-}],
-"loop": false,
-"name": &"_",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnnix")
-}],
-"loop": false,
-"name": &"blue",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_td6cn")
-}],
-"loop": false,
-"name": &"green",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_obsna")
-}],
-"loop": false,
-"name": &"red",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_emhho"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_onixx")
-}],
-"loop": false,
-"name": &"_",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnnix")
-}],
-"loop": false,
-"name": &"blue",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_td6cn")
-}],
-"loop": false,
-"name": &"green",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_obsna")
-}],
-"loop": false,
-"name": &"red",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_l65vo"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_onixx")
-}],
-"loop": false,
-"name": &"_",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnnix")
-}],
-"loop": false,
-"name": &"blue",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_td6cn")
-}],
-"loop": false,
-"name": &"green",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_obsna")
-}],
-"loop": false,
-"name": &"red",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6c1hp"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_onixx")
-}],
-"loop": false,
-"name": &"_",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnnix")
-}],
-"loop": false,
-"name": &"blue",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_td6cn")
-}],
-"loop": false,
-"name": &"green",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_obsna")
-}],
-"loop": false,
-"name": &"red",
-"speed": 5.0
-}]
-
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -429,11 +90,35 @@ text = " Level Map"
 layout_mode = 2
 
 [node name="placeholder" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(800, 400)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
+
+[node name="level_map" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_rx8ef")
+ring_color = Color(0.225138, 0.247013, 0.241796, 1)
+layer_disabled_dim = 0.7
+arc_width = 7.0
+connector_dash = 7.0
+arc_color = Color(0.57902, 0.57902, 0.57902, 1)
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/level_map"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.389287, 0.389287, 0.389287, 1)
+theme_override_font_sizes/font_size = 108
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 800)
@@ -548,6 +233,7 @@ size_flags_vertical = 4
 color = Color(0.0352941, 0.415686, 0.92549, 1)
 
 [node name="red" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_self_time"]
+visible = false
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -555,6 +241,7 @@ size_flags_vertical = 4
 color = Color(0.635294, 0.188235, 0, 1)
 
 [node name="green" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_self_time"]
+visible = false
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -584,6 +271,7 @@ label_settings = SubResource("LabelSettings_jbx2i")
 horizontal_alignment = 2
 
 [node name="blue" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt0_time"]
+visible = false
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -598,6 +286,7 @@ size_flags_vertical = 4
 color = Color(0.635294, 0.188235, 0, 1)
 
 [node name="green" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt0_time"]
+visible = false
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -627,6 +316,7 @@ label_settings = SubResource("LabelSettings_jbx2i")
 horizontal_alignment = 2
 
 [node name="blue" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt1_time"]
+visible = false
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -634,6 +324,7 @@ size_flags_vertical = 4
 color = Color(0.0352941, 0.415686, 0.92549, 1)
 
 [node name="red" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt1_time"]
+visible = false
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -701,75 +392,6 @@ motion_mirroring = Vector2(2048, 2048)
 position = Vector2(960, 520)
 scale = Vector2(2, 2)
 texture = ExtResource("4_137gh")
-
-[node name="level_map" type="Node2D" parent="."]
-texture_filter = 3
-position = Vector2(256, 768)
-scale = Vector2(2, 2)
-script = ExtResource("5_d4dit")
-
-[node name="cursor" type="AnimatedSprite2D" parent="level_map"]
-position = Vector2(192, -32)
-rotation = 4.71239
-sprite_frames = SubResource("SpriteFrames_uv4m7")
-frame = 1
-script = ExtResource("6_hr126")
-opening = 8
-
-[node name="nodes" type="Node2D" parent="level_map"]
-
-[node name="level_0_b" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
-position = Vector2(16, 16)
-sprite_frames = SubResource("SpriteFrames_oikr2")
-animation = &"blue"
-
-[node name="level_1_b" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
-position = Vector2(112, 16)
-sprite_frames = SubResource("SpriteFrames_du4fx")
-animation = &"blue"
-
-[node name="level_2_b" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
-position = Vector2(208, 16)
-sprite_frames = SubResource("SpriteFrames_n6idt")
-animation = &"blue"
-
-[node name="level_0_g" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
-position = Vector2(16, -176)
-sprite_frames = SubResource("SpriteFrames_fop6c")
-animation = &"green"
-
-[node name="level_1_g" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
-position = Vector2(112, -176)
-sprite_frames = SubResource("SpriteFrames_emhho")
-
-[node name="level_0_r" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
-position = Vector2(16, -80)
-sprite_frames = SubResource("SpriteFrames_l65vo")
-animation = &"red"
-
-[node name="level_1_r" parent="level_map/nodes" instance=ExtResource("6_2jbhw")]
-position = Vector2(112, -80)
-sprite_frames = SubResource("SpriteFrames_6c1hp")
-
-[node name="connector" parent="level_map/nodes" instance=ExtResource("7_ohwbg")]
-position = Vector2(16, -128)
-
-[node name="connector2" parent="level_map/nodes" instance=ExtResource("7_ohwbg")]
-position = Vector2(16, -32)
-
-[node name="arrow" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
-position = Vector2(64, 16)
-
-[node name="arrow3" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
-position = Vector2(160, 16)
-
-[node name="arrow2" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
-position = Vector2(64, -80)
-animation = &"red"
-
-[node name="arrow4" parent="level_map/nodes" instance=ExtResource("8_tdmwx")]
-position = Vector2(64, -176)
-animation = &"green"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/launch" to="." method="_on_launch_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/btn_back_title" to="." method="_on_btn_back_title_pressed"]
