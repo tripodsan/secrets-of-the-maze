@@ -1,6 +1,6 @@
 extends Node
 
-var scn_title:PackedScene = preload('res://scenes/title.tscn')
+var scn_title:PackedScene = preload('res://scenes/ui/title.tscn')
 var scn_main:PackedScene = preload('res://scenes/main.tscn')
 var scn_lvl_select:PackedScene = preload('res://scenes/level_map/level_select.tscn')
 
@@ -84,7 +84,7 @@ func set_level(l:Level)->void:
 
 func on_chroma_crystal_pickup(type:Global.Layer)->void:
   level.picked_up_crystal(_current_layer.type, type)
-  level.force_chroma_shift(type)
+  level.enable_layer(type)
 
 var _mouse_motion_timer:float = 0
 

@@ -101,6 +101,9 @@ func _on_portal_reached(_p:Portal)->void:
     _layers[to].game_data.unlocked = true
   set_state(State.STOPPED)
 
+func enable_layer(type:Global.Layer)->void:
+  var layer:ChromaLayer = _layers[type]
+  layer.visible = true
 
 func force_chroma_shift(type:Global.Layer)->void:
   var layer:ChromaLayer = _layers[type]

@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://bngfeoy11veqw"]
 
-[ext_resource type="Theme" uid="uid://gydw4cyvjjug" path="res://scenes/title_theme.tres" id="1_4sy3r"]
+[ext_resource type="Theme" uid="uid://gydw4cyvjjug" path="res://scenes/ui/title_theme.tres" id="1_4sy3r"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="2_2rjkx"]
-[ext_resource type="Script" path="res://scenes/title_screen.gd" id="2_aa0ag"]
+[ext_resource type="Script" path="res://scenes/ui/title_screen.gd" id="2_aa0ag"]
 [ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="3_0ilhp"]
 [ext_resource type="Texture2D" uid="uid://dvhjryb3vy68e" path="res://assets/start_bg0.png" id="3_d1qfl"]
 [ext_resource type="Script" path="res://scenes/world_environment.gd" id="4_jc54s"]
-[ext_resource type="PackedScene" uid="uid://be17dxfp5e0vq" path="res://scenes/settings.tscn" id="5_praim"]
-[ext_resource type="PackedScene" uid="uid://b0qnb15obtmeo" path="res://scenes/controls.tscn" id="6_cyc4m"]
+[ext_resource type="PackedScene" uid="uid://be17dxfp5e0vq" path="res://scenes/ui/settings.tscn" id="5_praim"]
+[ext_resource type="PackedScene" uid="uid://b0qnb15obtmeo" path="res://scenes/ui/controls.tscn" id="6_cyc4m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abufw"]
 
