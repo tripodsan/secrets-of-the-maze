@@ -1,17 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyv7olmjrvbo3"]
+[gd_scene load_steps=6 format=3 uid="uid://bav2x5aifl4gw"]
 
-[ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="1_3v36p"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a6mqr"]
+load_path = "res://.godot/imported/level_select.png-87001113b9f86e743595f9d949efb8f9.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3foig"]
-atlas = ExtResource("1_3v36p")
+atlas = SubResource("CompressedTexture2D_a6mqr")
 region = Rect2(32, 0, 64, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gxkw3"]
-atlas = ExtResource("1_3v36p")
+atlas = SubResource("CompressedTexture2D_a6mqr")
 region = Rect2(32, 64, 64, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xbpf6"]
-atlas = ExtResource("1_3v36p")
+atlas = SubResource("CompressedTexture2D_a6mqr")
 region = Rect2(32, 32, 64, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o16rh"]

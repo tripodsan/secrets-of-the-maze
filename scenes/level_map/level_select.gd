@@ -1,6 +1,6 @@
 extends Control
 
-@onready var level_map: LevelMapV2 = $MarginContainer/VBoxContainer/HBoxContainer/level_map
+@onready var level_map: LevelMapV2 = %level_map
 
 @onready var level_title: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/level_title
 @onready var level_suffix: LevelSuffixLabel = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/level_suffix

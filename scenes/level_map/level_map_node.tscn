@@ -1,22 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://be1r3b3neri51"]
+[gd_scene load_steps=9 format=3 uid="uid://ddb7wi6w6uu7f"]
 
-[ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="1_rrbk6"]
-[ext_resource type="Script" path="res://scenes/level_map/level_map_node.gd" id="2_utjt7"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a6mqr"]
+load_path = "res://.godot/imported/level_select.png-87001113b9f86e743595f9d949efb8f9.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nb2ei"]
-atlas = ExtResource("1_rrbk6")
+atlas = SubResource("CompressedTexture2D_a6mqr")
 region = Rect2(160, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70t40"]
-atlas = ExtResource("1_rrbk6")
+atlas = SubResource("CompressedTexture2D_a6mqr")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cdcq5"]
-atlas = ExtResource("1_rrbk6")
+atlas = SubResource("CompressedTexture2D_a6mqr")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v4bmj"]
-atlas = ExtResource("1_rrbk6")
+atlas = SubResource("CompressedTexture2D_a6mqr")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iy4uj"]
@@ -55,13 +55,47 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_ihe4t"]
+script/source = "class_name LevelMapNode
+extends AnimatedSprite2D
+
+var title:String = ''
+var suffix:String = ''
+
+signal clicked()
+
+static var DIRS = [
+  Vector2i(0, -1),
+  Vector2i(1, 0),
+  Vector2i(0, 1),
+  Vector2i(-1, 0),
+]
+
+var neighbors:Array[LevelMapNode] = [null, null, null, null]
+
+var gd_level:GDLevel
+
+var gd_layer:GDLayer
+
+func get_nb_bitmask()->int:
+  var msk:int = 0
+  for i in range(4):
+    if neighbors[i]: msk += 2**i
+  return msk
+
+@warning_ignore('unused_parameter')
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+  if event is InputEventMouseButton and event.is_released():
+    clicked.emit()
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixm0l"]
 size = Vector2(32, 32)
 
 [node name="level_map_node" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_iy4uj")
 animation = &"_"
-script = ExtResource("2_utjt7")
+script = SubResource("GDScript_ihe4t")
 
 [node name="Area2D" type="Area2D" parent="."]
 

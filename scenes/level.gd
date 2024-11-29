@@ -99,7 +99,6 @@ func _on_layer_selected(layer:ChromaLayer):
     for crystal:PickedUpCrystal in _picked_up_crystals:
       if crystal.source == _layer.type:
         _layers[crystal.type].visible = true
-
     _layer.visible = true
 
 func _on_portal_reached(_p:Portal)->void:
@@ -162,6 +161,7 @@ func restart()->void:
   GameController.player.activate(_start_portal.global_transform)
   _picked_up_crystals.clear()
   chrystals_changed.emit()
+  _layer = null # force recalc of visible layers
   _on_layer_selected(_start_layer)
   # wait a frame to avoid immediate collisions
   #await get_tree().physics_frame

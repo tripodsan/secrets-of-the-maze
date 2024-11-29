@@ -39,6 +39,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
     open()
     GameController.pause_game()
 
+func _input(event: InputEvent) -> void:
+  if !get_tree().paused:return
+  if event.is_action('ui_down') || event.is_action('ui_up'):
+    SoundController.play_sfx('ui_change', false, -7.0)
+  elif event.is_action('ui_accept'):
+    SoundController.play_sfx('ui_select')
+
 func _on_btn_setting_pressed() -> void:
   transition(pause_menu, settings_menu)
 

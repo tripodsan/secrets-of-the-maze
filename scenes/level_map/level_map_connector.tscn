@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ceykegurm2m3a"]
+[gd_scene load_steps=2 format=3 uid="uid://bvyfs4mwrosq"]
 
-[ext_resource type="Texture2D" uid="uid://m88s14tq1xkt" path="res://assets/level_select.png" id="1_fi20b"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a6mqr"]
+load_path = "res://.godot/imported/level_select.png-87001113b9f86e743595f9d949efb8f9.ctex"
 
 [node name="connector" type="Sprite2D"]
-texture = ExtResource("1_fi20b")
+texture = SubResource("CompressedTexture2D_a6mqr")
 region_enabled = true
 region_rect = Rect2(96, 32, 32, 64)

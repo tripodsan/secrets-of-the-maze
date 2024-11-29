@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvct7rp7yw0x1"]
+[gd_scene load_steps=16 format=3 uid="uid://dvct7rp7yw0x1"]
 
 [ext_resource type="Script" path="res://scenes/sound_controller.gd" id="1_li6tn"]
 [ext_resource type="AudioStream" uid="uid://cafa2rom3gv1x" path="res://sounds/chroma2.mp3" id="1_xvild"]
@@ -11,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://cmfg6qhpuw1iy" path="res://sounds/chromatitle.mp3" id="5_6ijvv"]
 [ext_resource type="AudioStream" uid="uid://bdbvny71kajkj" path="res://sounds/chromashift.wav" id="5_a585i"]
 [ext_resource type="AudioStream" uid="uid://06y65trn12fp" path="res://sounds/crystal.wav" id="6_iqavc"]
+[ext_resource type="AudioStream" uid="uid://duwj0vsjpx3di" path="res://sounds/ui_change.wav" id="7_bcdxs"]
+[ext_resource type="AudioStream" uid="uid://c58lwmwjtpqe1" path="res://sounds/ui_select.wav" id="8_38j4y"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_o0j2w"]
 clip_count = 5
@@ -42,8 +44,8 @@ Vector2i(-1, 0): {
 
 [node name="SoundController" type="Node"]
 script = ExtResource("1_li6tn")
-sfx_names = Array[StringName]([&"laser", &"missile", &"ship_explosion", &"enemy_explosion", &"chromashift", &"crystal"])
-sfx_streams = Array[AudioStream]([ExtResource("2_n3q32"), ExtResource("3_k7rhv"), ExtResource("4_eeciv"), ExtResource("4_eeciv"), ExtResource("5_a585i"), ExtResource("6_iqavc")])
+sfx_names = Array[StringName]([&"laser", &"missile", &"ship_explosion", &"enemy_explosion", &"chromashift", &"crystal", &"ui_change", &"ui_select"])
+sfx_streams = Array[AudioStream]([ExtResource("2_n3q32"), ExtResource("3_k7rhv"), ExtResource("4_eeciv"), ExtResource("4_eeciv"), ExtResource("5_a585i"), ExtResource("6_iqavc"), ExtResource("7_bcdxs"), ExtResource("8_38j4y")])
 
 [node name="bg_player" type="AudioStreamPlayer" parent="."]
 process_mode = 3

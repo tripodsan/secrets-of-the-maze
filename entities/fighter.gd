@@ -26,6 +26,7 @@ func _ready()->void:
 
 func hit():
   explosion.explode()
+  SoundController.play_sfx(&"enemy_explosion", false, -1.0)
   shape.visible = false
   collision.set_deferred('disabled', true)
   hitbox.set_disabled(true)

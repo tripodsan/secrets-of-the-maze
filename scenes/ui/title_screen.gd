@@ -53,3 +53,9 @@ func transition(from:Control, to:Control)->void:
   if to.has_method('focus'):
     to.focus()
   from.visible = false
+
+func _input(event: InputEvent) -> void:
+  if event.is_action('ui_down') || event.is_action('ui_up'):
+    SoundController.play_sfx('ui_change', false, -7.0)
+  elif event.is_action('ui_accept'):
+    SoundController.play_sfx('ui_select')

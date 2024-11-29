@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7ln60f04dhpl"]
+[gd_scene load_steps=19 format=3 uid="uid://b7ln60f04dhpl"]
 
 [ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/ui/level_theme.tres" id="1_7shaq"]
 [ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="2_luebk"]
@@ -11,7 +11,11 @@
 [ext_resource type="Script" path="res://scenes/level_map/level_map_v_2.gd" id="5_rx8ef"]
 [ext_resource type="Script" path="res://scenes/level_map/crystal_info.gd" id="7_gxw7w"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne2b6"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_gbq8l"]
+color = Color(0.625597, 0.625597, 0.625597, 1)
+thickness = 7
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nrjm3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nv6qf"]
 content_margin_left = 32.0
@@ -33,14 +37,12 @@ font_size = 100
 font_size = 100
 font_color = Color(0.219608, 0.411765, 0, 1)
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_gbq8l"]
-color = Color(0.625597, 0.625597, 0.625597, 1)
-thickness = 7
-
 [sub_resource type="LabelSettings" id="LabelSettings_jbx2i"]
 font = ExtResource("2_luebk")
 font_size = 55
 font_color = Color(0.923173, 0.923173, 0.923173, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne2b6"]
 
 [sub_resource type="GDScript" id="GDScript_fgtaq"]
 script/source = "extends ParallaxBackground
@@ -81,25 +83,36 @@ theme_override_constants/margin_right = 40
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 101
-text = " Level Map"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="placeholder" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(800, 400)
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
 
-[node name="level_map" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 101
+text = "MAZE XD-1"
+horizontal_alignment = 1
+
+[node name="line2" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_gbq8l")
+
+[node name="separator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nrjm3")
+
+[node name="level_map" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("5_rx8ef")
 ring_color = Color(0.225138, 0.247013, 0.241796, 1)
 layer_disabled_dim = 0.7
@@ -107,7 +120,7 @@ arc_width = 7.0
 connector_dash = 7.0
 arc_color = Color(0.57902, 0.57902, 0.57902, 1)
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/level_map"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/level_map"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,7 +136,7 @@ vertical_alignment = 1
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 800)
 layout_mode = 2
-theme_override_constants/separation = 90
+theme_override_constants/separation = 160
 theme_override_styles/separator = SubResource("StyleBoxFlat_nv6qf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
@@ -131,6 +144,7 @@ custom_minimum_size = Vector2(750, 0)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 
 [node name="level_title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
@@ -148,6 +162,12 @@ script = ExtResource("4_v353u")
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/separator = SubResource("StyleBoxLine_gbq8l")
+
+[node name="separator2" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 80
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nrjm3")
 
 [node name="HBoxContainer2" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -342,12 +362,6 @@ color = Color(0.219608, 0.411765, 0, 1)
 layout_mode = 2
 text = "00:00.00"
 label_settings = SubResource("LabelSettings_jbx2i")
-
-[node name="placeholder2" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 40
-theme_override_styles/separator = SubResource("StyleBoxEmpty_ne2b6")
 
 [node name="placeholder3" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

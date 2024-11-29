@@ -62,9 +62,13 @@ var COLORS = [
     debug = v
     queue_redraw()
 
-@export_flags("blue_red", "red_green", "green_blue") var arcs_debug:int = 0:
+@export_flags("blue_red", "red_green", "green_blue") var arcs_debug_0:int = 0:
   set(v):
-    arcs_debug = v
+    arcs_debug_0 = v
+    queue_redraw()
+@export_flags("blue_red", "red_green", "green_blue") var arcs_debug_1:int = 0:
+  set(v):
+    arcs_debug_1 = v
     queue_redraw()
 @export_flags("blue", "red", "green") var layer_debug:int = 0:
   set(v):
@@ -88,9 +92,10 @@ var selected_level:GDLayer
 func _ready()->void:
   if Engine.is_editor_hint():
     return
-  selected_level = GameData.get_layer(0, 0)
+  selected_level = GameController._current_layer
+  if !selected_level:
+    selected_level = GameData.get_layer(0, 0)
   level_selected.emit(selected_level)
-
 
 func _get_minimum_size():
   return Vector2(100, 100)
@@ -106,14 +111,25 @@ func _input(_event: InputEvent) -> void:
   elif Input.is_action_just_pressed('ui_down'):
     select((selected + Vector2i.DOWN * sign + MAX_LEVELS) % MAX_LEVELS)
   elif Input.is_action_just_pressed('ui_accept'):
-    pass #/level_accepted.emit(selected_level)
+    SoundController.play_sfx('ui_select')
+    level_accepted.emit(selected_level)
 
 func select(next:Vector2i):
-  if next.x < 0 || next.x > 2: return
-  selected = next
-  selected_level = GameData.get_layer(selected.x, selected.y)
-  level_selected.emit(selected_level)
-  queue_redraw()
+  if next.x < 0: return
+  if next.x > 2:
+    if next.y != 0:
+      next = Vector2i(2, 0)
+    elif GameData.get_layer(2, 1).unlocked:
+      next = Vector2i(2, 1)
+    else:
+      next = Vector2i(2, 2)
+  SoundController.play_sfx('ui_change', false, -7.0)
+  var next_level:GDLayer = GameData.get_layer(next.x, next.y)
+  if next_level.unlocked:
+    selected = next
+    selected_level = next_level
+    level_selected.emit(selected_level)
+    queue_redraw()
 
 
 func _draw() -> void:
@@ -130,19 +146,25 @@ func _draw() -> void:
       var cl = Vector2(r, 0).rotated(a0) + center
 
       # layer connector
-      var enabled = arcs_debug & Global.LAYER_MASK[lay] > 0
+      var enabled_0 = arcs_debug_0 & Global.LAYER_MASK[lay] > 0
+      var enabled_1 = arcs_debug_1 & Global.LAYER_MASK[lay] > 0
       if !debug && !Engine.is_editor_hint():
         var next_lay = (lay + 1) % 3
-        enabled = GameData.get_layer(lvl, lay).has_crystal(next_lay)
-        # todo: draw directional arc
-        enabled = enabled || GameData.get_layer(lvl, next_lay).has_crystal(lay)
+        enabled_0 = GameData.get_layer(lvl, lay).has_crystal(next_lay)
+        enabled_1 = GameData.get_layer(lvl, next_lay).has_crystal(lay)
 
-      if enabled:
-        var a1 = PI - TAU / 3.0 * float(lay + 1)
-        draw_arc(center, r, a0, a1, 20, arc_color, arc_width, true)
+      if enabled_0:
+        draw_arc(center, r, a0, a0 - TAU / 6.0, 20, arc_color, arc_width, true)
+      if enabled_1:
+        draw_arc(center, r, a0 - TAU / 6.0, a0 - TAU / 3.0, 20, arc_color, arc_width, true)
+
 
       # level connector
-      if level_debug & Global.LAYER_MASK[lvl] > 0:
+      var enabled = level_debug & Global.LAYER_MASK[lvl] > 0
+      if !debug && !Engine.is_editor_hint():
+        var next_lvl_lay = GameData.get_layer(lvl + 1, lay)
+        enabled = next_lvl_lay && next_lvl_lay.unlocked
+      if enabled:
         var cl_next = Vector2(r_next, 0).rotated(a0) + center
         draw_dashed_line(cl, cl_next, arc_color, arc_width, connector_dash, true, true)
 

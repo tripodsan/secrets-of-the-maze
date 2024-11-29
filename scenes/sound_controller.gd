@@ -43,11 +43,11 @@ func play_title():
   bg_player.get_stream_playback().switch_to_clip_by_name(current_clip)
   #change_volume(0)
 
-func play_sfx(name:StringName, toggle:bool = false)->void:
+func play_sfx(name:StringName, toggle:bool = false, volume_db:float = 0.0)->void:
   if !sfx_player.playing:
     sfx_player.play()
   var pb:AudioStreamPlaybackPolyphonic = sfx_player.get_stream_playback()
-  var idx:int = pb.play_stream(sfx[name])
+  var idx:int = pb.play_stream(sfx[name], 0, volume_db)
   if toggle:
     sfx_looped[name] = idx
 
