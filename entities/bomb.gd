@@ -10,7 +10,8 @@ func initialize(pos: Vector2, vel: Vector2):
 
 func _process(delta: float) -> void:
   time_alive += delta
-  if time_alive > 3.0:
+  if time_alive > 1.5:
+    GameController.create_blast(global_position, 200, 1000, false, true)
     Global.supernova.emit()
     queue_free()
   sprite.rotate(.2)

@@ -24,7 +24,7 @@ func get_damage(pos:Vector2)->float:
 
 func _physics_process(delta: float) -> void:
   ticks += 1
-  if ticks > 0:
+  if ticks > 1:
     collision_layer = 0
   if ticks > 60:
     queue_free()

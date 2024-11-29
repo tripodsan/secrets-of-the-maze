@@ -20,6 +20,7 @@ func _ready() -> void:
 
 func _store_initial_pos():
   _initial_pos = []
+  _targets = []
   for t:Node2D in get_children():
     _targets.append(t)
     _initial_pos.append(t.position)

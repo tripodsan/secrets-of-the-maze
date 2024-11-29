@@ -14,7 +14,7 @@ script = ExtResource("1_yijax")
 scale = Vector2(0.5, 1)
 script = ExtResource("1_flmd3")
 rot_dx = 0.0
-rot_y = 10787.6
+rot_y = 10791.2
 line_color = Color(1, 0.533333, 0.101961, 1)
 fill_color = Color(0.635294, 0.188235, 0, 0.666667)
 

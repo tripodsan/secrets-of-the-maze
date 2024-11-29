@@ -17,4 +17,6 @@ animate = true
 speed = 0.5
 size = 58.06
 pattern = Array[Vector2]([Vector2(1, 0.5), Vector2(0.75, 1), Vector2(0.75, 1), Vector2(1, 0.5)])
-color = Color(0.901961, 0.988235, 0.866667, 1)
+color = Color(0.47454, 0.2871, 0.99, 1)
+border_color = Color(0.22681, 0.1998, 0.74, 0.611765)
+border_width = 1.0
