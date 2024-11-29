@@ -4,12 +4,14 @@ extends Control
 @onready var btn_restart_level: Button = %btn_restart_level
 @onready var btn_exit_level: Button = %btn_exit_level
 
-@onready var pause_menu: VBoxContainer = %pause_menu
+@onready var pause_menu: Control = %pause_menu
 @onready var settings_menu: SettingsPanel = %settings_menu
+@onready var controls_menu: KeyboardBindings = %controls_menu
 
 func _ready()->void:
   visible = false
   settings_menu.closed.connect(_on_settings_closed)
+  controls_menu.closed.connect(_on_controls_closed)
 
 func open()->void:
   visible = true
@@ -42,6 +44,13 @@ func _on_btn_setting_pressed() -> void:
 
 func _on_settings_closed()->void:
   await transition(settings_menu, pause_menu)
+  btn_resume_game.grab_focus()
+
+func _on_btn_controls_pressed() -> void:
+  transition(pause_menu, controls_menu)
+
+func _on_controls_closed()->void:
+  await transition(controls_menu, pause_menu)
   btn_resume_game.grab_focus()
 
 func transition(from:Control, to:Control)->void:

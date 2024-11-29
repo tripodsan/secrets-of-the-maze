@@ -1,7 +1,6 @@
 class_name SettingsPanel
 extends VBoxContainer
 
-@onready var btn_controls: Button = %btn_controls
 @onready var btn_scale: Button = %btn_scale
 
 signal closed()
@@ -11,7 +10,7 @@ func _ready() -> void:
   visible = false
 
 func focus()->void:
-  btn_controls.grab_focus()
+  btn_scale.grab_focus()
 
 func update_scale()->void:
   btn_scale.text = 'Level scale: %s' % GameData.get_settings().get_maze_scale_name()

@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bxfruse1idhj0"]
+
+[ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="1_ctwxl"]
+
+[resource]
+default_font = ExtResource("1_ctwxl")
+default_font_size = 50
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Label/colors/font_color = Color(0.779291, 0.779291, 0.779291, 0.737255)

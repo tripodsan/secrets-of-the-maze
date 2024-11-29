@@ -5,16 +5,23 @@ extends Control
 
 @onready var title: VBoxContainer = $MarginContainer/title
 @onready var settings: SettingsPanel = $MarginContainer/settings
+@onready var controls: KeyboardBindings = $MarginContainer/controls
 
 func _ready() -> void:
   btn_start.grab_focus()
   settings.closed.connect(_on_settings_closed)
+  controls.closed.connect(_on_controls_closed)
+  # todo..move to game data?
+  KeyboardBindings.load_settings()
 
 func _on_btn_start_pressed() -> void:
   GameController.start_game()
 
 func _on_btn_settings_pressed() -> void:
   transition(title, settings)
+
+func _on_btn_controls_pressed() -> void:
+  transition(title, controls)
 
 func _on_btn_credits_pressed() -> void:
   pass
@@ -29,6 +36,10 @@ func _on_btn_quit_pressed() -> void:
 
 func _on_settings_closed() -> void:
   await transition(settings, title)
+  btn_start.grab_focus()
+
+func _on_controls_closed() -> void:
+  await transition(controls, title)
   btn_start.grab_focus()
 
 func transition(from:Control, to:Control)->void:

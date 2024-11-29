@@ -31,6 +31,9 @@ extends CharacterBody2D
 ## rotation speed
 @export_range(0.0, 10.0, 0.1, "or_greater") var rot_speed := 6.0
 
+## rotation speed
+@export_range(0.0, 10.0, 0.1, "or_greater") var rot_speed_laser := 2.0
+
 ## rotation angular damp
 @export_range(0.0, 10.0, 0.1, "or_greater") var rot_damp := 0.2
 
@@ -137,7 +140,8 @@ func _physics_process(delta: float) -> void:
 #
   var f:Vector2  # thrust
   if input.x != 0 && !Input.is_action_pressed('strafe_left') && !Input.is_action_pressed('strafe_right'):
-    rot_velo = input.x * rot_speed * delta
+    var rs = rot_speed_laser if laser.is_active else rot_speed
+    rot_velo = input.x * rs * delta
   var rot_angle = fposmod(rotation + rot_velo, TAU)
   var rot_dir = Vector2.from_angle(rot_angle)
   rot_velo = lerpf(rot_velo, 0, rot_damp)

@@ -94,12 +94,14 @@ func _unhandled_input(event: InputEvent) -> void:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _process(delta:float)->void:
+  if get_tree().paused: return
   if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
     _mouse_motion_timer += delta
     if _mouse_motion_timer > 3.0:
       Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func pause_game()->void:
+  Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
   get_tree().paused = true
   game_paused.emit()
 

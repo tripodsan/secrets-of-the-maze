@@ -1,0 +1,258 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0qnb15obtmeo"]
+
+[ext_resource type="Theme" uid="uid://gydw4cyvjjug" path="res://scenes/title_theme.tres" id="1_apnoi"]
+[ext_resource type="Theme" uid="uid://bxfruse1idhj0" path="res://scenes/controls_theme.tres" id="2_ilxsc"]
+[ext_resource type="FontFile" uid="uid://kvrcig0ggl1f" path="res://fonts/a-space/A-Space Bold Demo.otf" id="3_klhia"]
+[ext_resource type="Script" path="res://scripts/keyboard_bindings.gd" id="3_mqj3l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abufw"]
+
+[node name="KeyboardBindings" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 10
+script = ExtResource("3_mqj3l")
+
+[node name="controls" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_apnoi")
+
+[node name="Label" type="Label" parent="controls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="controls"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 23
+theme_override_styles/separator = SubResource("StyleBoxEmpty_abufw")
+
+[node name="keyboard_bindings" type="MarginContainer" parent="controls"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="inputs" type="GridContainer" parent="controls/keyboard_bindings"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_ilxsc")
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="hdr_descr" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.982343, 0.982342, 0.982342, 1)
+theme_override_fonts/font = ExtResource("3_klhia")
+text = "Action"
+horizontal_alignment = 2
+
+[node name="hdr_key_0" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.982343, 0.982342, 0.982342, 1)
+theme_override_fonts/font = ExtResource("3_klhia")
+text = "Key"
+horizontal_alignment = 1
+
+[node name="hdr_key_1" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.982343, 0.982342, 0.982342, 1)
+theme_override_fonts/font = ExtResource("3_klhia")
+text = "2nd"
+horizontal_alignment = 1
+
+[node name="ign_HSeparator2" type="HSeparator" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+
+[node name="ign_HSeparator3" type="HSeparator" parent="controls/keyboard_bindings/inputs"]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+
+[node name="ign_HSeparator4" type="HSeparator" parent="controls/keyboard_bindings/inputs"]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+
+[node name="template_action" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="template_keyboard" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="template_keyboard2" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_1" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_2" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action2" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_3" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_4" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action3" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_5" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_6" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action4" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_7" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_8" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action5" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_9" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_10" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action6" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_11" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_12" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action7" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_13" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_14" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action8" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_15" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_16" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action9" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_17" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_18" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action10" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_19" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_20" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="lab_action11" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="btn_21" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="btn_22" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="HSeparator2" type="HSeparator" parent="controls"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_abufw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="controls"]
+layout_mode = 2
+
+[node name="btn_reset" type="Button" parent="controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 100
+text = "Reset"
+
+[node name="btn_back" type="Button" parent="controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 100
+text = "Back"
+
+[connection signal="pressed" from="controls/HBoxContainer/btn_reset" to="." method="_on_btn_reset_pressed"]
+[connection signal="pressed" from="controls/HBoxContainer/btn_back" to="." method="_on_btn_back_pressed"]

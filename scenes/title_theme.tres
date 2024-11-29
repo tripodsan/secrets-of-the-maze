@@ -33,6 +33,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [resource]
+default_font = ExtResource("1_aysq5")
 default_font_size = 24
 Button/colors/font_color = Color(0.531621, 0.713231, 0.998427, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
@@ -52,7 +53,6 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 105
-Button/fonts/font = ExtResource("1_aysq5")
 Button/styles/disabled = SubResource("StyleBoxEmpty_2mvd8")
 Button/styles/focus = SubResource("StyleBoxEmpty_iu70a")
 Button/styles/hover = SubResource("StyleBoxEmpty_s8yqg")
