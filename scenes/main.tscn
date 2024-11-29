@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bksq71ompxjrn"]
+[gd_scene load_steps=49 format=3 uid="uid://bksq71ompxjrn"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_v5gem"]
 [ext_resource type="Environment" uid="uid://bhmwy1ygx05bk" path="res://scenes/default_env.tres" id="2_7p6ml"]
@@ -33,11 +33,6 @@
 [ext_resource type="PackedScene" uid="uid://b0qnb15obtmeo" path="res://scenes/ui/controls.tscn" id="24_c3sgx"]
 [ext_resource type="Script" path="res://scenes/ui/hint.gd" id="25_u7lt8"]
 [ext_resource type="Theme" uid="uid://5sakmuedgrxb" path="res://scenes/ui/hint_theme.tres" id="25_y155j"]
-[ext_resource type="AudioStream" uid="uid://kw8cidi6kggc" path="res://sounds/chromakoma.mp3" id="26_e8gw4"]
-[ext_resource type="AudioStream" uid="uid://cafa2rom3gv1x" path="res://sounds/chroma2.mp3" id="26_m5b81"]
-[ext_resource type="AudioStream" uid="uid://52u6bwu2tuvs" path="res://sounds/chroma3.mp3" id="27_621jn"]
-[ext_resource type="Script" path="res://scripts/bg_player.gd" id="27_noa8a"]
-[ext_resource type="AudioStream" uid="uid://dxis6fjog1dq7" path="res://sounds/chroma4.mp3" id="28_hhpqs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6pc7t"]
 
@@ -97,21 +92,6 @@ shader_parameter/darken = 0.507
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvfhi"]
 shader = ExtResource("7_e01wk")
-
-[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_qc5ue"]
-clip_count = 4
-clip_0/name = &"level_0"
-clip_0/stream = ExtResource("26_m5b81")
-clip_0/auto_advance = 0
-clip_1/name = &"level_1"
-clip_1/stream = ExtResource("27_621jn")
-clip_1/auto_advance = 0
-clip_2/name = &"level_2"
-clip_2/stream = ExtResource("28_hhpqs")
-clip_2/auto_advance = 0
-clip_3/name = &"level_3"
-clip_3/stream = ExtResource("26_e8gw4")
-clip_3/auto_advance = 0
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_v5gem")
@@ -747,12 +727,6 @@ texture = ExtResource("5_hcqio")
 [node name="ProjectileManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("18_nwqka")
-
-[node name="bg_player" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = SubResource("AudioStreamInteractive_qc5ue")
-bus = &"background"
-script = ExtResource("27_noa8a")
 
 [connection signal="pressed" from="hudlayer/pause/MarginContainer/pause_menu/hbox/btn_resume_game" to="hudlayer/pause" method="_on_btn_resume_game_pressed"]
 [connection signal="pressed" from="hudlayer/pause/MarginContainer/pause_menu/hbox/btn_restart_level" to="hudlayer/pause" method="_on_btn_restart_level_pressed"]

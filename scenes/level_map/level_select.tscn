@@ -470,39 +470,6 @@ theme_override_constants/h_separation = 19
 theme_override_constants/v_separation = 13
 columns = 2
 
-[node name="txt_secrets" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "secrets:"
-label_settings = SubResource("LabelSettings_jbx2i")
-horizontal_alignment = 2
-
-[node name="lab_secrets" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "0 / 5"
-label_settings = SubResource("LabelSettings_jbx2i")
-
-[node name="txt_time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "best time:"
-label_settings = SubResource("LabelSettings_jbx2i")
-horizontal_alignment = 2
-
-[node name="lab_time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "00:00.00"
-label_settings = SubResource("LabelSettings_jbx2i")
-
-[node name="txt_exits" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "exits found:"
-label_settings = SubResource("LabelSettings_jbx2i")
-horizontal_alignment = 2
-
-[node name="lab_exits" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "1 / 1"
-label_settings = SubResource("LabelSettings_jbx2i")
-
 [node name="txt_chroma" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "cystals:"
@@ -543,6 +510,147 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.219608, 0.411765, 0, 1)
+
+[node name="txt_secrets" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "secrets:"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="lab_secrets" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0 / 5"
+label_settings = SubResource("LabelSettings_jbx2i")
+
+[node name="txt_time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "best times:"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="lab_self_time" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("7_gxw7w")
+
+[node name="none" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_self_time"]
+visible = false
+layout_mode = 2
+text = "none"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="blue" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_self_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.0352941, 0.415686, 0.92549, 1)
+
+[node name="red" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_self_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.635294, 0.188235, 0, 1)
+
+[node name="green" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_self_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.219608, 0.411765, 0, 1)
+
+[node name="time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_self_time"]
+layout_mode = 2
+text = "00:00.00"
+label_settings = SubResource("LabelSettings_jbx2i")
+
+[node name="ph0" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="lab_alt0_time" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("7_gxw7w")
+
+[node name="none" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt0_time"]
+visible = false
+layout_mode = 2
+text = "none"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="blue" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt0_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.0352941, 0.415686, 0.92549, 1)
+
+[node name="red" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt0_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.635294, 0.188235, 0, 1)
+
+[node name="green" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt0_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.219608, 0.411765, 0, 1)
+
+[node name="time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt0_time"]
+layout_mode = 2
+text = "00:00.00"
+label_settings = SubResource("LabelSettings_jbx2i")
+
+[node name="ph1" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="lab_alt1_time" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("7_gxw7w")
+
+[node name="none" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt1_time"]
+visible = false
+layout_mode = 2
+text = "none"
+label_settings = SubResource("LabelSettings_jbx2i")
+horizontal_alignment = 2
+
+[node name="blue" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt1_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.0352941, 0.415686, 0.92549, 1)
+
+[node name="red" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt1_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.635294, 0.188235, 0, 1)
+
+[node name="green" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt1_time"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.219608, 0.411765, 0, 1)
+
+[node name="time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_alt1_time"]
+layout_mode = 2
+text = "00:00.00"
+label_settings = SubResource("LabelSettings_jbx2i")
 
 [node name="placeholder2" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

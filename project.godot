@@ -24,6 +24,7 @@ Global="*res://scripts/global.gd"
 GameData="*res://scripts/save/game_data.tscn"
 GameController="*res://scripts/game_controller.gd"
 SceneTransition="*res://scenes/ui/scene_transition.tscn"
+SoundController="*res://scenes/sound_controller.tscn"
 
 [debug]
 

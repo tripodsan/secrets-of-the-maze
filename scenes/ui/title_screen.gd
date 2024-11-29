@@ -13,6 +13,7 @@ func _ready() -> void:
   controls.closed.connect(_on_controls_closed)
   # todo..move to game data?
   KeyboardBindings.load_settings()
+  SoundController.play_title()
 
 func _on_btn_start_pressed() -> void:
   GameController.start_game()

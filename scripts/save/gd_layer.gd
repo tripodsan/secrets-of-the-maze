@@ -2,7 +2,7 @@
 class_name GDLayer
 extends GDSerializable
 
-@export var best_time:int = 0
+@export var best_times:Array[int] = [0, 0, 0]
 
 @export var unlocked:bool = false
 
@@ -47,10 +47,10 @@ func has_secret(nr:int)->bool:
 
 func reset()->void:
   unlocked = false
-  best_time = 0
+  best_times = [0, 0, 0]
   crystals = 0
   secrets = 0
 
-func record_time(time:int)->void:
-  if best_time == 0 || time < best_time:
-    best_time = time
+func record_time(goal:Global.Layer, time:int)->void:
+  if best_times[goal] == 0 || time < best_times[goal]:
+    best_times[goal] = time

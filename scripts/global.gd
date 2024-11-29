@@ -55,3 +55,8 @@ func enable_collision_in_tree(parent:Node2D, enabled:bool)->void:
       n.disabled = !enabled
     elif n is Node2D:
       enable_collision_in_tree(n, enabled)
+
+func format_time(msec:float)->String:
+  var hsec:int = msec / 10
+  var sec:int = hsec / 100
+  return '%02d:%02d.%02d' % [sec / 60, sec % 60, hsec % 100]
