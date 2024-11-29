@@ -48,3 +48,8 @@ func set_active(v:bool)->void:
   $TargetParticles.emitting = is_active
 
   $LaserLine.visible = is_active
+
+  if is_active:
+    SoundController.play_sfx(&"laser", true)
+  else:
+    SoundController.stop_sfx(&"laser")

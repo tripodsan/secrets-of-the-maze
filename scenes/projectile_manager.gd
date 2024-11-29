@@ -23,8 +23,8 @@ func shoot_projectile(xform:Transform2D):
   var projectile:RigidBody2D = projectile_pool[current_index]
   projectile.lifespan = 4.0
   projectile.start(xform.origin + xform.x*50.0, xform.x * 750)
-
   current_index = (current_index + 1) % MAX_PROJECTILES
+  SoundController.play_sfx('missile')
 
 func launch_bomb(xform:Transform2D)->void:
   var bomb = scn_bomb.instantiate()

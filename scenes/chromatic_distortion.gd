@@ -7,6 +7,7 @@ func _ready() -> void:
 func _on_layer_selected(_layer:ChromaLayer):
   var tween := get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
   tween.tween_method(_on_chroma_update, 2.5, 0.0, 1.0)
+  SoundController.play_sfx('chromashift')
 
 func _on_chroma_update(distortion:float)->void:
   if distortion == 0:

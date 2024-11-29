@@ -216,6 +216,7 @@ func apply_damage(amount:float, source:Node2D)->void:
   if health == 0:
     $ship.visible = false
     $Explosion.fire()
+    SoundController.play_sfx('ship_explosion')
     trail.fill(Vector4.ZERO)
     RenderingServer.global_shader_parameter_set("player_pos_and_vel", Vector4.ZERO)
     set_state(State.DESTROYING)

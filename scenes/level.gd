@@ -182,6 +182,7 @@ func get_grid(layer:Global.Layer)->TileMapLayer:
 func picked_up_crystal(layer_type:Global.Layer, crystal:Global.Layer)->void:
   prints('pikced up crystal %d in %d' % [crystal, layer_type])
   enable_layer(crystal)
+  SoundController.play_sfx('crystal')
   _picked_up_crystals.append(PickedUpCrystal.new(layer_type, crystal))
   chrystals_changed.emit()
 
