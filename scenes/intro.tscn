@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cykbxyoabjlaw"]
+
+[ext_resource type="Script" path="res://scenes/intro.gd" id="1_lfekx"]
+[ext_resource type="Texture2D" uid="uid://dac7m5d4vwdkj" path="res://assets/linear-games-title.png" id="1_rhxn8"]
+[ext_resource type="PackedScene" uid="uid://chykxgy7cl78m" path="res://entities/projectile.tscn" id="5_b3npf"]
+[ext_resource type="PackedScene" uid="uid://bcyr27ygm52ov" path="res://scenes/laser_cast.tscn" id="6_tcuqu"]
+[ext_resource type="PackedScene" uid="uid://cxo81whpicwy" path="res://entities/explosion.tscn" id="7_hvc2d"]
+[ext_resource type="PackedScene" uid="uid://bnbc6fy7ck4xj" path="res://scenes/explosion.tscn" id="8_b0pgj"]
+
+[node name="intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lfekx")
+
+[node name="logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_rhxn8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="particles" type="Node2D" parent="."]
+
+[node name="Projectile" parent="particles" instance=ExtResource("5_b3npf")]
+position = Vector2(223, 185)
+
+[node name="LaserCast" parent="particles" instance=ExtResource("6_tcuqu")]
+position = Vector2(208, 405)
+silent = true
+
+[node name="explosion" parent="particles" instance=ExtResource("7_hvc2d")]
+position = Vector2(523, 181)
+
+[node name="ship_explosion" parent="particles" instance=ExtResource("8_b0pgj")]
+position = Vector2(365, 658)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

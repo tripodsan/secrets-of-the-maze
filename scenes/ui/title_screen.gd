@@ -14,6 +14,7 @@ func _ready() -> void:
   # todo..move to game data?
   KeyboardBindings.load_settings()
   SoundController.play_title()
+  SoundController.stop_intro()
 
 func _on_btn_start_pressed() -> void:
   GameController.start_game()

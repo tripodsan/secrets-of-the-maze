@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cremgjkvu1nw4"]
+[gd_scene load_steps=17 format=3 uid="uid://cremgjkvu1nw4"]
 
 [ext_resource type="Script" path="res://scenes/portal.gd" id="1_bp8gh"]
 [ext_resource type="Texture2D" uid="uid://dhigxjbp3123f" path="res://scenes/gradient_texture_blue_to_green.tres" id="2_hrw4b"]
 [ext_resource type="Texture2D" uid="uid://bxp3gmbwlpu5b" path="res://assets/ring.png" id="3_ust2t"]
 [ext_resource type="Texture2D" uid="uid://7xabij5fiwwy" path="res://assets/triangle.png" id="4_ju5kj"]
-[ext_resource type="Texture2D" uid="uid://bs5qw3fkacloy" path="res://scenes/gradient_texture_blue_to_red.tres" id="4_qtulu"]
 [ext_resource type="Texture2D" uid="uid://bo42hb7j21lk2" path="res://assets/star.png" id="5_3brb1"]
 [ext_resource type="Texture2D" uid="uid://b6i5sw2kwdaq8" path="res://scenes/gradient_texture_green_to_red.tres" id="6_e14cl"]
 
@@ -38,7 +37,7 @@ angular_velocity_min = -11.74
 angular_velocity_max = -11.74
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_kiao5")
-color_ramp = ExtResource("4_qtulu")
+color_ramp = ExtResource("2_hrw4b")
 alpha_curve = SubResource("CurveTexture_4y5jl")
 
 [sub_resource type="GDScript" id="GDScript_lrei7"]
@@ -76,6 +75,7 @@ func _process(delta: float) -> void:
 radius = 100.0
 
 [node name="portal_0" type="Node2D" groups=["portal"]]
+visible = false
 script = ExtResource("1_bp8gh")
 ph_min = 0.100503
 ph_off = -0.100503
@@ -92,7 +92,7 @@ lifetime = 3.0
 preprocess = 20.0
 
 [node name="triangle" type="GPUParticles2D" parent="."]
-rotation = 10026.8
+rotation = 10106.7
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_yfe87")
 texture = ExtResource("4_ju5kj")

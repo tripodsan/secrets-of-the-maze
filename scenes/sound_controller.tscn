@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvct7rp7yw0x1"]
+[gd_scene load_steps=17 format=3 uid="uid://dvct7rp7yw0x1"]
 
 [ext_resource type="Script" path="res://scenes/sound_controller.gd" id="1_li6tn"]
 [ext_resource type="AudioStream" uid="uid://cafa2rom3gv1x" path="res://sounds/chroma2.mp3" id="1_xvild"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://06y65trn12fp" path="res://sounds/crystal.wav" id="6_iqavc"]
 [ext_resource type="AudioStream" uid="uid://duwj0vsjpx3di" path="res://sounds/ui_change.wav" id="7_bcdxs"]
 [ext_resource type="AudioStream" uid="uid://c58lwmwjtpqe1" path="res://sounds/ui_select.wav" id="8_38j4y"]
+[ext_resource type="AudioStream" uid="uid://cyex14kt8at6w" path="res://sounds/low-engine-hum-72529.mp3" id="15_xdbxe"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_o0j2w"]
 clip_count = 5
@@ -56,3 +57,6 @@ bus = &"background"
 process_mode = 3
 stream = SubResource("AudioStreamPolyphonic_08548")
 bus = &"sfx"
+
+[node name="intro_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_xdbxe")

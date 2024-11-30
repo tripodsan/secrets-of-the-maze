@@ -9,6 +9,8 @@ const DISTANCE = 1300
 
 @onready var laser_line: Line2D = $LaserLine
 
+@export var silent:bool = false
+
 func _ready() -> void:
   _on_maze_scale_changed()
   GameController.maze_scale_changed.connect(_on_maze_scale_changed)
@@ -49,7 +51,7 @@ func set_active(v:bool)->void:
 
   $LaserLine.visible = is_active
 
-  if is_active:
+  if is_active && !silent:
     SoundController.play_sfx(&"laser", true)
   else:
     SoundController.stop_sfx(&"laser")

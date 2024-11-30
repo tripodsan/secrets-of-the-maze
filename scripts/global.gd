@@ -60,3 +60,21 @@ func format_time(msec:float)->String:
   var hsec:int = msec / 10
   var sec:int = hsec / 100
   return '%02d:%02d.%02d' % [sec / 60, sec % 60, hsec % 100]
+
+func fade(item:CanvasItem, from:float = 0.0, to:float = 1.0, time:float = 0.5):
+  item.modulate.a = from
+  var tween:Tween = create_tween()
+  tween.set_process_mode(Tween.TWEEN_PROCESS_IDLE)
+  tween.tween_property(item, 'modulate:a', to, time)
+  await tween.finished
+
+func change_volume(player:AudioStreamPlayer, db:float, time:float = 0.5, autostop:bool = false)->void:
+  var start:float = db_to_linear(player.volume_db)
+  var end:float = db_to_linear(db)
+  var tween = create_tween()
+  tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+  tween.set_process_mode(Tween.TWEEN_PROCESS_IDLE)
+  tween.tween_method(func(v:float): player.volume_db = linear_to_db(v), start, end, time)
+  await tween.finished
+  if autostop:
+    player.stop()
