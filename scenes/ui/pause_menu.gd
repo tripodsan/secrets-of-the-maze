@@ -34,7 +34,7 @@ func _on_btn_exit_level_pressed() -> void:
   close()
   GameController.exit_level()
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
   if event.is_action_pressed('pause'):
     open()
     GameController.pause_game()

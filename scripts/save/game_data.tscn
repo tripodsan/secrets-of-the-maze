@@ -41,11 +41,13 @@ secrets = 3
 script = ExtResource("1_q0hed")
 unlocked = true
 crystals = 7
+max_secrets = 1
 
 [node name="green" type="Node" parent="save/levels/0/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
 crystals = 7
+max_secrets = 1
 
 [node name="1" type="Node" parent="save/levels"]
 script = ExtResource("3_ma83k")

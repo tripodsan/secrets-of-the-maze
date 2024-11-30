@@ -17,10 +17,9 @@ func _on_timer_timeout()->void:
   GameController.show_title_screen()
 
 func _input(event: InputEvent) -> void:
-  if event is InputEventKey or event is InputEventMouseButton:
+  if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton:
     timer.stop()
     _on_timer_timeout()
-
 
 func preload_particles()->void:
   projectile.start(projectile.global_position, Vector2.ZERO)

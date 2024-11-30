@@ -7,11 +7,10 @@ extends Node
 
 @export var sfx_names:Array[StringName] = []
 @export var sfx_streams:Array[AudioStream] = []
-
+@export var sfx_volume_adjust:Dictionary = {}
 
 var sfx:Dictionary = {}
 var sfx_looped:Dictionary = {}
-
 
 var current_clip:String
 
@@ -57,7 +56,7 @@ func play_sfx(name:StringName, toggle:bool = false, volume_db:float = 0.0)->void
     sfx_players.add_child(player)
     #prints('created new audio player for %s (%d)' % [name, sfx_players.get_child_count()])
   player.stream = sfx[name]
-  player.volume_db = volume_db
+  player.volume_db = sfx_volume_adjust.get(name, volume_db)
   player.play()
   if toggle:
     sfx_looped[name] = player
@@ -69,23 +68,6 @@ func stop_sfx(name:StringName)->void:
   var player:AudioStreamPlayer = sfx_looped.get(name)
   if player:
     player.stop()
-    sfx_looped.erase(name)
-
-func __old__play_sfx(name:StringName, toggle:bool = false, volume_db:float = 0.0)->void:
-  sfx_player.play()
-  if !sfx_player.playing:
-    sfx_player.play()
-  var pb:AudioStreamPlaybackPolyphonic = sfx_player.get_stream_playback()
-  var idx:int = pb.play_stream(sfx[name], 0, volume_db)
-  if idx == AudioStreamPlaybackPolyphonic.INVALID_ID:
-    printerr('unable to play sfx: %s' % name)
-  if toggle:
-    sfx_looped[name] = idx
-
-func __old__stop_sfx(name:StringName)->void:
-  if sfx_looped.has(name):
-    var pb:AudioStreamPlaybackPolyphonic = sfx_player.get_stream_playback()
-    pb.stop_stream(sfx_looped[name])
     sfx_looped.erase(name)
 
 func _on_game_paused()->void:

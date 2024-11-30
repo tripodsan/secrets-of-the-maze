@@ -19,6 +19,7 @@ func _ready():
   prints('secret %d is ready' % id)
 
 func reveal(immediate:bool = false)->void:
+  if revealed: return
   prints('secret %d is revealed' % id)
   revealed = true
   if immediate:

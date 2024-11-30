@@ -52,6 +52,7 @@ func set_game_data(layer:GDLayer)->void:
         n.secret_revealed.connect(_on_secret_revealed.bind(n))
 
 func _on_secret_revealed(_immediate:bool, secret:SecretRoom)->void:
+  SoundController.play_sfx(&"secret")
   game_data.set_secret(secret.id)
 
 func set_active(value: bool)->void:
