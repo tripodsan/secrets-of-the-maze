@@ -35,6 +35,16 @@ extends Node2D
     line_color = v
     queue_redraw()
 
+@export var line_width:float = 0.5:
+  set(v):
+    line_width = v
+    queue_redraw()
+
+@export var line_aa:bool = false:
+  set(v):
+    line_aa = v
+    queue_redraw()
+
 @export var fill_color:Color = Color.RED:
   set(v):
     fill_color = v
@@ -75,7 +85,7 @@ func _draw()->void:
     var lines:PackedVector2Array = []
     for i:int in e:
       lines.append(vs[i])
-    draw_polyline(lines, line_color, 0.5, true)
+    draw_polyline(lines, line_color, line_width, line_aa)
 
 func _process(delta:float)->void:
   if rot_dx > 0.0:

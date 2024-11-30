@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @onready var ship: Polygon2D = $ship
 @onready var laser: Laser = $ship/laser
+@onready var camera_2d: Camera2D = $Camera2D
 
 ## front surface area (m²)
 @export_range(0.0, 10.0, 0.1, "or_greater") var a_front := 30.0
@@ -234,6 +235,7 @@ func activate(xf:Transform2D)->void:
   rot_velo = 0
   health = start_health
   health_changed.emit(health)
+  camera_2d.drag_vertical_enabled = false
   set_state(State.ACTIVATING)
 
 
@@ -246,6 +248,7 @@ func portal_enter(p:Portal)->void:
     portal_time = 0
     portal_speed = velocity.length() * 0.0002
     velocity = Vector2.ZERO
+    camera_2d.drag_vertical_enabled = true # prevent jigglying during portal animation
     set_state(State.DEACTIVATING)
     GameController.portal_reached.emit(portal)
 

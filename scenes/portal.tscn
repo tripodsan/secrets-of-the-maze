@@ -93,7 +93,7 @@ lifetime = 3.0
 preprocess = 20.0
 
 [node name="triangle" type="GPUParticles2D" parent="."]
-rotation = 10106.7
+rotation = 10119.6
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_yfe87")
 texture = ExtResource("4_ju5kj")

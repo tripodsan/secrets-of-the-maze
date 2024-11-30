@@ -40,6 +40,11 @@ var phase:float = 0:
     border_width = v
     queue_redraw()
 
+@export var border_aa:bool = false:
+  set(v):
+    border_aa = v
+    queue_redraw()
+
 @export var sides:int = 12:
   set(v):
     sides = v
@@ -62,7 +67,7 @@ func _draw()->void:
   draw_colored_polygon(points, color)
   if border_width > 0.0:
     points.append(points[0])
-    draw_polyline(points, border_color, border_width, true)
+    draw_polyline(points, border_color, border_width, border_aa)
 
 func _process(delta:float)->void:
   if animate:

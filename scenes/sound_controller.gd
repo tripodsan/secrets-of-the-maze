@@ -3,6 +3,7 @@ extends Node
 @onready var bg_player: AudioStreamPlayer = $bg_player
 @onready var sfx_player: AudioStreamPlayer = $sfx_player
 @onready var intro_player: AudioStreamPlayer = $intro_player
+@onready var sfx_players: Node = $sfx_players
 
 @export var sfx_names:Array[StringName] = []
 @export var sfx_streams:Array[AudioStream] = []
@@ -44,6 +45,33 @@ func play_title():
 
 
 func play_sfx(name:StringName, toggle:bool = false, volume_db:float = 0.0)->void:
+  var player:AudioStreamPlayer
+  for p:AudioStreamPlayer in sfx_players.get_children():
+    if !p.playing:
+      player = p
+      break
+  if !player:
+    player = AudioStreamPlayer.new()
+    player.bus = &'sfx'
+    #player.finished.connect(_on_sfx_player_stopped.bind(player))
+    sfx_players.add_child(player)
+    #prints('created new audio player for %s (%d)' % [name, sfx_players.get_child_count()])
+  player.stream = sfx[name]
+  player.volume_db = volume_db
+  player.play()
+  if toggle:
+    sfx_looped[name] = player
+
+#func _on_sfx_player_stopped(p:AudioStreamPlayer):
+  #prints('sfx player stopped', p)
+
+func stop_sfx(name:StringName)->void:
+  var player:AudioStreamPlayer = sfx_looped.get(name)
+  if player:
+    player.stop()
+    sfx_looped.erase(name)
+
+func __old__play_sfx(name:StringName, toggle:bool = false, volume_db:float = 0.0)->void:
   sfx_player.play()
   if !sfx_player.playing:
     sfx_player.play()
@@ -54,7 +82,7 @@ func play_sfx(name:StringName, toggle:bool = false, volume_db:float = 0.0)->void
   if toggle:
     sfx_looped[name] = idx
 
-func stop_sfx(name:StringName)->void:
+func __old__stop_sfx(name:StringName)->void:
   if sfx_looped.has(name):
     var pb:AudioStreamPlaybackPolyphonic = sfx_player.get_stream_playback()
     pb.stop_stream(sfx_looped[name])

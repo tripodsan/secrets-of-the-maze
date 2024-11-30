@@ -20,16 +20,22 @@ void vertex() {
     (COLOR.g > 0.5 && VERTEX_ID == 1) ||
     (COLOR.b > 0.5 && VERTEX_ID == 2) ||
     (COLOR.a > 0.5 && VERTEX_ID == 3)) {
+    vec4 ppv = player_pos_and_vel;
+    //ppv = vec4(100.0, -200.0, 1500.0, 1500.0);
 
     vec2 wpos = (MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
-    float amp = length(player_pos_and_vel.zw) * 0.001;
-    vec2 dir = wpos - player_pos_and_vel.xy;
-    warp = exp(-dot(dir, dir) * 0.0001) * amp;
-    VERTEX = VERTEX + dir * warp;
+    vec2 dir_player = wpos - ppv.xy;
+    vec2 dir_portal = wpos - portal_pos.xy;
+    float dist_portal = dot(dir_portal, dir_portal);
 
-    dir = wpos - portal_pos.xy;
-    portal_warp = exp(-dot(dir, dir) * 0.00005) * 1.1;
-    VERTEX = VERTEX - dir * portal_warp + portal_warp * vec2(0.0, 200.0);
+    portal_warp = exp(-dist_portal * 0.00005) * 1.1;
+    VERTEX += - dir_portal * portal_warp + portal_warp * vec2(0.0, 200.0);
+
+    if (dist_portal >= 55000.0) {
+      float amp = length(ppv.zw) * 0.001;
+      warp = exp(-dot(dir_player, dir_player) * 0.0001) * amp;
+      VERTEX += dir_player * warp;
+    }
 
   }
 }

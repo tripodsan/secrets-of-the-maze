@@ -93,6 +93,8 @@ func on_chroma_crystal_pickup(type:Global.Layer)->void:
     crystal_hint_shown = true
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
     get_tree().paused = true
+    # set player velocity to zero to void crashes
+    player.velocity = Vector2.ZERO
     show_crystal_hint.emit(_current_layer.type, type)
 
 var _mouse_motion_timer:float = 0

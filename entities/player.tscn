@@ -35,6 +35,7 @@ collide_with_areas = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 drag_horizontal_enabled = true
+editor_draw_drag_margin = true
 
 [node name="collision" type="CollisionShape2D" parent="."]
 visible = false
