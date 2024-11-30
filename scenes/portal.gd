@@ -59,6 +59,7 @@ var marker_pos:Vector2
     process_mode = PROCESS_MODE_INHERIT if v else PROCESS_MODE_DISABLED
 
 func _ready() -> void:
+  visible = false
   if !Engine.is_editor_hint():
     $helper_arrow.queue_free()
   set_shape(shape)

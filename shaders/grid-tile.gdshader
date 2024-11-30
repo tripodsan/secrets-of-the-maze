@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 global uniform vec4 player_pos_and_vel;
+global uniform vec2 portal_pos;
 
 uniform float line_width = 0.01;
 uniform vec4 color_0 : source_color;
@@ -8,6 +9,7 @@ uniform vec4 color_1 : source_color;
 uniform bool debug = false;
 
 varying float warp;
+varying float portal_warp;
 
 void vertex() {
   // lock sides based on vertext color: RGBA. > 50% means no lock, < 50% means lock
@@ -24,6 +26,11 @@ void vertex() {
     vec2 dir = wpos - player_pos_and_vel.xy;
     warp = exp(-dot(dir, dir) * 0.0001) * amp;
     VERTEX = VERTEX + dir * warp;
+
+    dir = wpos - portal_pos.xy;
+    portal_warp = exp(-dot(dir, dir) * 0.00005) * 1.1;
+    VERTEX = VERTEX - dir * portal_warp + portal_warp * vec2(0.0, 200.0);
+
   }
 }
 
@@ -32,6 +39,7 @@ void fragment() {
   vec2 tr = smoothstep(vec2(0), vec2(line_width),1.0-UV);   // top-right
   vec2 c = abs(UV - vec2(0.5)); // corners
   vec4 line_color = mix(color_0, vec4(1), warp * c.x * c.y * 2.0);
+  line_color = mix(line_color, vec4(1), portal_warp);
   if (debug) {
     if (UV.x < 0.5 && UV.y < 0.5) {
       COLOR.rgb = vec3(round(COLOR.r));
@@ -44,7 +52,8 @@ void fragment() {
     }
     COLOR.a = 1.0;
   } else {
-    COLOR.rgba = mix(line_color, color_1, bl.x * bl.y * tr.x * tr.y);
+    float pulse = sin(TIME * 2.0)*0.1 + 0.8;
+    COLOR.rgba = mix(line_color, color_1 + vec4(portal_warp * pulse), bl.x * bl.y * tr.x * tr.y);
     //COLOR.rgb = vec3(warp);
     //COLOR.a = 0.9;
   }

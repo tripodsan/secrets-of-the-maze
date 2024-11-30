@@ -93,13 +93,15 @@ func _on_layer_selected(layer:ChromaLayer):
     _prev_layer = _layer
     _layer = layer
     _layer.set_active(true)
-    # show the layers where we have a crystal for
-    for l in _layers:
-      l.visible = _layer.game_data.has_crystal(l.type)
-    for crystal:PickedUpCrystal in _picked_up_crystals:
-      if crystal.source == _layer.type:
-        _layers[crystal.type].visible = true
-    _layer.visible = true
+
+  # show the layers where we have a crystal for
+  for l in _layers:
+    l.visible = _layer.game_data.has_crystal(l.type)
+  for crystal:PickedUpCrystal in _picked_up_crystals:
+    if crystal.source == _layer.type:
+      _layers[crystal.type].visible = true
+  _layer.visible = true
+  RenderingServer.global_shader_parameter_set("portal_pos", _layer.get_portal(1).global_position + Vector2(0, -150))
 
 func _on_portal_reached(_p:Portal)->void:
   print('portal reached')
@@ -161,7 +163,6 @@ func restart()->void:
   GameController.player.activate(_start_portal.global_transform)
   _picked_up_crystals.clear()
   chrystals_changed.emit()
-  _layer = null # force recalc of visible layers
   _on_layer_selected(_start_layer)
   # wait a frame to avoid immediate collisions
   #await get_tree().physics_frame

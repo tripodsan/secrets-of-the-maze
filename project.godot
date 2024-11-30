@@ -148,3 +148,7 @@ player_pos_and_vel={
 "type": "vec4",
 "value": Vector4(200, 0, 0, 0)
 }
+portal_pos={
+"type": "vec2",
+"value": Vector2(0, 0)
+}
