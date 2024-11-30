@@ -188,7 +188,6 @@ source = NodePath("../../../secret_1")
 invert = true
 
 [node name="portal_1" parent="blue/objects" instance=ExtResource("4_rgtqr")]
-visible = false
 position = Vector2(9088, -2176)
 rotation = -3.14159
 ph_off = -3.24209
@@ -196,7 +195,6 @@ shape = 2
 layer = 0
 
 [node name="portal_0" parent="blue/objects" instance=ExtResource("4_rgtqr")]
-visible = false
 position = Vector2(832, 512)
 rotation = -1.5708
 ph_off = -1.6713
@@ -271,14 +269,12 @@ source = NodePath("../../../secret_0")
 invert = true
 
 [node name="portal_0" parent="red/objects" instance=ExtResource("4_rgtqr")]
-visible = false
 position = Vector2(832, 512)
 rotation = 4.71239
 ph_off = -1.6713
 shape = 0
 
 [node name="portal_1" parent="red/objects" instance=ExtResource("4_rgtqr")]
-visible = false
 position = Vector2(9024, -2112)
 rotation = -1.5708
 ph_off = -1.6713
@@ -344,14 +340,12 @@ orientation = 3
 color_scheme = 2
 
 [node name="portal_1" parent="green/objects" instance=ExtResource("4_rgtqr")]
-visible = false
 position = Vector2(9024, -2176)
 rotation = 1.5708
 ph_off = 1.47029
 layer = 2
 
 [node name="portal_0" parent="green/objects" instance=ExtResource("4_rgtqr")]
-visible = false
 position = Vector2(832, 512)
 rotation = -1.5708
 ph_off = -1.6713

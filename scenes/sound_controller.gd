@@ -42,11 +42,15 @@ func play_title():
     bg_player.play()
     bg_player.get_stream_playback().switch_to_clip_by_name(current_clip)
 
+
 func play_sfx(name:StringName, toggle:bool = false, volume_db:float = 0.0)->void:
+  sfx_player.play()
   if !sfx_player.playing:
     sfx_player.play()
   var pb:AudioStreamPlaybackPolyphonic = sfx_player.get_stream_playback()
   var idx:int = pb.play_stream(sfx[name], 0, volume_db)
+  if idx == AudioStreamPlaybackPolyphonic.INVALID_ID:
+    printerr('unable to play sfx: %s' % name)
   if toggle:
     sfx_looped[name] = idx
 

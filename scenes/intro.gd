@@ -1,6 +1,6 @@
 extends Control
 
-@onready var logo: TextureRect = $logo
+@onready var logo: TextureRect = %logo
 @onready var timer: Timer = $Timer
 
 @onready var projectile: RigidBody2D = $particles/Projectile
