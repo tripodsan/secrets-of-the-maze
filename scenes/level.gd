@@ -36,6 +36,8 @@ var _start_layer:ChromaLayer
 
 var _level_run_time:int
 
+var _last_checkpoint:Checkpoint
+
 class PickedUpCrystal extends RefCounted:
   var source:Global.Layer
   var type:Global.Layer
@@ -64,6 +66,11 @@ func _ready() -> void:
   GameController.set_level(self)
   set_state(State.READY)
 
+func set_checkpoint(cp:Checkpoint)->void:
+  if _last_checkpoint != cp:
+    _last_checkpoint = cp
+    cp.time = _level_run_time
+
 func set_state(s:State)->void:
   state = s
   prints('layer state:', State.keys()[state])
@@ -74,7 +81,7 @@ func _on_player_loaded(p:Player)->void:
 
 func _on_player_state_changed(p:Player)->void:
   if p.state == Player.State.ACTIVE:
-    _level_run_time = 0
+    _level_run_time = 0 if _last_checkpoint == null else _last_checkpoint.time
   elif p.state == Player.State.DESTROYING:
     set_state(State.STOPPED)
   elif p.state == Player.State.DESTROYED:
@@ -160,7 +167,10 @@ func quit()->void:
   set_state(State.DESTROYED)
 
 func restart()->void:
-  GameController.player.activate(_start_portal.global_transform)
+  if _last_checkpoint:
+    GameController.player.activate(_last_checkpoint.global_transform)
+  else:
+    GameController.player.activate(_start_portal.global_transform)
   _picked_up_crystals.clear()
   chrystals_changed.emit()
   _on_layer_selected(_start_layer)

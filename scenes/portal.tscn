@@ -29,7 +29,7 @@ angular_velocity_min = -11.74
 angular_velocity_max = -11.74
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_kiao5")
-color_ramp = ExtResource("2_hrw4b")
+color_ramp = ExtResource("6_e14cl")
 alpha_curve = SubResource("CurveTexture_4y5jl")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yfe87"]
@@ -38,7 +38,7 @@ angular_velocity_min = -11.74
 angular_velocity_max = -11.74
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_kiao5")
-color_ramp = ExtResource("4_qtulu")
+color_ramp = ExtResource("2_hrw4b")
 alpha_curve = SubResource("CurveTexture_4y5jl")
 
 [sub_resource type="GDScript" id="GDScript_lrei7"]
@@ -58,7 +58,7 @@ angular_velocity_min = -11.74
 angular_velocity_max = -11.74
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_kiao5")
-color_ramp = ExtResource("6_e14cl")
+color_ramp = ExtResource("4_qtulu")
 alpha_curve = SubResource("CurveTexture_4y5jl")
 
 [sub_resource type="GDScript" id="GDScript_q8s6v"]
@@ -93,7 +93,7 @@ lifetime = 3.0
 preprocess = 20.0
 
 [node name="triangle" type="GPUParticles2D" parent="."]
-rotation = 10119.6
+rotation = 10139.6
 amount = 6
 process_material = SubResource("ParticleProcessMaterial_yfe87")
 texture = ExtResource("4_ju5kj")

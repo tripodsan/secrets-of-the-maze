@@ -14,7 +14,7 @@ extends Node
 
 
 @export var template:Texture2D
-@export var template_scale:int = 16
+@export var template_scale:float = 16
 
 ## calculated automatically
 @export var template_region:Rect2i
@@ -56,15 +56,15 @@ func _import_layer(l:ChromaLayer):
   var flags = [import_blue, import_red, import_green]
   var map_terrains := [2, 3, 1]
   var map_colors := [2, 0, 1]
-  var idx = l.layer_idx - 1
+  var idx = Global.Layer.get(l.name.to_upper())
   var cidx = map_colors[idx]
   if !flags[idx]: return
   prints('importing', l.name)
   var img:Image = template.get_image()
   @warning_ignore('integer_division')
-  var wx = template_region.size.x / template_scale
+  var wx = ceil(template_region.size.x / template_scale)
   @warning_ignore('integer_division')
-  var wy = template_region.size.y / template_scale
+  var wy = ceil(template_region.size.y / template_scale)
   var grid:TileMapLayer = l.get_node('grid')
   var map:TileMapLayer = l.get_node('map')
   var grid_cells:Array[Vector2i] = []

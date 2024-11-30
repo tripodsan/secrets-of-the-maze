@@ -147,7 +147,7 @@ theme_override_constants/separation = 160
 theme_override_styles/separator = SubResource("StyleBoxFlat_nv6qf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(750, 0)
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -277,7 +277,7 @@ color = Color(0.219608, 0.411765, 0, 1)
 
 [node name="time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/lab_self_time"]
 layout_mode = 2
-text = "00:00.00"
+text = "44:44:44"
 label_settings = SubResource("LabelSettings_jbx2i")
 
 [node name="ph0" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]

@@ -139,3 +139,7 @@ func create_blast(pos:Vector2, amount:float, radius:float, affect_player:bool = 
   blast.global_position = pos
   level.add_blast.call_deferred(blast)
   blasted.emit(blast)
+
+func checkpoint_reached(cp:Checkpoint)->void:
+  if level:
+    level.set_checkpoint(cp)

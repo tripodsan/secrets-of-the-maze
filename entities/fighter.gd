@@ -40,7 +40,7 @@ func hit():
   queue_free()
 
 func get_damage()->float:
-  return 100.0
+  return 50.0
 
 func apply_damage(amount:int, source:Node2D)->void:
   health = max(0, health - amount)
