@@ -108,7 +108,9 @@ func _on_layer_selected(layer:ChromaLayer):
     if crystal.source == _layer.type:
       _layers[crystal.type].visible = true
   _layer.visible = true
-  RenderingServer.global_shader_parameter_set("portal_pos", _layer.get_portal(1).global_position + Vector2(0, -150))
+  var goal = _layer.get_portal(1)
+  if goal:
+    RenderingServer.global_shader_parameter_set("portal_pos", _layer.get_portal(1).global_position + Vector2(0, -50))
 
 func _on_portal_reached(_p:Portal)->void:
   print('portal reached')
@@ -173,9 +175,10 @@ func restart()->void:
     GameController.player.activate(_start_portal.global_transform)
   _picked_up_crystals.clear()
   chrystals_changed.emit()
+  await get_tree().physics_frame
   _on_layer_selected(_start_layer)
   # wait a frame to avoid immediate collisions
-  #await get_tree().physics_frame
+  await get_tree().physics_frame
   #await get_tree().physics_frame
   for n:Node2D in get_tree().get_nodes_in_group('resetable'):
     n.reset()

@@ -251,6 +251,7 @@ func portal_enter(p:Portal)->void:
     camera_2d.drag_vertical_enabled = true # prevent jigglying during portal animation
     set_state(State.DEACTIVATING)
     GameController.portal_reached.emit(portal)
+    SoundController.play_sfx(&"portal")
 
 func pickup(body:Node2D)->void:
   if body is ChromaCrystal:

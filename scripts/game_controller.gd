@@ -49,6 +49,8 @@ func show_title_screen():
 ## Starts the level with the given layer as starting point
 ## calls by the level select screeen
 func start_level(layer:GDLayer)->void:
+  # hack to init hint
+  crystal_hint_shown = GameData.get_layer(0, 0).crystals != 0
   print('gamecontroller: start_level')
   _start_layer = layer
   await SceneTransition.change_scene(scn_main)

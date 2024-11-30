@@ -2,6 +2,8 @@
 class_name LevelMapV2
 extends Control
 
+@onready var questionmark: Label = %questionmark
+
 var COLORS = [
   {
     "border": Color("09ccec"),
@@ -79,6 +81,11 @@ var COLORS = [
     level_debug = v
     queue_redraw()
 
+@export var end_debug:bool = false:
+  set(v):
+    end_debug = v
+    queue_redraw()
+
 signal level_selected(layer:GDLayer)
 
 signal level_accepted(layer:GDLayer)
@@ -118,7 +125,9 @@ func _input(_event: InputEvent) -> void:
 func select(next:Vector2i):
   if next.x < 0: return
   if next.x > 2:
-    if next.y != 0:
+    if GameData.get_level(3).unlocked:
+      next = Vector2i(3, 0)
+    elif next.y != 0:
       next = Vector2i(2, 0)
     elif GameData.get_layer(2, 1).unlocked:
       next = Vector2i(2, 1)
@@ -136,6 +145,7 @@ func select(next:Vector2i):
 func _draw() -> void:
   #draw_rect(Rect2(Vector2.ZERO, size), Color.RED)
   var center:Vector2 = size/2
+  var show_end:bool = end_debug || !Engine.is_editor_hint() && GameData.get_level(3).unlocked
   for lvl in range(3):
     var r = remap(lvl, 0, 3, min(size.x, size.y) - layer_radius, 0) / 2.0
     var r_next = remap(lvl + 1, 0, 3, min(size.x, size.y) - layer_radius, 0) / 2.0
@@ -159,12 +169,11 @@ func _draw() -> void:
       if enabled_1:
         draw_arc(center, r, a0 - TAU / 6.0, a0 - TAU / 3.0, 20, arc_color, arc_width, true)
 
-
       # level connector
       var enabled = level_debug & Global.LAYER_MASK[lvl] > 0
       if !debug && !Engine.is_editor_hint():
         var next_lvl_lay = GameData.get_layer(lvl + 1, lay)
-        enabled = next_lvl_lay && next_lvl_lay.unlocked
+        enabled = next_lvl_lay && next_lvl_lay.unlocked || lvl == 2 && show_end
       if enabled:
         var cl_next = Vector2(r_next, 0).rotated(a0) + center
         draw_dashed_line(cl, cl_next, arc_color, arc_width, connector_dash, true, true)
@@ -187,6 +196,18 @@ func _draw() -> void:
       if selected.x == lvl && selected.y == lay:
         var pulse = sin(Time.get_ticks_msec() / 200.0) * 3.0
         draw_circle(cl, layer_radius + arc_width + pulse, select_color, false, arc_width + pulse/2, true)
+
+    if show_end:
+      draw_circle(center, layer_radius, arc_color, true, -1, true)
+      draw_circle(center, layer_radius + arc_width / 2.0, arc_color, false, arc_width, true)
+      questionmark.visible = false
+      if selected.x == 3:
+        var pulse = sin(Time.get_ticks_msec() / 200.0) * 3.0
+        draw_circle(center, layer_radius + arc_width + pulse, select_color, false, arc_width + pulse/2, true)
+
+    else:
+      questionmark.visible = true
+
 
 func _process(delta: float) -> void:
   queue_redraw()

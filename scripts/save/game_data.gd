@@ -23,6 +23,7 @@ func save_file(file_name:String)->void:
 
 func reset()->void:
   get_levels().reset()
+  get_progress().reset()
   get_level(0).unlock(0)
 
 func get_levels()->GDSerializable:
@@ -40,6 +41,9 @@ func unlock_next_level(lay:GDLayer):
 
 func get_settings()->GDSettings:
   return $save/settings
+
+func get_progress()->GDProgress:
+  return $save/progress
 
 func get_layer(nr:int, layer:Global.Layer)->GDLayer:
   if layer < 0 || layer > Global.Layer.GREEN: return

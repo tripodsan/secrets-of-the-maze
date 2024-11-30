@@ -69,7 +69,6 @@ lifetime = 1.5
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 
 [node name="sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.65, 0.65)
 texture = ExtResource("3_ynktc")
 
 [node name="hitbox" type="Area2D" parent="."]

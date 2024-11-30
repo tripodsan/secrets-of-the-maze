@@ -150,6 +150,7 @@ shape = 2
 layer = 0
 
 [node name="red" type="Node2D" parent="."]
+visible = false
 visibility_layer = 4
 script = ExtResource("2_niabm")
 metadata/_edit_lock_ = true
@@ -249,6 +250,7 @@ shape = SubResource("CircleShape2D_kfk02")
 script = ExtResource("7_dohr4")
 
 [node name="green" type="Node2D" parent="."]
+visible = false
 visibility_layer = 8
 script = ExtResource("2_niabm")
 metadata/_edit_lock_ = true

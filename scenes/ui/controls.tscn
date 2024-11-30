@@ -33,6 +33,7 @@ theme_override_constants/separation = 23
 theme_override_styles/separator = SubResource("StyleBoxEmpty_abufw")
 
 [node name="keyboard_bindings" type="MarginContainer" parent="controls"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 

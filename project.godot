@@ -177,3 +177,7 @@ portal_pos={
 "type": "vec2",
 "value": Vector2(0, 0)
 }
+maze_scale={
+"type": "vec2",
+"value": Vector2(1, 1)
+}

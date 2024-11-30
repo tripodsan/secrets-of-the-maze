@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 global uniform vec4 player_pos_and_vel;
 global uniform vec2 portal_pos;
+global uniform vec2 maze_scale;
 
 uniform float line_width = 0.01;
 uniform vec4 color_0 : source_color;
@@ -21,19 +22,24 @@ void vertex() {
     (COLOR.b > 0.5 && VERTEX_ID == 2) ||
     (COLOR.a > 0.5 && VERTEX_ID == 3)) {
     vec4 ppv = player_pos_and_vel;
-    //ppv = vec4(100.0, -200.0, 1500.0, 1500.0);
+    vec2 pp = portal_pos;
+    vec2 ms = maze_scale;
+    //pp = vec2(8800, -2212);
+    //ms = vec2(0.5, 0.5);
+    //ppv = vec4(8500.0, -2212, 1500.0, 1500.0) *ms.x;
 
     vec2 wpos = (MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
     vec2 dir_player = wpos - ppv.xy;
-    vec2 dir_portal = wpos - portal_pos.xy;
-    float dist_portal = dot(dir_portal, dir_portal);
+    vec2 dir_portal = wpos - pp.xy;
+    float dist_portal = dot(dir_portal, dir_portal) / (ms.x*ms.x);
 
     portal_warp = exp(-dist_portal * 0.00005) * 1.1;
     VERTEX += - dir_portal * portal_warp + portal_warp * vec2(0.0, 200.0);
 
     if (dist_portal >= 55000.0) {
+      float  dist_player = dot(dir_player, dir_player) / (ms.x * ms.x);
       float amp = length(ppv.zw) * 0.001;
-      warp = exp(-dot(dir_player, dir_player) * 0.0001) * amp;
+      warp = exp(-dist_player * 0.0001) * amp;
       VERTEX += dir_player * warp;
     }
 

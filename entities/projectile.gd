@@ -16,7 +16,7 @@ func _on_maze_scale_changed()->void:
   # adjust the scaling based on level scale, because a ridgid body can't be scaled
   var s = Vector2.ONE * GameData.get_settings().maze_scale
   trail.scale = s
-  sprite.scale = s * 0.3
+  sprite.scale = s * 0.6
   collision.scale = s
 
 func start(pos:Vector2, vel:Vector2):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://tol68o1dg6jj"]
+[gd_scene load_steps=7 format=3 uid="uid://tol68o1dg6jj"]
 
 [ext_resource type="Script" path="res://scripts/save/game_data.gd" id="1_6068a"]
 [ext_resource type="Script" path="res://scripts/save/gd_layer.gd" id="1_q0hed"]
 [ext_resource type="Script" path="res://scripts/save/gd_serializable.gd" id="2_b8w8f"]
 [ext_resource type="Script" path="res://scripts/save/gd_settings.gd" id="2_esn54"]
+[ext_resource type="Script" path="res://scripts/save/gd_progress.gd" id="3_jl162"]
 [ext_resource type="Script" path="res://scripts/save/gd_level.gd" id="3_ma83k"]
 
 [node name="GameData" type="Node"]
@@ -13,10 +14,11 @@ script = ExtResource("1_6068a")
 script = ExtResource("2_b8w8f")
 
 [node name="progress" type="Node" parent="save"]
-script = ExtResource("2_b8w8f")
+script = ExtResource("3_jl162")
 
 [node name="settings" type="Node" parent="save"]
 script = ExtResource("2_esn54")
+maze_scale = 0.5
 
 [node name="bindings" type="Node" parent="save/settings"]
 script = ExtResource("2_b8w8f")
@@ -89,6 +91,28 @@ crystals = 7
 max_secrets = 0
 
 [node name="green" type="Node" parent="save/levels/2/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+max_secrets = 1
+
+[node name="3" type="Node" parent="save/levels"]
+script = ExtResource("3_ma83k")
+unlocked = true
+
+[node name="layers" type="Node" parent="save/levels/3"]
+script = ExtResource("2_b8w8f")
+
+[node name="blue" type="Node" parent="save/levels/3/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+max_secrets = 0
+
+[node name="red" type="Node" parent="save/levels/3/layers"]
+script = ExtResource("1_q0hed")
+unlocked = true
+max_secrets = 0
+
+[node name="green" type="Node" parent="save/levels/3/layers"]
 script = ExtResource("1_q0hed")
 unlocked = true
 max_secrets = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dvct7rp7yw0x1"]
+[gd_scene load_steps=28 format=3 uid="uid://dvct7rp7yw0x1"]
 
 [ext_resource type="Script" path="res://scenes/sound_controller.gd" id="1_li6tn"]
 [ext_resource type="AudioStream" uid="uid://cafa2rom3gv1x" path="res://sounds/chroma2.mp3" id="1_xvild"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://cyex14kt8at6w" path="res://sounds/low-engine-hum-72529.mp3" id="15_xdbxe"]
 [ext_resource type="AudioStream" uid="uid://b4npmmtvjutmi" path="res://sounds/bomb_tick.wav" id="16_4sd41"]
 [ext_resource type="AudioStream" uid="uid://cypclsxoys8ex" path="res://sounds/supernova.wav" id="17_imgxa"]
+[ext_resource type="AudioStream" uid="uid://ddtnnj73nu8th" path="res://sounds/portal.wav" id="18_x1i8s"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vra2f"]
 streams_count = 6
@@ -63,8 +64,8 @@ Vector2i(-1, 0): {
 
 [node name="SoundController" type="Node"]
 script = ExtResource("1_li6tn")
-sfx_names = Array[StringName]([&"laser", &"missile", &"ship_explosion", &"enemy_explosion", &"chromashift", &"crystal", &"ui_change", &"ui_select", &"secret", &"bomb_tick", &"supernova"])
-sfx_streams = Array[AudioStream]([ExtResource("2_n3q32"), ExtResource("3_k7rhv"), ExtResource("4_ygkag"), SubResource("AudioStreamRandomizer_vra2f"), ExtResource("5_a585i"), ExtResource("6_iqavc"), ExtResource("7_bcdxs"), ExtResource("8_38j4y"), ExtResource("15_05kh0"), ExtResource("16_4sd41"), ExtResource("17_imgxa")])
+sfx_names = Array[StringName]([&"laser", &"missile", &"ship_explosion", &"enemy_explosion", &"chromashift", &"crystal", &"ui_change", &"ui_select", &"secret", &"bomb_tick", &"supernova", &"portal"])
+sfx_streams = Array[AudioStream]([ExtResource("2_n3q32"), ExtResource("3_k7rhv"), ExtResource("4_ygkag"), SubResource("AudioStreamRandomizer_vra2f"), ExtResource("5_a585i"), ExtResource("6_iqavc"), ExtResource("7_bcdxs"), ExtResource("8_38j4y"), ExtResource("15_05kh0"), ExtResource("16_4sd41"), ExtResource("17_imgxa"), ExtResource("18_x1i8s")])
 sfx_volume_adjust = {
 "enemy_explosion": 6.0
 }

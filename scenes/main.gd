@@ -4,7 +4,8 @@ extends Node2D
 var LEVEL_SCENES:Array[PackedScene] = [
   preload('res://scenes/levels/level_0.tscn'),
   preload('res://scenes/levels/level_1.tscn'),
-  preload('res://scenes/levels/level_2.tscn')
+  preload('res://scenes/levels/level_2.tscn'),
+  preload('res://scenes/levels/level_end.tscn')
 ]
 
 @onready var game: Node2D = $world/game
@@ -23,6 +24,8 @@ func _ready() -> void:
 
 func _on_maze_scale_changed()->void:
   scale = Vector2.ONE * GameData.get_settings().maze_scale
+  RenderingServer.global_shader_parameter_set("maze_scale", scale)
+
 
 func load_level(layer:GDLayer)->void:
   var nr := layer.get_level().get_nr()

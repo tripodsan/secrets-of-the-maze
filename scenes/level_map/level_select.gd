@@ -17,6 +17,7 @@ extends Control
 func _ready() -> void:
   level_map.level_selected.connect(_on_level_selected)
   level_map.level_accepted.connect(_on_level_accepted)
+  _on_level_selected(level_map.selected_level)
 
 func _on_level_selected(layer:GDLayer)->void:
   var type:Global.Layer = layer.type
