@@ -10,6 +10,8 @@ var velocity := Vector2(0, 0)
 const max_speed := 900.0
 var speed := 10.0
 
+signal destroyed()
+
 func set_target(t:Node2D)->void:
   target = t
   visual.material.set_shader_parameter("activity", 1.1)
@@ -32,6 +34,7 @@ func _on_explosion_area_body_entered(body: Node2D) -> void:
   visual.visible = false
   explosion.explode()
   GameController.create_blast(global_position, 200, 500, true, true)
+  destroyed.emit()
   await get_tree().create_timer(1.0).timeout
   prints('mine frees..', self)
   get_parent().remove_child(self)

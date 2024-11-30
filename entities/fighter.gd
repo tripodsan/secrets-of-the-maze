@@ -17,6 +17,9 @@ var layer:Global.Layer
 
 var health:float = 100
 
+var is_destroyed: bool = false
+signal destroyed()
+
 func _ready()->void:
   modulate.a = 0
   if nav_agent.avoidance_enabled:
@@ -25,11 +28,14 @@ func _ready()->void:
   nav_agent.set_navigation_map(Global.get_chroma_layer(self).navigation_map)
 
 func hit():
+  if is_destroyed: return
+  is_destroyed = true
   explosion.explode()
   SoundController.play_sfx(&"enemy_explosion", false, -1.0)
   shape.visible = false
   collision.set_deferred('disabled', true)
   hitbox.set_disabled(true)
+  destroyed.emit()
   await get_tree().create_timer(1.0).timeout
   queue_free()
 

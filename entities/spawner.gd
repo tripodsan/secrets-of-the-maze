@@ -15,11 +15,16 @@ extends Node2D
 
 @export var pre_spawn:bool = false
 
+## node that will be visible when the swarm is destroyed
+@export var secret:SecretRoom
+
 var spawning:bool = false
 
 var spawn_timer:float = 0
 
 var num_spawned:int = 0
+
+var num_destroyed:int = 0
 
 var type:Global.Layer
 
@@ -35,6 +40,7 @@ func reset()->void:
   spawning = false
   num_spawned = 0
   spawn_timer = 0
+  num_destroyed = 0
   entity = null
   if pre_spawn:
     spawn.call_deferred()
@@ -54,6 +60,7 @@ func _on_trigger_activate() -> void:
 func spawn()->void:
   entity = scn_entity.instantiate()
   entity.layer = type
+  entity.destroyed.connect(_on_entity_destroyed.bind(entity))
   prints('spawing', entity)
   swarm_parent.add_child(entity, true)
   entity.global_position = global_position
@@ -64,6 +71,16 @@ func launch()->void:
     entity.set_target(GameController.player)
   else:
     prints('unable to launch. entity is not valid')
+
+func _on_entity_destroyed(entity:Node2D)->void:
+  num_destroyed += 1
+  prints('entity destroyed %d/%d' % [num_destroyed, swarm_size])
+  if num_destroyed == swarm_size:
+    prints('swarm defeated')
+    if secret:
+      # todo: resettable secrets
+      #secret.global_position = entity.global_position
+      secret.reveal(true)
 
 
 func _process(delta:float)->void:

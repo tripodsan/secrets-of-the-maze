@@ -28,10 +28,10 @@ func _physics_process(delta: float) -> void:
     collision_layer = 0
   if ticks > 60:
     queue_free()
-
-func _draw()->void:
-  for i in range(20):
-    var r:float = remap(i, 0, 20, 0, radius)
-    var a:float = get_damage(global_position + Vector2(r, 0))
-    a /= amount
-    draw_circle(Vector2.ZERO, r, Color(a, a, a), false, 1.0, true)
+#
+#func _draw()->void:
+  #for i in range(20):
+    #var r:float = remap(i, 0, 20, 0, radius)
+    #var a:float = get_damage(global_position + Vector2(r, 0))
+    #a /= amount
+    #draw_circle(Vector2.ZERO, r, Color(a, a, a), false, 1.0, true)

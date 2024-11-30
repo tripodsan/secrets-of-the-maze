@@ -58,7 +58,7 @@ void fragment() {
     }
     COLOR.a = 1.0;
   } else {
-    float pulse = sin(TIME * 2.0)*0.1 + 0.8;
+    float pulse = sin(TIME * 2.0)*0.2 + 0.8;
     COLOR.rgba = mix(line_color, color_1 + vec4(portal_warp * pulse), bl.x * bl.y * tr.x * tr.y);
     //COLOR.rgb = vec3(warp);
     //COLOR.a = 0.9;
