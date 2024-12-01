@@ -98,7 +98,7 @@ height = 8
 
 [node name="portal_0" parent="blue/objects" instance=ExtResource("7_l5ml6")]
 visible = true
-position = Vector2(-2624, 6464)
+position = Vector2(320, 3520)
 shape = 0
 layer = 0
 

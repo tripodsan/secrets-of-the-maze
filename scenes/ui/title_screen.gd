@@ -9,7 +9,9 @@ extends Control
 @onready var controls: KeyboardBindings = $MarginContainer/controls
 
 func _ready() -> void:
+  GameData.load_file()
   btn_start.grab_focus()
+  #btn_start.text = 'Resume Game' if GameData.get_progress().modified else 'Start'
   btn_new_game.visible = GameData.get_progress().modified
   settings.closed.connect(_on_settings_closed)
   controls.closed.connect(_on_controls_closed)

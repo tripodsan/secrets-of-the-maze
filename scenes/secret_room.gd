@@ -22,7 +22,7 @@ func _ready():
   id = int(name.split('_')[1])
   if trigger:
     trigger.activate.connect(reveal)
-  prints('secret %d is ready' % id)
+  #prints('secret %d is ready' % id)
 
 func reveal(immediate:bool = false)->void:
   if revealed:

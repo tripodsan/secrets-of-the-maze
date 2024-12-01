@@ -6,13 +6,20 @@ extends Node
 const default_save = '0'
 
 func load_file(file_name:String = default_save)->void:
+  reset()
   var file = FileAccess.open("user://saves_%s.json" % file_name, FileAccess.READ)
   var error = FileAccess.get_open_error()
   if error != OK:
     printerr('failed to open save_file: ', error_string(error))
-    reset()
     return
-  pass
+  prints('loading game data from:', file.get_path_absolute())
+  var data = JSON.parse_string(file.get_as_text())
+  #prints(data)
+  if data == null:
+    printerr('failed to parse save_file: ', error_string(error))
+    return
+  var root:GDSerializable = get_node('save')
+  root.from_dict(data)
 
 func save_file(file_name:String = default_save)->void:
   var root:GDSerializable = get_node('save')

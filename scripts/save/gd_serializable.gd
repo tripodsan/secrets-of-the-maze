@@ -26,3 +26,22 @@ func reset()->void:
   for n in get_children():
     if n is GDSerializable:
       n.reset()
+
+func from_dict(dict:Dictionary)->void:
+  for p:Dictionary in get_property_list():
+    if p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE && !p.name.begins_with('_'):
+      var data = dict.get(p.name)
+      if data != null:
+        var value = self.get(p.name)
+        if value is GDSerializable:
+          #prints('descending...', get_path(), p.name)
+          value.from_dict(data)
+        else:
+          #prints('setting', get_path(), p.name, data)
+          self.set(p.name, data)
+
+  for n in get_children():
+    if n is GDSerializable:
+      var data = dict.get(n.name)
+      if data is Dictionary:
+        n.from_dict(data)
