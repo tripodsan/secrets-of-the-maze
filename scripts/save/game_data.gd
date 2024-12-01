@@ -33,6 +33,10 @@ func reset()->void:
   get_progress().reset()
   get_level(0).unlock(0)
 
+func unlock_all(crystals:bool)->void:
+  for lvl:GDLevel in get_levels().get_children():
+    lvl.unlock_all(crystals)
+
 func get_levels()->GDSerializable:
   return $save/levels
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b7ln60f04dhpl"]
+[gd_scene load_steps=22 format=3 uid="uid://b7ln60f04dhpl"]
 
 [ext_resource type="Theme" uid="uid://dqql2g0hhe5xd" path="res://scenes/ui/level_theme.tres" id="1_7shaq"]
 [ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="2_luebk"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scenes/ui/level_suffix.gd" id="4_v353u"]
 [ext_resource type="Script" path="res://scenes/level_map/level_map_v_2.gd" id="5_rx8ef"]
 [ext_resource type="Script" path="res://scenes/level_map/crystal_info.gd" id="7_gxw7w"]
+[ext_resource type="Script" path="res://scripts/cheat_code.gd" id="11_xpa2v"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_gbq8l"]
 color = Color(0.625597, 0.625597, 0.625597, 1)
@@ -71,6 +72,21 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_7shaq")
 script = ExtResource("2_s0hvj")
+
+[node name="cheat_spoiler" type="Node" parent="."]
+script = ExtResource("11_xpa2v")
+code = "spoilers"
+description = "Unlocks all leves, secrets and crystals"
+
+[node name="cheat_crystals" type="Node" parent="."]
+script = ExtResource("11_xpa2v")
+code = "crystals"
+description = "unlocks all crystals of the current level"
+
+[node name="cheat_wormhole" type="Node" parent="."]
+script = ExtResource("11_xpa2v")
+code = "wormhole"
+description = "unlocks all levels"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_dqn4j")

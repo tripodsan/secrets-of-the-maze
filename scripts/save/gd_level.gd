@@ -25,6 +25,14 @@ func reset()->void:
   unlocked = false
   super.reset()
 
+func unlock_all(crystals:bool)->void:
+  unlocked = true
+  for lay:GDLayer in _layers:
+    lay.unlocked = true
+    if crystals:
+      lay.crystals = 7
+      lay.secrets = (2**lay.max_secrets) - 1
+
 func unlock(type:int)->void:
   unlocked = true
   _layers[type].unlocked = true
