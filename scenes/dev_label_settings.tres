@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b3i0ptty4fg7n"]
+
+[ext_resource type="FontFile" uid="uid://4kaf8m7opkjh" path="res://fonts/a-space/A-Space Regular Demo.otf" id="1_hnnvn"]
+
+[resource]
+font = ExtResource("1_hnnvn")
+font_size = 70
+font_color = Color(0.663736, 0.646645, 0.739546, 1)

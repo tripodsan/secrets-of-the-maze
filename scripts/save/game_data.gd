@@ -16,7 +16,7 @@ func load_file(file_name:String = default_save)->void:
   var data = JSON.parse_string(file.get_as_text())
   #prints(data)
   if data == null:
-    printerr('failed to parse save_file: ', error_string(error))
+    printerr('failed to parse save_file.')
     return
   var root:GDSerializable = get_node('save')
   root.from_dict(data)

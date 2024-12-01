@@ -33,7 +33,6 @@ theme_override_constants/separation = 23
 theme_override_styles/separator = SubResource("StyleBoxEmpty_abufw")
 
 [node name="keyboard_bindings" type="MarginContainer" parent="controls"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -79,13 +78,145 @@ custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 
 [node name="template_action" type="Label" parent="controls/keyboard_bindings/inputs"]
-visible = false
 layout_mode = 2
 text = "some action"
 horizontal_alignment = 2
 
 [node name="template_keyboard" type="Button" parent="controls/keyboard_bindings/inputs"]
-visible = false
+layout_mode = 2
+text = "A"
+
+[node name="k" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k3" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k2" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a2" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k4" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k5" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a3" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k6" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k7" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a4" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k8" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k9" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a5" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k10" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k11" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a6" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k12" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k13" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a7" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k14" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k15" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a8" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k16" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k17" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a9" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k18" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k19" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="a10" type="Label" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "some action"
+horizontal_alignment = 2
+
+[node name="k20" type="Button" parent="controls/keyboard_bindings/inputs"]
+layout_mode = 2
+text = "A"
+
+[node name="k21" type="Button" parent="controls/keyboard_bindings/inputs"]
 layout_mode = 2
 text = "A"
 

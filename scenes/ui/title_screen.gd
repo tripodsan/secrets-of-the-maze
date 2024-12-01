@@ -7,6 +7,7 @@ extends Control
 @onready var title: VBoxContainer = $MarginContainer/title
 @onready var settings: SettingsPanel = $MarginContainer/settings
 @onready var controls: KeyboardBindings = $MarginContainer/controls
+@onready var credits: CreditsPanel = $MarginContainer/credits
 
 func _ready() -> void:
   GameData.load_file()
@@ -15,6 +16,7 @@ func _ready() -> void:
   btn_new_game.visible = GameData.get_progress().modified
   settings.closed.connect(_on_settings_closed)
   controls.closed.connect(_on_controls_closed)
+  credits.closed.connect(_on_credits_closed)
   # todo..move to game data?
   KeyboardBindings.load_settings()
   SoundController.play_title()
@@ -30,7 +32,7 @@ func _on_btn_controls_pressed() -> void:
   transition(title, controls)
 
 func _on_btn_credits_pressed() -> void:
-  pass
+  transition(title, credits)
 
 func _on_btn_new_game_pressed() -> void:
   GameData.reset()
@@ -46,6 +48,10 @@ func _on_settings_closed() -> void:
 
 func _on_controls_closed() -> void:
   await transition(controls, title)
+  btn_start.grab_focus()
+
+func _on_credits_closed() -> void:
+  await transition(credits, title)
   btn_start.grab_focus()
 
 func transition(from:Control, to:Control)->void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bngfeoy11veqw"]
+[gd_scene load_steps=12 format=3 uid="uid://bngfeoy11veqw"]
 
 [ext_resource type="Theme" uid="uid://gydw4cyvjjug" path="res://scenes/ui/title_theme.tres" id="1_4sy3r"]
 [ext_resource type="Texture2D" uid="uid://cbuius8gxtinx" path="res://assets/start_bg2.png" id="2_2rjkx"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/world_environment.gd" id="4_jc54s"]
 [ext_resource type="PackedScene" uid="uid://be17dxfp5e0vq" path="res://scenes/ui/settings.tscn" id="5_praim"]
 [ext_resource type="PackedScene" uid="uid://b0qnb15obtmeo" path="res://scenes/ui/controls.tscn" id="6_cyc4m"]
+[ext_resource type="PackedScene" uid="uid://rvfhddl3h7ww" path="res://scenes/ui/credits.tscn" id="7_xktpx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abufw"]
 
@@ -80,6 +81,7 @@ text = "Controls
 "
 
 [node name="btn_credits" type="Button" parent="MarginContainer/title"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Credits"
 
@@ -92,6 +94,10 @@ visible = false
 layout_mode = 2
 
 [node name="controls" parent="MarginContainer" instance=ExtResource("6_cyc4m")]
+visible = false
+layout_mode = 2
+
+[node name="credits" parent="MarginContainer" instance=ExtResource("7_xktpx")]
 visible = false
 layout_mode = 2
 
