@@ -3,6 +3,8 @@ extends Area2D
 
 var time:float
 
+var type:Global.Layer
+
 func _ready() -> void:
   $helper_arrow.visible = false
 

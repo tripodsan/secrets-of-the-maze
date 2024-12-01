@@ -19,12 +19,13 @@ func _ready() -> void:
   %phasemap.world_2d = get_viewport().world_2d
   GameController.on_game_scene_loaded(self)
   GameController.maze_scale_changed.connect(_on_maze_scale_changed)
-
   _on_maze_scale_changed()
 
 func _on_maze_scale_changed()->void:
   scale = Vector2.ONE * GameData.get_settings().maze_scale
   RenderingServer.global_shader_parameter_set("maze_scale", scale)
+  if _current_level && _current_level._layer:
+    RenderingServer.global_shader_parameter_set("portal_pos", _current_level._layer.get_portal(1).global_position + Vector2(0, -50))
 
 
 func load_level(layer:GDLayer)->void:

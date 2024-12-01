@@ -70,6 +70,7 @@ func set_checkpoint(cp:Checkpoint)->void:
   if _last_checkpoint != cp:
     _last_checkpoint = cp
     cp.time = _level_run_time
+    cp.type = _layer.type
 
 func set_state(s:State)->void:
   state = s
@@ -170,6 +171,7 @@ func quit()->void:
 
 func restart()->void:
   if _last_checkpoint:
+    _start_layer = _layers[_last_checkpoint.type]
     GameController.player.activate(_last_checkpoint.global_transform)
   else:
     GameController.player.activate(_start_portal.global_transform)
