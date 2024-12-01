@@ -84,11 +84,25 @@ var health:float = 100
 
 var start_health:float = 100
 
+@onready var cheat_diamond: Cheatcode = $cheat_diamond
+@onready var cheat_ice: Cheatcode = $cheat_ice
+
 func _ready() -> void:
   trail.resize(6)
   GameController.set_player(self)
   Global.supernova.connect(%SuperNova.trigger_supernova)
+  cheat_diamond.unlocked.connect(_on_cheat_diamond)
+  cheat_ice.unlocked.connect(_on_cheat_ice)
   set_state(State.READY)
+
+func _on_cheat_diamond()->void:
+  SoundController.play_sfx(&"secret")
+  health = start_health
+  health_changed.emit(health)
+
+func _on_cheat_ice()->void:
+  SoundController.play_sfx(&"secret")
+  density = 0
 
 func set_state(s:State)->void:
   state = s
@@ -184,10 +198,10 @@ func _physics_process(delta: float) -> void:
     var type:StringName = Global.get_tile_type(body, coll.get_collider_rid())
     if type == &"spike":
       apply_damage(100, body)
-      return
+      #return
     elif body is Node2D and body.is_in_group(&"spike"):
       apply_damage(100, body)
-      return
+      #return
 
     var wall := coll.get_normal()
     var a:float = wall.dot(rot_dir)
@@ -211,6 +225,7 @@ func _physics_process(delta: float) -> void:
 
 func apply_damage(amount:float, source:Node2D)->void:
   if state != State.ACTIVE: return
+  if cheat_diamond.is_unlocked: return
   health = max(0, health - amount)
   prints('%s applied damamage %f -> %f to %s' % [source, amount, health, self])
   health_changed.emit(health)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b804mmyeds45o"]
+[gd_scene load_steps=8 format=3 uid="uid://b804mmyeds45o"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_7se5g"]
 [ext_resource type="PackedScene" uid="uid://bnbc6fy7ck4xj" path="res://scenes/explosion.tscn" id="2_4fmxa"]
 [ext_resource type="PackedScene" uid="uid://bcyr27ygm52ov" path="res://scenes/laser_cast.tscn" id="3_1a7i0"]
 [ext_resource type="Script" path="res://entities/hitbox.gd" id="4_im7qr"]
+[ext_resource type="Script" path="res://scripts/cheat_code.gd" id="5_a2c5o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1jpm"]
 radius = 17.0
@@ -52,3 +53,13 @@ script = ExtResource("4_im7qr")
 position = Vector2(12, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_pj62m")
+
+[node name="cheat_diamond" type="Node" parent="."]
+script = ExtResource("5_a2c5o")
+code = "diamond"
+description = "makes player invincible"
+
+[node name="cheat_ice" type="Node" parent="."]
+script = ExtResource("5_a2c5o")
+code = "ice"
+description = "reduces friction"

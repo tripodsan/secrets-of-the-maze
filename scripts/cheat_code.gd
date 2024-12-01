@@ -16,7 +16,7 @@ func _ready() -> void:
   is_unlocked = false
 
 func _input(event: InputEvent) -> void:
-  var evt:InputEventKey = event
+  var evt:InputEventKey = event as InputEventKey
   if evt && evt.is_pressed():
     if evt.unicode == code.unicode_at(matched):
       matched += 1
