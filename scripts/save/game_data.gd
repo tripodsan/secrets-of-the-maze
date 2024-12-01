@@ -1,8 +1,6 @@
 ## The GameData acts as meta contains for level information as well as for
 ## loading and saving progress and settings.
 ## the variables that exported and do not start with `_` are saved.
-## note that only unlocked levels are saved, in order to keep
-## the undiscovered levels a "secret" :-)
 extends Node
 
 func load_file(_file_name:String)->void:

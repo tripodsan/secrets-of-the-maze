@@ -67,7 +67,9 @@ script = ExtResource("1_li6tn")
 sfx_names = Array[StringName]([&"laser", &"missile", &"ship_explosion", &"enemy_explosion", &"chromashift", &"crystal", &"ui_change", &"ui_select", &"secret", &"bomb_tick", &"supernova", &"portal"])
 sfx_streams = Array[AudioStream]([ExtResource("2_n3q32"), ExtResource("3_k7rhv"), ExtResource("4_ygkag"), SubResource("AudioStreamRandomizer_vra2f"), ExtResource("5_a585i"), ExtResource("6_iqavc"), ExtResource("7_bcdxs"), ExtResource("8_38j4y"), ExtResource("15_05kh0"), ExtResource("16_4sd41"), ExtResource("17_imgxa"), ExtResource("18_x1i8s")])
 sfx_volume_adjust = {
-"enemy_explosion": 6.0
+"chromashift": -1.0,
+"enemy_explosion": 6.0,
+"supernova": 6.0
 }
 
 [node name="bg_player" type="AudioStreamPlayer" parent="."]

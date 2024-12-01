@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cremgjkvu1nw4"]
+[gd_scene load_steps=17 format=3 uid="uid://cremgjkvu1nw4"]
 
 [ext_resource type="Script" path="res://scenes/portal.gd" id="1_bp8gh"]
 [ext_resource type="Texture2D" uid="uid://dhigxjbp3123f" path="res://scenes/gradient_texture_blue_to_green.tres" id="2_hrw4b"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://7xabij5fiwwy" path="res://assets/triangle.png" id="4_ju5kj"]
 [ext_resource type="Texture2D" uid="uid://bs5qw3fkacloy" path="res://scenes/gradient_texture_blue_to_red.tres" id="4_qtulu"]
 [ext_resource type="Texture2D" uid="uid://bo42hb7j21lk2" path="res://assets/star.png" id="5_3brb1"]
-[ext_resource type="Texture2D" uid="uid://b6i5sw2kwdaq8" path="res://scenes/gradient_texture_green_to_red.tres" id="6_e14cl"]
 
 [sub_resource type="Curve" id="Curve_71sem"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.257053, 1), 0.0, 0.0, 0, 0, Vector2(0.960293, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -29,7 +28,7 @@ angular_velocity_min = -11.74
 angular_velocity_max = -11.74
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_kiao5")
-color_ramp = ExtResource("6_e14cl")
+color_ramp = ExtResource("2_hrw4b")
 alpha_curve = SubResource("CurveTexture_4y5jl")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yfe87"]

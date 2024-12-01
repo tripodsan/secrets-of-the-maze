@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://b4kepaijdk64i"]
+[gd_scene load_steps=14 format=4 uid="uid://b4kepaijdk64i"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_anykt"]
 [ext_resource type="Script" path="res://scenes/chroma_layer.gd" id="4_y0ttv"]
@@ -6,7 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://d2oh02mscfwjk" path="res://entities/static_mine.tscn" id="6_x7w7n"]
 [ext_resource type="PackedScene" uid="uid://cremgjkvu1nw4" path="res://scenes/portal.tscn" id="7_8k2le"]
 [ext_resource type="PackedScene" uid="uid://c03mtiutjnf4o" path="res://entities/chroma_crystal.tscn" id="7_mn744"]
+[ext_resource type="Theme" uid="uid://5sakmuedgrxb" path="res://scenes/ui/hint_theme.tres" id="8_byo1x"]
 [ext_resource type="Script" path="res://scripts/oscilator.gd" id="8_ddnlu"]
+[ext_resource type="PackedScene" uid="uid://dyt1wujh0vr5w" path="res://entities/spawner.tscn" id="8_x0ju6"]
+[ext_resource type="Script" path="res://scripts/triggers/area_trigger.gd" id="9_lvurh"]
+[ext_resource type="PackedScene" uid="uid://bjgp6yyx5bqf" path="res://entities/mine.tscn" id="10_7ruwq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ite2c"]
+radius = 276.05
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0h0j"]
+size = Vector2(640, 192)
 
 [node name="level_1" type="Node2D"]
 script = ExtResource("1_anykt")
@@ -124,14 +134,21 @@ position = Vector2(256, 1728)
 shape = 2
 layer = 0
 
-[node name="ChromaCrystal" parent="blue/objects" instance=ExtResource("7_mn744")]
+[node name="red_crystal" parent="blue/objects" instance=ExtResource("7_mn744")]
 position = Vector2(4608, 1792)
+
+[node name="Label" type="Label" parent="blue/objects"]
+offset_left = 64.0
+offset_top = 1920.0
+offset_right = 1945.0
+offset_bottom = 1977.0
+theme = ExtResource("8_byo1x")
+text = "sorry, there are no secrets in this level"
 
 [node name="secrets" type="Node2D" parent="blue"]
 metadata/_edit_lock_ = true
 
 [node name="red" type="Node2D" parent="."]
-visible = false
 visibility_layer = 4
 script = ExtResource("4_y0ttv")
 metadata/_edit_lock_ = true
@@ -149,17 +166,51 @@ metadata/_edit_lock_ = true
 [node name="objects" type="Node2D" parent="red"]
 
 [node name="portal_0" parent="red/objects" instance=ExtResource("7_8k2le")]
+visible = true
 position = Vector2(256, 1728)
 
 [node name="portal_1" parent="red/objects" instance=ExtResource("7_8k2le")]
+visible = true
 position = Vector2(5952, 1792)
 rotation = -1.5708
 ph_off = -1.6713
 
+[node name="Label" type="Label" parent="red/objects"]
+offset_left = 64.0
+offset_top = 1920.0
+offset_right = 1945.0
+offset_bottom = 1977.0
+theme = ExtResource("8_byo1x")
+text = "sorry, there are no secrets in this level"
+
+[node name="mine_spawner" parent="red/objects" node_paths=PackedStringArray("trigger") instance=ExtResource("8_x0ju6")]
+position = Vector2(2432, 3136)
+scn_entity = ExtResource("10_7ruwq")
+swarm_size = 1
+spawn_delay = 0.0
+trigger = NodePath("Area2D/AreaTrigger")
+pre_spawn = true
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="red/objects/mine_spawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="red/objects/mine_spawner/Area2D"]
+shape = SubResource("CircleShape2D_ite2c")
+
+[node name="AreaTrigger" type="Node" parent="red/objects/mine_spawner/Area2D"]
+script = ExtResource("9_lvurh")
+
+[node name="blue_crystal" parent="red/objects" instance=ExtResource("7_mn744")]
+position = Vector2(5184, 384)
+type = 0
+
+[node name="green_crystal" parent="red/objects" instance=ExtResource("7_mn744")]
+position = Vector2(5440, 384)
+type = 2
+
 [node name="secrets" type="Node2D" parent="red"]
 
 [node name="green" type="Node2D" parent="."]
-visible = false
 visibility_layer = 8
 script = ExtResource("4_y0ttv")
 metadata/_edit_lock_ = true
@@ -177,15 +228,47 @@ metadata/_edit_lock_ = true
 [node name="objects" type="Node2D" parent="green"]
 
 [node name="portal_0" parent="green/objects" instance=ExtResource("7_8k2le")]
-position = Vector2(192, 1728)
+visible = true
+position = Vector2(256, 1728)
 shape = 2
 layer = 2
 
 [node name="portal_1" parent="green/objects" instance=ExtResource("7_8k2le")]
-position = Vector2(5952, 1600)
+visible = true
+position = Vector2(5952, 1728)
 rotation = 1.5708
 ph_off = 1.4703
 shape = 2
 layer = 2
 
+[node name="blue_crystal" parent="green/objects" instance=ExtResource("7_mn744")]
+position = Vector2(3776, 384)
+type = 0
+
+[node name="red_crystal" parent="green/objects" instance=ExtResource("7_mn744")]
+position = Vector2(4032, 384)
+
+[node name="spawner" parent="green/objects" node_paths=PackedStringArray("trigger") instance=ExtResource("8_x0ju6")]
+position = Vector2(5952, 2496)
+swarm_size = 12
+trigger = NodePath("detector/trigger")
+
+[node name="detector" type="Area2D" parent="green/objects/spawner"]
+position = Vector2(-2816, -1216)
+monitorable = false
+
+[node name="trigger" type="Node" parent="green/objects/spawner/detector"]
+script = ExtResource("9_lvurh")
+
+[node name="collision" type="CollisionShape2D" parent="green/objects/spawner/detector"]
+shape = SubResource("RectangleShape2D_q0h0j")
+
 [node name="secrets" type="Node2D" parent="green"]
+
+[node name="Label" type="Label" parent="green"]
+offset_left = 64.0
+offset_top = 1920.0
+offset_right = 1945.0
+offset_bottom = 1977.0
+theme = ExtResource("8_byo1x")
+text = "sorry, there are no secrets in this level"
