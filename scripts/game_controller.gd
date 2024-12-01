@@ -41,6 +41,7 @@ func start_game()->void:
 func show_level_select():
   level = null
   player = null
+  GameData.save_file()
   SceneTransition.change_scene(scn_lvl_select)
 
 func show_title_screen():

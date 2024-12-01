@@ -2,7 +2,7 @@
 class_name GDLevel
 extends GDSerializable
 
-var ROMAN:Array[String] = ['O', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+var _ROMAN:Array[String] = ['O', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 
 @export var unlocked:bool = false
 
@@ -19,7 +19,7 @@ func get_nr()->int:
   return int(str(name))
 
 func get_title()->String:
-  return 'D%s' % ROMAN[get_nr() + 1]
+  return 'D%s' % _ROMAN[get_nr() + 1]
 
 func reset()->void:
   unlocked = false

@@ -5,7 +5,7 @@ extends GDSerializable
 
 @export var maze_scale:float = 1.0
 
-var SCALE_NAMES = {
+var _SCALE_NAMES = {
   0.5: 'Small',
   0.75:'Normal',
   1.0: 'Large'
@@ -18,4 +18,4 @@ func toggle_maze_scale()->void:
     maze_scale = 0.5
 
 func get_maze_scale_name()->String:
-  return SCALE_NAMES[maze_scale]
+  return _SCALE_NAMES[maze_scale]

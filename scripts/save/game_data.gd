@@ -3,10 +3,18 @@
 ## the variables that exported and do not start with `_` are saved.
 extends Node
 
-func load_file(_file_name:String)->void:
+const default_save = '0'
+
+func load_file(file_name:String = default_save)->void:
+  var file = FileAccess.open("user://saves_%s.json" % file_name, FileAccess.READ)
+  var error = FileAccess.get_open_error()
+  if error != OK:
+    printerr('failed to open save_file: ', error_string(error))
+    reset()
+    return
   pass
 
-func save_file(file_name:String)->void:
+func save_file(file_name:String = default_save)->void:
   var root:GDSerializable = get_node('save')
   assert(root)
   var file = FileAccess.open("user://saves_%s.json" % file_name, FileAccess.WRITE)
@@ -14,6 +22,7 @@ func save_file(file_name:String)->void:
   if error != OK:
     printerr('failed to open save_file: ', error_string(error))
     return
+  get_progress().touch()
   var data = root.to_dict()
   var json_string = JSON.stringify(data, '  ')
   file.store_line(json_string)

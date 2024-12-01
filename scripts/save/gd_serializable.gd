@@ -9,7 +9,7 @@ extends Node
 func to_dict()->Dictionary:
   var ret := {}
   for p:Dictionary in get_property_list():
-    if p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
+    if p.usage & PROPERTY_USAGE_SCRIPT_VARIABLE && !p.name.begins_with('_'):
       var value = self.get(p.name)
       if value is GDSerializable:
         value = value.to_dict()

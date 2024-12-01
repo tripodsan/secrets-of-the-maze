@@ -2,6 +2,7 @@ extends Control
 
 @onready var btn_start: Button = %btn_start
 @onready var btn_settings: Button = %btn_settings
+@onready var btn_new_game: Button = %btn_new_game
 
 @onready var title: VBoxContainer = $MarginContainer/title
 @onready var settings: SettingsPanel = $MarginContainer/settings
@@ -9,6 +10,7 @@ extends Control
 
 func _ready() -> void:
   btn_start.grab_focus()
+  btn_new_game.visible = GameData.get_progress().modified
   settings.closed.connect(_on_settings_closed)
   controls.closed.connect(_on_controls_closed)
   # todo..move to game data?

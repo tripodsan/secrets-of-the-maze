@@ -55,15 +55,16 @@ horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/title"]
 layout_mode = 2
-theme_override_constants/separation = 55
+theme_override_constants/separation = 85
 theme_override_styles/separator = SubResource("StyleBoxEmpty_abufw")
 
 [node name="btn_start" type="Button" parent="MarginContainer/title"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Resume"
+text = "Start"
 
 [node name="btn_new_game" type="Button" parent="MarginContainer/title"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "New Game"
 

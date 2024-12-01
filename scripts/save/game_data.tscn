@@ -15,6 +15,7 @@ script = ExtResource("2_b8w8f")
 
 [node name="progress" type="Node" parent="save"]
 script = ExtResource("3_jl162")
+modified = true
 
 [node name="settings" type="Node" parent="save"]
 script = ExtResource("2_esn54")
