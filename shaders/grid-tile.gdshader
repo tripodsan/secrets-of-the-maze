@@ -42,7 +42,9 @@ void vertex() {
       warp = exp(-dist_player * 0.0001) * amp;
       VERTEX += dir_player * warp;
     }
-
+  } else {
+    warp = 0.0;
+    portal_warp = 0.0;  
   }
 }
 
