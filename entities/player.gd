@@ -90,10 +90,15 @@ var start_health:float = 100
 func _ready() -> void:
   trail.resize(6)
   GameController.set_player(self)
+  GameController.maze_scale_changed.connect(_on_maze_scale_changed)
   Global.supernova.connect(%SuperNova.trigger_supernova)
   cheat_diamond.unlocked.connect(_on_cheat_diamond)
   cheat_ice.unlocked.connect(_on_cheat_ice)
   set_state(State.READY)
+  _on_maze_scale_changed()
+
+func _on_maze_scale_changed()->void:
+  camera_2d.zoom = Vector2.ONE * GameData.get_settings().maze_scale
 
 func _on_cheat_diamond()->void:
   SoundController.play_sfx(&"secret")
@@ -192,7 +197,7 @@ func _physics_process(delta: float) -> void:
 
   velocity += a_tot * delta
 
-  var coll:KinematicCollision2D = move_and_collide(velocity * delta * GameData.get_settings().maze_scale)
+  var coll:KinematicCollision2D = move_and_collide(velocity * delta)
   if coll:
     var body:Object = coll.get_collider()
     var type:StringName = Global.get_tile_type(body, coll.get_collider_rid())

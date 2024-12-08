@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
     speed *= 1.1
 
   speed_delta = speed * delta
-  var new_velocity:Vector2 = transform.x * speed * GameData.get_settings().maze_scale
+  var new_velocity:Vector2 = transform.x * speed
   if nav_agent.avoidance_enabled:
     nav_agent.set_velocity(new_velocity)
   else:

@@ -8,17 +8,6 @@ var time_alive = 0.0
 @onready var hitbox: HitBox = $hitbox
 @onready var collision: CollisionShape2D = $collision
 
-func _ready() -> void:
-  GameController.maze_scale_changed.connect(_on_maze_scale_changed)
-  _on_maze_scale_changed()
-
-func _on_maze_scale_changed()->void:
-  # adjust the scaling based on level scale, because a ridgid body can't be scaled
-  var s = Vector2.ONE * GameData.get_settings().maze_scale
-  trail.scale = s
-  sprite.scale = s * 0.6
-  collision.scale = s
-
 func start(pos:Vector2, vel:Vector2):
   global_position = pos
   linear_velocity = vel

@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
   rotation += delta*3.0
 
   if target:
-    global_position += velocity * delta * GameData.get_settings().maze_scale
+    global_position += velocity * delta
     if speed < max_speed:
       speed *= 1.09
     var v_to_target = (target.global_position - global_position).normalized()

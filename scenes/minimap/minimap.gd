@@ -32,4 +32,4 @@ func _on_level_state_changed(level:Level)->void:
 
 func _process(_delta: float) -> void:
   if GameController.player:
-    camera_2d.global_position = GameController.player.global_position / 32.0 / GameData.get_settings().maze_scale
+    camera_2d.global_position = GameController.player.global_position / 32.0

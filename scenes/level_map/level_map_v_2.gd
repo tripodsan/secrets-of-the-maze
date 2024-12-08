@@ -223,10 +223,13 @@ func _draw() -> void:
         draw_circle(cl, layer_radius + ring_width / 2.0, ring_color, false, ring_width, true)
 
     if show_end:
+      var level_node = LevelNode.new(center, Vector2i(3, 0));
+      level_nodes.append(level_node)
       draw_circle(center, layer_radius, arc_color, true, -1, true)
       draw_circle(center, layer_radius + arc_width / 2.0, arc_color, false, arc_width, true)
       questionmark.visible = false
       if selected.x == 3:
+        selected_node = level_node
         var pulse = sin(Time.get_ticks_msec() / 200.0) * 3.0
         draw_circle(center, layer_radius + arc_width + pulse, select_color, false, arc_width + pulse/2, true)
 
